@@ -3,10 +3,8 @@ package com.prime.projet.core.data.entity;
 import jakarta.persistence.*;
 
 import java.util.Date;
-import java.util.List;
 
 @Entity
-@Table(name = "destination")
 public class Destination {
 
     @Id
@@ -14,40 +12,22 @@ public class Destination {
     private Integer destinationId;
 
     private String name;
-
-    @Column(length = 1000)
     private String description;
-
-    private Double price;
-
+    private float price;
     private String continent;
-
     private String country;
-
     private String city;
-
     private String type;
 
-    @Column(name = "start_date", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date startDate;
 
-    @Column(name = "end_date", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date endDate;
 
-    @Column(name = "lien_image", nullable = false, length = 255)
     private String lienImage;
 
-    @OneToMany(mappedBy = "destination", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Booking> bookings;
-
-    @OneToMany(mappedBy = "destination", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Review> reviews;
-
-    @OneToOne(mappedBy = "destination", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Offer offer;
-
+    // Getters et Setters
     public Integer getDestinationId() {
         return destinationId;
     }
@@ -72,11 +52,11 @@ public class Destination {
         this.description = description;
     }
 
-    public Double getPrice() {
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 
@@ -135,6 +115,4 @@ public class Destination {
     public void setLienImage(String lienImage) {
         this.lienImage = lienImage;
     }
-
-
 }

@@ -1,13 +1,9 @@
 package com.prime.projet.core.data.entity;
 
 import jakarta.persistence.*;
-
-import java.time.LocalDate;
 import java.util.Date;
-import java.util.List;
 
 @Entity
-@Table(name = "user")
 public class User {
 
     @Id
@@ -15,28 +11,17 @@ public class User {
     private Integer userId;
 
     private String lastname;
-
     private String firstname;
-
-    @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
-
     private String email;
-
     private String password;
 
-    @Column(name = "created_at", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date createdAt;
 
-    private Boolean admin;
+    private boolean admin;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Booking> bookings;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Review> reviews;
-
+    // Getters et Setters
     public Integer getUserId() {
         return userId;
     }
@@ -89,16 +74,15 @@ public class User {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDate createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Boolean getAdmin() {
+    public boolean isAdmin() {
         return admin;
     }
 
-    public void setAdmin(Boolean admin) {
+    public void setAdmin(boolean admin) {
         this.admin = admin;
     }
-
 }

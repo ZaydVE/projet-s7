@@ -1,46 +1,51 @@
 package com.prime.projet.core.spring.controller;
 
+
 import com.prime.projet.core.data.entity.Destination;
 import com.prime.projet.core.spring.service.DestinationService;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/destinations")
+@RequestMapping("/api/destinations")
 public class DestinationController {
 
-    private final DestinationService destinationService;
+    @Autowired
+    private DestinationService destinationService;
 
-    public DestinationController(DestinationService destinationService) {
-        this.destinationService = destinationService;
+    // Créer une destination
+    @PostMapping("/create")
+    public Destination createDestination(@RequestBody Destination destination) {
+        return destinationService.createDestination(destination.getName(), destination.getDescription(), destination.getPrice(),
+                destination.getContinent(), destination.getCountry(), destination.getCity(), destination.getType(),
+                destination.getStartDate(), destination.getEndDate(), destination.getLienImage());
     }
 
-    @GetMapping
-    public ResponseEntity<List<Destination>> getAllDestinations() {
-        List<Destination> destinations = destinationService.getAllDestinations();
-        return ResponseEntity.ok(destinations);
+    // Modifier une destination
+    @PutMapping("/update/{destinationId}")
+    public Destination updateDestination(@PathVariable Integer destinationId, @RequestBody Destination destination) {
+        return destinationService.updateDestination(destinationId, destination.getName(), destination.getDescription(), destination.getPrice(),
+                destination.getContinent(), destination.getCountry(), destination.getCity(), destination.getType(),
+                destination.getStartDate(), destination.getEndDate(), destination.getLienImage());
     }
 
-    @GetMapping("/sorted")
-    public ResponseEntity<List<Destination>> getDestinationsSorted(@RequestParam String sortBy) {
-        try {
-            List<Destination> sortedDestinations = destinationService.getDestinationsSorted(sortBy);
-            return ResponseEntity.ok(sortedDestinations);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(null);
-        }
+    // Supprimer une destination
+    @DeleteMapping("/delete/{destinationId}")
+    public void deleteDestination(@PathVariable Integer destinationId) {
+        destinationService.deleteDestination(destinationId);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Destination> getDestinationById(@PathVariable Long id) {
-        try {
-            Destination destination = destinationService.getDestinationById(id);
-            return ResponseEntity.ok(destination);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.notFound().build();
-        }
+    // Lister toutes les destinations
+    @GetMapping("/")
+    public List<Destination> listDestinations() {
+        return destinationService.listDestinations();
+    }
+
+    // Trouver une destination par ID
+    @GetMapping("/{destinationId}")
+    public Destination findDestinationById(@PathVariable Integer destinationId) {
+        return DestinationService.findById(destinationId);
     }
 }
-

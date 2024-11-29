@@ -2,21 +2,21 @@ package com.prime.projet.core.data.entity;
 
 import jakarta.persistence.*;
 
+
 @Entity
-@Table(name = "offer")
 public class Offer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer offerId;
 
-    @Column(name = "percentage_discount", nullable = false)
-    private Float percentageDiscount;
+    private float percentageDiscount;
 
-    @OneToOne
-    @JoinColumn(name = "destination_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "destination_id")
     private Destination destination;
 
+    // Getters et Setters
     public Integer getOfferId() {
         return offerId;
     }
@@ -25,11 +25,11 @@ public class Offer {
         this.offerId = offerId;
     }
 
-    public Float getPercentageDiscount() {
+    public float getPercentageDiscount() {
         return percentageDiscount;
     }
 
-    public void setPercentageDiscount(Float percentageDiscount) {
+    public void setPercentageDiscount(float percentageDiscount) {
         this.percentageDiscount = percentageDiscount;
     }
 
@@ -40,5 +40,4 @@ public class Offer {
     public void setDestination(Destination destination) {
         this.destination = destination;
     }
-
 }

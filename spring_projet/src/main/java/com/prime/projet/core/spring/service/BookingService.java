@@ -4,55 +4,37 @@ import com.prime.projet.core.data.entity.Booking;
 import com.prime.projet.core.data.entity.Destination;
 import com.prime.projet.core.data.entity.User;
 import com.prime.projet.core.spring.repository.BookingRepository;
-import com.prime.projet.core.spring.repository.DestinationRepository;
-import com.prime.projet.core.spring.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookingService {
 
-    private final BookingRepository bookingRepository;
-    private final DestinationRepository destinationRepository;
-    private final UserRepository userRepository;
+    @Autowired
+    private BookingRepository bookingRepository;
 
-    public BookingService(BookingRepository bookingRepository,
-                          DestinationRepository destinationRepository,
-                          UserRepository userRepository) {
-        this.bookingRepository = bookingRepository;
-        this.destinationRepository = destinationRepository;
-        this.userRepository = userRepository;
-    }
+    @Autowired
+    private DestinationService destinationService;
 
-    public Booking createBooking(Long userId, Long destinationId, int nbPassengers) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+    @Autowired
+    private UserService userService;
 
-        Destination destination = destinationRepository.findById(destinationId)
-                .orElseThrow(() -> new IllegalArgumentException("Destination not found"));
-
-        if (destination.getStartDate().isBefore(LocalDate.now())) {
-            throw new IllegalArgumentException("Destination is no longer available for booking.");
-        }
-
-        float totalPrice = (float) (nbPassengers * destination.getPrice());
-
+    // Créer une réservation
+    public Booking createBooking(Integer userId, Integer destinationId, Integer nbPassengers) {
+        User user = UserService.findById(userId);
+        Destination destination = DestinationService.findById(destinationId);
         Booking booking = new Booking();
         booking.setUser(user);
         booking.setDestination(destination);
         booking.setNbPassengers(nbPassengers);
-        booking.setBookingDate(LocalDate.now());
-        booking.setTotalPrice(totalPrice);
-
+        booking.setTotalPrice(destination.getPrice() * nbPassengers); // Exemple de calcul du prix
         return bookingRepository.save(booking);
     }
 
-    public List<Booking> getUserBookingHistory(Long userId) {
-        userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("User not found"));
-        return bookingRepository.findByUserId(userId);
+    // Obtenir les réservations d'un utilisateur
+    public Optional<Booking> getUserBookings(Integer userId) {
+        return bookingRepository.findById(userId);
     }
 }
-

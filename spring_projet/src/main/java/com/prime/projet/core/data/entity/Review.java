@@ -2,33 +2,31 @@ package com.prime.projet.core.data.entity;
 
 import jakarta.persistence.*;
 
+import java.security.Timestamp;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "review")
 public class Review {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer reviewId;
 
-    @Column(nullable = false)
-    private Integer rating;
-
-    @Column(length = 1000)
+    private int rating;
     private String comment;
 
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime createdAt;
+    @Column(name = "created_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private Timestamp createdAt;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "destination_id", nullable = false)
+    @JoinColumn(name = "destination_id")
     private Destination destination;
 
+    // Getters et Setters
     public Integer getReviewId() {
         return reviewId;
     }
@@ -37,11 +35,11 @@ public class Review {
         this.reviewId = reviewId;
     }
 
-    public Integer getRating() {
+    public int getRating() {
         return rating;
     }
 
-    public void setRating(Integer rating) {
+    public void setRating(int rating) {
         this.rating = rating;
     }
 
@@ -53,11 +51,11 @@ public class Review {
         this.comment = comment;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
 
@@ -76,5 +74,4 @@ public class Review {
     public void setDestination(Destination destination) {
         this.destination = destination;
     }
-
 }

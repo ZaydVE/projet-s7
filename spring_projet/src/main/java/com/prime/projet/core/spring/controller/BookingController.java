@@ -2,42 +2,27 @@ package com.prime.projet.core.spring.controller;
 
 import com.prime.projet.core.data.entity.Booking;
 import com.prime.projet.core.spring.service.BookingService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/bookings")
+@RequestMapping("/api/bookings")
 public class BookingController {
 
-    private final BookingService bookingService;
+    @Autowired
+    private BookingService bookingService;
 
-    public BookingController(BookingService bookingService) {
-        this.bookingService = bookingService;
-    }
-
+    // Créer une réservation
     @PostMapping("/create")
-    public ResponseEntity<Booking> createBooking(@RequestParam Long userId,
-                                                 @RequestParam Long destinationId,
-                                                 @RequestParam int nbPassengers) {
-        try {
-            Booking booking = bookingService.createBooking(userId, destinationId, nbPassengers);
-            return ResponseEntity.status(HttpStatus.CREATED).body(booking);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(null);
-        }
+    public Booking createBooking(@RequestBody Booking booking) {
+        return bookingService.createBooking(booking.getUser().getUserId(), booking.getDestination().getDestinationId(), booking.getNbPassengers());
     }
 
-    @GetMapping("/history/{userId}")
-    public ResponseEntity<List<Booking>> getUserBookingHistory(@PathVariable Long userId) {
-        try {
-            List<Booking> bookingHistory = bookingService.getUserBookingHistory(userId);
-            return ResponseEntity.ok(bookingHistory);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.notFound().build();
-        }
+    // Lister les réservations d'un utilisateur
+    @GetMapping("/user/{userId}")
+    public Optional<Booking> getUserBookings(@PathVariable Integer userId) {
+        return bookingService.getUserBookings(userId);
     }
 }
-
