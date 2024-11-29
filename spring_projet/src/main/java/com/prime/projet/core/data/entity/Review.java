@@ -3,8 +3,6 @@ package com.prime.projet.core.data.entity;
 import jakarta.persistence.*;
 
 import java.security.Timestamp;
-import java.time.LocalDateTime;
-
 @Entity
 public class Review {
 
