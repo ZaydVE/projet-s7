@@ -1,0 +1,40 @@
+:root {
+	--text-color-white: #FFFFFF;
+	--text-color-gray: #4D4D4D;
+	--accent-color-1: #06506E;
+	--accent-color-2: #C89608;
+}
+
+.questions-answers {
+	padding: 100px 12.5% 0;
+}
+
+.questions-answers h1 {
+	font-size: 4.375rem;
+	font-weight: 700;
+	letter-spacing: 12px;
+	text-transform: uppercase;
+	display: block;
+	text-align: center;
+	transition: letter-spacing .3s ease-in-out;
+	color: var(--accent-color-2);
+}
+
+.questions-answers h1:hover {
+	letter-spacing: 14px;
+}
+
+.questions-answers .question-answer {
+	margin: 75px 0;
+}
+
+.questions-answers .question-answer h2 {
+	margin: 0;
+	text-transform: uppercase;
+	color: var(--accent-color-1);
+	font-size: 1.25rem;
+}
+
+.questions-answers .question-answer h2 span {
+	color: var(--accent-color-2);
+}

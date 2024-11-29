@@ -1,0 +1,20 @@
+:root {
+	--text-color-white: #FFFFFF;
+	--text-color-gray: #4D4D4D;
+	--accent-color-1: #06506E;
+	--accent-color-2: #C89608;
+}
+
+.scroll-top-button {
+	position: fixed;
+	bottom: 15px;
+	right: 15px;
+	background-color: var(--text-color-white);
+	width: 40px;
+	height: 40px;
+	border-radius: 100px;
+	color: var(--accent-color-1);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
