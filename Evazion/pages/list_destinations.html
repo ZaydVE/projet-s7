@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Destinations</title>
+</head>
+<body>
+<h1>Liste des Destinations</h1>
+<table>
+  <thead>
+  <tr>
+    <th>Nom</th>
+    <th>Description</th>
+    <th>Prix</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="destination : ${destinations}">
+    <td th:text="${destination.name}"></td>
+    <td th:text="${destination.description}"></td>
+    <td th:text="${destination.price}"></td>
+    <td>
+      <a th:href="@{/destinations/{id}(destinationId=${destination.destinationId})}">Voir</a>
+      <a th:href="@{/destinations/update/{id}(destinationId=${destination.destinationId})}">Modifier</a>
+      <a th:href="@{/destinations/delete/{id}(destinationId=${destination.destinationId})}">Supprimer</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>
