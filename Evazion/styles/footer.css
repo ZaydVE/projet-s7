@@ -11,13 +11,10 @@
 	padding: 75px 12.5% 10px;
 }
 
-.footer h3 {
-	margin: 0;
-}
-
 .footer .footer-content h3 {
 	text-transform: uppercase;
 	font-size: 1.25rem;
+	margin: 0;
 }
 
 .footer .footer-content .footer-top {
@@ -26,6 +23,7 @@
 
 .footer .footer-content .footer-center {
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: space-between;
 	margin-bottom: 50px;
 }

@@ -25,4 +25,6 @@ body {
 	line-height: 1.625;
 	color: var(--text-color-gray);
 	margin: 0;
+	padding: 0;
+	width: 100%;
 }

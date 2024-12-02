@@ -23,21 +23,48 @@
                     Evazion
                 </a>
             </div>
-            <nav class="navigation">
-                <a href="#" class="navigation-item">Voyages</a>
-                <a href="#" class="navigation-item">Blog</a>
-                <a href="#" class="navigation-item">Avis</a>
-                <a href="#" class="navigation-item">Contact</a>
-                <form class="navigation-item search-bar">
-                    <input type="text" class="search-input" placeholder="Rechercher" size=10>
-                    <button class="search-button">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </button>
-                </form>
-                <a href="#" class="navigation-item account">
-                    <i class="fa-solid fa-user"></i> Compte
-                </a>
-            </nav>
+            <ul class="navigation">
+                <li class="navigation-item trips-item">
+                    <a href="#">Voyages</a>
+                    <ul class="navigation-item trips-dropdown">
+                        <li class="dropdown-item">
+                            <a href="#">Afrique</a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="#">Amérique du Nord</a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="#">Amérique du Sud</a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="#">Asie</a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="#">Europe</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="navigation-item">
+                    <a href="#">Blog</a>
+                </li>
+                <li class="navigation-item">
+                    <a href="#">Avis</a>
+                </li>
+                <li class="navigation-item">
+                    <a href="#">Contact</a>
+                </li>
+                <div class="navigation-item buttons-container">
+                    <form class="navigation-item search-bar">
+                        <input type="text" class="search-input" placeholder="Rechercher" size="10">
+                        <button class="search-button">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </form>
+                    <a href="#" class="navigation-item account">
+                        <i class="fa-solid fa-user"></i> Compte
+                    </a>
+                </div>
+            </ul>
         </div>
     </header>
     <section class="content">
