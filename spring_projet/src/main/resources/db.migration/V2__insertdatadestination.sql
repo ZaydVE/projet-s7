@@ -144,4 +144,47 @@ Les visiteurs peuvent explorer l''intérieur du palais, avec ses nombreuses cham
 Le Palais de Jaipur est situé au cœur de la ville et offre une vue spectaculaire sur les rues animées de Jaipur. Le monument attire des milliers de touristes chaque année, venus découvrir son architecture unique et son histoire fascinante.
 En visitant le Palais de Jaipur, les voyageurs peuvent non seulement apprécier la beauté de l''édifice, mais aussi en apprendre davantage sur la riche culture et l’histoire du Rajasthan et de l’Inde impériale. Le Palais de Jaipur est un symbole de la splendeur royale et de l’ingéniosité architecturale, et reste un incontournable pour toute visite en Inde.",
  1100.00, "Asie", "Inde", "Jaipur", "Culture", "2026-01-01", "2026-01-10",
- "16.jpg", 50);
+ "16.jpg", 50),
+(17,
+ "Les îles Maldives",
+ "Les Maldives, situées dans l’océan Indien, sont un archipel composé de 26 atolls et plus de 1 000 îles coralliennes. Connues pour leurs plages de sable blanc, leurs eaux turquoise et leur biodiversité marine exceptionnelle, les Maldives représentent une destination paradisiaque par excellence.
+Chaque île est unique, offrant des lagons paisibles, des récifs coralliens vibrants et des écosystèmes sous-marins riches. Les Maldives sont réputées pour la plongée et le snorkeling, permettant aux visiteurs de nager avec des raies manta, des requins-baleines et une multitude de poissons tropicaux. Les récifs coralliens qui entourent les îles sont parmi les plus préservés au monde.
+Les complexes hôteliers luxueux, souvent situés sur des îles privées, proposent des villas sur pilotis et des expériences uniques telles que des spas sous-marins ou des repas dans des restaurants sous l’eau. Ce luxe, combiné à la tranquillité et aux paysages époustouflants, fait des Maldives une destination prisée pour les lunes de miel et les vacances de rêve.
+Les Maldives ne se résument pas seulement à leurs plages. La capitale, Malé, offre un aperçu de la culture locale avec ses marchés, sa mosquée du Vendredi et son musée national. Les traditions maldiviennes, comme les danses Bodu Beru et la cuisine à base de poissons frais et de noix de coco, ajoutent une touche culturelle à ce cadre idyllique.
+Face aux défis posés par le changement climatique et la montée des eaux, les Maldives sensibilisent également le monde à l’importance de la préservation de la nature. L’archipel demeure un symbole de beauté naturelle et d’harmonie entre l’homme et la mer, une destination à la fois relaxante et fascinante.",
+ 2500, "Asie", "Maldives", "Malé", "Plage", "2025-01-10", "2025-01-20",
+ "17.jpg", 50),
+(18,
+ "Le Vieux Quartier de Hanoi",
+ "Le Vieux Quartier de Hanoi, situé au cœur de la capitale vietnamienne, est un labyrinthe vivant de ruelles animées, de marchés colorés et de bâtiments historiques. Ce quartier historique est une fenêtre sur l’âme de la ville, offrant un mélange captivant d’architecture coloniale française, de pagodes anciennes et d’activités modernes.
+Chaque rue du Vieux Quartier porte le nom des produits ou des métiers qui y étaient autrefois pratiqués, comme la rue de la Soie ou la rue des Herbes Médicinales. Aujourd’hui encore, ces traditions subsistent, et les visiteurs peuvent découvrir des artisans locaux fabriquant des produits à la main.
+Les marchés de rue sont un incontournable, avec leurs étals regorgeant de fruits exotiques, de légumes frais et de plats typiques tels que le pho, le bun cha et les rouleaux de printemps. Le soir, les rues s’illuminent avec des lanternes et des stands de nourriture, créant une ambiance festive.
+Les sites emblématiques du quartier incluent le lac Hoan Kiem, avec son pont rouge menant au temple Ngoc Son, et l’opéra de Hanoi, un héritage de l’époque coloniale. Le Vieux Quartier est également réputé pour ses cafés, où l’on peut déguster le célèbre café vietnamien, souvent servi avec du lait concentré ou sous forme de café aux œufs.
+Ce quartier est un lieu où le passé et le présent coexistent harmonieusement. La culture vietnamienne y est vivante, reflétée dans les rituels, l’artisanat et la cuisine. Flâner dans ses ruelles étroites, s’arrêter dans une échoppe pour un repas ou visiter un temple local constitue une immersion authentique dans l’histoire et le quotidien de Hanoi.",
+ 1200, "Asie", "Vietnam", "Hanoi", "Culture", "2025-02-01", "2025-02-10",
+ "18.jpg", 50),
+(19,
+ "Le Mont Rinjani",
+ "Le Mont Rinjani, situé sur l’île de Lombok en Indonésie, est un majestueux volcan actif qui culmine à 3 726 mètres, faisant de lui le deuxième plus haut volcan du pays. C’est une destination de choix pour les amateurs de randonnée, offrant des paysages spectaculaires et une immersion dans la nature sauvage de l’archipel indonésien.
+L’un des points forts de l’ascension est le lac de cratère Segara Anak, situé à 2 000 mètres d’altitude. Ce lac turquoise est entouré de formations rocheuses impressionnantes et de sources chaudes, créant un contraste saisissant avec le sommet du volcan. Les randonneurs peuvent également apercevoir le cône volcanique Barujari, une manifestation récente de l’activité volcanique du Rinjani.
+Le trek vers le sommet est exigeant, nécessitant une bonne condition physique et une préparation adéquate, mais la récompense est à la hauteur des efforts. Depuis le sommet, la vue panoramique sur l’île de Lombok, Bali et les îles Gili est à couper le souffle, particulièrement au lever du soleil.
+Le Mont Rinjani est également un site sacré pour la population locale. Les Sasaks et les Hindous considèrent le lac Segara Anak comme un lieu spirituel, où des cérémonies religieuses sont régulièrement organisées.
+Le parc national du Rinjani abrite une biodiversité unique, avec des forêts tropicales, des cascades et une faune variée, incluant des singes et des oiseaux endémiques. Les guides locaux, souvent issus des villages voisins, partagent des récits sur la culture et les traditions de la région.
+Avec sa beauté naturelle et son importance culturelle, le Mont Rinjani est une expérience inoubliable pour les aventuriers et les amoureux de la nature, mêlant défi physique et découverte spirituelle.",
+ 1800, "Asie", "Indonésie", "Lombok", "Nature", "2025-03-05", "2025-03-15",
+ "19.jpg", 50),
+(20,
+ "Les plages de Phuket",
+ "Phuket, la plus grande île de Thaïlande, est célèbre pour ses plages paradisiaques bordées de palmiers, ses eaux cristallines et son ambiance décontractée. Avec plus de 30 plages, cette île propose des paysages variés allant de criques isolées à des plages animées parfaites pour les activités aquatiques.
+Parmi les plages les plus populaires, Patong Beach est connue pour sa vie nocturne effervescente, ses restaurants et ses bars. Kata et Karon Beach offrent des cadres plus calmes, idéaux pour les familles ou ceux recherchant un peu de sérénité. Surin et Bang Tao attirent les amateurs de luxe avec leurs complexes haut de gamme.
+Phuket est également une destination prisée pour la plongée sous-marine et le snorkeling. Les récifs coralliens regorgent de vie marine, et les excursions vers les îles voisines comme Phi Phi ou Similan enrichissent l’expérience. Pour ceux en quête d’aventure, les sports nautiques tels que le surf, le jet-ski ou le paddle sont omniprésents.
+Au-delà de ses plages, Phuket possède une riche culture. La vieille ville, avec ses bâtiments coloniaux colorés et ses temples, offre un aperçu de l’histoire de l’île. Les visiteurs peuvent également découvrir le Grand Bouddha, un monument impressionnant offrant une vue panoramique sur l’île.
+Phuket est une destination qui s’adapte à toutes les envies : détente, découverte ou fête. Avec son mélange de beauté naturelle, de culture locale et d’options de divertissement, elle reste une escapade inoubliable.",
+ 1500, "Asie", "Thaïlande", "Phuket", "Plage", "2025-04-15", "2025-04-25",
+ "20.jpg", 50);
+
+
+
+
+
+
