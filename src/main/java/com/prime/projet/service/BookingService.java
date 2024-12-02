@@ -1,9 +1,9 @@
 package com.prime.projet.core.spring.service;
 
-import com.prime.projet.core.data.entity.Booking;
-import com.prime.projet.core.data.entity.Destination;
-import com.prime.projet.core.data.entity.User;
-import com.prime.projet.core.spring.repository.BookingRepository;
+import com.prime.projet.repository.entity.Booking;
+import com.prime.projet.repository.entity.Destination;
+import com.prime.projet.repository.entity.User;
+import com.prime.projet.repository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

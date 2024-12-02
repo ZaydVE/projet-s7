@@ -1,6 +1,6 @@
-package com.prime.projet.core.spring.controller;
+package com.prime.projet.controller;
 
-import com.prime.projet.core.data.entity.Destination;
+import com.prime.projet.repository.entity.Destination;
 import com.prime.projet.core.spring.service.DestinationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

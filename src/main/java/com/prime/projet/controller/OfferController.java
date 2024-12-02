@@ -1,7 +1,7 @@
-package com.prime.projet.core.spring.controller;
+package com.prime.projet.controller;
 
 
-import com.prime.projet.core.data.entity.Offer;
+import com.prime.projet.repository.entity.Offer;
 import com.prime.projet.core.spring.service.OfferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

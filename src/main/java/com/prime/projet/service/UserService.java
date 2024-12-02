@@ -1,7 +1,7 @@
 package com.prime.projet.core.spring.service;
 
-import com.prime.projet.core.data.entity.User;
-import com.prime.projet.core.spring.repository.UserRepository;
+import com.prime.projet.repository.entity.User;
+import com.prime.projet.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

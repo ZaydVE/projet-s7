@@ -1,6 +1,6 @@
-package com.prime.projet.core.spring.repository;
+package com.prime.projet.repository;
 
-import com.prime.projet.core.data.entity.Destination;
+import com.prime.projet.repository.entity.Destination;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

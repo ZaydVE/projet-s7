@@ -1,11 +1,9 @@
-package com.prime.projet.core.spring.controller;
+package com.prime.projet.controller;
 
-import com.prime.projet.core.data.entity.Review;
+import com.prime.projet.repository.entity.Review;
 import com.prime.projet.core.spring.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/reviews")

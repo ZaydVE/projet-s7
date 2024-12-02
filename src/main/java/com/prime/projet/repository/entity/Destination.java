@@ -1,4 +1,4 @@
-package com.prime.projet.core.data.entity;
+package com.prime.projet.repository.entity;
 
 import jakarta.persistence.*;
 

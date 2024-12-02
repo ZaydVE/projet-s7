@@ -1,12 +1,11 @@
 package com.prime.projet.core.spring.service;
 
-import com.prime.projet.core.data.entity.Booking;
-import com.prime.projet.core.data.entity.Review;
-import com.prime.projet.core.spring.repository.ReviewRepository;
+import com.prime.projet.repository.entity.Booking;
+import com.prime.projet.repository.entity.Review;
+import com.prime.projet.repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
