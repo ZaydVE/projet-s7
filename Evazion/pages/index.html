@@ -27,20 +27,8 @@
                 <li class="navigation-item trips-item">
                     <a href="#">Voyages</a>
                     <ul class="navigation-item trips-dropdown">
-                        <li class="dropdown-item">
-                            <a href="#">Afrique</a>
-                        </li>
-                        <li class="dropdown-item">
-                            <a href="#">Amérique du Nord</a>
-                        </li>
-                        <li class="dropdown-item">
-                            <a href="#">Amérique du Sud</a>
-                        </li>
-                        <li class="dropdown-item">
-                            <a href="#">Asie</a>
-                        </li>
-                        <li class="dropdown-item">
-                            <a href="#">Europe</a>
+                        <li class="dropdown-item" th:each="destination : ${destinations}">
+                            <a th:href="@{/destinations/{id}(id=${destination.id})}" th:text="${destination.name}"></a>
                         </li>
                     </ul>
                 </li>

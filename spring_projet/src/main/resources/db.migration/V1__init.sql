@@ -2,10 +2,10 @@ CREATE DATABASE IF NOT EXISTS db_projet;
 USE db_projet;
 
 DROP TABLE IF EXISTS booking;
+DROP TABLE IF EXISTS offer;
+DROP TABLE IF EXISTS review;
 DROP TABLE IF EXISTS destination;
 DROP TABLE IF EXISTS user;
-DROP TABLE IF EXISTS review;
-DROP TABLE IF EXISTS offer;
 
 CREATE TABLE IF NOT EXISTS user (
                                     user_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS user (
                                     firstname VARCHAR(45) NOT NULL,
                                     phone_number VARCHAR(15) NOT NULL,
                                     email VARCHAR(45) NOT NULL,
-                                    password VARCHAR(45) NOT NULL,
+                                    password VARCHAR(255) NOT NULL,
                                     created_at DATE NOT NULL,
                                     admin BIT NOT NULL
 ) ENGINE=InnoDB;
@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS user (
 CREATE TABLE IF NOT EXISTS destination (
                                            destination_id INT AUTO_INCREMENT PRIMARY KEY,
                                            name VARCHAR(45) NOT NULL,
-                                           description VARCHAR(1000) NOT NULL,
+                                           description VARCHAR(5000) NOT NULL,
                                            price FLOAT NOT NULL,
                                            continent VARCHAR(45) NOT NULL,
                                            country VARCHAR(45) NOT NULL,
@@ -29,7 +29,8 @@ CREATE TABLE IF NOT EXISTS destination (
                                            type VARCHAR(45) NOT NULL,
                                            start_date DATE NOT NULL,
                                            end_date DATE NOT NULL,
-                                           lien_image VARCHAR(255) NOT NULL
+                                           lien_image VARCHAR(255) NOT NULL,
+                                           nb_places INT NOT NULL
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS booking (

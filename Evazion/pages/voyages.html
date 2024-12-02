@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -320,162 +320,23 @@
             </div>
         </div>
         <div class="list">
-            <a href="#" class="card">
-                <img src="../images/card-image-1.jpg" alt="Rome" class="card-image">
+            <a th:each="destination : ${destinations}" class="card" href="#">
+                <img th:src="@{${destination.lienImage}}" alt="Image de la destination" class="card-image"/>
                 <div class="card-content">
                     <div class="card-header">
                         <div class="infos">
-                            <span class="price">3 000 €</span>
-                            <span class="duration">X jours, 6 <i class="fa-solid fa-user-group"></i></span>
+                            <span th:text="${destination.price}" class="price">Prix</span>
+                            <span class="duration">
+                        <span th:text="${destination.startDate}">Date de départ</span> -
+                        <span th:text="${destination.endDate}">Date de fin</span>
+                    </span>
                         </div>
                     </div>
                     <div class="card-footer">
                         <h4 class="location">
-                            <i class="fa-solid fa-map-pin"></i> La Digue, Seychelles
-                        </h4>
-                    </div>
-                </div>
-            </a>
-            <a href="#" class="card">
-                <img src="../images/card-image-1.jpg" alt="Rome" class="card-image">
-                <div class="card-content">
-                    <div class="card-header">
-                        <div class="infos">
-                            <span class="price">3 000 €</span>
-                            <span class="duration">X jours, 6 <i class="fa-solid fa-user-group"></i></span>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <h4 class="location">
-                            <i class="fa-solid fa-map-pin"></i> La Digue, Seychelles
-                        </h4>
-                    </div>
-                </div>
-            </a>
-            <a href="#" class="card">
-                <img src="../images/card-image-1.jpg" alt="Rome" class="card-image">
-                <div class="card-content">
-                    <div class="card-header">
-                        <div class="infos">
-                            <span class="price">3 000 €</span>
-                            <span class="duration">X jours, 6 <i class="fa-solid fa-user-group"></i></span>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <h4 class="location">
-                            <i class="fa-solid fa-map-pin"></i> La Digue, Seychelles
-                        </h4>
-                    </div>
-                </div>
-            </a>
-            <a href="#" class="card">
-                <img src="../images/card-image-1.jpg" alt="Rome" class="card-image">
-                <div class="card-content">
-                    <div class="card-header">
-                        <div class="infos">
-                            <span class="price">3 000 €</span>
-                            <span class="duration">X jours, 6 <i class="fa-solid fa-user-group"></i></span>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <h4 class="location">
-                            <i class="fa-solid fa-map-pin"></i> La Digue, Seychelles
-                        </h4>
-                    </div>
-                </div>
-            </a>
-            <a href="#" class="card">
-                <img src="../images/card-image-1.jpg" alt="Rome" class="card-image">
-                <div class="card-content">
-                    <div class="card-header">
-                        <div class="infos">
-                            <span class="price">3 000 €</span>
-                            <span class="duration">X jours, 6 <i class="fa-solid fa-user-group"></i></span>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <h4 class="location">
-                            <i class="fa-solid fa-map-pin"></i> La Digue, Seychelles
-                        </h4>
-                    </div>
-                </div>
-            </a>
-            <a href="#" class="card">
-                <img src="../images/card-image-1.jpg" alt="Rome" class="card-image">
-                <div class="card-content">
-                    <div class="card-header">
-                        <div class="infos">
-                            <span class="price">3 000 €</span>
-                            <span class="duration">X jours, 6 <i class="fa-solid fa-user-group"></i></span>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <h4 class="location">
-                            <i class="fa-solid fa-map-pin"></i> La Digue, Seychelles
-                        </h4>
-                    </div>
-                </div>
-            </a>
-            <a href="#" class="card">
-                <img src="../images/card-image-1.jpg" alt="Rome" class="card-image">
-                <div class="card-content">
-                    <div class="card-header">
-                        <div class="infos">
-                            <span class="price">3 000 €</span>
-                            <span class="duration">X jours, 6 <i class="fa-solid fa-user-group"></i></span>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <h4 class="location">
-                            <i class="fa-solid fa-map-pin"></i> La Digue, Seychelles
-                        </h4>
-                    </div>
-                </div>
-            </a>
-            <a href="#" class="card">
-                <img src="../images/card-image-1.jpg" alt="Rome" class="card-image">
-                <div class="card-content">
-                    <div class="card-header">
-                        <div class="infos">
-                            <span class="price">3 000 €</span>
-                            <span class="duration">X jours, 6 <i class="fa-solid fa-user-group"></i></span>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <h4 class="location">
-                            <i class="fa-solid fa-map-pin"></i> La Digue, Seychelles
-                        </h4>
-                    </div>
-                </div>
-            </a>
-            <a href="#" class="card">
-                <img src="../images/card-image-1.jpg" alt="Rome" class="card-image">
-                <div class="card-content">
-                    <div class="card-header">
-                        <div class="infos">
-                            <span class="price">3 000 €</span>
-                            <span class="duration">X jours, 6 <i class="fa-solid fa-user-group"></i></span>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <h4 class="location">
-                            <i class="fa-solid fa-map-pin"></i> La Digue, Seychelles
-                        </h4>
-                    </div>
-                </div>
-            </a>
-            <a href="#" class="card">
-                <img src="../images/card-image-1.jpg" alt="Rome" class="card-image">
-                <div class="card-content">
-                    <div class="card-header">
-                        <div class="infos">
-                            <span class="price">3 000 €</span>
-                            <span class="duration">X jours, 6 <i class="fa-solid fa-user-group"></i></span>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <h4 class="location">
-                            <i class="fa-solid fa-map-pin"></i> La Digue, Seychelles
+                            <i class="fa-solid fa-map-pin"></i>
+                            <span th:text="${destination.city}">Ville</span>,
+                            <span th:text="${destination.country}">Pays</span>
                         </h4>
                     </div>
                 </div>

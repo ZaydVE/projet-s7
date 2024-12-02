@@ -18,6 +18,7 @@ public class Destination {
     private String country;
     private String city;
     private String type;
+    private int nb_places;
 
     @Temporal(TemporalType.DATE)
     private Date startDate;
@@ -115,4 +116,8 @@ public class Destination {
     public void setLienImage(String lienImage) {
         this.lienImage = lienImage;
     }
+
+    public int getNb_places() { return nb_places; }
+
+    public void setNb_places(int nb_places) { this.nb_places = nb_places; }
 }

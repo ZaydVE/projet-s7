@@ -1,0 +1,203 @@
+:root {
+	--text-color-white: #FFFFFF;
+	--text-color-gray: #4D4D4D;
+	--accent-color-1: #06506E;
+	--accent-color-2: #C89608;
+}
+
+.header .top-bar {
+	background-color: var(--text-color-white);
+	color: var(--accent-color-1);
+	font-size: .875rem;
+	text-transform: uppercase;
+	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 0 auto;
+	padding: 18px 12.5% 23px;
+	position: fixed;
+	width: 100%;
+	z-index: 1000;
+	top: 0;
+}
+
+.header .top-bar .logo {
+	margin: 0;
+}
+
+.header .top-bar .logo a {
+	position: relative;
+	display: inline-block;
+	font-weight: bold;
+}
+
+.header .top-bar .logo a::before {
+	content: '';
+	position: absolute;
+	width: 0;
+	height: 1.5px;
+	bottom: 0;
+	left: 0;
+	background-color: var(--accent-color-2);
+	visibility: hidden;
+	transition: all .3s ease-in-out;
+}
+
+.header .top-bar .logo a:hover::before {
+	visibility: visible;
+	width: 100%;
+}
+
+.header .top-bar .navigation {
+	list-style-type: none;
+	display: flex;
+	align-items: center;
+}
+
+.header .top-bar .navigation .navigation-item {
+	position: relative;
+	margin: 0 24px;
+}
+
+.header .top-bar .navigation .navigation-item a {
+	text-align: center;
+}
+
+.header .top-bar .navigation .navigation-item a:hover {
+	color: var(--accent-color-2);
+}
+
+.header .top-bar .navigation .trips-item .trips-dropdown {
+	display: none;
+    position: absolute;
+    top: 100%;
+    left: -100%;
+    background-color: white;
+    list-style: none;
+    margin: 0;
+    padding: 15px 0;
+    z-index: 1000;
+    width: 300%;
+}
+
+.header .top-bar .navigation .trips-item:hover .trips-dropdown {
+	display: block;
+}
+
+.header .top-bar .navigation .trips-item .trips-dropdown .dropdown-item {
+	display: block;
+	padding: 5px 0;
+}
+
+.header .top-bar .navigation .buttons-container {
+	display: flex;
+	margin: 0;
+}
+
+.header .top-bar .navigation .buttons-container .search-bar {
+	border: solid 1px var(--accent-color-1);
+	border-radius: 5px;
+	margin-top: 5px;
+	margin-right: 15px;
+	padding: 7px 10px;
+	display: flex;
+	justify-content: space-between;
+	margin: 0 10px 0 0;
+}
+
+.header .top-bar .navigation .buttons-container .search-bar .search-input {
+	background: none;
+	border: none;
+	outline: none;
+	color: var(--accent-color-1);
+}
+
+.header .top-bar .navigation .buttons-container .search-bar .search-input::placeholder {
+	color: var(--accent-color-1);
+	text-transform: uppercase;
+}
+
+.header .top-bar .navigation .buttons-container .search-bar .search-input:focus::placeholder {
+	opacity: 0;
+}
+
+.header .top-bar .navigation .buttons-container .search-bar .search-button {
+	background: none;
+	border: none;
+	color: var(--accent-color-1);
+	cursor: pointer;
+}
+
+.header .top-bar .navigation .buttons-container .search-bar .search-button i {
+	font-size: .75rem;
+}
+
+.header .top-bar .navigation .buttons-container .account {
+	color: var(--accent-color-2);
+	border: solid 1px var(--accent-color-2);
+	border-radius: 5px;
+	padding: 7px 10px;
+	transition: background-color .3s ease-in-out;
+	margin: 0;
+}
+
+.header .top-bar .navigation .buttons-container .account:hover {
+	background: var(--accent-color-2);
+	color: var(--text-color-white);
+}
+
+.header .top-bar .navigation .buttons-container .account i {
+	font-size: .75rem;
+	margin-right: 5px;
+}
+
+@media (max-width: 1010px) {
+	.header .top-bar {
+		flex-direction: column;
+		align-items: flex-start;
+		padding: 15px;
+		position: inherit;
+	}
+
+	.header .top-bar .logo {
+		margin: 15px 0;
+		align-self: center;
+	}
+
+	.header .top-bar .navigation {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		width: 100%;
+		gap: 10px;
+	}
+
+	.header .top-bar .navigation .navigation-item {
+		margin: 0 10px;
+	}
+
+	.header .top-bar .navigation .trips-dropdown {
+		width: 100%;
+		left: 0;
+		top: auto;
+		color: var(--accent-color-1);
+	}
+
+	.header .top-bar .navigation .buttons-container {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		width: 100%;
+		margin-top: 15px;
+	}
+
+	.header .top-bar .navigation .search-bar {
+		width: calc(70% - 10px);
+	}
+
+	.header .top-bar .navigation .account {
+		width: calc(30% - 10px);
+		text-align: center;
+	}
+}
