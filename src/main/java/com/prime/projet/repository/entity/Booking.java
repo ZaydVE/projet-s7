@@ -10,21 +10,25 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer bookingId;
 
+    @Column(nullable = false)
     @Temporal(TemporalType.DATE)
     private Date bookingDate;
 
+    @Column(nullable = false)
     private int nbPassengers;
+
+    @Column(nullable = false)
     private float totalPrice;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "destination_id")
+    @JoinColumn(name = "destination_id", nullable = false)
     private Destination destination;
 
-    // Getters et Setters
+    // Getters et setters
     public Integer getBookingId() {
         return bookingId;
     }

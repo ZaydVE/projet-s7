@@ -1,28 +1,45 @@
 package com.prime.projet.controller;
 
+
 import com.prime.projet.repository.entity.Booking;
-import com.prime.projet.core.spring.service.BookingService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.prime.projet.service.BookingService;
+import com.prime.projet.service.dto.BookingDto;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import java.util.List;
 
-@RestController
-@RequestMapping("/api/bookings")
+@Controller
+@RequestMapping("/bookings")
 public class BookingController {
 
-    @Autowired
-    private BookingService bookingService;
+    private final BookingService bookingService;
 
-    // Créer une réservation
-    @PostMapping("/create")
-    public Booking createBooking(@RequestBody Booking booking) {
-        return bookingService.createBooking(booking.getUser().getUserId(), booking.getDestination().getDestinationId(), booking.getNbPassengers());
+    public BookingController(BookingService bookingService) {
+        this.bookingService = bookingService;
     }
 
-    // Lister les réservations d'un utilisateur
+    //Affichage d'une page pour créer une réservation
+    @GetMapping("/new")
+    public String showBookingForm(Model model) {
+        model.addAttribute("bookingDto", new BookingDto());
+        return "booking-form";
+    }
+
+    //Traite la soumission d'une nouvelle réservation
+    @PostMapping("/new")
+    public String createBooking(@ModelAttribute("bookingDto") BookingDto bookingDto, Model model) {
+        Booking booking = bookingService.createBooking(bookingDto);
+        model.addAttribute("booking", booking);
+        return "booking-confirmation";
+    }
+
+    //Affiche toutes les réservations d'un utilisateur donné
     @GetMapping("/user/{userId}")
-    public Optional<Booking> getUserBookings(@PathVariable Integer userId) {
-        return bookingService.getUserBookings(userId);
+    public String getUserBookings(@PathVariable Integer userId, Model model) {
+        List<Booking> bookings = bookingService.getBookingsForUser(userId);
+        model.addAttribute("bookings", bookings);
+        return "user-bookings";
     }
 }

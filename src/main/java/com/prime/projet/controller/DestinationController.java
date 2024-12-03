@@ -1,8 +1,8 @@
 package com.prime.projet.controller;
 
 import com.prime.projet.repository.entity.Destination;
-import com.prime.projet.core.spring.service.DestinationService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.prime.projet.service.DestinationService;
+import com.prime.projet.service.dto.DestinationDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,59 +13,69 @@ import java.util.List;
 @RequestMapping("/destinations")
 public class DestinationController {
 
-    @Autowired
-    private DestinationService destinationService;
+    private final DestinationService destinationService;
 
-    // Créer une destination (formulaire et vue HTML)
-    @GetMapping("/create")
-    public String showCreateForm() {
-        return "create_destination"; // page HTML où l'utilisateur peut créer une destination
+    public DestinationController(DestinationService destinationService) {
+        this.destinationService = destinationService;
     }
 
-    @PostMapping("/create")
-    public String createDestination(@ModelAttribute Destination destination) {
-        destinationService.createDestination(destination.getName(), destination.getDescription(), destination.getPrice(),
-                destination.getContinent(), destination.getCountry(), destination.getCity(), destination.getType(),
-                destination.getStartDate(), destination.getEndDate(), destination.getLienImage(), destination.getNb_places());
-        return "redirect:/destinations/"; // Redirige vers la liste après la création
-    }
-
-    // Modifier une destination (formulaire et vue HTML)
-    @GetMapping("/update/{destinationId}")
-    public String showUpdateForm(@PathVariable Integer destinationId, Model model) {
-        Destination destination = destinationService.findById(destinationId);
-        model.addAttribute("destination", destination);
-        return "update_destination"; // page HTML pour modifier la destination
-    }
-
-    @PostMapping("/update/{destinationId}")
-    public String updateDestination(@PathVariable Integer destinationId, @ModelAttribute Destination destination) {
-        destinationService.updateDestination(destinationId, destination.getName(), destination.getDescription(), destination.getPrice(),
-                destination.getContinent(), destination.getCountry(), destination.getCity(), destination.getType(),
-                destination.getStartDate(), destination.getEndDate(), destination.getLienImage(), destination.getNb_places());
-        return "redirect:/destinations/"; // Redirige vers la liste après la mise à jour
-    }
-
-    // Supprimer une destination
-    @GetMapping("/delete/{destinationId}")
-    public String deleteDestination(@PathVariable Integer destinationId) {
-        destinationService.deleteDestination(destinationId);
-        return "redirect:/destinations/"; // Redirige vers la liste après suppression
-    }
-
-    // Lister toutes les destinations
-    @GetMapping()
-    public String listDestinations(Model model) {
-        List<Destination> destinations = destinationService.listDestinations();
+    //Affiche toutes les destinations
+    @GetMapping
+    public String showAllDestinations(Model model) {
+        List<Destination> destinations = destinationService.getAllDestinations();
         model.addAttribute("destinations", destinations);
-        return "list_destinations"; // Page HTML où les destinations sont listées
+        return "destinations";
     }
 
-    // Trouver une destination par ID (détail d'une destination)
-    @GetMapping("/{destinationId}")
-    public String findDestinationById(@PathVariable Integer destinationId, Model model) {
-        Destination destination = destinationService.findById(destinationId);
+    //Affiche les détails d'une destination
+    @GetMapping("/{id}")
+    public String getDestinationDetails(@PathVariable Integer id, Model model) {
+        Destination destination = destinationService.getDestinationById(id);
         model.addAttribute("destination", destination);
-        return "destination_detail"; // Page HTML qui affiche le détail de la destination
+        return "destination-details";
+    }
+
+    //Affiche une page pour créer une nouvelle destination
+    @GetMapping("/new")
+    public String showCreateDestinationForm(Model model) {
+        model.addAttribute("destinationDto", new DestinationDto());
+        return "destination-form";
+    }
+
+    //Poste une nouvelle destination
+    @PostMapping("/new")
+    public String createDestination(@ModelAttribute("destinationDto") DestinationDto destinationDto) {
+        destinationService.createDestination(destinationDto);
+        return "redirect:/destinations";
+    }
+
+    //Affiche une page pour modifier une destination existante
+    @GetMapping("/edit/{id}")
+    public String showEditDestinationForm(@PathVariable Integer id, Model model) {
+        Destination destination = destinationService.getDestinationById(id);
+        model.addAttribute("destination", destination);
+        return "destination-edit-form";
+    }
+
+    //Poste la modification d'une destination existante
+    @PostMapping("/edit/{id}")
+    public String editDestination(@PathVariable Integer id, @ModelAttribute("destinationDto") DestinationDto destinationDto) {
+        destinationService.updateDestination(id, destinationDto);
+        return "redirect:/destinations";
+    }
+
+    //Supprimer une destination
+    @PostMapping("/delete/{id}")
+    public String deleteDestination(@PathVariable Integer id) {
+        destinationService.deleteDestination(id);
+        return "redirect:/destinations";
+    }
+
+    //Applique un filtre ou un tri sur la liste des destinations
+    @GetMapping("/filter")
+    public String filterDestinations(@RequestParam(required = false) String type, Model model) {
+        List<Destination> filteredDestinations = destinationService.filterDestinations(type);
+        model.addAttribute("destinations", filteredDestinations);
+        return "destinations";
     }
 }

@@ -1,44 +1,33 @@
 package com.prime.projet.controller;
 
-import com.prime.projet.repository.entity.User;
-import com.prime.projet.core.spring.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import com.prime.projet.service.UserService;
+import com.prime.projet.service.dto.UserDto;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-@RestController
-@RequestMapping("/api/users")
+@Controller
+@RequestMapping("/users")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
-    // Créer un utilisateur
-    @PostMapping("/create")
-    public User createUser(@RequestBody User user) {
-        return userService.createUser(user.getEmail(), user.getPassword(), user.getFirstname(), user.getLastname(), user.getPhoneNumber());
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
-    // Modifier un utilisateur
-    @PutMapping("/update/{userId}")
-    public User updateUser(@PathVariable Integer userId, @RequestBody User user) {
-        return userService.updateUser(userId, user.getFirstname(), user.getLastname(), user.getEmail(), user.getPhoneNumber(), user.getPassword());
+    //Créer un utilisateur
+    @PostMapping("/new")
+    public String createUser(UserDto userDto) {
+        userService.createUser(userDto);
+        return "redirect:/users/success";
     }
 
-    // Supprimer un utilisateur
-    @DeleteMapping("/delete/{userId}")
-    public void deleteUser(@PathVariable Integer userId) {
-        userService.deleteUser(userId);
-    }
-
-    // Trouver un utilisateur par email
-    @GetMapping("/email/{email}")
-    public User findByEmail(@PathVariable String email) {
-        return userService.findByEmail(email);
-    }
-
-    // Trouver un utilisateur par ID
-    @GetMapping("/{userId}")
-    public User findById(@PathVariable Integer userId) {
-        return UserService.findById(userId);
+    //Supprimer un utilisateur
+    @PostMapping("/delete/{id}")
+    public String deleteUser(@PathVariable Integer id) {
+        userService.deleteUser(id);
+        return "redirect:/";
     }
 }

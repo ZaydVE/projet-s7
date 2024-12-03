@@ -1,39 +1,32 @@
-package com.prime.projet.core.spring.service;
+package com.prime.projet.service;
 
-import com.prime.projet.repository.entity.Booking;
-import com.prime.projet.repository.entity.Review;
 import com.prime.projet.repository.ReviewRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.prime.projet.repository.entity.Review;
+import com.prime.projet.service.dto.ReviewDto;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.List;
 
 @Service
 public class ReviewService {
 
-    @Autowired
-    private ReviewRepository reviewRepository;
+    private final ReviewRepository reviewRepository;
 
-    @Autowired
-    private BookingService bookingService;
+    public ReviewService(ReviewRepository reviewRepository) {
+        this.reviewRepository = reviewRepository;
+    }
 
-    // Ajouter un avis pour une destination
-    public Review addReview(Integer userId, Integer destinationId, int rating, String comment) {
-        Optional<Booking> bookings = bookingService.getUserBookings(userId);
-        if (bookings.stream().noneMatch(booking -> booking.getDestination().getDestinationId().equals(destinationId))) {
-            throw new RuntimeException("L'utilisateur n'a pas réservé cette destination");
-        }
-
+    //Créer une review
+    public Review createReview(ReviewDto reviewDto) {
         Review review = new Review();
-        review.setRating(rating);
-        review.setComment(comment);
-        review.setUser(UserService.findById(userId));
-        review.setDestination(DestinationService.findById(destinationId));
+        review.setRating(reviewDto.getRating());
+        review.setComment(reviewDto.getComment());
+        review.setCreatedAt(reviewDto.getCreatedAt());
         return reviewRepository.save(review);
     }
 
-    // Supprimer un avis
-    public void deleteReview(Integer reviewId) {
-        reviewRepository.deleteById(reviewId);
+    //Lister les review pour une destination
+    public List<Review> getReviewsForDestination(Integer destinationId) {
+        return reviewRepository.findByDestinationDestinationId(destinationId);
     }
 }

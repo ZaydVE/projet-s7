@@ -2,7 +2,6 @@ package com.prime.projet.repository.entity;
 
 import jakarta.persistence.*;
 
-
 @Entity
 public class Offer {
 
@@ -10,13 +9,14 @@ public class Offer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer offerId;
 
+    @Column(nullable = false)
     private float percentageDiscount;
 
     @ManyToOne
-    @JoinColumn(name = "destination_id")
+    @JoinColumn(name = "destination_id", nullable = false)
     private Destination destination;
 
-    // Getters et Setters
+    // Getters et setters
     public Integer getOfferId() {
         return offerId;
     }
