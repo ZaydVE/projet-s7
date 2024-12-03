@@ -19,18 +19,19 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
-                        .requestMatchers("/public").permitAll() //
                         .requestMatchers("/destinations").permitAll()
+                        .requestMatchers("/styles/**").permitAll()
+                        .requestMatchers("/assets/**").permitAll()
+                        .requestMatchers("/public").permitAll()
                         .requestMatchers("/rest/admin").hasRole("ADMIN")
                         .requestMatchers("/rest/user").hasRole("USER")
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())
-                .formLogin(Customizer.withDefaults())
-        ;
+                .formLogin(Customizer.withDefaults());
         return httpSecurity.build();
     }
+
 
     @Bean
     public UserDetailsService userDetailsService() {
