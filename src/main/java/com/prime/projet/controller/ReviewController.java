@@ -23,7 +23,7 @@ public class ReviewController {
     @GetMapping("/new")
     public String showReviewForm(Model model) {
         model.addAttribute("reviewDto", new ReviewDto());
-        return "review-form"; // Page Thymeleaf pour le formulaire d'avis
+        return "review-form";
     }
 
     //Poster une review
@@ -31,7 +31,7 @@ public class ReviewController {
     public String createReview(@ModelAttribute("reviewDto") ReviewDto reviewDto, Model model) {
         Review review = reviewService.createReview(reviewDto);
         model.addAttribute("review", review);
-        return "review-confirmation"; // Page Thymeleaf pour confirmer l'ajout d'un avis
+        return "review-confirmation";
     }
 
     //Affiche toutes les review pour une destination donnée
@@ -39,6 +39,6 @@ public class ReviewController {
     public String getReviewsForDestination(@PathVariable Integer destinationId, Model model) {
         List<Review> reviews = reviewService.getReviewsForDestination(destinationId);
         model.addAttribute("reviews", reviews);
-        return "destination-reviews"; // Page Thymeleaf pour afficher les avis d'une destination
+        return "destination-reviews";
     }
 }
