@@ -1,68 +1,71 @@
-package com.prime.projet.core.spring.service;
+package com.prime.projet.service;
 
-import com.prime.projet.repository.entity.Destination;
 import com.prime.projet.repository.DestinationRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.prime.projet.repository.entity.Destination;
+import com.prime.projet.service.dto.DestinationDto;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 @Service
 public class DestinationService {
 
-    @Autowired
-    private static DestinationRepository destinationRepository;
+    private final DestinationRepository destinationRepository;
+
     public DestinationService(DestinationRepository destinationRepository) {
         this.destinationRepository = destinationRepository;
     }
-    // Créer une nouvelle destination
-    public Destination createDestination(String name, String description, float price, String continent, String country, String city, String type, Date startDate, Date endDate, String lienImage, int nbPlaces) {
-        Destination destination = new Destination();
-        destination.setName(name);
-        destination.setDescription(description);
-        destination.setPrice(price);
-        destination.setContinent(continent);
-        destination.setCountry(country);
-        destination.setCity(city);
-        destination.setType(type);
-        destination.setStartDate(startDate);
-        destination.setEndDate(endDate);
-        destination.setLienImage(lienImage);
-        destination.setNb_places(nbPlaces);
-        return destinationRepository.save(destination);
-    }
 
-    // Modifier une destination
-    public Destination updateDestination(Integer destinationId, String name, String description, float price, String continent, String country, String city, String type, Date startDate, Date endDate, String lienImage, int nbPlaces) {
-        Destination destination = destinationRepository.findById(destinationId).orElseThrow(() -> new RuntimeException("Destination non trouvée"));
-        destination.setName(name);
-        destination.setDescription(description);
-        destination.setPrice(price);
-        destination.setContinent(continent);
-        destination.setCountry(country);
-        destination.setCity(city);
-        destination.setType(type);
-        destination.setStartDate(startDate);
-        destination.setEndDate(endDate);
-        destination.setLienImage(lienImage);
-        destination.setNb_places(nbPlaces);
-        return destinationRepository.save(destination);
-    }
-
-    // Supprimer une destination
-    public void deleteDestination(Integer destinationId) {
-        Destination destination = destinationRepository.findById(destinationId).orElseThrow(() -> new RuntimeException("Destination non trouvée"));
-        destinationRepository.delete(destination);
-    }
-
-    // Lister toutes les destinations
-    public List<Destination> listDestinations() {
+    //Lister toutes les destinations
+    public List<Destination> getAllDestinations() {
         return destinationRepository.findAll();
     }
 
-    // Trouver une destination par son ID
-    public static Destination findById(Integer destinationId) {
-        return destinationRepository.findById(destinationId).orElseThrow(() -> new RuntimeException("Destination non trouvée"));
+    //Récupérer les détails d'une destination spécifique
+    public Destination getDestinationById(Integer destinationId) {
+        return destinationRepository.findById(destinationId)
+                .orElseThrow(() -> new IllegalArgumentException("Destination introuvable."));
     }
+
+    //Créer une nouvelle destination
+    public void createDestination(DestinationDto destinationDto) {
+        Destination destination = new Destination();
+        destination = setDestination(destination, destinationDto);
+        destinationRepository.save(destination);
+    }
+
+    public void updateDestination(Integer destinationId, DestinationDto destinationDto) {
+        Destination destination = destinationRepository.findById(destinationId)
+                .orElseThrow(() -> new IllegalArgumentException("Destination introuvable."));
+        destination = setDestination(destination, destinationDto);
+        destinationRepository.save(destination);
+    }
+
+    //Supprimer une destination
+    public void deleteDestination(Integer userId) {
+        destinationRepository.deleteById(userId);
+    }
+
+    //Filtrer les destinations
+    public List<Destination> filterDestinations(String type) {
+        if (type != null && !type.isEmpty()) {
+            return destinationRepository.findByType(type);
+        }
+        return destinationRepository.findAll();
+    }
+
+    //Méthode pour pouvoir utiliser update et create
+    public Destination setDestination(Destination destination, DestinationDto destinationDto) {
+        destination.setName(destinationDto.getName());
+        destination.setDescription(destinationDto.getDescription());
+        destination.setPrice(destinationDto.getPrice());
+        destination.setContinent(destinationDto.getContinent());
+        destination.setCountry(destinationDto.getCountry());
+        destination.setCity(destinationDto.getCity());
+        destination.setType(destinationDto.getType());
+        destination.setLienImage(destinationDto.getLienImage());
+        destination.setNbPlaces(destinationDto.getNbPlaces());
+        return destination;
+    }
+
 }

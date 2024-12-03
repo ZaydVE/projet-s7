@@ -1,34 +1,28 @@
-package com.prime.projet.core.spring.service;
+package com.prime.projet.service;
 
-
-import com.prime.projet.repository.entity.Offer;
 import com.prime.projet.repository.OfferRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.prime.projet.repository.entity.Offer;
+import com.prime.projet.service.dto.OfferDto;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.List;
 
 @Service
 public class OfferService {
 
-    @Autowired
-    private OfferRepository offerRepository;
+    private final OfferRepository offerRepository;
 
-    // Créer une offre pour une destination
-    public Offer createOffer(Integer destinationId, float percentageDiscount) {
+    public OfferService(OfferRepository offerRepository) {
+        this.offerRepository = offerRepository;
+    }
+
+    public Offer createOffer(OfferDto offerDto) {
         Offer offer = new Offer();
-        offer.setDestination(DestinationService.findById(destinationId));
-        offer.setPercentageDiscount(percentageDiscount);
+        offer.setPercentageDiscount(offerDto.getPercentageDiscount());
         return offerRepository.save(offer);
     }
 
-    // Supprimer une offre
-    public void deleteOffer(Integer offerId) {
-        offerRepository.deleteById(offerId);
-    }
-
-    // Récupérer les offres liées à une destination
-    public Optional<Offer> getOffersByDestination(Integer destinationId) {
-        return offerRepository.findById(destinationId);
+    public List<Offer> getOffersForDestination(Integer destinationId) {
+        return offerRepository.findByDestinationDestinationId(destinationId);
     }
 }

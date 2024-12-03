@@ -1,8 +1,8 @@
 package com.prime.projet.repository.entity;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
-import java.security.Timestamp;
 @Entity
 public class Review {
 
@@ -10,21 +10,24 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer reviewId;
 
+    @Column(nullable = false)
     private int rating;
+
+    @Column(nullable = false, length = 1000)
     private String comment;
 
-    @Column(name = "created_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private Timestamp createdAt;
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime createdAt;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "destination_id")
+    @JoinColumn(name = "destination_id", nullable = false)
     private Destination destination;
 
-    // Getters et Setters
+    // Getters et setters
     public Integer getReviewId() {
         return reviewId;
     }
@@ -49,11 +52,11 @@ public class Review {
         this.comment = comment;
     }
 
-    public Timestamp getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
@@ -71,5 +74,10 @@ public class Review {
 
     public void setDestination(Destination destination) {
         this.destination = destination;
+    }
+
+    @PrePersist
+    public void onCreate() {
+        this.createdAt = LocalDateTime.now();
     }
 }

@@ -1,8 +1,8 @@
 package com.prime.projet.repository.entity;
 
 import jakarta.persistence.*;
-
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Destination {
@@ -11,24 +11,51 @@ public class Destination {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer destinationId;
 
+    @Column(nullable = false, length = 45)
     private String name;
-    private String description;
-    private float price;
-    private String continent;
-    private String country;
-    private String city;
-    private String type;
-    private int nb_places;
 
+    @Column(nullable = false, length = 5000)
+    private String description;
+
+    @Column(nullable = false)
+    private float price;
+
+    @Column(nullable = false, length = 45)
+    private String continent;
+
+    @Column(nullable = false, length = 45)
+    private String country;
+
+    @Column(nullable = false, length = 45)
+    private String city;
+
+    @Column(nullable = false, length = 45)
+    private String type;
+
+    @Column(nullable = false)
     @Temporal(TemporalType.DATE)
     private Date startDate;
 
+    @Column(nullable = false)
     @Temporal(TemporalType.DATE)
     private Date endDate;
 
+    @Column(nullable = false, length = 255)
     private String lienImage;
 
-    // Getters et Setters
+    @Column(nullable = false)
+    private int nbPlaces;
+
+    @OneToMany(mappedBy = "destination", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Booking> bookings;
+
+    @OneToMany(mappedBy = "destination", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> reviews;
+
+    @OneToMany(mappedBy = "destination", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Offer> offers;
+
+    // Getters et setters
     public Integer getDestinationId() {
         return destinationId;
     }
@@ -117,7 +144,35 @@ public class Destination {
         this.lienImage = lienImage;
     }
 
-    public int getNb_places() { return nb_places; }
+    public int getNbPlaces() {
+        return nbPlaces;
+    }
 
-    public void setNb_places(int nb_places) { this.nb_places = nb_places; }
+    public void setNbPlaces(int nbPlaces) {
+        this.nbPlaces = nbPlaces;
+    }
+
+    public List<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(List<Booking> bookings) {
+        this.bookings = bookings;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
+    public List<Offer> getOffers() {
+        return offers;
+    }
+
+    public void setOffers(List<Offer> offers) {
+        this.offers = offers;
+    }
 }

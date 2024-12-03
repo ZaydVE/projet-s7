@@ -1,34 +1,16 @@
-package com.prime.projet.repository.entity;
+package com.prime.projet.service.dto;
 
-import jakarta.persistence.*;
 import java.util.Date;
 
-@Entity
-public class Booking {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class BookingDto {
     private Integer bookingId;
-
-    @Column(nullable = false)
-    @Temporal(TemporalType.DATE)
     private Date bookingDate;
-
-    @Column(nullable = false)
     private int nbPassengers;
-
-    @Column(nullable = false)
     private float totalPrice;
+    private Integer userId;
+    private Integer destinationId;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-
-    @ManyToOne
-    @JoinColumn(name = "destination_id", nullable = false)
-    private Destination destination;
-
-    // Getters et setters
+    // Getters et Setters
     public Integer getBookingId() {
         return bookingId;
     }
@@ -61,19 +43,19 @@ public class Booking {
         this.totalPrice = totalPrice;
     }
 
-    public User getUser() {
-        return user;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
-    public Destination getDestination() {
-        return destination;
+    public Integer getDestinationId() {
+        return destinationId;
     }
 
-    public void setDestination(Destination destination) {
-        this.destination = destination;
+    public void setDestinationId(Integer destinationId) {
+        this.destinationId = destinationId;
     }
 }

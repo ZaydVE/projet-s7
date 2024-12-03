@@ -1,35 +1,44 @@
 package com.prime.projet.controller;
 
-
 import com.prime.projet.repository.entity.Offer;
-import com.prime.projet.core.spring.service.OfferService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.prime.projet.service.OfferService;
+import com.prime.projet.service.dto.OfferDto;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import java.util.List;
 
-@RestController
-@RequestMapping("/api/offers")
+@Controller
+@RequestMapping("/offers")
 public class OfferController {
 
-    @Autowired
-    private OfferService offerService;
+    private final OfferService offerService;
 
-    // Créer une offre pour une destination
-    @PostMapping("/create")
-    public Offer createOffer(@RequestBody Offer offer) {
-        return offerService.createOffer(offer.getDestination().getDestinationId(), offer.getPercentageDiscount());
+    public OfferController(OfferService offerService) {
+        this.offerService = offerService;
     }
 
-    // Supprimer une offre
-    @DeleteMapping("/delete/{offerId}")
-    public void deleteOffer(@PathVariable Integer offerId) {
-        offerService.deleteOffer(offerId);
+    //Ouvre une page pour ajouter une nouvelle offre
+    @GetMapping("/new")
+    public String showOfferForm(Model model) {
+        model.addAttribute("offerDto", new OfferDto());
+        return "offer-form";
     }
 
-    // Lister les offres d'une destination
+    //Poste une nouvelle offre
+    @PostMapping("/new")
+    public String createOffer(@ModelAttribute("offerDto") OfferDto offerDto, Model model) {
+        Offer offer = offerService.createOffer(offerDto);
+        model.addAttribute("offer", offer);
+        return "offer-confirmation";
+    }
+
+    //Affiche les offres pour une destination donnée
     @GetMapping("/destination/{destinationId}")
-    public Optional<Offer> getOffersByDestination(@PathVariable Integer destinationId) {
-        return offerService.getOffersByDestination(destinationId);
+    public String getOffersForDestination(@PathVariable Integer destinationId, Model model) {
+        List<Offer> offers = offerService.getOffersForDestination(destinationId);
+        model.addAttribute("offers", offers);
+        return "destination-offers"; // Page Thymeleaf pour afficher les offres d'une destination
     }
 }
