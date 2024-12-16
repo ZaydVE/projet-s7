@@ -1,5 +1,7 @@
 package com.prime.projet.service.dto;
 
+import java.util.Date;
+
 public class DestinationDto {
     private Integer destinationId;
     private String name;
@@ -9,6 +11,8 @@ public class DestinationDto {
     private String country;
     private String city;
     private String type;
+    private Date startDate;
+    private Date endDate;
     private String lienImage;
     private int nbPlaces;
 
@@ -76,6 +80,14 @@ public class DestinationDto {
     public void setType(String type) {
         this.type = type;
     }
+
+    public Date getStartDate() { return startDate; }
+
+    public void setStartDate(Date startDate) { this.startDate = startDate; }
+
+    public Date getEndDate() { return endDate; }
+
+    public void setEndDate(Date endDate) { this.endDate = endDate; }
 
     public String getLienImage() {
         return lienImage;

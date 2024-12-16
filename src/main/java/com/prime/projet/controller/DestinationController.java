@@ -16,9 +16,6 @@ public class DestinationController {
 
     private final DestinationService destinationService;
 
-    //public static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/uploads";
-    private static final String UPLOAD_DIRECTORY = "src/main/resources/static/uploads/";
-
 
     public DestinationController(DestinationService destinationService) {
         this.destinationService = destinationService;
@@ -42,10 +39,31 @@ public class DestinationController {
 
     //Affiche une page pour créer une nouvelle destination
     @GetMapping("/new")
-    public String showCreateDestinationForm(Model model) {
-        model.addAttribute("destinationDto", new DestinationDto());
+    public String showCreateDestinationForm() {
         return "destination-form";
     }
+
+    @PostMapping("/new")
+    public String createDestination(
+            @RequestParam("name") String name,
+            @RequestParam("description") String description,
+            @RequestParam("price") float price,
+            @RequestParam("continent") String continent,
+            @RequestParam("country") String country,
+            @RequestParam("city") String city,
+            @RequestParam("type") String type,
+            @RequestParam("startDate") String startDate,
+            @RequestParam("endDate") String endDate,
+            @RequestParam("nbPlaces") int nbPlaces,
+            @RequestParam("lienImage") MultipartFile lienImage) {
+
+        destinationService.createDestination(
+                name, description, price, continent, country, city, type, startDate, endDate, nbPlaces, lienImage
+        );
+
+        return "destination-added"; // Page statique confirmant l'ajout
+    }
+
 
  /*
 
@@ -84,12 +102,15 @@ public class DestinationController {
         return "destination-edit-form";
     }
 
+    /*
     //Poste la modification d'une destination existante
     @PostMapping("/edit/{id}")
     public String editDestination(@PathVariable Integer id, @ModelAttribute("destinationDto") DestinationDto destinationDto) {
         destinationService.updateDestination(id, destinationDto);
         return "redirect:/destinations";
     }
+
+     */
 
     //Supprimer une destination
     @PostMapping("/delete/{id}")
