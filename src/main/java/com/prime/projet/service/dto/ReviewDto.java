@@ -9,6 +9,7 @@ public class ReviewDto {
     private LocalDateTime createdAt;
     private Integer userId;
     private Integer destinationId;
+    private String title;
 
     // Getters et Setters
     public Integer getReviewId() {
@@ -57,5 +58,13 @@ public class ReviewDto {
 
     public void setDestinationId(Integer destinationId) {
         this.destinationId = destinationId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

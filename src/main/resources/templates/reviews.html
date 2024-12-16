@@ -72,111 +72,48 @@
     </header>
     <section class="main-section">
         <h3>Avis</h3>
-        <p>Blablabla blablabla blablabla.</p>
+        <p>Votre avis nous intéresse ! Laissez nous être guidés par vos avis, et laissez vous guider (ou pas) vers votre prochaine destination !</p>
         <div class="review-card-container">
-            <div class="review-card">
+            <div th:each="review : ${reviews}" class="review-card">
                 <div class="top">
                     <div class="top-first-row">
-                        <span class="review-card-rating" id="rating-display"><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></span>
+                        <!-- Affichage de la note avec des étoiles -->
+                        <span class="review-card-rating" id="rating-display">
+                <i th:each="star : ${#numbers.sequence(1, 5)}"
+                   th:classappend="${star <= review.rating} ? 'fa-solid fa-star' : 'fa-regular fa-star'"></i>
+            </span>
                         <div class="user-infos">
-                            <span class="username"><span class="at">@</span>username</span>
-                            <span class="inscription-date">inscrit(e) le ...</span>
+                            <!-- Nom d'utilisateur -->
+                            <span class="username">
+                    <span class="at">@</span>
+                    <span th:text="${review.user.firstname}">username</span>
+                </span>
+                            <!-- Date d'inscription -->
+                            <span class="inscription-date" th:text="'inscrit(e) le ' + ${#dates.format(review.user.createdAt, 'dd/MM/yyyy')}">
+                    inscrit(e) le ...
+                </span>
                         </div>
                     </div>
                     <div class="top-last-row">
-                        <span class="review-card-title" id="title-display">Titre</span>
+                        <!-- Titre de la review -->
+                        <span class="review-card-title" id="title-display" th:text="${review.title}">Titre</span>
                     </div>
                 </div>
                 <div class="body" id="body">
-                    <p class="review-card-comment" id="comment-display">Commentaire ...</p>
+                    <!-- Commentaire -->
+                    <p class="review-card-comment" id="comment-display" th:text="${review.comment}">Commentaire ...</p>
                 </div>
                 <div class="bottom">
-                    <span class="review-card-destination" id="destination-display"><i class="fa-solid fa-location-dot"></i></span>
-                    <span class="review-card-date"><i class="fa-solid fa-calendar-days"></i></span>
-                </div>
-            </div>
-            <div class="review-card">
-                <div class="top">
-                    <div class="top-first-row">
-                        <span class="review-card-rating" id="rating-display"><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></span>
-                        <div class="user-infos">
-                            <span class="username"><span class="at">@</span>username</span>
-                            <span class="inscription-date">inscrit(e) le ...</span>
-                        </div>
-                    </div>
-                    <div class="top-last-row">
-                        <span class="review-card-title" id="title-display">Titre</span>
-                    </div>
-                </div>
-                <div class="body" id="body">
-                    <p class="review-card-comment" id="comment-display">Commentaire ...</p>
-                </div>
-                <div class="bottom">
-                    <span class="review-card-destination" id="destination-display"><i class="fa-solid fa-location-dot"></i></span>
-                    <span class="review-card-date"><i class="fa-solid fa-calendar-days"></i></span>
-                </div>
-            </div>
-            <div class="review-card">
-                <div class="top">
-                    <div class="top-first-row">
-                        <span class="review-card-rating" id="rating-display"><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></span>
-                        <div class="user-infos">
-                            <span class="username"><span class="at">@</span>username</span>
-                            <span class="inscription-date">inscrit(e) le ...</span>
-                        </div>
-                    </div>
-                    <div class="top-last-row">
-                        <span class="review-card-title" id="title-display">Titre</span>
-                    </div>
-                </div>
-                <div class="body" id="body">
-                    <p class="review-card-comment" id="comment-display">Commentaire ...</p>
-                </div>
-                <div class="bottom">
-                    <span class="review-card-destination" id="destination-display"><i class="fa-solid fa-location-dot"></i></span>
-                    <span class="review-card-date"><i class="fa-solid fa-calendar-days"></i></span>
-                </div>
-            </div>
-            <div class="review-card">
-                <div class="top">
-                    <div class="top-first-row">
-                        <span class="review-card-rating" id="rating-display"><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></span>
-                        <div class="user-infos">
-                            <span class="username"><span class="at">@</span>username</span>
-                            <span class="inscription-date">inscrit(e) le ...</span>
-                        </div>
-                    </div>
-                    <div class="top-last-row">
-                        <span class="review-card-title" id="title-display">Titre</span>
-                    </div>
-                </div>
-                <div class="body" id="body">
-                    <p class="review-card-comment" id="comment-display">Commentaire ...</p>
-                </div>
-                <div class="bottom">
-                    <span class="review-card-destination" id="destination-display"><i class="fa-solid fa-location-dot"></i></span>
-                    <span class="review-card-date"><i class="fa-solid fa-calendar-days"></i></span>
-                </div>
-            </div>
-            <div class="review-card">
-                <div class="top">
-                    <div class="top-first-row">
-                        <span class="review-card-rating" id="rating-display"><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></span>
-                        <div class="user-infos">
-                            <span class="username"><span class="at">@</span>username</span>
-                            <span class="inscription-date">inscrit(e) le ...</span>
-                        </div>
-                    </div>
-                    <div class="top-last-row">
-                        <span class="review-card-title" id="title-display">Titre</span>
-                    </div>
-                </div>
-                <div class="body" id="body">
-                    <p class="review-card-comment" id="comment-display">Commentaire ...</p>
-                </div>
-                <div class="bottom">
-                    <span class="review-card-destination" id="destination-display"><i class="fa-solid fa-location-dot"></i></span>
-                    <span class="review-card-date"><i class="fa-solid fa-calendar-days"></i></span>
+                    <!-- Destination -->
+                    <span class="review-card-destination" id="destination-display">
+            <i class="fa-solid fa-location-dot"></i>
+            <span th:text="${review.destination.name}"></span>
+        </span>
+                    <!-- Date de création de la review -->
+                    <span class="review-card-date">
+            <i class="fa-solid fa-calendar-days"></i>
+            <span th:text="${review.createdAt}"></span>
+        </span>
                 </div>
             </div>
     </section>

@@ -40,6 +40,6 @@ public class BookingController {
     public String getUserBookings(@PathVariable Integer userId, Model model) {
         List<Booking> bookings = bookingService.getBookingsForUser(userId);
         model.addAttribute("bookings", bookings);
-        return "user-bookings";
+        return "booking-history";
     }
 }

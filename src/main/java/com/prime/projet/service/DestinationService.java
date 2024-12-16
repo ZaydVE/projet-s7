@@ -55,6 +55,12 @@ public class DestinationService {
         destinationRepository.save(destination);
     }
 
+    public List<String> getAllContinents() {
+        List<String> continents = destinationRepository.findDistinctContinents();
+        System.out.println("Continents dans DestinationService : " + continents); // Ajoute un débogage ici
+        return continents;
+    }
+
     //Supprimer une destination
     public void deleteDestination(Integer userId) {
         destinationRepository.deleteById(userId);

@@ -13,6 +13,9 @@ public class Review {
     @Column(nullable = false)
     private int rating;
 
+    @Column
+    private String title;
+
     @Column(nullable = false, length = 1000)
     private String comment;
 
@@ -42,6 +45,14 @@ public class Review {
 
     public void setRating(int rating) {
         this.rating = rating;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getComment() {

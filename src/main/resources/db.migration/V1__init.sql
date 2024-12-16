@@ -46,6 +46,7 @@ CREATE TABLE IF NOT EXISTS booking (
 
 CREATE TABLE IF NOT EXISTS review (
                                       review_id INT AUTO_INCREMENT PRIMARY KEY,
+                                      title VARCHAR(1000) NOT NULL,
                                       rating INT NOT NULL CHECK (rating BETWEEN 1 AND 5),
                                       comment VARCHAR(1000) NOT NULL,
                                       created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,

@@ -82,6 +82,62 @@
 	color: var(--accent-color-1);
 }
 
+.main-section .registration-form .form-group input[type="radio"] {
+	display: none;
+}
+
+.main-section .registration-form .form-group input[type="radio"] + label {
+	position: relative;
+	padding-left: 20px;
+	cursor: pointer;
+	color: var(--accent-color-1);
+	user-select: none;
+}
+
+.main-section .registration-form .form-group input[type="radio"] + label::before {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 0;
+	transform: translateY(-50%);
+	width: 8px;
+	height: 8px;
+	border: 2px solid var(--accent-color-1);
+	border-radius: 100%;
+	background-color: var(--text-color-white);
+	transition: all .3s ease-in-out;
+}
+
+.main-section .registration-form .form-group input[type="radio"]:checked + label::before {
+	border-color: var(--accent-color-2);
+	background-color: var(--accent-color-2);
+}
+
+.main-section .registration-form .form-group input[type="radio"]:checked + label::after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 10px;
+	transform: translateY(-50%);
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background-color: var(--text-color-white);
+}
+
+.main-section .registration-form .form-group input[type="radio"] + label {
+	margin-right: 20px;
+}
+
+.main-section .registration-form .form-group input[type="radio"] + label:hover::before {
+	background-color: var(--accent-color-1);
+}
+
+.main-section .registration-form .form-group input[type="radio"]:checked + label:hover::before {
+	border-color: var(--accent-color-2);
+	background-color: var(--accent-color-2);
+}
+
 .main-section .registration-form .form-group .submit-button {
 	font-size: .675rem;
 	border: none;
@@ -94,6 +150,10 @@
 	cursor: pointer;
 	text-align: center;
 	background-color: var(--accent-color-2);
+}
+
+.main-section .registration-form .form-group .submit-button i {
+	margin-right: 5px;
 }
 
 @media (max-width: 1300px) {
@@ -109,7 +169,7 @@
 		max-width: 100%;
 	}
 
-	.main-section .registration-form .form-group .submit-button {
+	.main-section .registration-form .form-group.submit-button {
 		text-align: center;
 	}
 

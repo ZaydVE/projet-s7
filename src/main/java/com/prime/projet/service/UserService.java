@@ -14,12 +14,12 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository ,PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
-    //Créer un utilisateur
+    // Créer un utilisateur
     public void createUser(UserDto userDto) {
         User user = new User();
         user.setLastname(userDto.getLastname());
@@ -32,12 +32,40 @@ public class UserService {
         userRepository.save(user);
     }
 
-    //Supprimer un utilisateur
+    // Supprimer un utilisateur
     public void deleteUser(Integer userId) {
         userRepository.deleteById(userId);
     }
 
-    public boolean existsByEmail(String email) {
-        return userRepository.findByEmail(email).isPresent();
+    // Récupérer un utilisateur par ID
+    public UserDto getUserById(Integer id) {
+        User user = userRepository.findById(id).orElse(null);
+        if (user == null) {
+            return null; // Retourne `null` si l'utilisateur n'existe pas
+        }
+        UserDto userDto = new UserDto();
+        userDto.setUserId(user.getUserId());
+        userDto.setLastname(user.getLastname());
+        userDto.setFirstname(user.getFirstname());
+        userDto.setEmail(user.getEmail());
+        userDto.setPhonenumber(user.getPhoneNumber());
+        userDto.setAdmin(user.isAdmin());
+        return userDto;
+    }
+
+    // Mettre à jour un utilisateur
+    public void updateUser(Integer id, UserDto userDto) {
+        User user = userRepository.findById(id).orElse(null);
+        if (user != null) {
+            user.setFirstname(userDto.getFirstname());
+            user.setLastname(userDto.getLastname());
+            user.setEmail(userDto.getEmail());
+            user.setPhoneNumber(userDto.getPhonenumber());
+            user.setAdmin(userDto.isAdmin());
+            if (userDto.getPassword() != null && !userDto.getPassword().isBlank()) {
+                user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+            }
+            userRepository.save(user);
+        }
     }
 }
