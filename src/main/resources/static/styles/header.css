@@ -103,7 +103,7 @@
 	padding: 7px 10px;
 	display: flex;
 	justify-content: space-between;
-	margin: 0 10px 0 0;
+	margin: 0 10px;
 }
 
 .header .top-bar .navigation .buttons-container .search-bar .search-input {
@@ -153,6 +153,7 @@
 }
 
 @media (max-width: 1010px) {
+
 	.header .top-bar {
 		flex-direction: column;
 		align-items: flex-start;
@@ -177,6 +178,10 @@
 		margin: 0 10px;
 	}
 
+	.header .top-bar .navigation .trips-item {
+		margin: 0 10px 0 0;
+	}
+
 	.header .top-bar .navigation .trips-dropdown {
 		width: 100%;
 		left: 0;
@@ -186,18 +191,21 @@
 
 	.header .top-bar .navigation .buttons-container {
 		display: flex;
-		justify-content: space-between;
-		align-items: center;
+		justify-content: center;
 		width: 100%;
-		margin-top: 15px;
+		margin: 15px 20px 0 0;
+		padding: 0;
 	}
 
 	.header .top-bar .navigation .search-bar {
-		width: calc(70% - 10px);
+		height: 40px;
+		align-items: center;
 	}
 
 	.header .top-bar .navigation .account {
-		width: calc(30% - 10px);
 		text-align: center;
+		height: 40px;
+		align-items: center;
 	}
+
 }
