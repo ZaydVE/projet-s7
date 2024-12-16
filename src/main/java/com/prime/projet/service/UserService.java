@@ -6,33 +6,30 @@ import com.prime.projet.service.dto.UserDto;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Service
 public class UserService {
 
     private final UserRepository userRepository;
-    //private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository /*PasswordEncoder passwordEncoder*/) {
+    public UserService(UserRepository userRepository ,PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
-       /* this.passwordEncoder = passwordEncoder;*/
+        this.passwordEncoder = passwordEncoder;
     }
 
     //Créer un utilisateur
-    public User createUser(UserDto userDto) {
+    public void createUser(UserDto userDto) {
         User user = new User();
         user.setLastname(userDto.getLastname());
         user.setFirstname(userDto.getFirstname());
         user.setEmail(userDto.getEmail());
-        user.setPassword(userDto.getPassword());
-
-       /* // Encodage du mot de passe
-        String encodedPassword = passwordEncoder.encode(userDto.getPassword());
-        user.setPassword(encodedPassword);
-
-        */
-
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setAdmin(userDto.isAdmin());
-        return userRepository.save(user);
+        user.setPhoneNumber(userDto.getPhonenumber());
+        user.setCreatedAt(new Date());
+        userRepository.save(user);
     }
 
     //Supprimer un utilisateur

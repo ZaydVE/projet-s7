@@ -6,6 +6,7 @@ import com.prime.projet.service.dto.DestinationDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -14,6 +15,10 @@ import java.util.List;
 public class DestinationController {
 
     private final DestinationService destinationService;
+
+    //public static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/uploads";
+    private static final String UPLOAD_DIRECTORY = "src/main/resources/static/uploads/";
+
 
     public DestinationController(DestinationService destinationService) {
         this.destinationService = destinationService;
@@ -42,12 +47,34 @@ public class DestinationController {
         return "destination-form";
     }
 
-    //Poste une nouvelle destination
+ /*
+
+    //Ajoute une nouvelle destination
     @PostMapping("/new")
-    public String createDestination(@ModelAttribute("destinationDto") DestinationDto destinationDto) {
+    public String addDestination(
+            Model model,
+            @ModelAttribute("destinationDto") DestinationDto destinationDto,
+            @RequestParam("image") MultipartFile file) throws IOException {
+
+        // Sauvegarde de l'image
+        String fileName = destinationService.saveImage(file);
+        destinationDto.setLienImage(fileName);
+
+        // Création de la destination
         destinationService.createDestination(destinationDto);
-        return "redirect:/destinations";
+
+        model.addAttribute("message", "Destination ajoutée avec succès !");
+        return "redirect:/destinations"; // Redirection vers la liste des destinations
     }
+
+     */
+
+    //Poste une nouvelle destination
+    //@PostMapping("/new")
+    //public String createDestination(@ModelAttribute("destinationDto") DestinationDto destinationDto) {
+    //    destinationService.createDestination(destinationDto);
+    //    return "redirect:/destinations";
+    //}
 
     //Affiche une page pour modifier une destination existante
     @GetMapping("/edit/{id}")

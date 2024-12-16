@@ -4,6 +4,7 @@ import com.prime.projet.repository.DestinationRepository;
 import com.prime.projet.repository.entity.Destination;
 import com.prime.projet.service.dto.DestinationDto;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -11,6 +12,9 @@ import java.util.List;
 public class DestinationService {
 
     private final DestinationRepository destinationRepository;
+
+    // Répertoire où les images seront stockées
+    private static final String UPLOAD_DIR = "src/main/resources/static/assets/";
 
     public DestinationService(DestinationRepository destinationRepository) {
         this.destinationRepository = destinationRepository;
@@ -29,10 +33,20 @@ public class DestinationService {
 
     //Créer une nouvelle destination
     public void createDestination(DestinationDto destinationDto) {
+        // Conversion du DTO en entité
         Destination destination = new Destination();
         destination = setDestination(destination, destinationDto);
+
+        // Sauvegarde dans la base de données
         destinationRepository.save(destination);
     }
+
+    //Créer une nouvelle destination
+    //public void createDestination(DestinationDto destinationDto) {
+    //    Destination destination = new Destination();
+    //    destination = setDestination(destination, destinationDto);
+    //    destinationRepository.save(destination);
+    //}
 
     public void updateDestination(Integer destinationId, DestinationDto destinationDto) {
         Destination destination = destinationRepository.findById(destinationId)

@@ -72,6 +72,17 @@
 			<artifactId>spring-security-crypto</artifactId>
 			<version>6.4.1</version> <!-- Vérifiez la dernière version -->
 		</dependency>
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-jdk18on</artifactId>
+			<version>1.79</version>  <!-- Assurez-vous que la version est à jour -->
+		</dependency>
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcpkix-jdk18on</artifactId>
+			<version>1.79</version> <!-- Alignez la version avec bcprov-jdk18on -->
+		</dependency>
+
 
 	</dependencies>
 

@@ -1,5 +1,9 @@
 package com.prime.projet.service.dto;
 
+import jakarta.validation.constraints.Size;
+
+import java.util.Date;
+
 public class UserDto {
     private Integer userId;
     private String lastname;
@@ -7,6 +11,8 @@ public class UserDto {
     private String email;
     private String password;
     private boolean admin;
+    private String phonenumber;
+    private Date createdAt;
 
     // Getters et setters
     public Integer getUserId() {
@@ -45,6 +51,7 @@ public class UserDto {
         return password;
     }
 
+    @Size(min = 8, message = "Le mot de passe doit contenir au moins 8 caractères")
     public void setPassword(String password) {
         this.password = password;
     }
@@ -55,6 +62,23 @@ public class UserDto {
 
     public void setAdmin(boolean admin) {
         this.admin = admin;
+    }
+
+    public String getPhonenumber() {
+        return phonenumber;
+    }
+
+    public void setPhonenumber(String phonenumber) {
+        this.phonenumber = phonenumber;
+    }
+
+    public Date getCreatedAt() {
+        Date createdAt = new Date();
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 }
 
