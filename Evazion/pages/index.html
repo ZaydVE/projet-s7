@@ -25,36 +25,50 @@
             </div>
             <ul class="navigation">
                 <li class="navigation-item trips-item">
-                    <a href="#">Voyages</a>
+                    <a href="voyages.html">Voyages</a>
                     <ul class="navigation-item trips-dropdown">
-                        <li class="dropdown-item" th:each="destination : ${destinations}">
-                            <a th:href="@{/destinations/{id}(id=${destination.id})}" th:text="${destination.name}"></a>
+                        <li class="dropdown-item">
+                            <a href="voyages.html">Afrique</a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="voyages.html">Amérique du Nord</a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="voyages.html">Amérique du Sud</a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="voyages.html">Asie</a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="voyages.html">Europe</a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="voyages.html">Océanie</a>
                         </li>
                     </ul>
                 </li>
                 <li class="navigation-item">
-                    <a href="#">Blog</a>
+                    <a href="reviews.html">Avis</a>
                 </li>
                 <li class="navigation-item">
-                    <a href="#">Avis</a>
+                    <a href="contact.html">Contact</a>
                 </li>
-                <li class="navigation-item">
-                    <a href="#">Contact</a>
-                </li>
-                <form class="navigation-item search-bar">
-                    <input type="text" class="search-input" placeholder="Rechercher" size=10>
-                    <button class="search-button">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </button>
-                </form>
-                <a href="#" class="navigation-item account">
-                    <i class="fa-solid fa-user"></i> Compte
-                </a>
+                <div class="navigation-item buttons-container">
+                    <form class="navigation-item search-bar">
+                        <input type="text" class="search-input" placeholder="Rechercher" size="10">
+                        <button class="search-button">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </form>
+                    <a href="user-profile.html" class="navigation-item account">
+                        <i class="fa-solid fa-user"></i> Compte
+                    </a>
+                </div>
             </ul>
         </div>
         <div class="base-line">
             <strong class="base-line-name">Evazion</strong>
-            <span class="base-line-slogan">Laissez vos rêves devenir votre prochaine évazion.</span>
+            <span class="base-line-slogan">Laissez vos rêves devenir votre prochaine evazion.</span>
         </div>
     </header>
     <section class="section-1">
@@ -64,14 +78,51 @@
         </p>
         <div class="card-slider-container">
             <div class="card-slider">
+
+                <!-- 
+                    
+                    ~~~ THYMELEAF ~~~
+
+                    Exactement quatre 'input' sont générés, ainsi que leur 'label'.
+
+                    Template à suivre :
+
+                    <th:block th:each="?, iterStat : ${?}">
+                        <input type="radio" name="slide" id="card-[[${iterStat.index}]]"
+                               th:checked="${iterStat.index == 0}">
+                        <label for="card-[[${iterStat.index}]]" class="card">
+                            <img th:src="[[${?}]]" class="card-image">
+                            <div class="card-content">
+                                <div class="card-header">
+                                    <div class="infos">
+                                        <span class="old-price" th:text="[[${?}]]"></span>
+                                        <span class="new-price" th:text="[[${?}]]"></span>
+                                        <span class="duration" th:text="[[${?} + ' - ' + ${?}]]"></span>
+                                    </div>
+                                    <div class="time">
+                                        <span><i class="fa-solid fa-clock"></i> <span th:text="[[${?}]]"></span></span>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <h4 class="location">
+                                        <i class="fa-solid fa-map-pin"></i> <span th:text="[[${?} + ', ' + ${?}]]"></span>
+                                    </h4>
+                                </div>
+                            </div>
+                        </label>
+                    </th:block>
+
+                -->
+
                 <input type="radio" name="slide" id="card-1" checked>
                 <label for="card-1" class="card">
+                    <img src="../images/italie-rome.jpg" class="card-image">
                     <div class="card-content">
                         <div class="card-header">
                             <div class="infos">
-                                <span class="old-price">5 510 €</span>
-                                <span class="new-price">3 750 €</span>
-                                <span class="duration">X jours</span>
+                                <span class="old-price">5 000 €</span>
+                                <span class="new-price">3 000 €</span>
+                                <span class="duration">X jours - X nuits</span>
                             </div>
                             <div class="time">
                                 <span><i class="fa-solid fa-clock"></i> 21:47</span>
@@ -79,14 +130,14 @@
                         </div>
                         <div class="card-footer">
                             <h4 class="location">
-                                <i class="fa-solid fa-map-pin"></i> Patagonie, Chili
+                                <i class="fa-solid fa-map-pin"></i> Lieu, Pays
                             </h4>
-                            <p class="card-description">blabla bla blablabla blabla bla bla blabla blablabla</p>
                         </div>
                     </div>
                 </label>
                 <input type="radio" name="slide" id="card-2">
                 <label for="card-2" class="card">
+                    <img src="../images/suisse-zermatt.jpg" class="card-image">
                     <div class="card-content">
                         <div class="card-header">
                             <div class="infos">
@@ -100,14 +151,14 @@
                         </div>
                         <div class="card-footer">
                             <h4 class="location">
-                                <i class="fa-solid fa-map-pin"></i> Tokyo, Japon
+                                <i class="fa-solid fa-map-pin"></i> Lieu, Pays
                             </h4>
-                            <p class="card-description">blabla bla blablabla blabla bla bla blabla blablabla</p>
                         </div>
                     </div>
                 </label>
                 <input type="radio" name="slide" id="card-3">
                 <label for="card-3" class="card">
+                    <img src="../images/grece-delphes.jpg" class="card-image">
                     <div class="card-content">
                         <div class="card-header">
                             <div class="infos">
@@ -121,14 +172,14 @@
                         </div>
                         <div class="card-footer">
                             <h4 class="location">
-                                <i class="fa-solid fa-map-pin"></i> La Digue, Seychelles
+                                <i class="fa-solid fa-map-pin"></i> Lieu, Pays
                             </h4>
-                            <p class="card-description">blabla bla blablabla blabla bla bla blabla blablabla</p>
                         </div>
                     </div>
                 </label>
                 <input type="radio" name="slide" id="card-4">
                 <label for="card-4" class="card">
+                    <img src="../images/maroc-chefchaouen.jpg" class="card-image">
                     <div class="card-content">
                         <div class="card-header">
                             <div class="infos">
@@ -142,43 +193,50 @@
                         </div>
                         <div class="card-footer">
                             <h4 class="location">
-                                <i class="fa-solid fa-map-pin"></i> Barcelone, Espagne
+                                <i class="fa-solid fa-map-pin"></i> Lieu, Pays
                             </h4>
-                            <p class="card-description">blabla bla blablabla blabla bla bla blabla blablabla</p>
                         </div>
                     </div>
                 </label>
             </div>
         </div>
-        <a href="#" class="section-1-view-link">Voir toutes nos offres</a>
+        <a href="voyages.html" class="section-1-view-link">Voir tous nos voyages</a>
     </section>
     <section class="section-2">
         <h2 class="section-2-title">Pourquoi voyager avec <span>Evazion</span> ?</h2>
         <div class="reason-container">
             <div class="reason">
-                <i class="fa-solid fa-euro-sign"></i>
-                <h4>Prix imbattables</h4>
-                <p>Voyagez à des tarifs jusqu'à 30% inférieurs grâce à nos partenariats exclusifs et profitez du programme EVApoints pour économiser davantage sur vos prochaines aventures.</p>
+                <div class="reason-header">
+                    <i class="fa-solid fa-euro-sign"></i>
+                    <h4>Prix imbattables</h4>
+                </div>
+                <p>Voyagez à des tarifs jusqu'à 30% inférieurs grâce à nos partenariats exclusifs et profitez des promotions pour économiser davantage sur vos prochaines aventures.</p>
             </div>
             <div class="reason">
-                <i class="fa-solid fa-shield-halved"></i>
-                <h4>Sérénité garantie</h4>
+                <div class="reason-header">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <h4>Sérénité garantie</h4>
+                </div>
                 <p>Annulez sans frais jusqu’à 48h avant le départ. Notre assistance 24/7 et nos protections uniques assurent votre tranquillité, même en cas d’intempéries ou d’imprévus.</p>
             </div>
             <div class="reason">
-                <i class="fa-regular fa-star"></i>
-                <h4>Expériences exclusives</h4>
+                <div class="reason-header">
+                    <i class="fa-regular fa-star"></i>
+                    <h4>Expériences exclusives</h4>
+                </div>
                 <p>Accédez à des séjours uniques comme une nuit en igloo ou des safaris culinaires authentiques. Chaque voyage est pensé pour être original et adapté à vos envies.</p>
             </div>
             <div class="reason">
-                <i class="fa-solid fa-earth-europe"></i>
-                <h4>Voyage responsable</h4>
+                <div class="reason-header">
+                    <i class="fa-solid fa-earth-europe"></i>
+                    <h4>Voyage responsable</h4>
+                </div>
                 <p>En choisissant Evazion, vous soutenez des projets écologiques et locaux. Explorez le monde tout en contribuant à un avenir durable pour les communautés et la planète.</p>
             </div>
         </div>
         <div class="section-2-view-links">
             <p>
-                <a href="#" class="section-2-view-link-1">Qui sommes-nous ?</a> - <a href="#" class="section-2-view-link-2">FAQ</a>
+                <a href="about-us.html" class="section-2-view-link-1">Qui sommes-nous ?</a> - <a href="faq.html" class="section-2-view-link-2">FAQ</a>
             </p>
         </div>
     </section>
@@ -439,11 +497,11 @@
                 </div>
             </div>
         </div>
-        <a href="#" class="section-3-view-link" category="IT">Voir tous les voyages en Italie</a>
-        <a href="#" class="section-3-view-link" category="BO">Voir tous les voyages en Bolivie</a>
-        <a href="#" class="section-3-view-link" category="MA">Voir tous les voyages au Maroc</a>
-        <a href="#" class="section-3-view-link" category="GR">Voir tous les voyages en Grêce</a>
-        <a href="#" class="section-3-view-link" category="CH">Voir tous les voyages en Suisse</a>
+        <a href="voyages.html" class="section-3-view-link" category="IT">Voir tous les voyages en Italie</a>
+        <a href="voyages.html" class="section-3-view-link" category="BO">Voir tous les voyages en Bolivie</a>
+        <a href="voyages.html" class="section-3-view-link" category="MA">Voir tous les voyages au Maroc</a>
+        <a href="voyages.html" class="section-3-view-link" category="GR">Voir tous les voyages en Grêce</a>
+        <a href="voyages.html" class="section-3-view-link" category="CH">Voir tous les voyages en Suisse</a>
         <script type="text/javascript">
             document.addEventListener('DOMContentLoaded', () => {
                 showHeartthrobs('IT');
@@ -495,13 +553,13 @@
                     <h3>Accès rapide</h3>
                     <ul class="pages">
                         <li>
-                            <a href="#">Blog</a>
+                            <a href="about-us.html">Qui sommes-nous ?</a>
                         </li>
                         <li>
-                            <a href="#">Qui sommes-nous ?</a>
+                            <a href="faq.html">Foire aux questions</a>
                         </li>
                         <li>
-                            <a href="faq.html">FAQ</a>
+                            <a href="blog.html">Avis</a>
                         </li>
                     </ul>
                 </div>
@@ -525,9 +583,9 @@
                 <div class="footer-center-section">
                     <h3>Partenaires</h3>
                     <ul class="partners">
-                        <li>Partenaire 1</li>
-                        <li>Partenaire 2</li>
-                        <li>Partenaire 3</li>
+                        <li>SkyLynx Airways</li>
+                        <li>Aurora Haven</li>
+                        <li>Pathfinders Collective</li>
                     </ul>
                 </div>
             </div>
