@@ -8,6 +8,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -15,34 +18,38 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfiguration {
 
+/*
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new Argon2PasswordEncoder(
+                16,  // Longueur de sel (salt length en bytes)
+                32,  // Longueur de hash (hash length en bytes)
+                1,   // Parallelisme (threads)
+                60000,  // Mémoire (en kilobytes)
+                10    // Itérations
+        );
+    }
+
+ */
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/destinations").permitAll()
-                        .requestMatchers("/styles/**").permitAll()
-                        .requestMatchers("/assets/**").permitAll()
-                        .requestMatchers("/public").permitAll()
-                        .requestMatchers("/rest/admin").hasRole("ADMIN")
-                        .requestMatchers("/rest/user").hasRole("USER")
-                        .anyRequest().authenticated()
+                        .requestMatchers("/styles/**", "/assets/**", "/public").permitAll() // Chemins publics
+                        .requestMatchers("/destinations").hasRole("ADMIN") // ADMIN uniquement
+                        .requestMatchers("/rest/admin").hasRole("ADMIN") // ADMIN uniquement
+                        .requestMatchers("/rest/user").hasRole("USER") // USER uniquement
+                        .anyRequest().authenticated() // Toute autre requête doit être authentifiée
                 )
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(Customizer.withDefaults());
         return httpSecurity.build();
     }
 
-
     @Bean
-    public UserDetailsService userDetailsService() {
-        UserDetails admin = User.withDefaultPasswordEncoder().username("admin")
-                .password("admin-pass")
-                .roles("ADMIN", "USER").build();
-
-        UserDetails user = User.withDefaultPasswordEncoder().username("user")
-                .password("user-pass")
-                .roles("USER").build();
-
-        return new InMemoryUserDetailsManager(admin, user);
+    public PasswordEncoder passwordEncoder() {
+        // Pour le test uniquement : mots de passe en clair
+        return NoOpPasswordEncoder.getInstance();
     }
 }

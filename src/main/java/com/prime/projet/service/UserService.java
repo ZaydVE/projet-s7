@@ -3,15 +3,18 @@ package com.prime.projet.service;
 import com.prime.projet.repository.UserRepository;
 import com.prime.projet.repository.entity.User;
 import com.prime.projet.service.dto.UserDto;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
 
     private final UserRepository userRepository;
+    //private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository /*PasswordEncoder passwordEncoder*/) {
         this.userRepository = userRepository;
+       /* this.passwordEncoder = passwordEncoder;*/
     }
 
     //Créer un utilisateur
@@ -21,6 +24,13 @@ public class UserService {
         user.setFirstname(userDto.getFirstname());
         user.setEmail(userDto.getEmail());
         user.setPassword(userDto.getPassword());
+
+       /* // Encodage du mot de passe
+        String encodedPassword = passwordEncoder.encode(userDto.getPassword());
+        user.setPassword(encodedPassword);
+
+        */
+
         user.setAdmin(userDto.isAdmin());
         return userRepository.save(user);
     }
@@ -28,5 +38,9 @@ public class UserService {
     //Supprimer un utilisateur
     public void deleteUser(Integer userId) {
         userRepository.deleteById(userId);
+    }
+
+    public boolean existsByEmail(String email) {
+        return userRepository.findByEmail(email).isPresent();
     }
 }
