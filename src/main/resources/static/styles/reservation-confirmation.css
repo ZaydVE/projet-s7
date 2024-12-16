@@ -1,0 +1,69 @@
+:root {
+	--text-color-white: #FFFFFF;
+	--text-color-gray: #4D4D4D;
+	--accent-color-1: #06506E;
+	--accent-color-2: #C89608;
+}
+
+.main-section {
+	padding: 115px 12.5% 0;
+	margin-bottom: 75px;
+	width: 100%;
+}
+
+.main-section .message {
+	font-style: italic;
+}
+
+.main-section h3 {
+	font-size: 1.5rem;
+	font-weight: bold;
+	line-height: 1.1;
+	text-transform: uppercase;
+	color: var(--accent-color-1);
+}
+
+.main-section .details {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	margin-bottom: 15px;
+}
+
+.main-section .details img {
+	height: 150px;
+	width: 300px;
+	border-radius: 32px;
+	margin-right: 50px;
+}
+
+.main-section .details p {
+	line-height: 2.25;
+}
+
+.main-section .details p span {
+	font-weight: bold;
+}
+
+.main-section a {
+	text-align: center;
+	text-transform: uppercase;
+	font-size: .675rem;
+	font-weight: bold;
+	line-height: 1.1;
+	text-decoration: underline;
+	color: var(--accent-color-2);
+}
+
+@media (max-width: 1010px) {
+
+	.main-section {
+		padding: 0 12.5% 0;
+		margin-bottom: 75px;
+	}
+
+	.main-section .details {
+		margin-bottom: 0;
+	}
+
+}

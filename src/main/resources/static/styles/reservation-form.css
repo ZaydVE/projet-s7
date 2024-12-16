@@ -1,0 +1,112 @@
+:root {
+	--text-color-white: #FFFFFF;
+	--text-color-gray: #4D4D4D;
+	--accent-color-1: #06506E;
+	--accent-color-2: #C89608;
+}
+
+.main-section {
+	padding: 115px 12.5% 0;
+	margin-bottom: 75px;
+	width: 100%;
+}
+
+.main-section h3 {
+	font-size: 1.5rem;
+	font-weight: bold;
+	line-height: 1.1;
+	text-transform: uppercase;
+	color: var(--accent-color-1);
+}
+
+.main-section .details {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	margin-bottom: 15px;
+	gap: 25px;
+}
+
+.main-section .details img {
+	height: 250px;
+	width: auto;
+	border-radius: 32px;
+	margin-right: 50px;
+}
+
+.main-section .details form {
+	line-height: 2.25;
+}
+
+.main-section .details form span {
+	font-weight: bold;
+}
+
+.main-section .details form .hidden {
+	display: none;
+}
+
+.main-section .details form input {
+	border: none;
+	color: var(--text-color-gray);
+	font-size: 1rem;
+}
+
+.main-section .details form input:focus {
+	outline: none;
+}
+
+.main-section .details form input[type='number'] {
+	width: 40px;
+}
+
+.main-section .details form .confirmation-container p {
+	line-height: 1;
+	font-style: italic;
+}
+
+.main-section .details form .confirmation-container #re-confirmation-button {
+	margin-right: 15px;
+}
+
+.main-section .details form .confirmation-container #confirmation-button, #re-confirmation-button, #cancellation-button {
+	background-color: var(--text-color-white);
+	color: var(--accent-color-2);
+	border: solid 1px var(--accent-color-2);
+	border-radius: 5px;
+	padding: 7px 10px;
+	margin-top: 15px;
+	text-transform: uppercase;
+	cursor: pointer;
+	align-self: center;
+	transition: all .3s ease-in-out;
+}
+
+.main-section .details form .confirmation-container #confirmation-button:hover, #re-confirmation-button:hover, #cancellation-button:hover {
+	background: var(--accent-color-2);
+	color: var(--text-color-white);
+}
+
+.main-section a {
+	text-align: center;
+	text-transform: uppercase;
+	font-size: .675rem;
+	font-weight: bold;
+	line-height: 1.1;
+	text-decoration: underline;
+	color: var(--accent-color-2);
+}
+
+@media (max-width: 1010px) {
+
+	.main-section {
+		padding: 0 12.5% 0;
+		margin-bottom: 75px;
+	}
+
+	.main-section .details {
+		margin-bottom: 0;
+	}
+
+
+}
