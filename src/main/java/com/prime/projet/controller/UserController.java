@@ -2,7 +2,10 @@ package com.prime.projet.controller;
 
 import com.prime.projet.service.UserService;
 import com.prime.projet.service.dto.UserDto;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -29,7 +32,21 @@ public class UserController {
 
     @GetMapping("/success")
     public String successPage() {
-        return "success";
+        return "inscription-success";
+    }
+
+    @GetMapping("/profile")
+    public String profilePage(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+        // Récupérer les informations de l'utilisateur courant
+        String username = userDetails.getUsername(); // Nom de l'utilisateur
+        String roles = userDetails.getAuthorities().toString(); // Rôles de l'utilisateur
+
+        // Ajouter les informations dans le modèle pour la vue
+        model.addAttribute("username", username);
+        model.addAttribute("roles", roles);
+
+        // Retourne la page HTML associée
+        return "user-profile";
     }
 
     // -------------------- Partie admin --------------------

@@ -19,20 +19,39 @@
 <header class="header">
   <div class="top-bar">
     <div class="logo">
-      <a href="/">Evazion</a>
+      <a th:href="@{/}">
+        Evazion
+      </a>
     </div>
     <ul class="navigation">
       <li class="navigation-item trips-item">
-        <a href="/voyages">Voyages</a>
+        <a th:href="@{/destinations}">Voyages</a>
+        <ul class="navigation-item trips-dropdown">
+          <li class="dropdown-item">
+            <a href="#">Afrique</a>
+          </li>
+          <li class="dropdown-item">
+            <a href="#">Amérique du Nord</a>
+          </li>
+          <li class="dropdown-item">
+            <a href="#">Amérique du Sud</a>
+          </li>
+          <li class="dropdown-item">
+            <a href="#">Asie</a>
+          </li>
+          <li class="dropdown-item">
+            <a href="#">Europe</a>
+          </li>
+        </ul>
       </li>
       <li class="navigation-item">
-        <a href="/blog">Blog</a>
+        <a href="#">Blog</a>
       </li>
       <li class="navigation-item">
-        <a href="/reviews/liste">Avis</a>
+        <a th:href="@{/reviews/liste}">Avis</a>
       </li>
       <li class="navigation-item">
-        <a href="/contact">Contact</a>
+        <a href="#">Contact</a>
       </li>
       <div class="navigation-item buttons-container">
         <form class="navigation-item search-bar">
@@ -41,7 +60,7 @@
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>
         </form>
-        <a href="/user-profile" class="navigation-item account">
+        <a th:href="@{/users/profile}" class="navigation-item account">
           <i class="fa-solid fa-user"></i> Compte
         </a>
       </div>

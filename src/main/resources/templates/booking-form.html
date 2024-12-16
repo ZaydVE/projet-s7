@@ -16,60 +16,57 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body>
-    <header class="header">
-        <div class="top-bar">
-            <div class="logo">
-                <a href="index.html">
-                    Evazion
+<header class="header">
+    <div class="top-bar">
+        <div class="logo">
+            <a th:href="@{/}">
+                Evazion
+            </a>
+        </div>
+        <ul class="navigation">
+            <li class="navigation-item trips-item">
+                <a th:href="@{/destinations}">Voyages</a>
+                <ul class="navigation-item trips-dropdown">
+                    <li class="dropdown-item">
+                        <a href="#">Afrique</a>
+                    </li>
+                    <li class="dropdown-item">
+                        <a href="#">Amérique du Nord</a>
+                    </li>
+                    <li class="dropdown-item">
+                        <a href="#">Amérique du Sud</a>
+                    </li>
+                    <li class="dropdown-item">
+                        <a href="#">Asie</a>
+                    </li>
+                    <li class="dropdown-item">
+                        <a href="#">Europe</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="navigation-item">
+                <a href="#">Blog</a>
+            </li>
+            <li class="navigation-item">
+                <a th:href="@{/reviews/liste}">Avis</a>
+            </li>
+            <li class="navigation-item">
+                <a href="#">Contact</a>
+            </li>
+            <div class="navigation-item buttons-container">
+                <form class="navigation-item search-bar">
+                    <input type="text" class="search-input" placeholder="Rechercher" size="10">
+                    <button class="search-button">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </form>
+                <a th:href="@{/users/profile}" class="navigation-item account">
+                    <i class="fa-solid fa-user"></i> Compte
                 </a>
             </div>
-            <ul class="navigation">
-                <li class="navigation-item trips-item">
-                    <a href="voyages.html">Voyages</a>
-                    <ul class="navigation-item trips-dropdown">
-                        <li class="dropdown-item">
-                            <a href="voyages.html">Afrique</a>
-                        </li>
-                        <li class="dropdown-item">
-                            <a href="voyages.html">Amérique du Nord</a>
-                        </li>
-                        <li class="dropdown-item">
-                            <a href="voyages.html">Amérique du Sud</a>
-                        </li>
-                        <li class="dropdown-item">
-                            <a href="voyages.html">Asie</a>
-                        </li>
-                        <li class="dropdown-item">
-                            <a href="voyages.html">Europe</a>
-                        </li>
-                        <li class="dropdown-item">
-                            <a href="voyages.html">Océanie</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="navigation-item">
-                    <a href="blog.html">Blog</a>
-                </li>
-                <li class="navigation-item">
-                    <a href="reviews.html">Avis</a>
-                </li>
-                <li class="navigation-item">
-                    <a href="contact.html">Contact</a>
-                </li>
-                <div class="navigation-item buttons-container">
-                    <form class="navigation-item search-bar">
-                        <input type="text" class="search-input" placeholder="Rechercher" size="10">
-                        <button class="search-button">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </button>
-                    </form>
-                    <a href="user-profile.html" class="navigation-item account">
-                        <i class="fa-solid fa-user"></i> Compte
-                    </a>
-                </div>
-            </ul>
-        </div>
-    </header>
+        </ul>
+    </div>
+</header>
     <section class="main-section">
         <h3>Réservation</h3>
         <div class="details">
