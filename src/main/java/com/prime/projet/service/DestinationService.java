@@ -130,6 +130,11 @@ public class DestinationService {
     public void deleteDestination(Integer destinationId) {
         Destination destination = destinationRepository.findById(destinationId)
                 .orElseThrow(() -> new IllegalArgumentException("Destination introuvable."));
+        // Supprimer l'image associée si elle existe
+        deleteImage(destination.getLienImage());
+
+        destinationRepository.delete(destination);
+    }
 
     public List<String> getAllContinents() {
         List<String> continents = destinationRepository.findDistinctContinents();
@@ -137,11 +142,6 @@ public class DestinationService {
         return continents;
     }
 
-        // Supprimer l'image associée si elle existe
-        deleteImage(destination.getLienImage());
-
-        destinationRepository.delete(destination);
-    }
 
     /*
     //Supprimer une destination
