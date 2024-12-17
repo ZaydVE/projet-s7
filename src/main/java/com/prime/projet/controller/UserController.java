@@ -1,21 +1,29 @@
 package com.prime.projet.controller;
 
+import com.prime.projet.repository.UserRepository;
+import com.prime.projet.repository.entity.User;
 import com.prime.projet.service.UserService;
 import com.prime.projet.service.dto.UserDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/users")
 public class UserController {
 
+    private final UserRepository userRepository;
     private final UserService userService;
 
-    public UserController(UserService userService) {
+    public UserController(UserRepository userRepository, UserService userService) {
+        this.userRepository = userRepository;
         this.userService = userService;
     }
 
-    // Partie utilisateur (inchangée)
+    // ---------------INSCRIPTION-------------------------
     @GetMapping("/new")
     public String showRegistrationForm() {
         return "inscription";
@@ -32,7 +40,7 @@ public class UserController {
         return "inscription-success";
     }
 
-    // -------------------- Partie admin --------------------
+    // -------------------- ADMIN CREE UN UTILISATEUR OU UN ADMIN --------------------
     @GetMapping("/newadmin")
     public String showAdminRegistrationForm() {
         return "user-inscription-admin";
@@ -50,7 +58,31 @@ public class UserController {
         return "inscription-success";
     }
 
-    // -------------------- Partie Modifier un User --------------------
+    // -------------------- Partie User Modifie ses Informations --------------------
+
+    @GetMapping("/user-edit-himself")
+    public String editHimselfUserForm() {
+        return "user-edit-himself";
+    }
+
+    @PostMapping("/user-edit-himself")
+    public String updateUserHimself(@ModelAttribute UserDto userDto, @AuthenticationPrincipal UserDetails currentUser) {
+        // Récupérer l'utilisateur connecté grâce à son email (ou username)
+        Optional<User> user = userRepository.findByEmail(currentUser.getUsername());
+        if (user != null) {
+            userDto.setUserId(user.get().getUserId()); // Assigne l'ID utilisateur
+            userService.updateUser(user.get().getUserId(), userDto); // Appelle le service
+        }
+        return "redirect:/users/user-edit-himself-success";
+    }
+
+    @GetMapping("/user-edit-himself-success")
+    public String userEditHimselfSuccessPage() {
+        return "user-edit-himself-success";
+    }
+
+
+    // -------------------- Partie Admin Modifie un User ----------------------------
     @GetMapping("/user-edit")
     public String editUserForm() {
         return "user-edit";
