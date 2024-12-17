@@ -8,24 +8,24 @@
     <meta name="author" content="Younes Achouche, Zayd Ajjaji, Lucas Colussi, Mehdi El Kadaoui, Daniele Sandra Tonfack Yonta">
     <title>Ajouter une Destination - Evazion</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="/styles/base.css">
-    <link rel="stylesheet" href="/styles/header.css">
-    <link rel="stylesheet" href="/styles/footer.css">
-    <link rel="stylesheet" href="/styles/scroll-top-button.css">
-    <link rel="stylesheet" href="/styles/voyages.css">
+    <link rel="stylesheet" href="../styles/base.css">
+    <link rel="stylesheet" href="../styles/header.css">
+    <link rel="stylesheet" href="../styles/footer.css">
+    <link rel="stylesheet" href="../styles/scroll-top-button.css">
+    <link rel="stylesheet" href="../styles/destination-form.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body>
 <header class="header">
     <div class="top-bar">
         <div class="logo">
-            <a th:href="@{/}">
+            <a href="index.html">
                 Evazion
             </a>
         </div>
         <ul class="navigation">
             <li class="navigation-item trips-item">
-                <a th:href="@{/destinations}">Voyages</a>
+                <a href="#">Voyages</a>
                 <ul class="navigation-item trips-dropdown">
                     <li class="dropdown-item">
                         <a href="#">Afrique</a>
@@ -48,7 +48,7 @@
                 <a href="#">Blog</a>
             </li>
             <li class="navigation-item">
-                <a th:href="@{/reviews/liste}">Avis</a>
+                <a href="#">Avis</a>
             </li>
             <li class="navigation-item">
                 <a href="#">Contact</a>
@@ -60,7 +60,7 @@
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </button>
                 </form>
-                <a th:href="@{/users/profile}" class="navigation-item account">
+                <a href="#" class="navigation-item account">
                     <i class="fa-solid fa-user"></i> Compte
                 </a>
             </div>
@@ -68,256 +68,267 @@
     </div>
 </header>
 <section class="main-section">
-    <h1 class="section-title">Ajouter une Destination</h1>
-    <p class="section-description">Remplissez le formulaire ci-dessous pour ajouter une nouvelle destination à notre catalogue.</p>
+    <h1 class="title">Ajouter une Destination</h1>
+    <p class="description">Ajoutez un nouveau voyage au catalogue via le formulaire ci-dessous.</p>
     <form action="/destinations/new" method="post" enctype="multipart/form-data" class="add-destination-form">
-        <div class="form-group">
-            <label for="name">Nom de la destination :</label>
-            <input type="text" id="name" name="name" required>
+        <div class="fields">
+            <div class="form-block">
+                <div class="form-group">
+                    <h5>Nom</h5>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <h5 for="type">Type</h5>
+                    <input type="text" id="type" name="type" required>
+                </div>
+            </div>
+            <div class="form-block location">
+                <div class="form-group">
+                    <h5 for="continent">Continent</h5>
+                    <select id="continent" name="continent" required>
+                        <option>Afrique</option>
+                        <option>Amérique du Nord</option>
+                        <option>Amérique du Sud</option>
+                        <option>Asie</option>
+                        <option>Europe</option>
+                        <option>Océanie</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <h5 for="country">Pays</h5>
+                    <select id="country" name="country" required>
+                        <option>Afghanistan</option>
+                        <option>Afrique du Sud</option>
+                        <option>Albanie</option>
+                        <option>Algérie</option>
+                        <option>Allemagne</option>
+                        <option>Andorre</option>
+                        <option>Angola</option>
+                        <option>Antigua-et-Barbuda</option>
+                        <option>Arabie Saoudite</option>
+                        <option>Argentine</option>
+                        <option>Arménie</option>
+                        <option>Australie</option>
+                        <option>Autriche</option>
+                        <option>Azerbaïdjan</option>
+                        <option>Bahamas</option>
+                        <option>Bahreïn</option>
+                        <option>Bangladesh</option>
+                        <option>Barbade</option>
+                        <option>Belau / Palau / Palaos</option>
+                        <option>Belgique</option>
+                        <option>Belize</option>
+                        <option>Bénin</option>
+                        <option>Bhoutan</option>
+                        <option>Biélorussie</option>
+                        <option>Birmanie</option>
+                        <option>Bolivie</option>
+                        <option>Bosnie-Herzégovine</option>
+                        <option>Botswana</option>
+                        <option>Brésil</option>
+                        <option>Brunei</option>
+                        <option>Bulgarie</option>
+                        <option>Burkina Faso</option>
+                        <option>Burundi</option>
+                        <option>Cambodge</option>
+                        <option>Cameroun</option>
+                        <option>Canada</option>
+                        <option>Cap-Vert</option>
+                        <option>Centrafrique</option>
+                        <option>Chili</option>
+                        <option>Chine</option>
+                        <option>Chypre</option>
+                        <option>Colombie</option>
+                        <option>Comores</option>
+                        <option>Congo-Brazzaville</option>
+                        <option>Congo-Kinshasa</option>
+                        <option>Corée du Nord</option>
+                        <option>Corée du Sud</option>
+                        <option>Costa Rica</option>
+                        <option>Côte d’Ivoire</option>
+                        <option>Croatie</option>
+                        <option>Cuba</option>
+                        <option>Danemark</option>
+                        <option>Djibouti</option>
+                        <option>Dominique</option>
+                        <option>Égypte</option>
+                        <option>Émirats arabes unis</option>
+                        <option>Équateur</option>
+                        <option>Érythrée</option>
+                        <option>Espagne</option>
+                        <option>Estonie</option>
+                        <option>États-Unis</option>
+                        <option>Éthiopie</option>
+                        <option>Fidji</option>
+                        <option>Finlande</option>
+                        <option>France</option>
+                        <option>Gabon</option>
+                        <option>Gambie</option>
+                        <option>Géorgie</option>
+                        <option>Ghana</option>
+                        <option>Grèce</option>
+                        <option>Grenade</option>
+                        <option>Guatemala</option>
+                        <option>Guinée-Bissau</option>
+                        <option>Guinée-Conakry</option>
+                        <option>Guinée équatoriale</option>
+                        <option>Guyana</option>
+                        <option>Haïti</option>
+                        <option>Honduras</option>
+                        <option>Hongrie</option>
+                        <option>Inde</option>
+                        <option>Indonésie</option>
+                        <option>Irak</option>
+                        <option>Iran</option>
+                        <option>Irlande</option>
+                        <option>Islande</option>
+                        <option>Israël</option>
+                        <option>Italie</option>
+                        <option>Jamaïque</option>
+                        <option>Japon</option>
+                        <option>Jordanie</option>
+                        <option>Kazakhstan</option>
+                        <option>Kenya</option>
+                        <option>Kirghizistan</option>
+                        <option>Kiribati</option>
+                        <option>Kosovo</option>
+                        <option>Koweït</option>
+                        <option>Laos</option>
+                        <option>Lesotho</option>
+                        <option>Lettonie</option>
+                        <option>Liban</option>
+                        <option>Liberia</option>
+                        <option>Libye</option>
+                        <option>Liechtenstein</option>
+                        <option>Lituanie</option>
+                        <option>Luxembourg</option>
+                        <option>Macédoine</option>
+                        <option>Madagascar</option>
+                        <option>Malaisie</option>
+                        <option>Malawi</option>
+                        <option>Maldives</option>
+                        <option>Mali</option>
+                        <option>Malte</option>
+                        <option>Maroc</option>
+                        <option>Marshall</option>
+                        <option>Maurice</option>
+                        <option>Mauritanie</option>
+                        <option>Mexique</option>
+                        <option>Micronésie</option>
+                        <option>Moldavie</option>
+                        <option>Monaco</option>
+                        <option>Mongolie</option>
+                        <option>Monténégro</option>
+                        <option>Mozambique</option>
+                        <option>Namibie</option>
+                        <option>Nauru</option>
+                        <option>Népal</option>
+                        <option>Nicaragua</option>
+                        <option>Niger</option>
+                        <option>Nigeria</option>
+                        <option>Norvège</option>
+                        <option>Nouvelle-Zélande</option>
+                        <option>Oman</option>
+                        <option>Ouganda</option>
+                        <option>Ouzbékistan</option>
+                        <option>Pakistan</option>
+                        <option>Panama</option>
+                        <option>Papouasie-Nouvelle-Guinée</option>
+                        <option>Paraguay</option>
+                        <option>Pays-Bas</option>
+                        <option>Pérou</option>
+                        <option>Philippines</option>
+                        <option>Pologne</option>
+                        <option>Portugal</option>
+                        <option>Qatar</option>
+                        <option>République dominicaine</option>
+                        <option>République tchèque</option>
+                        <option>Roumanie</option>
+                        <option>Royaume-Uni</option>
+                        <option>Russie</option>
+                        <option>Rwanda</option>
+                        <option>Saint-Christophe-et-Niévès</option>
+                        <option>Sainte-Lucie</option>
+                        <option>Saint-Marin</option>
+                        <option>Saint-Vincent-et-les-Grenadines</option>
+                        <option>Salomon</option>
+                        <option>São-Tomé-et-Príncipe</option>
+                        <option>Salvador</option>
+                        <option>Samoa occidentales</option>
+                        <option>Sénégal</option>
+                        <option>Serbie</option>
+                        <option>Seychelles</option>
+                        <option>Sierra Leone</option>
+                        <option>Singapour</option>
+                        <option>Slovaquie</option>
+                        <option>Slovénie</option>
+                        <option>Somalie</option>
+                        <option>Soudan</option>
+                        <option>Soudan du Sud</option>
+                        <option>Sri Lanka</option>
+                        <option>Suède</option>
+                        <option>Suisse</option>
+                        <option>Surinam</option>
+                        <option>Swaziland</option>
+                        <option>Syrie</option>
+                        <option>Tadjikistan</option>
+                        <option>Tanzanie</option>
+                        <option>Tchad</option>
+                        <option>Timor oriental</option>
+                        <option>Thaïlande</option>
+                        <option>Togo</option>
+                        <option>Tonga</option>
+                        <option>Trinité-et-Tobago</option>
+                        <option>Tunisie</option>
+                        <option>Turkménistan</option>
+                        <option>Turquie</option>
+                        <option>Tuvalu</option>
+                        <option>Ukraine</option>
+                        <option>Uruguay</option>
+                        <option>Vanuatu</option>
+                        <option>Vatican</option>
+                        <option>Venezuela</option>
+                        <option>Vietnam</option>
+                        <option>Yémen</option>
+                        <option>Zambie</option>
+                        <option>Zimbabwe</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <h5 for="city">Ville</h5>
+                    <input type="text" id="city" name="city" required>
+                </div>
+            </div>
+            <div class="form-block">
+                <div class="form-group">
+                    <h5 for="startDate">Date de début</h5>
+                    <input type="date" id="startDate" name="startDate" required>
+                </div>
+                <div class="form-group">
+                    <h5 for="endDate">Date de fin</h5>
+                    <input type="date" id="endDate" name="endDate" required>
+                </div>
+            </div>
+            <div class="form-block">
+                <div class="form-group">
+                    <h5 for="price">Prix</h5>
+                    <input type="number" id="price" name="price" min="0" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <h5 for="nbPlaces">Places disponibles</h5>
+                    <input type="number" id="nbPlaces" name="nbPlaces" min="1" required>
+                </div>
+            </div>        
+            <div class="form-group">
+                <h5 for="description">Description</h5>
+                <textarea id="description" name="description" rows="5" cols="125" required></textarea>
+            </div>
+            <div class="form-group">
+                <h5 for="lienImage">Image</h5>
+                <input type="file" id="lienImage" name="lienImage" accept=".jpg, .jpeg" required>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="continent">Continent :</label>
-            <select id="continent" name="continent" required>
-                <option>Afrique</option>
-                <option>Amérique du Nord</option>
-                <option>Amérique du Sud</option>
-                <option>Asie</option>
-                <option>Europe</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="country">Pays :</label>
-            <select id="country" name="country" required>
-                <option>Afghanistan</option>
-                <option>Afrique du Sud</option>
-                <option>Albanie</option>
-                <option>Algérie</option>
-                <option>Allemagne</option>
-                <option>Andorre</option>
-                <option>Angola</option>
-                <option>Antigua-et-Barbuda</option>
-                <option>Arabie Saoudite</option>
-                <option>Argentine</option>
-                <option>Arménie</option>
-                <option>Australie</option>
-                <option>Autriche</option>
-                <option>Azerbaïdjan</option>
-                <option>Bahamas</option>
-                <option>Bahreïn</option>
-                <option>Bangladesh</option>
-                <option>Barbade</option>
-                <option>Belau / Palau / Palaos</option>
-                <option>Belgique</option>
-                <option>Belize</option>
-                <option>Bénin</option>
-                <option>Bhoutan</option>
-                <option>Biélorussie</option>
-                <option>Birmanie</option>
-                <option>Bolivie</option>
-                <option>Bosnie-Herzégovine</option>
-                <option>Botswana</option>
-                <option>Brésil</option>
-                <option>Brunei</option>
-                <option>Bulgarie</option>
-                <option>Burkina Faso</option>
-                <option>Burundi</option>
-                <option>Cambodge</option>
-                <option>Cameroun</option>
-                <option>Canada</option>
-                <option>Cap-Vert</option>
-                <option>Centrafrique</option>
-                <option>Chili</option>
-                <option>Chine</option>
-                <option>Chypre</option>
-                <option>Colombie</option>
-                <option>Comores</option>
-                <option>Congo-Brazzaville</option>
-                <option>Congo-Kinshasa</option>
-                <option>Corée du Nord</option>
-                <option>Corée du Sud</option>
-                <option>Costa Rica</option>
-                <option>Côte d’Ivoire</option>
-                <option>Croatie</option>
-                <option>Cuba</option>
-                <option>Danemark</option>
-                <option>Djibouti</option>
-                <option>Dominique</option>
-                <option>Égypte</option>
-                <option>Émirats arabes unis</option>
-                <option>Équateur</option>
-                <option>Érythrée</option>
-                <option>Espagne</option>
-                <option>Estonie</option>
-                <option>États-Unis</option>
-                <option>Éthiopie</option>
-                <option>Fidji</option>
-                <option>Finlande</option>
-                <option>France</option>
-                <option>Gabon</option>
-                <option>Gambie</option>
-                <option>Géorgie</option>
-                <option>Ghana</option>
-                <option>Grèce</option>
-                <option>Grenade</option>
-                <option>Guatemala</option>
-                <option>Guinée-Bissau</option>
-                <option>Guinée-Conakry</option>
-                <option>Guinée équatoriale</option>
-                <option>Guyana</option>
-                <option>Haïti</option>
-                <option>Honduras</option>
-                <option>Hongrie</option>
-                <option>Inde</option>
-                <option>Indonésie</option>
-                <option>Irak</option>
-                <option>Iran</option>
-                <option>Irlande</option>
-                <option>Islande</option>
-                <option>Israël</option>
-                <option>Italie</option>
-                <option>Jamaïque</option>
-                <option>Japon</option>
-                <option>Jordanie</option>
-                <option>Kazakhstan</option>
-                <option>Kenya</option>
-                <option>Kirghizistan</option>
-                <option>Kiribati</option>
-                <option>Kosovo</option>
-                <option>Koweït</option>
-                <option>Laos</option>
-                <option>Lesotho</option>
-                <option>Lettonie</option>
-                <option>Liban</option>
-                <option>Liberia</option>
-                <option>Libye</option>
-                <option>Liechtenstein</option>
-                <option>Lituanie</option>
-                <option>Luxembourg</option>
-                <option>Macédoine</option>
-                <option>Madagascar</option>
-                <option>Malaisie</option>
-                <option>Malawi</option>
-                <option>Maldives</option>
-                <option>Mali</option>
-                <option>Malte</option>
-                <option>Maroc</option>
-                <option>Marshall</option>
-                <option>Maurice</option>
-                <option>Mauritanie</option>
-                <option>Mexique</option>
-                <option>Micronésie</option>
-                <option>Moldavie</option>
-                <option>Monaco</option>
-                <option>Mongolie</option>
-                <option>Monténégro</option>
-                <option>Mozambique</option>
-                <option>Namibie</option>
-                <option>Nauru</option>
-                <option>Népal</option>
-                <option>Nicaragua</option>
-                <option>Niger</option>
-                <option>Nigeria</option>
-                <option>Norvège</option>
-                <option>Nouvelle-Zélande</option>
-                <option>Oman</option>
-                <option>Ouganda</option>
-                <option>Ouzbékistan</option>
-                <option>Pakistan</option>
-                <option>Panama</option>
-                <option>Papouasie-Nouvelle-Guinée</option>
-                <option>Paraguay</option>
-                <option>Pays-Bas</option>
-                <option>Pérou</option>
-                <option>Philippines</option>
-                <option>Pologne</option>
-                <option>Portugal</option>
-                <option>Qatar</option>
-                <option>République dominicaine</option>
-                <option>République tchèque</option>
-                <option>Roumanie</option>
-                <option>Royaume-Uni</option>
-                <option>Russie</option>
-                <option>Rwanda</option>
-                <option>Saint-Christophe-et-Niévès</option>
-                <option>Sainte-Lucie</option>
-                <option>Saint-Marin</option>
-                <option>Saint-Vincent-et-les-Grenadines</option>
-                <option>Salomon</option>
-                <option>São-Tomé-et-Príncipe</option>
-                <option>Salvador</option>
-                <option>Samoa occidentales</option>
-                <option>Sénégal</option>
-                <option>Serbie</option>
-                <option>Seychelles</option>
-                <option>Sierra Leone</option>
-                <option>Singapour</option>
-                <option>Slovaquie</option>
-                <option>Slovénie</option>
-                <option>Somalie</option>
-                <option>Soudan</option>
-                <option>Soudan du Sud</option>
-                <option>Sri Lanka</option>
-                <option>Suède</option>
-                <option>Suisse</option>
-                <option>Surinam</option>
-                <option>Swaziland</option>
-                <option>Syrie</option>
-                <option>Tadjikistan</option>
-                <option>Tanzanie</option>
-                <option>Tchad</option>
-                <option>Timor oriental</option>
-                <option>Thaïlande</option>
-                <option>Togo</option>
-                <option>Tonga</option>
-                <option>Trinité-et-Tobago</option>
-                <option>Tunisie</option>
-                <option>Turkménistan</option>
-                <option>Turquie</option>
-                <option>Tuvalu</option>
-                <option>Ukraine</option>
-                <option>Uruguay</option>
-                <option>Vanuatu</option>
-                <option>Vatican</option>
-                <option>Venezuela</option>
-                <option>Vietnam</option>
-                <option>Yémen</option>
-                <option>Zambie</option>
-                <option>Zimbabwe</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="city">Ville :</label>
-            <input type="text" id="city" name="city" required>
-        </div>
-        <div class="form-group">
-            <label for="type">Type de destination :</label>
-            <input type="text" id="type" name="type" required>
-        </div>
-        <div class="form-group">
-            <label for="description">Description :</label>
-            <textarea id="description" name="description" rows="5" required></textarea>
-        </div>
-        <div class="form-group">
-            <label for="price">Prix :</label>
-            <input type="number" id="price" name="price" min="0" step="0.01" required>
-        </div>
-        <div class="form-group">
-            <label for="startDate">Date de début :</label>
-            <input type="date" id="startDate" name="startDate" required>
-        </div>
-        <div class="form-group">
-            <label for="endDate">Date de fin :</label>
-            <input type="date" id="endDate" name="endDate" required>
-        </div>
-        <div class="form-group">
-            <label for="lienImage">Image :</label>
-            <input type="file" id="lienImage" name="lienImage" accept=".jpg, .jpeg" required>
-        </div>
-        <div class="form-group">
-            <label for="nbPlaces">Nombre de places disponibles :</label>
-            <input type="number" id="nbPlaces" name="nbPlaces" min="1" required>
-        </div>
-        <button type="submit" class="btn-submit">Ajouter la destination</button>
+        <button type="submit" class="submit-button"><i class="fa-solid fa-plus"></i> Ajouter</button>
     </form>
 </section>
 

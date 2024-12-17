@@ -35,8 +35,8 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/","/styles/**", "/assets/**", "/public", "/favicon.ico", "/users/new", "/users/success","/destinations").permitAll() // Chemins publics
-                        .requestMatchers("/users/delete/**","/destinations/new").hasRole("ADMIN") // ADMIN uniquement
+                        .requestMatchers("/","/reviews/liste", "/styles/**", "/assets/**", "/public", "/favicon.ico", "/users/new", "/users/inscription-success", "/users/admin/success","/users/edit-users", "/users/delete-users", "/destinations").permitAll() // Chemins publics
+                        .requestMatchers("/users/delete/**","/destinations/new", "/users/newadmin").hasRole("ADMIN") // ADMIN uniquement
                         .anyRequest().authenticated() // Toute autre requête doit être authentifiée
                 )
                 .csrf().disable()
