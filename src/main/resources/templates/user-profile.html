@@ -12,73 +12,104 @@
     <link rel="stylesheet" href="../styles/header.css">
     <link rel="stylesheet" href="../styles/footer.css">
     <link rel="stylesheet" href="../styles/scroll-top-button.css">
-    <link rel="stylesheet" href="../styles/reviews.css">
+    <link rel="stylesheet" href="../styles/user.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body>
-<header class="header">
-    <div class="top-bar">
-        <div class="logo">
-            <a th:href="@{/}">
-                Evazion
-            </a>
-        </div>
-        <ul class="navigation">
-            <li class="navigation-item trips-item">
-                <a th:href="@{/destinations}">Voyages</a>
-                <ul class="navigation-item trips-dropdown">
-                    <li class="dropdown-item">
-                        <a href="#">Afrique</a>
-                    </li>
-                    <li class="dropdown-item">
-                        <a href="#">Amérique du Nord</a>
-                    </li>
-                    <li class="dropdown-item">
-                        <a href="#">Amérique du Sud</a>
-                    </li>
-                    <li class="dropdown-item">
-                        <a href="#">Asie</a>
-                    </li>
-                    <li class="dropdown-item">
-                        <a href="#">Europe</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="navigation-item">
-                <a href="#">Blog</a>
-            </li>
-            <li class="navigation-item">
-                <a th:href="@{/reviews/liste}">Avis</a>
-            </li>
-            <li class="navigation-item">
-                <a href="#">Contact</a>
-            </li>
-            <div class="navigation-item buttons-container">
-                <form class="navigation-item search-bar">
-                    <input type="text" class="search-input" placeholder="Rechercher" size="10">
-                    <button class="search-button">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </button>
-                </form>
-                <a th:href="@{/users/profile}" class="navigation-item account">
-                    <i class="fa-solid fa-user"></i> Compte
+    <header class="header">
+        <div class="top-bar">
+            <div class="logo">
+                <a href="index.html">
+                    Evazion
                 </a>
             </div>
-        </ul>
-    </div>
-</header>
-    <section class="main-section">
-        <!-- Informations de l'utilisateur + Boutons 'Modifier' et 'Supprimer' -->
-    </section>
-    <div id="popup" class="popup hidden">
-        <div class="popup-content">
-            <span id="popup-close" class="popup-close"></span>
-            <p id="popup-comment"></p>
+            <ul class="navigation">
+                <li class="navigation-item trips-item">
+                    <a href="voyages.html">Voyages</a>
+                    <ul class="navigation-item trips-dropdown">
+                        <li class="dropdown-item">
+                            <a href="voyages.html">Afrique</a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="voyages.html">Amérique du Nord</a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="voyages.html">Amérique du Sud</a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="voyages.html">Asie</a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="voyages.html">Europe</a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a href="voyages.html">Océanie</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="navigation-item">
+                    <a href="blog.html">Blog</a>
+                </li>
+                <li class="navigation-item">
+                    <a href="reviews.html">Avis</a>
+                </li>
+                <li class="navigation-item">
+                    <a href="contact.html">Contact</a>
+                </li>
+                <div class="navigation-item buttons-container">
+                    <form class="navigation-item search-bar">
+                        <input type="text" class="search-input" placeholder="Rechercher" size="10">
+                        <button class="search-button">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </form>
+                    <a href="user-profile.html" class="navigation-item account">
+                        <i class="fa-solid fa-user"></i> Compte
+                    </a>
+                </div>
+            </ul>
         </div>
-    </div>
-    <script>
-        // Script pour afficher correctement la carte : comme 'review-form.html' mais en plus simple en gros
-    </script>
+    </header>
+    <section class="main-section">
+        <h3 class="title">Profil</h3>
+        <p class="description">
+            Dans votre profil, retrouvez toutes vos informations personnelles. Vos données sont sécurisées et utilisées conformément à notre
+            <a href="politique-de-confidentialite.html">Politique de confidentialité</a>.
+        </p>
+        <div class="informations">
+            <div class="informations-item">
+                <h5>Nom</h5>
+                <p th:text="${user.lastname}">Nom</p>
+            </div>
+            <div class="informations-item">
+                <h5>Prénom</h5>
+                <p th:text="${user.firstname}">Prénom</p>
+            </div>
+            <div class="informations-item">
+                <h5>E-mail</h5>
+                <p th:text="${user.email}">E-mail</p>
+            </div>
+            <div class="informations-item">
+                <h5>Téléphone</h5>
+                <p th:text="${user.phonenumber}">Téléphone</p>
+            </div>
+            <div class="informations-item">
+                <h5>Date d'inscription</h5>
+                <p th:text="${user.createdAt}">Date d'inscription</p>
+            </div>
+            <div class="buttons">
+                <a th:href="@{/user-edit}" class="edit-button">
+                    <i class="fa-solid fa-user-pen"></i> Modifier
+                </a>
+                <a th:href="@{/user-delete}" class="delete-button">
+                    <i class="fa-solid fa-trash"></i> Supprimer
+                </a>
+                <a th:href="@{/logout}" class="log-out-button">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Se déconnecter
+                </a>
+            </div>
+        </div>
+    </section>
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-top">

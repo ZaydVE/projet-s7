@@ -6,12 +6,12 @@
   <meta name="description" content="Supprimer un utilisateur">
   <meta name="keywords" content="utilisateur, supprimer">
   <meta name="author" content="Evazion">
-  <title>Supprimer un utilisateur - Evazion</title>
+  <title>Liste des utilisateurs - Evazion</title>
   <link rel="stylesheet" href="../styles/base.css">
   <link rel="stylesheet" href="../styles/header.css">
   <link rel="stylesheet" href="../styles/footer.css">
   <link rel="stylesheet" href="../styles/scroll-top-button.css">
-  <link rel="stylesheet" href="../styles/user-delete.css">
+  <link rel="stylesheet" href="../styles/user-list.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body>
@@ -66,19 +66,33 @@
     </ul>
   </div>
 </header>
-
 <section class="main-section">
-  <h1 class="title">Supprimer un utilisateur</h1>
-  <p class="description">Supprimer un utilisateur via son identifiant (ID).</p>
-  <form action="/users/user-delete" method="post" class="delete-form">
-    <div class="form-group">
-      <label for="userId">ID de l'utilisateur</label>
-      <input type="number" id="userId" name="userId" required>
-    </div>
-    <div class="form-group">
-      <button type="submit" class="delete-button"><i class="fa-solid fa-trash"></i> Supprimer</button>
-    </div>
-  </form>
+  <h1 class="title">Liste des utilisateurs</h1>
+  <p class="description">Les utiliseurs et leurs informations sont listées dans le tableau ci-dessous.</p>
+  <table>
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nom</th>
+      <th>Prénom</th>
+      <th>Email</th>
+      <th>Téléphone</th>
+      <th>Date d'inscription</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Boucle Thymeleaf pour afficher les utilisateurs -->
+    <tr th:each="user : ${users}">
+      <td th:text="${user.userId}">ID</td>
+      <td th:text="${user.lastname}">Nom</td>
+      <td th:text="${user.firstname}">Prénom</td>
+      <td th:text="${user.email}">Email</td>
+      <td th:text="${user.phoneNumber}">Téléphone</td>
+      <td th:text="${user.createdAt}">Date d'inscription</td>
+    </tr>
+    </tbody>
+  </table>
+
 </section>
 <footer class="footer">
   <div class="footer-content">
