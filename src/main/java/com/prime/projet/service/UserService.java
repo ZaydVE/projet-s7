@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -17,6 +18,11 @@ public class UserService {
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+    }
+
+    //Lister tous les users
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 
     // Créer un utilisateur
@@ -37,21 +43,14 @@ public class UserService {
         userRepository.deleteById(userId);
     }
 
+    /*
     // Récupérer un utilisateur par ID
-    public UserDto getUserById(Integer id) {
+    public UserDto getUserById(Long id) {
         User user = userRepository.findById(id).orElse(null);
-        if (user == null) {
-            return null; // Retourne `null` si l'utilisateur n'existe pas
-        }
-        UserDto userDto = new UserDto();
-        userDto.setUserId(user.getUserId());
-        userDto.setLastname(user.getLastname());
-        userDto.setFirstname(user.getFirstname());
-        userDto.setEmail(user.getEmail());
-        userDto.setPhonenumber(user.getPhoneNumber());
-        userDto.setAdmin(user.isAdmin());
-        return userDto;
+        return createDto(user);
     }
+
+     */
 
     // Mettre à jour un utilisateur
     public void updateUser(Integer id, UserDto userDto) {
@@ -68,4 +67,25 @@ public class UserService {
             userRepository.save(user);
         }
     }
+
+    //Récupérer un user avec son adresse mail
+    public UserDto getUserByEmail(String email) {
+        User user = userRepository.findByEmail(email).orElse(null);
+        return createDto(user);
+    }
+
+    private UserDto createDto(User user){
+        if (user == null) {
+            return null; // Retourne `null` si l'utilisateur n'existe pas
+        }
+        UserDto userDto = new UserDto();
+        userDto.setUserId(user.getUserId());
+        userDto.setLastname(user.getLastname());
+        userDto.setFirstname(user.getFirstname());
+        userDto.setEmail(user.getEmail());
+        userDto.setPhonenumber(user.getPhoneNumber());
+        userDto.setAdmin(user.isAdmin());
+        return userDto;
+    }
+
 }

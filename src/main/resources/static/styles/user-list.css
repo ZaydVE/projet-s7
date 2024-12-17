@@ -1,0 +1,86 @@
+:root {
+	--text-color-white: #FFFFFF;
+	--text-color-gray: #4D4D4D;
+	--accent-color-1: #06506E;
+	--accent-color-2: #C89608;
+}
+
+.main-section {
+	padding: 115px 12.5% 0;
+	margin-bottom: 75px;
+	width: 100%;
+}
+
+.main-section .title {
+	font-size: 2rem;
+	font-weight: 700;
+	letter-spacing: 6px;
+	text-transform: uppercase;
+	display: block;
+	text-align: center;
+	transition: letter-spacing .3s ease-in-out;
+	color: var(--accent-color-2);
+}
+
+.main-section .title:hover {
+	letter-spacing: 7px;
+}
+
+.main-section table {
+  width: 100%;
+  border-collapse: collapse;
+  border-color: var(--accent-color-1);
+  margin: 20px 0;
+}
+
+.main-section table thead tr th {
+  color: var(--text-color-white);
+  text-transform: uppercase;
+  font-weight: bold;
+  border: 1px solid var(--text-color-white);
+  padding: 10px;
+  background-color: var(--accent-color-1);
+}
+
+tbody td {
+  border: 1px solid var(--accent-color-1);
+  padding: 10px;
+  text-align: left;
+}
+
+tbody tr:nth-child(even) {
+  background-color: rgba(6, 80, 110, .05);
+}
+
+tbody tr:hover {
+  background-color: rgba(6, 80, 110, .1);
+}
+
+@media (max-width: 1300px) {
+
+	.main-section .delete-form {
+		flex-direction: column;
+		align-items: stretch;
+		gap: 20px;
+	}
+
+	.main-section .delete-form .form-group input {
+		width: 100%;
+		max-width: 100%;
+	}
+
+	.main-section .delete-form .form-group .submit-button {
+		text-align: center;
+		margin-top: 0
+	}
+
+}
+
+@media (max-width: 1010px) {
+
+	.main-section {
+		padding: 0 12.5% 0;
+		margin-bottom: 75px;
+	}
+
+}
