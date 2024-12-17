@@ -18,7 +18,7 @@ public class DestinationService {
     private final DestinationRepository destinationRepository;
 
     // Répertoire où les images seront stockées
-    private static final String UPLOAD_DIR = Paths.get(System.getProperty("user.dir"), "projet-s7", "src", "main", "resources", "static", "assets").toString();
+    private static final String UPLOAD_DIR = Paths.get(System.getProperty("user.dir"),  "src", "main", "resources", "static", "assets").toString();
 
     public DestinationService(DestinationRepository destinationRepository) {
         this.destinationRepository = destinationRepository;

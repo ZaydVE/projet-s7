@@ -1,0 +1,168 @@
+:root {
+	--text-color-white: #FFFFFF;
+	--text-color-gray: #4D4D4D;
+	--accent-color-1: #06506E;
+	--accent-color-2: #C89608;
+}
+
+.main-section {
+	padding: 115px 12.5% 0;
+	margin-bottom: 75px;
+	width: 100%;
+}
+
+.main-section .title {
+	font-size: 2rem;
+	font-weight: 700;
+	letter-spacing: 6px;
+	text-transform: uppercase;
+	display: block;
+	text-align: center;
+	transition: letter-spacing .3s ease-in-out;
+	color: var(--accent-color-2);
+}
+
+.main-section .title:hover {
+	letter-spacing: 7px;
+}
+
+.main-section .add-destination-form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 50px 0 0;
+}
+
+.main-section .add-destination-form .fields {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	gap: 75px;
+}
+
+.main-section .add-destination-form .fields .form-block .form-group:first-child {
+	margin-bottom: 25px;
+}
+
+.main-section .add-destination-form .fields .location .form-group {
+	margin-bottom: 25px;
+}
+
+.main-section .add-destination-form .fields .location .form-group:last-child {
+	margin-bottom: 0;
+}
+
+.main-section .add-destination-form .fields .form-group {
+	display: flex;
+	flex-direction: column;
+	font-size: .675rem;
+	font-weight: normal;
+	text-transform: uppercase;
+	color: var(--accent-color-1);
+	margin: 0 0 10px 0;
+}
+
+.main-section .add-destination-form .fields .form-group h5 {
+	font-size: .675rem;
+	font-weight: normal;
+	text-transform: uppercase;
+	color: var(--accent-color-1);
+	margin: 0 0 10px 0;
+}
+
+.main-section .add-destination-form .fields .form-group input, .main-section .add-destination-form .fields .form-group select {
+	font-size: .675rem;
+	padding: 0 5px 5px 5px;
+	border: none;
+	border-bottom: solid 1px var(--accent-color-1);
+	color: var(--accent-color-1);
+	min-width: 100px;
+	max-width: 200px;
+}
+
+.main-section .add-destination-form .fields .form-group input:focus, .main-section .add-destination-form .fields .form-group select:focus {
+	outline: none;
+}
+
+.main-section .add-destination-form .fields .form-group input[type="file"] {
+	max-width: 300px;
+}
+
+.main-section .add-destination-form .fields .form-group textarea {
+	resize: none;
+	border-color: var(--accent-color-1);
+	border-radius: 5px;
+	padding: 5px;
+	font-family: 'Poppins', sans-serif;
+	color: var(--accent-color-1);
+	max-width: 100%;
+}
+
+.main-section .add-destination-form .fields .form-group textarea:focus {
+	outline: none;
+}
+
+.main-section .add-destination-form .submit-button {
+	font-size: .675rem;
+	border: none;
+	outline: none;
+	color: var(--text-color-white);
+	border-radius: 5px;
+	padding: 8px 10px 7px;
+	margin-left: 0;
+	text-transform: uppercase;
+	cursor: pointer;
+	text-align: center;
+	background-color: var(--accent-color-2);
+	max-height: 30px;
+	margin-top: 25px;
+}
+
+.main-section .add-destination-form .submit-button i {
+	margin-right: 5px;
+}
+
+@media (max-width: 1300px) {
+
+	.main-section .add-destination-form {
+		flex-direction: column;
+		align-items: stretch;
+		gap: 20px;
+	}
+
+	.main-section .add-destination-form .fields {
+		flex-direction: column;
+		align-items: stretch;
+		gap: 20px;
+	}
+
+	.main-section .add-destination-form .fields .form-group input, .main-section .add-destination-form .fields .form-group select {
+		width: 100%;
+		max-width: 100%;
+	}
+
+	.main-section .add-destination-form .fields .form-group textarea {
+		resize: unset;
+		width: 100%;
+		max-width: 100%;
+	}
+
+	.main-section .add-destination-form .fields .form-group input[type="file"] {
+		max-width: 100%;
+	}
+
+	.main-section .add-destination-form .fields .submit-button {
+		text-align: center;
+		margin-top: 0
+	}
+
+}
+
+@media (max-width: 1010px) {
+
+	.main-section {
+		padding: 0 12.5% 0;
+		margin-bottom: 75px;
+	}
+
+}
