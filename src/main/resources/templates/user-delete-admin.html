@@ -70,6 +70,14 @@
 <section class="main-section">
   <h1 class="title">Supprimer un utilisateur</h1>
   <p class="description">Les informations de l'utilisateur à supprimer sont affichées ci-dessous. Confirmez la suppression si nécessaire.</p>
+
+  <!-- Pop-in d'erreur -->
+  <div th:if="${error}" class="error-popup">
+    <div class="error-popup-content">
+      <p th:text="${error}"></p>
+    </div>
+  </div>
+
   <form th:action="@{'/users/user-delete/' + ${user.userId}}" method="post" class="delete-form" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">
     <div class="form-block">
       <div class="form-group">
