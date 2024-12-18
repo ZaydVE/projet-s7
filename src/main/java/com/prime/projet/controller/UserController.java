@@ -4,6 +4,7 @@ import com.prime.projet.repository.UserRepository;
 import com.prime.projet.repository.entity.User;
 import com.prime.projet.service.UserService;
 import com.prime.projet.controller.dto.UserDto;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,15 +24,14 @@ public class UserController {
     private final UserService userService;
 
     public UserController(UserService userService, UserRepository userRepository) {
-            this.userService = userService;
-            this.userRepository = userRepository;
-        }
+        this.userService = userService;
+        this.userRepository = userRepository;
+    }
 
-        // ---------------INSCRIPTION-------------------------
-        // Partie utilisateur (inchangée)
+    // ---------------INSCRIPTION-------------------------
+    // Partie utilisateur (inchangée)
 
-
-        //Bouton pour montrer la page de profil
+    //Bouton pour montrer la page de profil
         @GetMapping("/user-profile")
         public String showUserProfile () {
             return "user-profile"; // Fichier user-profile.html dans templates
@@ -61,6 +61,8 @@ public class UserController {
             return "inscription-success";
         }
 
+
+
         // -------------------- ADMIN CREE UN UTILISATEUR OU UN ADMIN --------------------
         @GetMapping("/newadmin")
         public String showAdminRegistrationForm () {
@@ -76,13 +78,27 @@ public class UserController {
 
         @GetMapping("/admin/success")
         public String successPageAdmin () {
-            return "inscription-success";
+        return "inscription-success";
         }
 
         // -------------------- Partie User Modifie ses Informations --------------------
 
         @GetMapping("/user-edit-himself")
-        public String editHimselfUserForm () {
+        public String editUserForm(Model model) {
+            // Récupérer l'utilisateur connecté
+            org.springframework.security.core.userdetails.User principal =
+                    (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+            // Récupérer l'utilisateur depuis la base de données
+            com.prime.projet.repository.entity.User user = userRepository.findByEmail(principal.getUsername())
+                    .orElseThrow(() -> new RuntimeException("Utilisateur non trouvé"));
+
+            // Convertir l'utilisateur en UserDto pour pré-remplir le formulaire
+            UserDto userDto = userService.createDto(user);
+
+            // Ajouter le UserDto au modèle
+            model.addAttribute("user", userDto);
+
             return "user-edit-himself";
         }
 
