@@ -151,23 +151,33 @@ public class UserController {
     }
 
     @PostMapping("/user-delete/{id}")
-    public String deleteUserAdmin(@PathVariable Integer id, Model model, @AuthenticationPrincipal UserDetails currentUser, RedirectAttributes redirectAttributes) {
-        User user = userService.findById(id);
+    public String deleteUserAdmin(@PathVariable Integer id,
+                                  Model model,
+                                  @AuthenticationPrincipal UserDetails currentUser,
+                                  RedirectAttributes redirectAttributes) {
+        User userToDelete = userService.findById(id);
+        User currentLoggedInUser = userRepository.findByEmail(currentUser.getUsername())
+                .orElseThrow(() -> new RuntimeException("Utilisateur connecté non trouvé"));
 
-        // Vérifie si l'utilisateur actuel est le même que celui à supprimer
-        if (user.getEmail().equals(currentUser.getUsername())) {
-            // Vérifie si l'utilisateur est un admin
-            if (user.isAdmin()) {
-                model.addAttribute("error", "Les administrateurs ne peuvent pas se supprimer eux-mêmes !");
-                model.addAttribute("user", user);
-                return "user-delete-admin"; // Reste sur la page avec un message d'erreur
-            }
+        // Cas : un admin tente de se supprimer lui-même
+        if (userToDelete.getEmail().equals(currentLoggedInUser.getEmail()) && currentLoggedInUser.isAdmin()) {
+            model.addAttribute("error", "Les administrateurs ne peuvent pas se supprimer eux-mêmes !");
+            model.addAttribute("user", userToDelete);
+            return "user-delete-admin"; // Retourne avec un message d'erreur
         }
 
         userService.deleteUser(id); // Supprime l'utilisateur
-        redirectAttributes.addFlashAttribute("successMessageDeleteUser", "Suppresion d'utilisateur réussie !");
-        return "redirect:/users/liste"; // Redirige vers la liste des utilisateurs après suppression
+
+        // Détermine la redirection
+        if (currentLoggedInUser.getEmail().equals(userToDelete.getEmail())) {
+            redirectAttributes.addFlashAttribute("successMessageDeleteUser", "Votre compte a été supprimé avec succès.");
+            return "redirect:/"; // Si l'utilisateur s'auto-supprime, redirige vers l'accueil
+        } else {
+            redirectAttributes.addFlashAttribute("successMessageDeleteUser", "Suppression d'utilisateur réussie !");
+            return "redirect:/users/liste"; // Si un admin supprime un autre utilisateur, redirige vers la liste des utilisateurs
+        }
     }
+
 
         //------------------Partie un User se supprime lui même--------------------------------
 
