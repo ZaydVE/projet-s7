@@ -151,18 +151,34 @@ public class UserController {
             return "user-edit-success";
         }
 
-        //-------------------- Partie Supprimer un User --------------------
+        //-------------------- Partie Admin Supprime un User --------------------
 
         @GetMapping("/user-delete/{id}")
-        public String showDeleteUserForm (@PathVariable Integer id, Model model) {
+        public String showDeleteUserAdminForm (@PathVariable Integer id, Model model) {
         User user = userService.findById(id);
         model.addAttribute("user", user);
-        return "user-delete";
+        return "user-delete-admin";
         }
 
         @PostMapping("/user-delete/{id}")
-        public String deleteUser(@PathVariable Integer id) {
+        public String deleteUserAdmin(@PathVariable Integer id) {
             userService.deleteUser(id); // Supprime l'utilisateur avec l'ID passé dans l'URL
             return "user-delete-success";
         }
+
+        //------------------Partie un User se supprime lui même--------------------------------
+
+    @GetMapping("/user-profile/{id}")
+    public String showUserProfile(@PathVariable Integer id, Model model) {
+        User user = userService.findById(id);
+        model.addAttribute("user", user);
+        return "user-profile";
+    }
+
+    @PostMapping("/user-profile/{id}")
+    public String deleteUser(@PathVariable Integer id) {
+        userService.deleteUser(id); // Supprime l'utilisateur
+        return "redirect:/"; // Redirige vers la page d'accueil
+    }
+
     }

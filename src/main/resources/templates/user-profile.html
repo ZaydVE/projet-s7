@@ -101,8 +101,12 @@
                 <a th:href="@{/users/user-edit-himself}" class="edit-button">
                     <i class="fa-solid fa-user-pen"></i> Modifier
                 </a>
-                <a th:href="@{/users/user-delete}" class="delete-button">
-                    <i class="fa-solid fa-trash"></i> Supprimer
+                <a>
+                    <form th:action="@{'/users/user-delete/' + ${user.userId}}" method="post" style="display: inline;">
+                    <button type="submit" class="delete-button">
+                            <i class="fa-solid fa-trash"></i> Supprimer
+                        </button>
+                    </form>
                 </a>
                 <a th:href="@{/logout}" class="log-out-button">
                     <form th:action="@{/logout}" method="post" style="display: inline;">
