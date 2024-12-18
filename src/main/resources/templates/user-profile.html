@@ -105,7 +105,9 @@
                     <i class="fa-solid fa-trash"></i> Supprimer
                 </a>
                 <a th:href="@{/logout}" class="log-out-button">
-                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Se déconnecter
+                    <form th:action="@{/logout}" method="post" style="display: inline;">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i> Se déconnecter
+                    </form>
                 </a>
             </div>
         </div>
