@@ -35,7 +35,7 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/","/reviews/liste", "/styles/**", "/assets/**", "/public", "/favicon.ico", "/users/new", "/destinations","/images/**", "/login").permitAll() // Chemins publics
+                        .requestMatchers("/","/reviews/liste", "/styles/**", "/assets/**", "/public", "/favicon.ico", "/users/new","/images/**", "/login", "/destinations").permitAll() // Chemins publics
                         .requestMatchers("/users/delete/**","/destinations/new", "/users/newadmin", "/users/admin/success", "/users/delete-users","/users/edit-users").hasRole("ADMIN") // ADMIN uniquement
                         .requestMatchers("/users/inscription-success", "/users/user-edit-himself", "/users/user-edit-himself-s").hasRole("USER")
                         .anyRequest().authenticated() // Toute autre requête doit être authentifiée
@@ -47,7 +47,7 @@ public class SecurityConfiguration {
                         .permitAll() // Autorise tout le monde à accéder à la page de connexion
                 )
                 .logout((logout) -> logout
-                        .logoutUrl("/logout")
+                        .logoutUrl("/logout")//url pour la déconnexion
                         .logoutSuccessUrl("/") // Redirection après déconnexion
                         .permitAll()
                 );
