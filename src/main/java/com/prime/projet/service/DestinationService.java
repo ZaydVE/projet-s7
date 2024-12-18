@@ -3,6 +3,7 @@ package com.prime.projet.service;
 import com.prime.projet.repository.DestinationRepository;
 import com.prime.projet.repository.entity.Destination;
 import com.prime.projet.service.dto.DestinationDto;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,11 +18,11 @@ public class DestinationService {
 
     private final DestinationRepository destinationRepository;
 
-    // Répertoire où les images seront stockées
-    private static final String UPLOAD_DIR = Paths.get(System.getProperty("user.dir"),  "src", "main", "resources", "static", "assets").toString();
+    private final String UPLOAD_DIR;
 
-    public DestinationService(DestinationRepository destinationRepository) {
+    public DestinationService(DestinationRepository destinationRepository,@Value("${file.upload-dir}") String UPLOAD_DIR) {
         this.destinationRepository = destinationRepository;
+        this.UPLOAD_DIR = UPLOAD_DIR;
     }
 
     //Lister toutes les destinations
@@ -40,11 +41,9 @@ public class DestinationService {
             String name, String description, float price, String continent,
             String country, String city, String type, String startDate,
             String endDate, int nbPlaces, MultipartFile image) {
-
         // Créer et mapper le DTO
         DestinationDto destinationDto = createDestinationDto(name, description, price, continent, country, city,
                 type, startDate, endDate, nbPlaces);
-
         // Créer une nouvelle instance de Destination et mapper les données
         Destination destination = mapDtoToDestination(new Destination(), destinationDto);
 
@@ -54,25 +53,17 @@ public class DestinationService {
     public void updateDestination(Integer destinationId, String name, String description, float price,
                                   String continent, String country, String city, String type,
                                   String startDate, String endDate, int nbPlaces, MultipartFile image) {
-
         // Récupérer la destination existante par ID
         Destination destination = getDestinationById(destinationId);
-
         // Créer et mapper le DTO
-        DestinationDto destinationDto = createDestinationDto(name, description, price, continent, country, city,
-                type, startDate, endDate, nbPlaces);
-
-
+        DestinationDto destinationDto = createDestinationDto(name, description, price, continent, country, city, type, startDate, endDate, nbPlaces);
         // Mettre à jour les champs
         destination = mapDtoToDestination(destination, destinationDto);
-
         // Gérer la nouvelle image (supprimer l'ancienne et ajouter la nouvelle si fournie)
         if (image != null && !image.isEmpty()) {
             deleteImage(destination.getLienImage()); // Supprimer l'ancienne image
         }
-
         saveDestination(destination, image);
-
     }
 
     public void updateDestinationWithoutImage(Integer destinationId, String name, String description, float price,
@@ -98,14 +89,14 @@ public class DestinationService {
         destinationRepository.save(destination);
     }
 
-    private void saveDestination(Destination destination, MultipartFile image) {
-        if (image != null && !image.isEmpty()) {
-            String imagePath = saveImage(image); // Sauvegarder la nouvelle image
-            destination.setLienImage(imagePath);
-        }
-        destinationRepository.save(destination); // Enregistrer la destination
-    }
+    // Supprimer une destination et l'image associée
+    public void deleteDestination(Integer destinationId) {
+        Destination destination = getDestinationById(destinationId);
 
+        deleteImage(destination.getLienImage());
+
+        destinationRepository.deleteById(destinationId);
+    }
 
     // Méthode privée pour créer un DTO à partir des paramètres bruts
     private DestinationDto createDestinationDto(String name, String description, float price, String continent,
@@ -141,14 +132,6 @@ public class DestinationService {
         return destination;
     }
 
-    // Supprimer une destination et l'image associée
-    public void deleteDestination(Integer destinationId) {
-        Destination destination = getDestinationById(destinationId);
-
-        deleteImage(destination.getLienImage());
-
-        destinationRepository.deleteById(destinationId);
-    }
 
     public List<String> getAllContinents() {
         List<String> continents = destinationRepository.findDistinctContinents();
@@ -156,33 +139,13 @@ public class DestinationService {
         return continents;
     }
 
-
-    //Filtrer les destinations
-    public List<Destination> filterDestinations(String type) {
-        if (type != null && !type.isEmpty()) {
-            return destinationRepository.findByType(type);
+    private void saveDestination(Destination destination, MultipartFile image) {
+        if (image != null && !image.isEmpty()) {
+            String imagePath = saveImage(image); // Sauvegarder la nouvelle image
+            destination.setLienImage(imagePath);
         }
-        return destinationRepository.findAll();
+        destinationRepository.save(destination); // Enregistrer la destination
     }
-
-
-    /*
-    //Méthode pour pouvoir utiliser update et create
-    public Destination setDestination(Destination destination, DestinationDto destinationDto) {
-        destination.setName(destinationDto.getName());
-        destination.setDescription(destinationDto.getDescription());
-        destination.setPrice(destinationDto.getPrice());
-        destination.setContinent(destinationDto.getContinent());
-        destination.setCountry(destinationDto.getCountry());
-        destination.setCity(destinationDto.getCity());
-        destination.setType(destinationDto.getType());
-        destination.setStartDate(destinationDto.getStartDate());
-        destination.setEndDate(destinationDto.getEndDate());
-        destination.setLienImage(destinationDto.getLienImage());
-        destination.setNbPlaces(destinationDto.getNbPlaces());
-        return destination;
-    }
-    */
 
     // Sauvegarder une image sur le système de fichiers
     private String saveImage(MultipartFile image) {
@@ -212,6 +175,4 @@ public class DestinationService {
             }
         }
     }
-
-
 }

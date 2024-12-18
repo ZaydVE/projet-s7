@@ -108,15 +108,4 @@ public class DestinationController {
         destinationService.deleteDestination(destinationId); //
         return "destination-delete-success";
     }
-
-
-/*
-    //Applique un filtre ou un tri sur la liste des destinations
-    @GetMapping("/filter")
-    public String filterDestinations(@RequestParam(required = false) String type, Model model) {
-        List<Destination> filteredDestinations = destinationService.filterDestinations(type);
-        model.addAttribute("destinations", filteredDestinations);
-        return "destinations";
-    }
- */
 }
