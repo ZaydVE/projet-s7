@@ -4,6 +4,7 @@ import com.prime.projet.repository.UserRepository;
 import com.prime.projet.repository.entity.User;
 import com.prime.projet.service.UserService;
 import com.prime.projet.controller.dto.UserDto;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,21 +25,35 @@ public class UserController {
     private final UserService userService;
 
     public UserController(UserService userService, UserRepository userRepository) {
-            this.userService = userService;
-            this.userRepository = userRepository;
-        }
+        this.userService = userService;
+        this.userRepository = userRepository;
+    }
 
-        // ---------------INSCRIPTION-------------------------
-        // Partie utilisateur (inchangée)
+    // ---------------INSCRIPTION-------------------------
+    // Partie utilisateur (inchangée)
 
-
-        //Bouton pour montrer la page de profil
+    //Bouton pour montrer la page de profil
         @GetMapping("/user-profile")
-        public String showUserProfile () {
+        public String showUserProfile (Model model) {
+            // Récupérer l'utilisateur connecté
+            User user = getCurrentUser();
+
+            // Convertir l'utilisateur en UserDto pour pré-remplir le formulaire
+            UserDto userDto = userService.createDto(user);
+
+            // Ajouter le UserDto au modèle
+            model.addAttribute("user", userDto);
             return "user-profile"; // Fichier user-profile.html dans templates
         }
 
-        //Liste des utilisateurs
+        private User getCurrentUser() {
+            org.springframework.security.core.userdetails.User principal =
+                (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            return userRepository.findByEmail(principal.getUsername())
+                .orElseThrow(() -> new RuntimeException("Utilisateur non trouvé"));
+            }
+
+    //Liste des utilisateurs
         @GetMapping("/liste")
         public String showAllUsers (Model model){
             List<User> users = userService.getAllUsers();
@@ -58,6 +73,8 @@ public class UserController {
             return "redirect:/";
         }
 
+
+
         // -------------------- ADMIN CREE UN UTILISATEUR OU UN ADMIN --------------------
         @GetMapping("/newadmin")
         public String showAdminRegistrationForm () {
@@ -76,7 +93,16 @@ public class UserController {
         // -------------------- Partie User Modifie ses Informations --------------------
 
         @GetMapping("/user-edit-himself")
-        public String editHimselfUserForm () {
+        public String editUserForm(Model model) {
+            // Récupérer l'utilisateur connecté
+            User user = getCurrentUser();
+
+            // Convertir l'utilisateur en UserDto pour pré-remplir le formulaire
+            UserDto userDto = userService.createDto(user);
+
+            // Ajouter le UserDto au modèle
+            model.addAttribute("user", userDto);
+
             return "user-edit-himself";
         }
 

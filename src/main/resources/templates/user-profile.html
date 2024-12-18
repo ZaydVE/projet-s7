@@ -7,19 +7,19 @@
     <meta name="keywords" content="voyage, tourisme, vacances">
     <meta name="author" content="Younes Achouche, Zayd Ajjaji, Lucas Colussi, Mehdi El Kadaoui, Daniele Sandra Tonfack Yonta">
     <title>Profil - Evazion</title>
-    <link rel="icon" type="image/x-icon" href="../images/bodygood-3.svg">
-    <link rel="stylesheet" href="../styles/base.css">
-    <link rel="stylesheet" href="../styles/header.css">
-    <link rel="stylesheet" href="../styles/footer.css">
-    <link rel="stylesheet" href="../styles/scroll-top-button.css">
-    <link rel="stylesheet" href="../styles/user.css">
+    <link rel="icon" type="image/x-icon" href="/assets/evazion-logo.png">
+    <link rel="stylesheet" href="/styles/base.css">
+    <link rel="stylesheet" href="/styles/header.css">
+    <link rel="stylesheet" href="/styles/footer.css">
+    <link rel="stylesheet" href="/styles/scroll-top-button.css">
+    <link rel="stylesheet" href="/styles/user.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body>
     <header class="header">
         <div class="top-bar">
             <div class="logo">
-                <a href="index.html">
+                <a th:href="@{/}">
                     Evazion
                 </a>
             </div>
@@ -79,33 +79,35 @@
         <div class="informations">
             <div class="informations-item">
                 <h5>Nom</h5>
-                <p>Nom</p>
+                <p th:text="${user.lastname}">Nom</p>
             </div>
             <div class="informations-item">
                 <h5>Prénom</h5>
-                <p>Prénom</p>
+                <p th:text="${user.firstname}">Prénom</p>
             </div>
             <div class="informations-item">
                 <h5>E-mail</h5>
-                <p>E-mail</p>
+                <p th:text="${user.email}">E-mail</p>
             </div>
             <div class="informations-item">
                 <h5>Téléphone</h5>
-                <p>Téléphone</p>
+                <p th:text="${user.phonenumber}">Téléphone</p>
             </div>
             <div class="informations-item">
                 <h5>Date d'inscription</h5>
-                <p>Date d'inscription</p>
+                <p th:text="${user.createdAt}">Date d'inscription</p>
             </div>
             <div class="buttons">
-                <a th:href="@{/user-edit}" class="edit-button">
+                <a th:href="@{/users/user-edit-himself}" class="edit-button">
                     <i class="fa-solid fa-user-pen"></i> Modifier
                 </a>
-                <a th:href="@{/user-delete}" class="delete-button">
+                <a th:href="@{/users/user-delete}" class="delete-button">
                     <i class="fa-solid fa-trash"></i> Supprimer
                 </a>
                 <a th:href="@{/logout}" class="log-out-button">
-                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Se déconnecter
+                    <form th:action="@{/logout}" method="post" style="display: inline;">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i> Se déconnecter
+                    </form>
                 </a>
             </div>
         </div>

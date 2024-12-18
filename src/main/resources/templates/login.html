@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Modifier les informations d'un utilisateur existant.">
-    <meta name="keywords" content="voyage, tourisme, modification utilisateur">
+    <meta name="description" content="Découvrez nos offres de voyage autour du monde !">
+    <meta name="keywords" content="voyage, tourisme, vacances">
     <meta name="author" content="Younes Achouche, Zayd Ajjaji, Lucas Colussi, Mehdi El Kadaoui, Daniele Sandra Tonfack Yonta">
-    <title>Modifier Utilisateur - Evazion</title>
-    <link rel="icon" href="/assets/evazion-logo.png" type="image/x-icon">
-    <link rel="stylesheet" href="/styles/base.css">
-    <link rel="stylesheet" href="/styles/header.css">
-    <link rel="stylesheet" href="/styles/footer.css">
-    <link rel="stylesheet" href="/styles/scroll-top-button.css">
-    <link rel="stylesheet" href="/styles/inscription.css">
+    <title>Inscription - Evazion</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../styles/base.css">
+    <link rel="stylesheet" href="../styles/header.css">
+    <link rel="stylesheet" href="../styles/footer.css">
+    <link rel="stylesheet" href="../styles/scroll-top-button.css">
+    <link rel="stylesheet" href="../styles/login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body>
@@ -68,41 +68,49 @@
     </div>
 </header>
 <section class="main-section">
-    <h1 class="title">Modifier Utilisateur</h1>
-    <p class="description">Mettez à jour vos informations. Veuillez renseigner votre mot de passe pour confirmer la modification, même s'il n'a pas été modifié.</p>
-    <form action="/users/user-edit-himself" method="post" class="registration-form" th:object="${user}">
-        <div class="form-block">
-            <div class="form-group">
-                <label for="firstname">Prénom :</label>
-                <input type="text" id="firstname" name="firstname" th:value="${user.firstname}">
-            </div>
-            <div class="form-group">
-                <label for="lastname">Nom :</label>
-                <input type="text" id="lastname" name="lastname" th:value="${user.lastname}">
-            </div>
+    <h1 class="title">Connexion</h1>
+    <form method="post" action="/login" class="login-form" id="login-form" novalidate>
+        <div class="form-group">
+            <h5>Email</h5>
+            <input type="email" id="email" name="username">
+            <div class="error" id="emailError"></div>
         </div>
         <div class="form-group">
-            <label for="email">Email :</label>
-            <input type="email" id="email" name="email" th:value="${user.email}">
+            <h5>Mot de passe</h5>
+            <input type="password" id="password" name="password">
+            <div class="error" id="passwordError"></div>
         </div>
         <div class="form-group">
-            <label for="phonenumber">Téléphone :</label>
-            <input type="text" id="phonenumber" name="phonenumber" th:value="${user.phonenumber}">
-        </div>
-        <div class="form-block">
-            <div class="form-group">
-                <label for="password">Nouveau mot de passe :</label>
-                <input type="password" id="password" name="password" >
-            </div>
-            <div class="form-group">
-                <label for="confirmPassword">Confirmez le mot de passe :</label>
-                <input type="password" id="confirmPassword" name="confirmPassword">
-            </div>
-        </div>
-        <div class="form-group">
-            <button type="submit" class="submit-button">Enregistrer</button>
+            <button type="submit" class="submit-button">Se connecter</button>
         </div>
     </form>
+    <p class="message">Pas encore inscrit ? Créez un compte <a href="/users/new">ici</a>.</p>
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            let isValid = true;
+            // Nom d'utilisateur
+            const email = document.getElementById('email').value.trim();
+            if (!email) {
+                document.getElementById('emailError').textContent = "L'email est obligatoire.";
+                isValid = false;
+            } else {
+                document.getElementById('emailError').textContent = "";
+            }
+            // Mot de passe
+            const password = document.getElementById('password').value;
+            if (!password) {
+                document.getElementById('passwordError').textContent = "Le mot de passe est obligatoire.";
+                isValid = false;
+            } else {
+                document.getElementById('passwordError').textContent = "";
+            }
+            // Validation
+            if (isValid) {
+                this.submit();
+            }
+        });
+    </script>
 </section>
 <footer class="footer">
     <div class="footer-content">
