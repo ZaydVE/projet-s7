@@ -8,12 +8,14 @@
     <meta name="author" content="Younes Achouche, Zayd Ajjaji, Lucas Colussi, Mehdi El Kadaoui, Daniele Sandra Tonfack Yonta">
     <title>Avis - Evazion</title>
     <link rel="icon" type="image/x-icon" href="../images/bodygood-3.svg">
-    <link rel="stylesheet" href="../styles/base.css">
-    <link rel="stylesheet" href="../styles/header.css">
-    <link rel="stylesheet" href="../styles/footer.css">
-    <link rel="stylesheet" href="../styles/scroll-top-button.css">
-    <link rel="stylesheet" href="../styles/reviews.css">
+    <link rel="stylesheet" href="/styles/base.css">
+    <link rel="stylesheet" href="/styles/header.css">
+    <link rel="stylesheet" href="/styles/footer.css">
+    <link rel="stylesheet" href="/styles/scroll-top-button.css">
+    <link rel="stylesheet" href="/styles/notification.css">
+    <link rel="stylesheet" href="/styles/reviews.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <script src="/script/notification.js"></script>
 </head>
 <body>
 <header class="header">
@@ -67,6 +69,13 @@
         </ul>
     </div>
 </header>
+
+<!--/*@thymesVar id="successMessageRegisterReview" type="java"*/-->
+<p class="notification" th:if="${successMessageRegisterReview}">
+    <i class="fa-solid fa-plus"></i>
+    <span th:text="${successMessageRegisterReview}"></span>
+</p>
+
     <section class="main-section">
         <h3>Avis</h3>
         <p>Votre avis nous intéresse ! Laissez nous être guidés par vos avis, et laissez vous guider (ou pas) vers votre prochaine destination !</p>

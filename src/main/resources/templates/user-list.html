@@ -11,8 +11,10 @@
   <link rel="stylesheet" href="/styles/header.css">
   <link rel="stylesheet" href="/styles/footer.css">
   <link rel="stylesheet" href="/styles/scroll-top-button.css">
+  <link rel="stylesheet" href="/styles/notification.css">
   <link rel="stylesheet" href="/styles/user-list.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <script src="/script/notification.js"></script>
 </head>
 <body>
 <header class="header">
@@ -66,6 +68,25 @@
     </ul>
   </div>
 </header>
+
+<!--/*@thymesVar id="successMessageRegisterUserAsAdmin" type="java"*/-->
+<p class="notification" th:if="${successMessageRegisterUserAsAdmin}">
+  <i class="fa-solid fa-user-plus"></i>
+  <span th:text="${successMessageRegisterUserAsAdmin}"></span>
+</p>
+
+<!--/*@thymesVar id="successMessageUpdateUser" type="java"*/-->
+<p class="notification" th:if="${successMessageUpdateUser}">
+  <i class="fa-solid fa-user-check"></i>
+  <span th:text="${successMessageUpdateUser}"></span>
+</p>
+
+<!--/*@thymesVar id="successMessageDeleteUser" type="java"*/-->
+<p class="notification" th:if="${successMessageDeleteUser}">
+  <i class="fa-solid fa-user-xmark"></i>
+  <span th:text="${successMessageDeleteUser}"></span>
+</p>
+
 <section class="main-section">
   <h1 class="title">Liste des utilisateurs</h1>
   <p class="description">Les utilisateurs et leurs informations sont listées dans le tableau ci-dessous.</p>
