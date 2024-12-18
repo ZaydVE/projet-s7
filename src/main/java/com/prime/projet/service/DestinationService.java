@@ -132,13 +132,6 @@ public class DestinationService {
         return destination;
     }
 
-
-    public List<String> getAllContinents() {
-        List<String> continents = destinationRepository.findDistinctContinents();
-        System.out.println("Continents dans DestinationService : " + continents); // Ajoute un débogage ici
-        return continents;
-    }
-
     private void saveDestination(Destination destination, MultipartFile image) {
         if (image != null && !image.isEmpty()) {
             String imagePath = saveImage(image); // Sauvegarder la nouvelle image

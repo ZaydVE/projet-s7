@@ -8,6 +8,5 @@ import java.util.List;
 
 public interface DestinationRepository extends JpaRepository<Destination, Integer> {
     List<Destination> findByType(String type);
-    @Query("SELECT DISTINCT d.continent FROM Destination d")
-    List<String> findDistinctContinents();
+
 }

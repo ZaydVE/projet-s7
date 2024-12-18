@@ -69,7 +69,7 @@ public class UserController {
         @PostMapping("/new")
         public String registerUser (@ModelAttribute UserDto userDto, RedirectAttributes redirectAttributes){
             userService.createUser(userDto);
-            redirectAttributes.addFlashAttribute("successMessage", "Inscription réussie!");
+            redirectAttributes.addFlashAttribute("successMessageRegisterUser", "Inscription réussie!");
             return "redirect:/";
         }
 
@@ -85,7 +85,7 @@ public class UserController {
         public String registerUserAsAdmin (@ModelAttribute UserDto userDto, RedirectAttributes redirectAttributes){
             userDto.setAdmin(true); // Assurez-vous que l'utilisateur est marqué comme administrateur
             userService.createUser(userDto);
-            redirectAttributes.addFlashAttribute("successMessage", "Création réussie!");
+            redirectAttributes.addFlashAttribute("successMessageRegisterUserAsAdmin", "Création d'utilisateur réussie !");
             return "redirect:/users/liste";
         }
 
@@ -108,21 +108,16 @@ public class UserController {
 
         @PostMapping("/user-edit-himself")
         public String updateUserHimself (@ModelAttribute UserDto userDto, @AuthenticationPrincipal UserDetails
-        currentUser){
+        currentUser, RedirectAttributes redirectAttributes){
             // Récupérer l'utilisateur connecté grâce à son email (ou username)
             Optional<User> user = userRepository.findByEmail(currentUser.getUsername());
             if (user != null) {
                 userDto.setUserId(user.get().getUserId()); // Assigne l'ID utilisateur
                 userService.updateUser(user.get().getUserId(), userDto); // Appelle le service
+                redirectAttributes.addFlashAttribute("successMessageUpdateUserHimself", "Modification de votre profil réussie !");
             }
-            return "redirect:/users/user-edit-himself-success";
+            return "redirect:/users/user-profile";
         }
-
-        @GetMapping("/user-edit-himself-success")
-        public String userEditHimselfSuccessPage () {
-            return "user-edit-himself-success";
-        }
-
 
         // -------------------- Partie Admin ouvre le centre de contrôle admin ----------------------------
         //Ouvrir la page admin
@@ -140,8 +135,9 @@ public class UserController {
         }
 
         @PostMapping("/user-edit/{id}")
-        public String updateUser (@PathVariable Integer id, @ModelAttribute UserDto userDto){
+        public String updateUser (@PathVariable Integer id, @ModelAttribute UserDto userDto, RedirectAttributes redirectAttributes) {
             userService.updateUser(id, userDto);
+            redirectAttributes.addFlashAttribute("successMessageUpdateUser", "Modification d'utilisateur réussie !");
             return "redirect:/users/liste";
         }
 
@@ -155,7 +151,7 @@ public class UserController {
     }
 
     @PostMapping("/user-delete/{id}")
-    public String deleteUser(@PathVariable Integer id, Model model, @AuthenticationPrincipal UserDetails currentUser) {
+    public String deleteUserAdmin(@PathVariable Integer id, Model model, @AuthenticationPrincipal UserDetails currentUser, RedirectAttributes redirectAttributes) {
         User user = userService.findById(id);
 
         // Vérifie si l'utilisateur actuel est le même que celui à supprimer
@@ -169,7 +165,8 @@ public class UserController {
         }
 
         userService.deleteUser(id); // Supprime l'utilisateur
-        return "redirect:/"; // Redirige vers la page d'accueil ou une autre page
+        redirectAttributes.addFlashAttribute("successMessageDeleteUser", "Suppresion d'utilisateur réussie !");
+        return "redirect:/users/liste"; // Redirige vers la liste des utilisateurs après suppression
     }
 
         //------------------Partie un User se supprime lui même--------------------------------
