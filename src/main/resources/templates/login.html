@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion - Evazion</title>
+    <link rel="stylesheet" href="/styles/login.css">
+</head>
+<body>
+<header class="header">
+    <div class="top-bar">
+        <div class="logo">
+            <a th:href="@{/}">
+                Evazion
+            </a>
+        </div>
+        <ul class="navigation">
+            <li class="navigation-item trips-item">
+                <a th:href="@{/destinations}">Voyages</a>
+                <ul class="navigation-item trips-dropdown">
+                    <li class="dropdown-item">
+                        <a href="#">Afrique</a>
+                    </li>
+                    <li class="dropdown-item">
+                        <a href="#">Amérique du Nord</a>
+                    </li>
+                    <li class="dropdown-item">
+                        <a href="#">Amérique du Sud</a>
+                    </li>
+                    <li class="dropdown-item">
+                        <a href="#">Asie</a>
+                    </li>
+                    <li class="dropdown-item">
+                        <a href="#">Europe</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="navigation-item">
+                <a href="#">Blog</a>
+            </li>
+            <li class="navigation-item">
+                <a th:href="@{/reviews/liste}">Avis</a>
+            </li>
+            <li class="navigation-item">
+                <a href="#">Contact</a>
+            </li>
+            <div class="navigation-item buttons-container">
+                <form class="navigation-item search-bar">
+                    <input type="text" class="search-input" placeholder="Rechercher" size="10">
+                    <button class="search-button">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </form>
+                <a th:href="@{/users/profile}" class="navigation-item account">
+                    <i class="fa-solid fa-user"></i> Compte
+                </a>
+            </div>
+        </ul>
+    </div>
+</header>
+<div class="login-container">
+    <h1>Connexion</h1>
+    <form method="post" action="/login">
+        <div>
+            <label for="username">Nom d'utilisateur :</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div>
+            <label for="password">Mot de passe :</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <div>
+            <button type="submit">Se connecter</button>
+        </div>
+    </form>
+    <p>Pas encore inscrit ? <a href="/users/new">Créer un compte</a></p>
+</div>
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-top">
+            <h3>Evazion</h3>
+            <p>Evazion propose des voyages sur mesure pour des escapades uniques, mêlant aventure, détente et découvertes culturelles. Faites confiance à notre expertise pour transformer vos envies d’évasion en souvenirs mémorables, où que vos rêves vous mènent.</p>
+        </div>
+        <div class="footer-center">
+            <div class="footer-center-section">
+                <h3>Accès rapide</h3>
+                <ul class="pages">
+                    <li>
+                        <a href="#">Blog</a>
+                    </li>
+                    <li>
+                        <a href="#">Qui sommes-nous ?</a>
+                    </li>
+                    <li>
+                        <a href="faq.html">FAQ</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-center-section">
+                <h3>Contactez-nous</h3>
+                <ul class="contact">
+                    <li>
+                        <i class="fa-solid fa-phone"></i> +33 1 23 45 67 89
+                    </li>
+                    <li>
+                        <a href="mailto:contact@evazion.com" target="_blank"><i class="fa-solid fa-envelope"></i> contact@evazion.com</a>
+                    </li>
+                    <li>
+                        <a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook"></i> Evazion - Agence de voyage</a>
+                    </li>
+                    <li>
+                        <a href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i> evazionvoyages</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-center-section">
+                <h3>Partenaires</h3>
+                <ul class="partners">
+                    <li>Partenaire 1</li>
+                    <li>Partenaire 2</li>
+                    <li>Partenaire 3</li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+        <div class="footer-bottom">
+            <ul class="documents">
+                <li>
+                    <a href="#">Politique de confidentialité</a>
+                </li>
+                <li>
+                    <a href="#">Conditions générales de ventes</a>
+                </li>
+            </ul>
+            <p>© 2024 Evazion - Tous droits réservés.</p>
+        </div>
+    </div>
+</footer>
+<a href="#" class="scroll-top-button">
+    <i class="fa-solid fa-arrow-up"></i>
+</a>
+</body>
+</html>
