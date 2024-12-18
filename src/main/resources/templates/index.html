@@ -8,24 +8,24 @@
     <meta name="author" content="Younes Achouche, Zayd Ajjaji, Lucas Colussi, Mehdi El Kadaoui, Daniele Sandra Tonfack Yonta">
     <title>Evazion - Explorez le monde !</title>
     <link rel="icon" type="image/x-icon" href="/assets/evazion-logo.png">
-    <link rel="stylesheet" href="../styles/base.css">
-    <link rel="stylesheet" href="../styles/header.css">
-    <link rel="stylesheet" href="../styles/footer.css">
-    <link rel="stylesheet" href="../styles/scroll-top-button.css">
-    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="/styles/base.css">
+    <link rel="stylesheet" href="/styles/header.css">
+    <link rel="stylesheet" href="/styles/footer.css">
+    <link rel="stylesheet" href="/styles/scroll-top-button.css">
+    <link rel="stylesheet" href="/styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body>
     <header class="header">
         <div class="top-bar">
             <div class="logo">
-                <a href="index.html">
+                <a th:href="@{/}">
                     Evazion
                 </a>
             </div>
             <ul class="navigation">
                 <li class="navigation-item trips-item">
-                    <a href="voyages.html">Voyages</a>
+                    <a th:href="@{/destinations}">Voyages</a>
                     <ul class="navigation-item trips-dropdown">
                         <li class="dropdown-item">
                             <a href="voyages.html">Afrique</a>
@@ -48,10 +48,10 @@
                     </ul>
                 </li>
                 <li class="navigation-item">
-                    <a href="reviews.html">Avis</a>
+                    <a th:href="@{/reviews/liste}">Avis</a>
                 </li>
                 <li class="navigation-item">
-                    <a href="contact.html">Contact</a>
+                    <a th:href="@{/contact}">Contact</a>
                 </li>
                 <div class="navigation-item buttons-container">
                     <form class="navigation-item search-bar">
@@ -60,7 +60,7 @@
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
                     </form>
-                    <a href="user-profile.html" class="navigation-item account">
+                    <a th:href="@{/users/user-profile}" class="navigation-item account">
                         <i class="fa-solid fa-user"></i> Compte
                     </a>
                 </div>
@@ -152,7 +152,7 @@
                 </label>
             </div>
         </div>
-        <a href="voyages.html" class="section-1-view-link">Voir tous nos voyages</a>
+        <a th:href="@{/destinations}" class="section-1-view-link">Voir tous nos voyages</a>
     </section>
     <section class="section-2">
         <h2 class="section-2-title">Pourquoi voyager avec <span>Evazion</span> ?</h2>

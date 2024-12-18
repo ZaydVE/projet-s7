@@ -33,11 +33,26 @@ public class UserController {
 
     //Bouton pour montrer la page de profil
         @GetMapping("/user-profile")
-        public String showUserProfile () {
+        public String showUserProfile (Model model) {
+            // Récupérer l'utilisateur connecté
+            User user = getCurrentUser();
+
+            // Convertir l'utilisateur en UserDto pour pré-remplir le formulaire
+            UserDto userDto = userService.createDto(user);
+
+            // Ajouter le UserDto au modèle
+            model.addAttribute("user", userDto);
             return "user-profile"; // Fichier user-profile.html dans templates
         }
 
-        //Liste des utilisateurs
+        private User getCurrentUser() {
+            org.springframework.security.core.userdetails.User principal =
+                (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            return userRepository.findByEmail(principal.getUsername())
+                .orElseThrow(() -> new RuntimeException("Utilisateur non trouvé"));
+            }
+
+    //Liste des utilisateurs
         @GetMapping("/liste")
         public String showAllUsers (Model model){
             List<User> users = userService.getAllUsers();
@@ -86,12 +101,7 @@ public class UserController {
         @GetMapping("/user-edit-himself")
         public String editUserForm(Model model) {
             // Récupérer l'utilisateur connecté
-            org.springframework.security.core.userdetails.User principal =
-                    (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-            // Récupérer l'utilisateur depuis la base de données
-            com.prime.projet.repository.entity.User user = userRepository.findByEmail(principal.getUsername())
-                    .orElseThrow(() -> new RuntimeException("Utilisateur non trouvé"));
+            User user = getCurrentUser();
 
             // Convertir l'utilisateur en UserDto pour pré-remplir le formulaire
             UserDto userDto = userService.createDto(user);
