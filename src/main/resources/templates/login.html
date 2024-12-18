@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Découvrez nos offres de voyage autour du monde !">
+    <meta name="keywords" content="voyage, tourisme, vacances">
+    <meta name="author" content="Younes Achouche, Zayd Ajjaji, Lucas Colussi, Mehdi El Kadaoui, Daniele Sandra Tonfack Yonta">
+    <title>Inscription - Evazion</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../styles/base.css">
+    <link rel="stylesheet" href="../styles/header.css">
+    <link rel="stylesheet" href="../styles/footer.css">
+    <link rel="stylesheet" href="../styles/scroll-top-button.css">
+    <link rel="stylesheet" href="../styles/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
+</head>
+<body>
+<header class="header">
+    <div class="top-bar">
+        <div class="logo">
+            <a th:href="@{/}">
+                Evazion
+            </a>
+        </div>
+        <ul class="navigation">
+            <li class="navigation-item trips-item">
+                <a th:href="@{/destinations}">Voyages</a>
+                <ul class="navigation-item trips-dropdown">
+                    <li class="dropdown-item">
+                        <a href="#">Afrique</a>
+                    </li>
+                    <li class="dropdown-item">
+                        <a href="#">Amérique du Nord</a>
+                    </li>
+                    <li class="dropdown-item">
+                        <a href="#">Amérique du Sud</a>
+                    </li>
+                    <li class="dropdown-item">
+                        <a href="#">Asie</a>
+                    </li>
+                    <li class="dropdown-item">
+                        <a href="#">Europe</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="navigation-item">
+                <a href="#">Blog</a>
+            </li>
+            <li class="navigation-item">
+                <a th:href="@{/reviews/liste}">Avis</a>
+            </li>
+            <li class="navigation-item">
+                <a href="#">Contact</a>
+            </li>
+            <div class="navigation-item buttons-container">
+                <form class="navigation-item search-bar">
+                    <input type="text" class="search-input" placeholder="Rechercher" size="10">
+                    <button class="search-button">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </form>
+                <a th:href="@{/users/profile}" class="navigation-item account">
+                    <i class="fa-solid fa-user"></i> Compte
+                </a>
+            </div>
+        </ul>
+    </div>
+</header>
+<section class="main-section">
+    <h1 class="title">Connexion</h1>
+    <form method="post" action="/login" class="login-form" id="login-form" novalidate>
+        <div class="form-group">
+            <h5>Email</h5>
+            <input type="email" id="email" name="username">
+            <div class="error" id="emailError"></div>
+        </div>
+        <div class="form-group">
+            <h5>Mot de passe</h5>
+            <input type="password" id="password" name="password">
+            <div class="error" id="passwordError"></div>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="submit-button">Se connecter</button>
+        </div>
+    </form>
+    <p class="message">Pas encore inscrit ? Créez un compte <a href="/users/new">ici</a>.</p>
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            let isValid = true;
+            // Nom d'utilisateur
+            const email = document.getElementById('email').value.trim();
+            if (!email) {
+                document.getElementById('emailError').textContent = "L'email est obligatoire.";
+                isValid = false;
+            } else {
+                document.getElementById('emailError').textContent = "";
+            }
+            // Mot de passe
+            const password = document.getElementById('password').value;
+            if (!password) {
+                document.getElementById('passwordError').textContent = "Le mot de passe est obligatoire.";
+                isValid = false;
+            } else {
+                document.getElementById('passwordError').textContent = "";
+            }
+            // Validation
+            if (isValid) {
+                this.submit();
+            }
+        });
+    </script>
+</section>
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-top">
+            <h3>Evazion</h3>
+            <p>Evazion propose des voyages sur mesure pour des escapades uniques, mêlant aventure, détente et découvertes culturelles. Faites confiance à notre expertise pour transformer vos envies d’évasion en souvenirs mémorables, où que vos rêves vous mènent.</p>
+        </div>
+        <div class="footer-center">
+            <div class="footer-center-section">
+                <h3>Accès rapide</h3>
+                <ul class="pages">
+                    <li>
+                        <a href="#">Blog</a>
+                    </li>
+                    <li>
+                        <a href="#">Qui sommes-nous ?</a>
+                    </li>
+                    <li>
+                        <a href="faq.html">FAQ</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-center-section">
+                <h3>Contactez-nous</h3>
+                <ul class="contact">
+                    <li>
+                        <i class="fa-solid fa-phone"></i> +33 1 23 45 67 89
+                    </li>
+                    <li>
+                        <a href="mailto:contact@evazion.com" target="_blank"><i class="fa-solid fa-envelope"></i> contact@evazion.com</a>
+                    </li>
+                    <li>
+                        <a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook"></i> Evazion - Agence de voyage</a>
+                    </li>
+                    <li>
+                        <a href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i> evazionvoyages</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-center-section">
+                <h3>Partenaires</h3>
+                <ul class="partners">
+                    <li>Partenaire 1</li>
+                    <li>Partenaire 2</li>
+                    <li>Partenaire 3</li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+        <div class="footer-bottom">
+            <ul class="documents">
+                <li>
+                    <a href="#">Politique de confidentialité</a>
+                </li>
+                <li>
+                    <a href="#">Conditions générales de ventes</a>
+                </li>
+            </ul>
+            <p>© 2024 Evazion - Tous droits réservés.</p>
+        </div>
+    </div>
+</footer>
+<a href="#" class="scroll-top-button">
+    <i class="fa-solid fa-arrow-up"></i>
+</a>
+</body>
+</html>
