@@ -2,7 +2,7 @@ package com.prime.projet.controller;
 
 import com.prime.projet.repository.entity.Offer;
 import com.prime.projet.service.OfferService;
-import com.prime.projet.service.dto.OfferDto;
+import com.prime.projet.controller.dto.OfferDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

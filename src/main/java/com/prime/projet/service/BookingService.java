@@ -6,7 +6,7 @@ import com.prime.projet.repository.UserRepository;
 import com.prime.projet.repository.entity.Booking;
 import com.prime.projet.repository.entity.Destination;
 import com.prime.projet.repository.entity.User;
-import com.prime.projet.service.dto.BookingDto;
+import com.prime.projet.controller.dto.BookingDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,14 +31,19 @@ public class BookingService {
         Destination destination = destinationRepository.findById(bookingDto.getDestinationId())
                 .orElseThrow(() -> new IllegalArgumentException("Destination introuvable."));
 
+        Booking booking = buildBooking(bookingDto, destination, user);
+
+        return bookingRepository.save(booking);
+    }
+
+    private static Booking buildBooking(BookingDto bookingDto, Destination destination, User user) {
         Booking booking = new Booking();
         booking.setBookingDate(bookingDto.getBookingDate());
         booking.setNbPassengers(bookingDto.getNbPassengers());
         booking.setTotalPrice(destination.getPrice() * bookingDto.getNbPassengers());
         booking.setUser(user);
         booking.setDestination(destination);
-
-        return bookingRepository.save(booking);
+        return booking;
     }
 
     //Lister toutes les réservations

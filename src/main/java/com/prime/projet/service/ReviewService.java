@@ -4,8 +4,7 @@ import com.prime.projet.repository.DestinationRepository;
 import com.prime.projet.repository.ReviewRepository;
 import com.prime.projet.repository.entity.Destination;
 import com.prime.projet.repository.entity.Review;
-import com.prime.projet.repository.entity.User;
-import com.prime.projet.service.dto.ReviewDto;
+import com.prime.projet.controller.dto.ReviewDto;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -28,7 +27,6 @@ public class ReviewService {
         review.setTitle(reviewDto.getTitle());
         review.setComment(reviewDto.getComment());
         review.setRating(reviewDto.getRating());
-        review.setCreatedAt(LocalDateTime.now()); // Redondant avec @PrePersist, mais sécuritaire
 
         // Récupère la destination depuis l'ID
         Destination destination = destinationRepository.findById(reviewDto.getDestinationId())

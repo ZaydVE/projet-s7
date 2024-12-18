@@ -5,7 +5,7 @@ import com.prime.projet.repository.entity.Destination;
 import com.prime.projet.repository.entity.Review;
 import com.prime.projet.repository.UserRepository;
 import com.prime.projet.service.ReviewService;
-import com.prime.projet.service.dto.ReviewDto;
+import com.prime.projet.controller.dto.ReviewDto;
 import com.prime.projet.service.DestinationService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -22,24 +22,18 @@ public class ReviewController {
     private final ReviewService reviewService;
     private final DestinationService destinationService;
     private final UserRepository userRepository;
-    private final ReviewRepository reviewRepository;
 
     public ReviewController(ReviewService reviewService, DestinationService destinationService, UserRepository userRepository, ReviewRepository reviewRepository) {
         this.reviewService = reviewService;
         this.destinationService = destinationService;
         this.userRepository = userRepository;
-        this.reviewRepository = reviewRepository;
     }
 
     //Ouvre une page pour créer une nouvelle review
     @GetMapping("/new")
     public String showReviewForm(Model model) {
-        // Ajouter la date actuelle au modèle
-        LocalDate today = LocalDate.now();
-        model.addAttribute("todayDate", today);
-        // Ajoute les destinations au modèle
-        List<Destination> destinations = destinationService.getAllDestinations();
-        model.addAttribute("destinations", destinations);
+        addTodayTo(model);
+        addDestinationTo(model);
         //Ajoute un ReviewDto vide dans le modèle
         model.addAttribute("review", new ReviewDto());
         // Récupérer l'utilisateur connecté
@@ -49,15 +43,26 @@ public class ReviewController {
         // Récupérer l'utilisateur depuis la base de données
         com.prime.projet.repository.entity.User user = userRepository.findByEmail(principal.getUsername())
                 .orElseThrow(() -> new RuntimeException("Utilisateur non trouvé"));
+        //envoyer ça dans le service, créer une méthode et l'appeler ici
 
         // Ajouter l'utilisateur au modèle
         model.addAttribute("user", user);
         return "review-form"; // Nom du fichier HTML pour l'inscription (register.html)
     }
 
+    private void addDestinationTo(Model model) {
+        List<Destination> destinations = destinationService.getAllDestinations();
+        model.addAttribute("destinations", destinations);
+    }
+
+    private static void addTodayTo(Model model) {
+        LocalDate today = LocalDate.now();
+        model.addAttribute("todayDate", today);
+    }
+
     // Poster une review
     @PostMapping("/new")
-    public String registerReview(@ModelAttribute ReviewDto reviewDto, Model model) {
+    public String registerReview(@ModelAttribute ReviewDto reviewDto) {
         // Récupérer l'utilisateur connecté
         org.springframework.security.core.userdetails.User principal =
                 (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

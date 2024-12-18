@@ -3,7 +3,7 @@ package com.prime.projet.controller;
 
 import com.prime.projet.repository.entity.Booking;
 import com.prime.projet.service.BookingService;
-import com.prime.projet.service.dto.BookingDto;
+import com.prime.projet.controller.dto.BookingDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
