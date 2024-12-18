@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class UserService {
+public class UserService {    
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
