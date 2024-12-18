@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Optional;
 
@@ -66,14 +67,10 @@ public class UserController {
         }
 
         @PostMapping("/new")
-        public String registerUser (@ModelAttribute UserDto userDto){
+        public String registerUser (@ModelAttribute UserDto userDto, RedirectAttributes redirectAttributes){
             userService.createUser(userDto);
-            return "redirect:/users/inscription-success";
-        }
-
-        @GetMapping("/inscription-success")
-        public String successPage () {
-            return "inscription-success";
+            redirectAttributes.addFlashAttribute("successMessage", "Inscription réussie!");
+            return "redirect:/";
         }
 
 
@@ -85,16 +82,13 @@ public class UserController {
         }
 
         @PostMapping("/newadmin")
-        public String registerUserAsAdmin (@ModelAttribute UserDto userDto){
+        public String registerUserAsAdmin (@ModelAttribute UserDto userDto, RedirectAttributes redirectAttributes){
             userDto.setAdmin(true); // Assurez-vous que l'utilisateur est marqué comme administrateur
             userService.createUser(userDto);
-            return "redirect:/users/admin/success";
+            redirectAttributes.addFlashAttribute("successMessage", "Création réussie!");
+            return "redirect:/users/liste";
         }
 
-        @GetMapping("/admin/success")
-        public String successPageAdmin () {
-        return "inscription-success";
-        }
 
         // -------------------- Partie User Modifie ses Informations --------------------
 
@@ -148,7 +142,7 @@ public class UserController {
         @PostMapping("/user-edit/{id}")
         public String updateUser (@PathVariable Integer id, @ModelAttribute UserDto userDto){
             userService.updateUser(id, userDto);
-            return "user-edit-success";
+            return "redirect:/users/liste";
         }
 
         //-------------------- Partie Admin Supprime un User --------------------
@@ -163,7 +157,7 @@ public class UserController {
         @PostMapping("/user-delete/{id}")
         public String deleteUserAdmin(@PathVariable Integer id) {
             userService.deleteUser(id); // Supprime l'utilisateur avec l'ID passé dans l'URL
-            return "user-delete-success";
+            return "redirect:/users/liste";
         }
 
         //------------------Partie un User se supprime lui même--------------------------------
