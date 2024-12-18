@@ -75,7 +75,7 @@ public class UserService {
         return createDto(user);
     }
 
-    private UserDto createDto(User user){
+    public UserDto createDto(User user){
         if (user == null) {
             return null; // Retourne `null` si l'utilisateur n'existe pas
         }
