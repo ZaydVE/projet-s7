@@ -126,7 +126,7 @@ public class UserController {
         return "admin";
         }
 
-        // -------------------- Partie Modifier un User --------------------
+        // -------------------- Partie Admin Modifie un User --------------------
         @GetMapping("/user-edit/{id}")
         public String editUserForm(@PathVariable Integer id, Model model) {
             User user = userService.findById(id);
@@ -141,19 +141,45 @@ public class UserController {
             return "redirect:/users/liste";
         }
 
-        //-------------------- Partie Supprimer un User --------------------
+        //-------------------- Partie Admin Supprime un User --------------------
 
-        @GetMapping("/user-delete/{id}")
-        public String showDeleteUserForm (@PathVariable Integer id, Model model) {
+    @GetMapping("/user-delete/{id}")
+    public String showDeleteUserAdminForm(@PathVariable Integer id, Model model, @AuthenticationPrincipal UserDetails currentUser) {
         User user = userService.findById(id);
         model.addAttribute("user", user);
-        return "user-delete";
+        return "user-delete-admin"; // Charge la page de confirmation de suppression
+    }
+
+    @PostMapping("/user-delete/{id}")
+    public String deleteUserAdmin(@PathVariable Integer id, Model model, @AuthenticationPrincipal UserDetails currentUser, RedirectAttributes redirectAttributes) {
+        User user = userService.findById(id);
+
+        // Vérifie si l'utilisateur actuel tente de se supprimer lui-même
+        if (user.getEmail().equals(currentUser.getUsername())) {
+            model.addAttribute("error", "Vous ne pouvez pas supprimer votre propre compte !");
+            model.addAttribute("user", user); // Recharge les informations de l'utilisateur
+            return "user-delete-admin"; // Reste sur la page avec le message d'erreur
         }
 
-        @PostMapping("/user-delete/{id}")
-        public String deleteUser(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
-            userService.deleteUser(id); // Supprime l'utilisateur avec l'ID passé dans l'URL
-            redirectAttributes.addFlashAttribute("successMessageDeleteUser", "Suppresion d'utilisateur réussie !");
-            return "redirect:/users/liste";
-        }
+        userService.deleteUser(id); // Supprime l'utilisateur
+        redirectAttributes.addFlashAttribute("successMessageDeleteUser", "Suppresion d'utilisateur réussie !");
+        return "redirect:/users/liste"; // Redirige vers la liste des utilisateurs après suppression
     }
+
+
+
+        //------------------Partie un User se supprime lui même--------------------------------
+
+    @GetMapping("/user-profile/{id}")
+    public String showUserProfile(@PathVariable Integer id, Model model) {
+        User user = userService.findById(id);
+        model.addAttribute("user", user);
+        return "user-profile";
+    }
+
+    @PostMapping("/user-profile/{id}")
+    public String deleteUser(@PathVariable Integer id) {
+        userService.deleteUser(id); // Supprime l'utilisateur
+        return "redirect:/"; // Redirige vers la page d'accueil
+    }
+}
