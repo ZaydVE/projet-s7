@@ -1,0 +1,149 @@
+:root {
+    --text-color-white: #FFFFFF;
+    --text-color-gray: #4D4D4D;
+    --accent-color-1: #06506E;
+    --accent-color-2: #C89608;
+}
+
+.main-section {
+    padding: 115px 12.5% 0;
+    margin-bottom: 75px;
+    width: 100%;
+}
+
+.main-section .title {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    display: block;
+    text-align: center;
+    transition: letter-spacing .3s ease-in-out;
+    color: var(--accent-color-2);
+}
+
+.main-section .title:hover {
+    letter-spacing: 7px;
+}
+
+.main-section .description a {
+    font-style: italic;
+    transition: all .3s ease-in-out;
+}
+
+.main-section .description a:hover {
+    color: var(--accent-color-2);
+}
+
+.main-section .login-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+    margin: 50px 0 0;
+}
+
+.main-section .login-form .form-block .form-group:first-child {
+    margin-bottom: 25px;
+}
+
+.main-section .login-form .form-group {
+    display: flex;
+    flex-direction: column;
+    font-size: .675rem;
+    font-weight: normal;
+    text-transform: uppercase;
+    color: var(--accent-color-1);
+    margin: 0 0 10px 0;
+}
+
+.main-section .login-form .form-group h5 {
+    font-size: .675rem;
+    font-weight: normal;
+    text-transform: uppercase;
+    color: var(--accent-color-1);
+    margin: 0 0 10px 0;
+}
+
+.main-section .login-form .form-group input {
+    font-size: .675rem;
+    padding: 0 5px 5px 5px;
+    border: none;
+    border-bottom: solid 1px var(--accent-color-1);
+    color: var(--accent-color-1);
+    min-width: 100px;
+    max-width: 200px;
+}
+
+.main-section .login-form .form-group input:focus {
+    outline: none;
+}
+
+.main-section .login-form .form-group .error {
+    margin-top: 5px;
+    color: var(--text-color-gray);
+    text-transform: none;
+    font-size: .5rem;
+    max-width: 150px;
+}
+
+.main-section .login-form .form-group .submit-button {
+    font-size: .675rem;
+    border: none;
+    outline: none;
+    color: var(--text-color-white);
+    border-radius: 5px;
+    padding: 8px 10px 7px;
+    margin-left: 0;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-align: center;
+    background-color: var(--accent-color-2);
+}
+
+.main-section .login-form .form-group .submit-button i {
+    margin-right: 5px;
+}
+
+.main-section .message {
+    text-align: center;
+    font-size: .875rem;
+}
+
+.main-section .message a {
+    font-style: italic;
+    transition: all .3s ease-in-out;
+}
+
+.main-section .message a:hover {
+    color: var(--accent-color-2);
+}
+
+@media (max-width: 1300px) {
+
+    .main-section .login-form {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 20px;
+    }
+
+    .main-section .login-form .form-group input {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .main-section .login-form .form-group.submit-button {
+        text-align: center;
+    }
+
+}
+
+@media (max-width: 1010px) {
+
+    .main-section {
+        padding: 0 12.5% 0;
+        margin-bottom: 75px;
+    }
+
+}
