@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
-public class UserService {
+public class UserService {    
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;

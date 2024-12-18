@@ -42,34 +42,88 @@ public class DestinationService {
             String endDate, int nbPlaces, MultipartFile image) {
 
         // Créer et mapper le DTO
-        DestinationDto destinationDto = new DestinationDto();
-        destinationDto.setName(name);
-        destinationDto.setDescription(description);
-        destinationDto.setPrice(price);
-        destinationDto.setContinent(continent);
-        destinationDto.setCountry(country);
-        destinationDto.setCity(city);
-        destinationDto.setType(type);
-        destinationDto.setNbPlaces(nbPlaces);
-        destinationDto.setStartDate(java.sql.Date.valueOf(startDate));
-        destinationDto.setEndDate(java.sql.Date.valueOf(endDate));
+        DestinationDto destinationDto = createDestinationDto(name, description, price, continent, country, city,
+                type, startDate, endDate, nbPlaces);
 
-        // Appel à la méthode interne pour sauvegarder
-        saveDestination(destinationDto, image);
+        // Créer une nouvelle instance de Destination et mapper les données
+        Destination destination = mapDtoToDestination(new Destination(), destinationDto);
+
+        saveDestination(destination, image);
     }
 
-    // Sauvegarder une destination en gérant le fichier image
-    private void saveDestination(DestinationDto dto, MultipartFile image) {
-        Destination destination = mapDtoToDestination(new Destination(), dto);
+    public void updateDestination(Integer destinationId, String name, String description, float price,
+                                  String continent, String country, String city, String type,
+                                  String startDate, String endDate, int nbPlaces, MultipartFile image) {
 
-        // Sauvegarder l'image
+        // Récupérer la destination existante par ID
+        Destination destination = getDestinationById(destinationId);
+
+        // Créer et mapper le DTO
+        DestinationDto destinationDto = createDestinationDto(name, description, price, continent, country, city,
+                type, startDate, endDate, nbPlaces);
+
+
+        // Mettre à jour les champs
+        destination = mapDtoToDestination(destination, destinationDto);
+
+        // Gérer la nouvelle image (supprimer l'ancienne et ajouter la nouvelle si fournie)
         if (image != null && !image.isEmpty()) {
-            String imagePath = saveImage(image);
-            destination.setLienImage(imagePath);
+            deleteImage(destination.getLienImage()); // Supprimer l'ancienne image
         }
 
-        // Sauvegarder la destination dans la base de données
+        saveDestination(destination, image);
+
+    }
+
+    public void updateDestinationWithoutImage(Integer destinationId, String name, String description, float price,
+                                              String continent, String country, String city, String type,
+                                              String startDate, String endDate, int nbPlaces) {
+
+        // Récupérer la destination existante
+        Destination destination = getDestinationById(destinationId);
+
+        // Mettre à jour les champs sans toucher à l'image
+        destination.setName(name);
+        destination.setDescription(description);
+        destination.setPrice(price);
+        destination.setContinent(continent);
+        destination.setCountry(country);
+        destination.setCity(city);
+        destination.setType(type);
+        destination.setNbPlaces(nbPlaces);
+        destination.setStartDate(java.sql.Date.valueOf(startDate));
+        destination.setEndDate(java.sql.Date.valueOf(endDate));
+
+        // Sauvegarder la destination mise à jour sans modifier l'image
         destinationRepository.save(destination);
+    }
+
+    private void saveDestination(Destination destination, MultipartFile image) {
+        if (image != null && !image.isEmpty()) {
+            String imagePath = saveImage(image); // Sauvegarder la nouvelle image
+            destination.setLienImage(imagePath);
+        }
+        destinationRepository.save(destination); // Enregistrer la destination
+    }
+
+
+    // Méthode privée pour créer un DTO à partir des paramètres bruts
+    private DestinationDto createDestinationDto(String name, String description, float price, String continent,
+                                                String country, String city, String type,
+                                                String startDate, String endDate, int nbPlaces) {
+
+        DestinationDto dto = new DestinationDto();
+        dto.setName(name);
+        dto.setDescription(description);
+        dto.setPrice(price);
+        dto.setContinent(continent);
+        dto.setCountry(country);
+        dto.setCity(city);
+        dto.setType(type);
+        dto.setNbPlaces(nbPlaces);
+        dto.setStartDate(java.sql.Date.valueOf(startDate));
+        dto.setEndDate(java.sql.Date.valueOf(endDate));
+        return dto;
     }
 
     // Mapper un DTO vers une entité Destination
@@ -87,53 +141,13 @@ public class DestinationService {
         return destination;
     }
 
-
-
-    /*
-    //Créer une nouvelle destination
-    public void createDestination(DestinationDto destinationDto) {
-        // Conversion du DTO en entité
-        Destination destination = new Destination();
-        destination = setDestination(destination, destinationDto);
-
-        // Sauvegarde dans la base de données
-        destinationRepository.save(destination);
-    }
-     */
-
-    // Mettre à jour une destination existante
-    public void updateDestination(Integer destinationId, DestinationDto destinationDto, MultipartFile image) {
-        Destination destination = destinationRepository.findById(destinationId)
-                .orElseThrow(() -> new IllegalArgumentException("Destination introuvable."));
-
-        destination = mapDtoToDestination(destination, destinationDto);
-
-        // Sauvegarder la nouvelle image, si fournie
-        if (image != null && !image.isEmpty()) {
-            String imagePath = saveImage(image);
-            destination.setLienImage(imagePath);
-        }
-
-        destinationRepository.save(destination);
-    }
-
-    /*
-    public void updateDestination(Integer destinationId, DestinationDto destinationDto) {
-        Destination destination = destinationRepository.findById(destinationId)
-                .orElseThrow(() -> new IllegalArgumentException("Destination introuvable."));
-        destination = setDestination(destination, destinationDto);
-        destinationRepository.save(destination);
-    }
-     */
-
     // Supprimer une destination et l'image associée
     public void deleteDestination(Integer destinationId) {
-        Destination destination = destinationRepository.findById(destinationId)
-                .orElseThrow(() -> new IllegalArgumentException("Destination introuvable."));
-        // Supprimer l'image associée si elle existe
+        Destination destination = getDestinationById(destinationId);
+
         deleteImage(destination.getLienImage());
 
-        destinationRepository.delete(destination);
+        destinationRepository.deleteById(destinationId);
     }
 
     public List<String> getAllContinents() {
@@ -142,13 +156,6 @@ public class DestinationService {
         return continents;
     }
 
-
-    /*
-    //Supprimer une destination
-    public void deleteDestination(Integer userId) {
-        destinationRepository.deleteById(userId);
-    }
-    */
 
     //Filtrer les destinations
     public List<Destination> filterDestinations(String type) {
@@ -180,10 +187,11 @@ public class DestinationService {
     // Sauvegarder une image sur le système de fichiers
     private String saveImage(MultipartFile image) {
         try {
-            String filename = image.getOriginalFilename();
-            if (filename == null || filename.isBlank()) {
+            String originalFilename = image.getOriginalFilename();
+            if (originalFilename == null || originalFilename.isBlank()) {
                 throw new IllegalArgumentException("Le fichier n'a pas de nom valide.");
             }
+            String filename = System.currentTimeMillis() + "_" + originalFilename;
             Path path = Paths.get(UPLOAD_DIR).resolve(filename);
             Files.write(path, image.getBytes());
             return filename;
