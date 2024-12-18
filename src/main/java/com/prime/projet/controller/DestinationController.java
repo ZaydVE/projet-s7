@@ -2,8 +2,6 @@ package com.prime.projet.controller;
 
 import com.prime.projet.repository.entity.Destination;
 import com.prime.projet.service.DestinationService;
-import com.prime.projet.service.dto.DestinationDto;
-import com.prime.projet.service.dto.UserDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

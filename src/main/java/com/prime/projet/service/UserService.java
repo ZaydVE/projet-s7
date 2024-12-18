@@ -2,12 +2,13 @@ package com.prime.projet.service;
 
 import com.prime.projet.repository.UserRepository;
 import com.prime.projet.repository.entity.User;
-import com.prime.projet.service.dto.UserDto;
+import com.prime.projet.controller.dto.UserDto;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class UserService {    
@@ -88,4 +89,8 @@ public class UserService {
         return userDto;
     }
 
+    public User findById(Integer id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Utilisateur avec l'ID " + id + " non trouvé."));
+    }
 }

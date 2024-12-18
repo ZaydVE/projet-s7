@@ -1,30 +1,31 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Modifier les informations d'un utilisateur existant.">
-    <meta name="keywords" content="voyage, tourisme, modification utilisateur">
+    <meta name="description" content="Ajoutez une nouvelle destination à notre catalogue.">
+    <meta name="keywords" content="voyage, ajout, destination">
     <meta name="author" content="Younes Achouche, Zayd Ajjaji, Lucas Colussi, Mehdi El Kadaoui, Daniele Sandra Tonfack Yonta">
-    <title>Modifier Utilisateur - Evazion</title>
-    <link rel="stylesheet" href="/styles/base.css">
-    <link rel="stylesheet" href="/styles/header.css">
-    <link rel="stylesheet" href="/styles/footer.css">
-    <link rel="stylesheet" href="/styles/scroll-top-button.css">
-    <link rel="stylesheet" href="/styles/inscription.css">
+    <title>Qui sommes-nous ? - Evazion</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../styles/base.css">
+    <link rel="stylesheet" href="../styles/header.css">
+    <link rel="stylesheet" href="../styles/footer.css">
+    <link rel="stylesheet" href="../styles/scroll-top-button.css">
+    <link rel="stylesheet" href="../styles/about-us.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body>
 <header class="header">
     <div class="top-bar">
         <div class="logo">
-            <a th:href="@{/}">
+            <a href="index.html">
                 Evazion
             </a>
         </div>
         <ul class="navigation">
             <li class="navigation-item trips-item">
-                <a th:href="@{/destinations}">Voyages</a>
+                <a href="#">Voyages</a>
                 <ul class="navigation-item trips-dropdown">
                     <li class="dropdown-item">
                         <a href="#">Afrique</a>
@@ -47,7 +48,7 @@
                 <a href="#">Blog</a>
             </li>
             <li class="navigation-item">
-                <a th:href="@{/reviews/liste}">Avis</a>
+                <a href="#">Avis</a>
             </li>
             <li class="navigation-item">
                 <a href="#">Contact</a>
@@ -59,7 +60,7 @@
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </button>
                 </form>
-                <a th:href="@{/users/profile}" class="navigation-item account">
+                <a href="#" class="navigation-item account">
                     <i class="fa-solid fa-user"></i> Compte
                 </a>
             </div>
@@ -67,53 +68,47 @@
     </div>
 </header>
 <section class="main-section">
-    <h1 class="title">Modifier Utilisateur</h1>
-    <p class="description">Mettez à jour les informations de cet utilisateur.</p>
-    <form th:action="@{'/users/user-edit/' + ${user.userId}}" method="post" class="registration-form">
-        <div class="form-block">
-            <div class="form-group">
-                <h5>Nom</h5>
-                <input type="text" id="firstname" name="firstname" th:value="${user.firstname}">
-            </div>
-            <div class="form-group">
-                <h5>Prénom</h5>
-                <input type="text" id="lastname" name="lastname" th:value="${user.lastname}">
+    <h1 class="title">Qui sommes-nous ?</h1>
+    <p>Bienvenue sur notre site ! Nous sommes un groupe d’étudiants en ingénierie informatique, passionnés par les nouvelles technologies et désireux de créer des projets concrets. Ce site est le fruit de notre travail collaboratif dans le cadre d’un projet académique, où nous avons combiné nos compétences pour concevoir une plateforme fonctionnelle et innovante.</p>
+    <div class="member-container">
+        <div class="member">
+            <img src="../images/italie-rome.jpg" class="member-image">
+            <div class="member-text">
+                <h3>Younes Achouche</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat.</p>
             </div>
         </div>
-        <div class="form-group">
-            <h5>Email</h5>
-            <input type="email" id="email" name="email" th:value="${user.email}">
-        </div>
-        <div class="form-group">
-            <h5>Téléphone</h5>
-            <input type="text" id="phonenumber" name="phonenumber" th:value="${user.phoneNumber}">
-        </div>
-        <div class="form-block">
-            <div class="form-group">
-                <h5>Nouveau mot de passe</h5>
-                <input type="password" id="password" name="password" placeholder="Nouveau mot de passe">
-            </div>
-            <div class="form-group">
-                <h5>Confirmer le mot de passe</h5>
-                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirmez le mot de passe">
+        <div class="member">
+            <img src="../images/italie-rome.jpg" class="member-image">
+            <div class="member-text">
+                <h3>Zayd Ajjaji</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat.</p>
             </div>
         </div>
-        <div class="form-group">
-            <label>Type d'utilisateur</label>
-            <div>
-                <input type="radio" id="user" name="admin" value="false" th:checked="${!user.admin}">
-                <label for="user">Utilisateur</label>
-            </div>
-            <div>
-                <input type="radio" id="admin" name="admin" value="true" th:checked="${user.admin}">
-                <label for="admin">Administrateur</label>
+        <div class="member">
+            <img src="../images/italie-rome.jpg" class="member-image">
+            <div class="member-text">
+                <h3>Lucas Colussi</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat.</p>
             </div>
         </div>
-        <div class="form-group">
-            <button type="submit" class="submit-button"><i class="fa-solid fa-save"></i> Enregistrer</button>
+        <div class="member">
+            <img src="../images/italie-rome.jpg" class="member-image">
+            <div class="member-text">
+                <h3>Mehdi El Kadaoui</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat.</p>
+            </div>
         </div>
-    </form>
+        <div class="member">
+            <img src="../images/italie-rome.jpg" class="member-image">
+            <div class="member-text">
+                <h3>Daniele Sandra Tonfack Yonta</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat.</p>
+            </div>
+        </div>
+    </div>
 </section>
+
 <footer class="footer">
     <div class="footer-content">
         <div class="footer-top">

@@ -1,4 +1,4 @@
-package com.prime.projet.service.dto;
+package com.prime.projet.controller.dto;
 
 import java.util.Date;
 

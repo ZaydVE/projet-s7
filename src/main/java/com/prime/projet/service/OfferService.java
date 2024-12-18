@@ -2,7 +2,7 @@ package com.prime.projet.service;
 
 import com.prime.projet.repository.OfferRepository;
 import com.prime.projet.repository.entity.Offer;
-import com.prime.projet.service.dto.OfferDto;
+import com.prime.projet.controller.dto.OfferDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

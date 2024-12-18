@@ -2,13 +2,8 @@ package com.prime.projet.controller;
 
 import com.prime.projet.repository.UserRepository;
 import com.prime.projet.repository.entity.User;
-import com.prime.projet.repository.UserRepository;
-import com.prime.projet.repository.entity.User;
-import com.prime.projet.service.ReviewService;
 import com.prime.projet.service.UserService;
-import com.prime.projet.service.dto.ReviewDto;
-import com.prime.projet.service.dto.UserDto;
-import org.springframework.security.core.context.SecurityContextHolder;
+import com.prime.projet.controller.dto.UserDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +12,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Optional;
 
-import java.security.Principal;
 import java.util.List;
 
 
@@ -110,35 +104,39 @@ public class UserController {
         }
 
 
-        // -------------------- Partie Admin Modifie un User ----------------------------
+        // -------------------- Partie Admin ouvre le centre de contrôle admin ----------------------------
         //Ouvrir la page admin
         @GetMapping("/admin")
         public String showAdminPage () {
-            return "admin";
+        return "admin";
         }
 
         // -------------------- Partie Modifier un User --------------------
-        @GetMapping("/user-edit")
-        public String editUserForm () {
+        @GetMapping("/user-edit/{id}")
+        public String editUserForm(@PathVariable Integer id, Model model) {
+            User user = userService.findById(id);
+            model.addAttribute("user", user);
             return "user-edit";
         }
 
-        @PostMapping("/user-edit")
-        public String updateUser (@ModelAttribute UserDto userDto){
-            userService.updateUser(userDto.getUserId(), userDto);
+        @PostMapping("/user-edit/{id}")
+        public String updateUser (@PathVariable Integer id, @ModelAttribute UserDto userDto){
+            userService.updateUser(id, userDto);
             return "user-edit-success";
         }
 
         //-------------------- Partie Supprimer un User --------------------
 
-        @GetMapping("/user-delete")
-        public String showDeleteUserForm () {
-            return "user-delete";
+        @GetMapping("/user-delete/{id}")
+        public String showDeleteUserForm (@PathVariable Integer id, Model model) {
+        User user = userService.findById(id);
+        model.addAttribute("user", user);
+        return "user-delete";
         }
 
-        @PostMapping("/user-delete")
-        public String deleteUser (@RequestParam("userId") Integer userId){
-            userService.deleteUser(userId); //
+        @PostMapping("/user-delete/{id}")
+        public String deleteUser(@PathVariable Integer id) {
+            userService.deleteUser(id); // Supprime l'utilisateur avec l'ID passé dans l'URL
             return "user-delete-success";
         }
     }
