@@ -134,13 +134,15 @@ public class DestinationController {
     }
      */
 
-    @GetMapping("/delete")
-    public String deleteDestinationForm() {
-        return "destination-delete";
+    @GetMapping("/delete/{destinationId}")
+    public String showDeleteForm(@PathVariable("destinationId") Integer destinationId, Model model) {
+        Destination destination = destinationService.getDestinationById(destinationId);
+        model.addAttribute("destination", destination);
+        return "destination-delete"; // Nom du fichier HTML contenant le formulaire
     }
 
-    @PostMapping("/delete")
-    public String deleteDestination(@RequestParam("destinationId") Integer destinationId, RedirectAttributes redirectAttributes) {
+    @PostMapping("/delete/{destinationId}")
+    public String deleteDestination(@PathVariable("destinationId") Integer destinationId, RedirectAttributes redirectAttributes) {
         destinationService.deleteDestination(destinationId);
         redirectAttributes.addFlashAttribute("successMessageDeleteDestination", "Suppression de la destination réussie !");
         return "redirect:/destinations";
