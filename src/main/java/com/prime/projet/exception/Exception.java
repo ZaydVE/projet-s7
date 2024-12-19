@@ -10,10 +10,14 @@ public class Exception extends RuntimeException {
   public Exception(String message, Throwable cause) {
     super(message, cause);
   }
+
   public UsernameNotFoundException getUsernameNotFoundException() {
+
     return (UsernameNotFoundException) getCause();
   }
+
   public Destination getDestination() {
-    return null; 
+
+    return null;
   }
 }
