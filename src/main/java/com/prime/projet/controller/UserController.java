@@ -63,7 +63,7 @@ public class UserController {
 
         @GetMapping("/new")
         public String showRegistrationForm () {
-            return "inscription";
+            return "sign-up";
         }
 
         @PostMapping("/new")

@@ -70,15 +70,15 @@
 
 .header .top-bar .navigation .trips-item .trips-dropdown {
 	display: none;
-    position: absolute;
-    top: 100%;
-    left: -100%;
-    background-color: white;
-    list-style: none;
-    margin: 0;
-    padding: 15px 0;
-    z-index: 1000;
-    width: 300%;
+	position: absolute;
+	top: 100%;
+	left: -100%;
+	background-color: white;
+	list-style: none;
+	margin: 0;
+	padding: 15px 0;
+	z-index: 1000;
+	width: 300%;
 }
 
 .header .top-bar .navigation .trips-item:hover .trips-dropdown {
