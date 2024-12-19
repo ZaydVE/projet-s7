@@ -29,9 +29,8 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/","/contact","/reviews", "/styles/**", "/assets/**", "/public", "/favicon.ico", "/users/new","/images/**", "/login", "/destinations", "/destinations/{id}").permitAll() // Chemins publics
-                        .requestMatchers("/","politique-de-confidentialite","cgv","/faq","/about-us","/contact","/reviews", "/styles/**", "/assets/**", "/public", "/favicon.ico", "/users/new","/images/**", "/login", "/destinations").permitAll() // Chemins publics
-                        .requestMatchers("/users/admin","/users/delete/**","/destinations/new", "/users/newadmin", "/users/delete-users","/users/edit-users","/users/list","/destinations/list","/destinations/new","/destinations/edit","/destinations/delete", "/reviews/review-list-admin", "reviews/delete/").hasRole("ADMIN") // ADMIN uniquement
+                        .requestMatchers("/","politique-de-confidentialite","cgv","/faq","/about-us","/contact","/reviews", "/styles/**", "/assets/**", "/public", "/favicon.ico", "/users/new","/images/**", "/login", "/destinations","/destinations/{id}").permitAll() // Chemins publics
+                        .requestMatchers("/users/admin","/users/delete/**", "/users/newadmin", "/users/delete-users","/users/edit-users","/users/list","/destinations/list","/destinations/new","/destinations/edit","/destinations/delete", "/reviews/review-list-admin", "reviews/delete/").hasRole("ADMIN") // ADMIN uniquement
                         .requestMatchers("/users/user-edit-himself", "/users/user-edit-himself-s", "/reviews/review-list", "reviews/delete/").hasRole("USER")
                         .anyRequest().authenticated() // Toute autre requête doit être authentifiée
                 )
