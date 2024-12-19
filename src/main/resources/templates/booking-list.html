@@ -87,8 +87,8 @@
             <td th:text="${booking.destination.endDate}">Fin</td>
             <td th:text="${booking.totalPrice} + '€'">Prix total</td>
             <td>
-                <button th:onclick="|window.location='/booking/booking-edit/' + ${booking.bookingId}|" class="edit-button"><i class="fa-solid fa-user-pen"></i>Modifier</button>
-                <button th:onclick="|window.location='/booking/delete/' + ${booking.bookingId}|" class="delete-button"><i class="fa-solid fa-trash"></i>Supprimer</button>
+                <button th:onclick="|window.location='/bookings/edit/' + ${booking.bookingId}|" class="edit-button"><i class="fa-solid fa-user-pen"></i>Modifier</button>
+                <button th:onclick="|window.location='/bookings/delete/' + ${booking.bookingId}|" class="delete-button"><i class="fa-solid fa-trash"></i>Supprimer</button>
             </td>
         </tr>
         </tbody>
