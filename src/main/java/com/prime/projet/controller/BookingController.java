@@ -6,6 +6,7 @@ import com.prime.projet.repository.entity.User;
 import com.prime.projet.service.BookingService;
 import com.prime.projet.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +24,39 @@ public class BookingController {
     private BookingService bookingService;
     private final com.prime.projet.service.DestinationService destinationService;
     private final UserService userService;
+    private final UserRepository userRepository;
 
-    // Initialisation du formulaire
+    public BookingController(com.prime.projet.service.DestinationService destinationService, UserRepository userRepository, UserService userService, UserRepository userRepository1) {
+        this.destinationService = destinationService;
+        this.userService = userService;
+        this.userRepository = userRepository1;
+    }
+
+    //Liste de toutes les réservations (admin)
+    @GetMapping("/list")
+    public String listAllBookings(Model model) {
+        List<Booking> bookings = bookingService.getAllBookings();
+        model.addAttribute("bookings", bookings);
+        return "booking-list"; // Vue pour afficher toutes les réservations
+    }
+
+    //Liste les réservations de l'utilisateur connecté
+    @GetMapping("/user-list")
+    public String showUserBookings(Model model) {
+        // Récupère l'utilisateur connecté
+        org.springframework.security.core.userdetails.User principal =
+                (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        com.prime.projet.repository.entity.User user = userRepository.findByEmail(principal.getUsername())
+                .orElseThrow(() -> new RuntimeException("Utilisateur non trouvé"));
+        // Récupère les réservations de l'utilisateur
+        List<Booking> bookings = bookingService.getBookingsByUser(user.getUserId());
+        // Ajoute les réservations au modèle
+        model.addAttribute("bookings", bookings);
+        // Retourne la vue pour la liste des réservations
+        return "booking-list-user";
+    }
+
+    // Initialisation du formulaire de réservation
     @GetMapping("/new/{destinationId}")
     public String initBookingForm(@PathVariable Integer destinationId, Model model) {
         Destination destination = destinationService.getDestinationById(destinationId);
@@ -71,35 +103,31 @@ public class BookingController {
 
         bookingService.updateBooking(booking);
 
-        return "redirect:/destinations"; // Redirection vers une page de confirmation
+        return "redirect:/bookings/user-list"; // Redirection vers une page de confirmation
     }
 
-    public BookingController(com.prime.projet.service.DestinationService destinationService, UserRepository userRepository, UserService userService) {
-        this.destinationService = destinationService;
-        this.userService = userService;
+    //Init de la suppression d'une réservation
+    @GetMapping("/delete/{id}")
+    public String showDeleteBookingPage(@PathVariable Integer id, Model model) {
+        Booking booking = bookingService.getBookingById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Réservation introuvable."));
+        model.addAttribute("booking", booking);
+        return "booking-delete";
     }
 
-
-    @GetMapping("/list")
-    public String listAllBookings(Model model) {
-        List<Booking> bookings = bookingService.getAllBookings();
-        model.addAttribute("bookings", bookings);
-        return "booking-list"; // Vue pour afficher toutes les réservations
-    }
-
-    @GetMapping("/user")
-    public String listUserBookings(Principal principal, Model model) {
-        User user = getUserFromPrincipal(principal);
-        List<Booking> bookings = bookingService.getBookingsByUser(user.getUserId());
-        model.addAttribute("bookings", bookings);
-        return "userBookings"; // Vue pour afficher les réservations utilisateur
+    //Enregistrement du delete
+    @PostMapping("/delete/{id}")
+    public String deleteBooking(@PathVariable Integer id) {
+        bookingService.deleteBooking(id);
+        return "redirect:/bookings/user-list";
     }
 
     @GetMapping("/edit/{id}")
-    public String editBookingForm(@PathVariable Integer id, Model model) {
-        Booking booking = bookingService.getBookingById(id).orElse(null);
+    public String showEditBookingPage(@PathVariable Integer id, Model model) {
+        Booking booking = bookingService.getBookingById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Réservation introuvable."));
         model.addAttribute("booking", booking);
-        return "editBooking"; // Vue pour modifier la réservation
+        return "booking-edit";
     }
 
     @PostMapping("/edit/{id}")
@@ -112,19 +140,8 @@ public class BookingController {
             booking.setTotalPrice(totalPrice);
             bookingService.updateBooking(booking);
         }
-        return "redirect:/bookings/all";
+        return "redirect:/bookings/list";
     }
 
-    @GetMapping("/delete/{id}")
-    public String deleteBooking(@PathVariable Integer id) {
-        bookingService.deleteBooking(id);
-        return "redirect:/bookings/all";
-    }
 
-    private User getUserFromPrincipal(Principal principal) {
-        // Simuler la récupération de l'utilisateur à partir du Principal
-        User user = new User();
-        user.setUserId(1); // Exemple d'ID utilisateur
-        return user;
-    }
 }
