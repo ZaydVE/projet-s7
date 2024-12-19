@@ -315,7 +315,7 @@
     </div>
   </div>
   <div class="list">
-    <a th:each="destination : ${destinations}" class="card" href="#">
+    <a th:each="destination : ${destinations}" class="card" th:href="@{/destinations/{id}(id=${destination.destinationId})}">
       <img th:src="@{/images/{urlImage}(urlImage=${destination.lienImage})}" alt="Image de la destination" class="card-image"/>
       <div class="card-content">
         <div class="card-header">
