@@ -33,11 +33,11 @@
             <li class="navigation-item">
                 <a th:href="@{/contact}">Contact</a>
             </li>
-            <div class="navigation-item buttons-container">
+            <li class="navigation-item buttons-container">
                 <a th:href="@{/templates/review/user-profile}" class="navigation-item account">
                     <i class="fa-solid fa-user"></i> Compte
                 </a>
-            </div>
+            </li>
         </ul>
     </div>
     <div class="base-line">
@@ -64,7 +64,7 @@
 </p>
 <section class="main-section">
     <h1 class="title">Liste des réservations</h1>
-    <p class="description">Les réservatopns et leurs informations sont listés dans le tableau ci-dessous.</p>
+    <p class="description">Les réservations et leurs informations sont listées dans le tableau ci-dessous.</p>
     <table>
         <thead>
         <tr>
@@ -80,14 +80,15 @@
         <tbody>
         <!-- Boucle Thymeleaf pour afficher les utilisateurs -->
         <tr th:each="booking : ${bookings}">
-            <td th:text="${booking.user.lastname} + ${booking.user.firstname}">Nom Prénom</td>
+            <td th:text="${booking.user.firstname} + ' ' + ${booking.user.lastname}">Nom Prénom</td>
             <td th:text="${booking.destination.country} + ', ' + ${booking.destination.city}">Pays, Ville</td>
+            <td th:text="${booking.nbPassengers}">Nombres de passagers</td>
             <td th:text="${booking.destination.startDate}">Début</td>
             <td th:text="${booking.destination.endDate}">Fin</td>
-            <td th:text="${booking.totalPrice}">Prix total</td>
+            <td th:text="${booking.totalPrice} + '€'">Prix total</td>
             <td>
-                <button th:onclick="|window.location='/booking/booking-edit/' + ${booking.bookingId}|" class="edit-button"><i class="fa-solid fa-user-pen"></i> Modifier</button>
-                <button th:onclick="|window.location='/booking/booking-delete/' + ${booking.bookingId}|" class="delete-button"><i class="fa-solid fa-trash"></i> Supprimer</button>
+                <button th:onclick="|window.location='/booking/booking-edit/' + ${booking.bookingId}|" class="edit-button"><i class="fa-solid fa-user-pen"></i>Modifier</button>
+                <button th:onclick="|window.location='/booking/booking-delete/' + ${booking.bookingId}|" class="delete-button"><i class="fa-solid fa-trash"></i>Supprimer</button>
             </td>
         </tr>
         </tbody>
