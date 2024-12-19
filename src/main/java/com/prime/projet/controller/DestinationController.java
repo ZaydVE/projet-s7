@@ -67,12 +67,42 @@ public class DestinationController {
         return "redirect:/destinations";
     }
 
-    @GetMapping("/edit")
-    public String editDestinationForm() {
+    @GetMapping("/edit/{id}")
+    public String editDestinationForm(@PathVariable Integer id, Model model) {
+        Destination destination = destinationService.getDestinationById(id);
+        model.addAttribute("destination", destination);
         return "destination-edit";
     }
 
-    @PostMapping("/edit")
+    @PostMapping("/edit/{id}")
+    public String updateDestination(
+            @PathVariable Integer id, // Utilisation de l'ID de la destination
+            @ModelAttribute Destination destination, // L'objet Destination sera lié automatiquement
+            @RequestParam(value = "lienImage", required = false) MultipartFile lienImage,
+            RedirectAttributes redirectAttributes) {
+
+        if (lienImage != null && !lienImage.isEmpty()) {
+            destinationService.updateDestination(
+                    id, destination.getName(), destination.getDescription(), destination.getPrice(),
+                    destination.getContinent(), destination.getCountry(), destination.getCity(),
+                    destination.getType(), destination.getStartDate().toString(),
+                    destination.getEndDate().toString(), destination.getNbPlaces(), lienImage
+            );
+        } else {
+            destinationService.updateDestinationWithoutImage(
+                    id, destination.getName(), destination.getDescription(), destination.getPrice(),
+                    destination.getContinent(), destination.getCountry(), destination.getCity(),
+                    destination.getType(), destination.getStartDate().toString(),
+                    destination.getEndDate().toString(), destination.getNbPlaces()
+            );
+        }
+
+        redirectAttributes.addFlashAttribute("successMessageUpdateDestination", "Modification de la destination réussie !");
+        return "redirect:/destinations";
+    }
+
+    /*
+    @PostMapping("/edit/{id}")
     public String updateDestination(
             @RequestParam("destinationId") Integer destinationId,
             @RequestParam("name") String name,
@@ -102,16 +132,26 @@ public class DestinationController {
 
         return "redirect:/destinations";
     }
+     */
 
-    @GetMapping("/delete")
-    public String deleteDestinationForm() {
-        return "destination-delete";
+    @GetMapping("/delete/{destinationId}")
+    public String showDeleteForm(@PathVariable("destinationId") Integer destinationId, Model model) {
+        Destination destination = destinationService.getDestinationById(destinationId);
+        model.addAttribute("destination", destination);
+        return "destination-delete"; // Nom du fichier HTML contenant le formulaire
     }
 
-    @PostMapping("/delete")
-    public String deleteDestination(@RequestParam("destinationId") Integer destinationId, RedirectAttributes redirectAttributes) {
+    @PostMapping("/delete/{destinationId}")
+    public String deleteDestination(@PathVariable("destinationId") Integer destinationId, RedirectAttributes redirectAttributes) {
         destinationService.deleteDestination(destinationId);
         redirectAttributes.addFlashAttribute("successMessageDeleteDestination", "Suppression de la destination réussie !");
         return "redirect:/destinations";
+    }
+
+    @GetMapping("/list")
+    public String listAllDestinations(Model model) {
+        List<Destination> destinations = destinationService.getAllDestinations();
+        model.addAttribute("destinations", destinations);
+        return "destination-list";
     }
 }

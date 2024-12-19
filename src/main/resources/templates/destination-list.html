@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Ajoutez une nouvelle destination à notre catalogue.">
-    <meta name="keywords" content="voyage, ajout, destination">
-    <meta name="author" content="Younes Achouche, Zayd Ajjaji, Lucas Colussi, Mehdi El Kadaoui, Daniele Sandra Tonfack Yonta">
-    <title>Qui sommes-nous ? - Evazion</title>
+        <meta name="description" content="Liste des destinations">
+    <meta name="keywords" content="utilisateur, supprimer">
+    <meta name="author" content="Evazion">
+    <title>Liste des destinations - Evazion</title>
     <link rel="icon" type="image/x-icon" href="/assets/evazion-logo.png">
     <link rel="stylesheet" href="/styles/base.css">
     <link rel="stylesheet" href="/styles/header.css">
     <link rel="stylesheet" href="/styles/footer.css">
     <link rel="stylesheet" href="/styles/scroll-top-button.css">
-    <link rel="stylesheet" href="/styles/about-us.css">
+    <link rel="stylesheet" href="/styles/notification.css">
+    <link rel="stylesheet" href="/styles/user-list.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <script src="/script/notification.js"></script>
 </head>
 <body>
 <header class="header">
@@ -40,53 +42,64 @@
             </div>
         </ul>
     </div>
-    <div class="base-line">
-        <strong class="base-line-name">Evazion</strong>
-        <span class="base-line-slogan">Laissez vos rêves devenir votre prochaine evazion.</span>
-    </div>
 </header>
-<section class="main-section">
-    <h1 class="title">Qui sommes-nous ?</h1>
-    <p>Bienvenue sur notre site ! Nous sommes un groupe d’étudiants en ingénierie informatique, passionnés par les nouvelles technologies et désireux de créer des projets concrets. Ce site est le fruit de notre travail collaboratif dans le cadre d’un projet académique, où nous avons combiné nos compétences pour concevoir une plateforme fonctionnelle et innovante.</p>
-    <div class="member-container">
-        <div class="member">
-            <img src="../images/italie-rome.jpg" class="member-image">
-            <div class="member-text">
-                <h3>Younes Achouche</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat.</p>
-            </div>
-        </div>
-        <div class="member">
-            <img src="../images/italie-rome.jpg" class="member-image">
-            <div class="member-text">
-                <h3>Zayd Ajjaji</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat.</p>
-            </div>
-        </div>
-        <div class="member">
-            <img src="../images/italie-rome.jpg" class="member-image">
-            <div class="member-text">
-                <h3>Lucas Colussi</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat.</p>
-            </div>
-        </div>
-        <div class="member">
-            <img src="../images/italie-rome.jpg" class="member-image">
-            <div class="member-text">
-                <h3>Mehdi El Kadaoui</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat.</p>
-            </div>
-        </div>
-        <div class="member">
-            <img src="../images/italie-rome.jpg" class="member-image">
-            <div class="member-text">
-                <h3>Daniele Sandra Tonfack Yonta</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat.</p>
-            </div>
-        </div>
-    </div>
-</section>
 
+<!--/*@thymesVar id="successMessageRegisterUserAsAdmin" type="java"*/-->
+<p class="notification" th:if="${successMessageRegisterUserAsAdmin}">
+    <i class="fa-solid fa-user-plus"></i>
+    <span th:text="${successMessageRegisterUserAsAdmin}"></span>
+</p>
+
+<!--/*@thymesVar id="successMessageUpdateUser" type="java"*/-->
+<p class="notification" th:if="${successMessageUpdateUser}">
+    <i class="fa-solid fa-user-check"></i>
+    <span th:text="${successMessageUpdateUser}"></span>
+</p>
+
+<!--/*@thymesVar id="successMessageDeleteUser" type="java"*/-->
+<p class="notification" th:if="${successMessageDeleteUser}">
+    <i class="fa-solid fa-user-xmark"></i>
+    <span th:text="${successMessageDeleteUser}"></span>
+</p>
+
+<section class="main-section">
+    <h1 class="title">Liste des destinations</h1>
+    <p class="description">Les destinations et leurs informations sont listées dans le tableau ci-dessous.</p>
+    <table>
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Prix</th>
+            <th>Continent</th>
+            <th>Pays</th>
+            <th>Ville</th>
+            <th>Type</th>
+            <th>Date de début</th>
+            <th>Date de fin</th>
+            <th>Nombre de places</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Boucle Thymeleaf pour afficher les destinations -->
+        <tr th:each="destination : ${destinations}">
+            <td th:text="${destination.name}">Nom</td>
+            <td th:text="${destination.price} + '€'">Prix</td>
+            <td th:text="${destination.continent}">Continent</td>
+            <td th:text="${destination.country}">Pays</td>
+            <td th:text="${destination.city}">Ville</td>
+            <td th:text="${destination.type}">Type</td>
+            <td th:text="${destination.startDate}">Date de début</td>
+            <td th:text="${destination.endDate}">Date de fin</td>
+            <td th:text="${destination.nbPlaces}">Nombre de places</td>
+            <td>
+                <button th:onclick="|window.location='/destinations/edit/' + ${destination.destinationId}|">Modifier</button>
+                <button th:onclick="|window.location='/destinations/delete/' + ${destination.destinationId}|">Supprimer</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</section>
 <footer class="footer">
     <div class="footer-content">
         <div class="footer-top">

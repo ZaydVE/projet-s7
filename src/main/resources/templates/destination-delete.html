@@ -6,13 +6,13 @@
     <meta name="description" content="Supprimer une destination existante.">
     <meta name="keywords" content="voyage, modification, destination">
     <meta name="author" content="Younes Achouche, Zayd Ajjaji, Lucas Colussi, Mehdi El Kadaoui, Daniele Sandra Tonfack Yonta">
-    <title>Modifier une destination - Evazion</title>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="../styles/base.css">
-    <link rel="stylesheet" href="../styles/header.css">
-    <link rel="stylesheet" href="../styles/footer.css">
-    <link rel="stylesheet" href="../styles/scroll-top-button.css">
-    <link rel="stylesheet" href="../styles/destination-form.css">
+    <title>Supprimer une destination - Evazion</title>
+    <link rel="icon" type="image/x-icon" href="/assets/evazion-logo.png">
+    <link rel="stylesheet" href="/styles/base.css">
+    <link rel="stylesheet" href="/styles/header.css">
+    <link rel="stylesheet" href="/styles/footer.css">
+    <link rel="stylesheet" href="/styles/scroll-top-button.css">
+    <link rel="stylesheet" href="/styles/user-delete.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body>
@@ -26,60 +26,56 @@
         <ul class="navigation">
             <li class="navigation-item trips-item">
                 <a th:href="@{/destinations}">Voyages</a>
-                <ul class="navigation-item trips-dropdown">
-                    <li class="dropdown-item">
-                        <a href="#">Afrique</a>
-                    </li>
-                    <li class="dropdown-item">
-                        <a href="#">Amérique du Nord</a>
-                    </li>
-                    <li class="dropdown-item">
-                        <a href="#">Amérique du Sud</a>
-                    </li>
-                    <li class="dropdown-item">
-                        <a href="#">Asie</a>
-                    </li>
-                    <li class="dropdown-item">
-                        <a href="#">Europe</a>
-                    </li>
-                </ul>
             </li>
             <li class="navigation-item">
-                <a href="#">Blog</a>
+                <a th:href="@{/reviews}">Avis</a>
             </li>
             <li class="navigation-item">
-                <a th:href="@{/reviews/liste}">Avis</a>
-            </li>
-            <li class="navigation-item">
-                <a href="#">Contact</a>
+                <a th:href="@{/contact}">Contact</a>
             </li>
             <div class="navigation-item buttons-container">
-                <form class="navigation-item search-bar">
-                    <input type="text" class="search-input" placeholder="Rechercher" size="10">
-                    <button class="search-button">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </button>
-                </form>
-                <a th:href="@{/users/profile}" class="navigation-item account">
+                <a th:href="@{/users/user-profile}" class="navigation-item account">
                     <i class="fa-solid fa-user"></i> Compte
                 </a>
             </div>
         </ul>
     </div>
+    <div class="base-line">
+        <strong class="base-line-name">Evazion</strong>
+        <span class="base-line-slogan">Laissez vos rêves devenir votre prochaine evazion.</span>
+    </div>
 </header>
-
 <section class="main-section">
     <h1 class="title">Supprimer une destination</h1>
     <p class="description">Entrez l'ID de la destination que vous souhaitez supprimer.</p>
-    <form action="/destinations/delete" method="post" class="delete-form">
-        <div class="form-group">
-            <label for="destinationId">ID de la destination</label>
-            <input type="number" id="destinationId" name="destinationId" placeholder="Entrez l'ID de la destination" required>
+    <form th:action="@{'/destinations/delete/' + ${destination.destinationId}}" method="post" class="delete-form" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette destination ?');">
+        <div class="form-block">
+            <div class="form-group">
+                <h5>Nom</h5>
+                <input type="text" id="firstname" name="firstname" th:value="${destination.name}" readonly>
+            </div>
+            <div class="form-group">
+                <h5>Continent</h5>
+                <input type="text" id="lastname" name="lastname" th:value="${destination.continent}" readonly>
+            </div>
         </div>
         <div class="form-group">
-            <button type="submit" class="delete-button">Supprimer</button>
+            <h5>Pays</h5>
+            <input type="email" id="email" name="email" th:value="${destination.country}" readonly>
+        </div>
+        <div class="form-group">
+            <h5>Ville</h5>
+            <input type="text" id="phonenumber" name="phonenumber" th:value="${destination.city}" readonly>
+        </div>
+        <div class="form-group">
+            <h5>Nombres de places</h5>
+            <input type="text" id="admin" name="admin" th:value="${destination.nbPlaces}" readonly>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="delete-button"><i class="fa-solid fa-trash"></i> Confirmer la suppression</button>
         </div>
     </form>
+
 </section>
 
 <footer class="footer">
