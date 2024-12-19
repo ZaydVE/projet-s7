@@ -6,7 +6,7 @@
     <meta name="description" content="Découvrez nos offres de voyage autour du monde !">
     <meta name="keywords" content="voyage, tourisme, vacances">
     <meta name="author" content="Younes Achouche, Zayd Ajjaji, Lucas Colussi, Mehdi El Kadaoui, Daniele Sandra Tonfack Yonta">
-    <title>Evazion - Explorez le monde !</title>
+    <title>Evazion - Explorez le monde avec nous !</title>
     <link rel="icon" type="image/x-icon" href="/assets/evazion-logo.png">
     <link rel="stylesheet" href="/styles/base.css">
     <link rel="stylesheet" href="/styles/header.css">
@@ -54,90 +54,37 @@
         <span th:text="${successMessageRegisterUser}"></span>
     </p>
 
-    <section class="section-1">
-        <h2 class="section-1-title">Les dernières offres</h2>
-        <p class="section-1-description">
-            Découvrez nos promotions exclusives pour des voyages inoubliables à prix réduits. <br> Saisissez ces opportunités avant qu'elles ne disparaissent !
-        </p>
-        <div class="card-slider-container">
-            <div class="card-slider">
-                <input type="radio" name="slide" id="card-1" checked>
-                <label for="card-1" class="card">
-                    <img src="/assets/italie-rome.jpg" class="card-image">
+<section class="section-1">
+    <h2 class="section-1-title">Les prochains départs</h2>
+    <p class="section-1-description">
+        Découvrez nos voyages les plus imminents, à petits prix. <br> Saisissez ces opportunités avant qu'elles ne disparaissent !
+    </p>
+    <div class="card-slider-container">
+        <div class="card-slider">
+            <div th:each="destination, stat : ${closestDestinations}">
+                <input type="radio" name="slide" th:id="'card-' + ${stat.index + 1}" th:checked="${stat.index == 0}">
+                <label th:for="'card-' + ${stat.index + 1}" class="card">
+                    <img th:src="@{/images/{urlImage}(urlImage=${destination.lienImage})}" alt="Image de la destination" class="card-image">
                     <div class="card-content">
                         <div class="card-header">
                             <div class="infos">
-                                <span class="old-price">2500.00 €</span>
-                                <span class="new-price">2150.00 €</span>
-                                <span class="duration">28/04/2025 - 07/05/2025</span>
+                                <span class="price" th:text="${T(java.lang.Math).round(destination.price) + ' €'}"></span>
+                                <span class="dates" th:text="${#dates.format(destination.startDate, 'dd/MM/yyyy')} + ' - ' + ${#dates.format(destination.endDate, 'dd/MM/yyyy')}"></span>
                             </div>
                         </div>
                         <div class="card-footer">
                             <h4 class="location">
-                                <i class="fa-solid fa-location-pin"></i> Rome, Italie
-                            </h4>
-                        </div>
-                    </div>
-                </label>
-                <input type="radio" name="slide" id="card-2">
-                <label for="card-2" class="card">
-                    <img src="/assets/suisse-zermatt.jpg" class="card-image">
-                    <div class="card-content">
-                        <div class="card-header">
-                            <div class="infos">
-                                <span class="old-price">1435.00 €</span>
-                                <span class="new-price">1200.00 €</span>
-                                <span class="duration">04/01/2025 - 12/01/2025</span>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <h4 class="location">
-                                <i class="fa-solid fa-location-pin"></i> Zermatt, Suisse
-                            </h4>
-                        </div>
-                    </div>
-                </label>
-                <input type="radio" name="slide" id="card-3">
-                <label for="card-3" class="card">
-                    <img src="/assets/grece-delphes.jpg" class="card-image">
-                    <div class="card-content">
-                        <div class="card-header">
-                            <div class="infos">
-                                <span class="old-price">4125.00 €</span>
-                                <span class="new-price">3850.00 €</span>
-                                <span class="duration">17/06/2025 - 01/07/2025</span>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <h4 class="location">
-                                <i class="fa-solid fa-location-pin"></i> Delphes, Grêce
-                            </h4>
-                        </div>
-                    </div>
-                </label>
-                <input type="radio" name="slide" id="card-4">
-                <label for="card-4" class="card">
-                    <img src="/assets/maroc-chefchaouen.jpg" class="card-image">
-                    <div class="card-content">
-                        <div class="card-header">
-                            <div class="infos">
-                                <span class="old-price">1350.00 €</span>
-                                <span class="new-price">895.00 €</span>
-                                <span class="duration">24/10/2025 - 01/11/2025</span>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <h4 class="location">
-                                <i class="fa-solid fa-location-pin"></i> Chefchaouen, Maroc
+                                <i class="fa-solid fa-location-pin"></i> <span th:text="${destination.city} + ', ' + ${destination.country}"></span>
                             </h4>
                         </div>
                     </div>
                 </label>
             </div>
         </div>
-        <a th:href="@{/destinations}" class="section-1-view-link">Voir tous nos voyages</a>
-    </section>
-    <section class="section-2">
+    </div>
+    <a th:href="@{/destinations}" class="section-1-view-link">Voir tous nos voyages</a>
+</section>
+<section class="section-2">
         <h2 class="section-2-title">Pourquoi voyager avec <span>Evazion</span> ?</h2>
         <div class="reason-container">
             <div class="reason">
@@ -432,11 +379,7 @@
                 </div>
             </div>
         </div>
-        <a href="voyages.html" class="section-3-view-link" category="IT">Voir tous les voyages en Italie</a>
-        <a href="voyages.html" class="section-3-view-link" category="BO">Voir tous les voyages en Bolivie</a>
-        <a href="voyages.html" class="section-3-view-link" category="MA">Voir tous les voyages au Maroc</a>
-        <a href="voyages.html" class="section-3-view-link" category="GR">Voir tous les voyages en Grêce</a>
-        <a href="voyages.html" class="section-3-view-link" category="CH">Voir tous les voyages en Suisse</a>
+        <a th:href="@{/destinations}" class="section-3-view-link">Voir tous les voyages</a>
         <script type="text/javascript">
             document.addEventListener('DOMContentLoaded', () => {
                 showHeartthrobs('IT');
@@ -444,7 +387,6 @@
             function showHeartthrobs(category) {
                 const descriptions = document.querySelectorAll('.s3-description');
                 const bentos = document.querySelectorAll('.bento');
-                const links = document.querySelectorAll('.section-3-view-link');
                 const buttons = document.querySelectorAll('.list-heartthrobs button');
                 descriptions.forEach(description => {
                     if (description.getAttribute('category') === category) {
@@ -458,13 +400,6 @@
                         bento.style.display = 'grid';
                     } else {
                         bento.style.display = 'none';
-                    }
-                });
-                links.forEach(link => {
-                    if (link.getAttribute('category') === category) {
-                        link.style.display = 'block';
-                    } else {
-                        link.style.display = 'none';
                     }
                 });
                 buttons.forEach(button => {

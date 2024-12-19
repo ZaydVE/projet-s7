@@ -156,6 +156,17 @@
 	margin-right: 5px;
 }
 
+.main-section .message {
+	text-align: center;
+	margin-top: 25px;
+	font-size: .875rem;
+}
+
+.main-section .message a {
+	font-style: italic;
+	color: var(--accent-color-2);
+}
+
 @media (max-width: 1300px) {
 
 	.main-section .registration-form {

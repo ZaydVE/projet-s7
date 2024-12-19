@@ -113,10 +113,6 @@
 
 .main-section .message a {
     font-style: italic;
-    transition: all .3s ease-in-out;
-}
-
-.main-section .message a:hover {
     color: var(--accent-color-2);
 }
 

@@ -45,7 +45,7 @@
         <h3>Laisser un avis</h3>
         <p>Partagez votre expérience avec Evazion ! Vos avis nous aident à améliorer nos services et à inspirer d'autres voyageurs. Merci de contribuer à notre aventure.</p>
         <div class="review">
-            <form action="/reviews/new" method="POST" th:object="${review}">
+            <form action="/reviews/new" method="POST" th:object="${review}" novalidate>
                 <div class="form-main">
                     <div class="fields">
                         <label>
@@ -55,56 +55,54 @@
                                 <option th:each="destination : ${destinations}" th:value="${destination.destinationId}" th:data-name="${destination.name}" th:text="${destination.name}">
                                 </option>
                             </select>
+                            <div class="error" id="destinationError"></div>
                         </label>
                         <br>
                         <label>
                             <span>Note :</span>
                             <input type="number" id="rating-input" min="1" max="5" th:field="*{rating}">
+                            <div class="error" id="ratingError"></div>
                         </label>
                         <br>
                         <label>
                             <span>Titre :</span>
                             <input type="text" id="title-input" maxlength="50" size="40" placeholder="..." th:field="*{title}">
+                            <div class="error" id="titleError"></div>
                         </label>
                         <br>
                         <label class="comment-field">
                             <span>Commentaire :</span>
                             <textarea id="comment-input" rows="4" cols="40" maxlength="1500" placeholder="Laisser votre commentaire..." th:field="*{comment}"></textarea>
+                            <div class="error" id="commentError"></div>
                         </label>
                         <br>
                     </div>
                     <div class="review-card">
                         <div class="top">
                             <div class="top-first-row">
-                    <span class="review-card-rating" id="rating-display">
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                    </span>
+                                <span class="review-card-rating" id="rating-display"></span>
                                 <div class="user-infos">
                                     <span class="username" th:text="${user.firstname}"><span class="at">@</span>Prénom</span>
-                                    <span class="inscription-date" th:text="'inscrit(e) le ' + ${user.createdAt}">inscrit(e) le ...</span>
+                                    <span class="inscription-date" th:text="'inscrit(e) le ' + ${#dates.format(user.createdAt, 'dd/MM/yyyy')}">inscrit(e) le ...</span>
                                 </div>
                             </div>
                             <div class="top-last-row">
-                                <span class="review-card-title" id="title-display">Titre</span>
+                                <span class="review-card-title" id="title-display"></span>
                             </div>
                         </div>
                         <div class="body" id="body">
-                            <p class="review-card-comment" id="comment-display">Laissez votre cœur parler ...</p>
+                            <p class="review-card-comment" id="comment-display"></p>
                         </div>
                         <div class="bottom">
-                            <span class="review-card-destination" id="destination-display"><i class="fa-solid fa-location-dot"></i></span>
+                            <span class="review-card-destination" id="destination-display"></span>
                             <span class="review-card-date">
-                            <i class="fa-solid fa-calendar-days"></i>
-                            <span th:text="${todayDate}"></span>
+                                <i class="fa-solid fa-calendar-days"></i>
+                                <span th:text="${#temporals.format(todayDate, 'dd/MM/yyyy')}"></span>
                             </span>
                         </div>
                     </div>
                 </div>
-                    <input type="hidden" th:field="*{createdAt}" th:value="${todayDate}" />
+                <input type="hidden" th:field="*{createdAt}" th:value="${todayDate}"/>
                 <div class="button-link">
                     <div class="form-group">
                         <button type="submit" class="btn-submit">Envoyer</button>
@@ -152,10 +150,8 @@
         destinationSelect.addEventListener('change', () => {
             // Récupère l'option sélectionnée
             const selectedOption = destinationSelect.options[destinationSelect.selectedIndex];
-
             // Récupère le nom de la destination via l'attribut data-name
             const destinationName = selectedOption.getAttribute('data-name') || '';
-
             // Met à jour l'aperçu dynamique
             destinationDisplay.innerHTML = `<i class="fa-solid fa-location-dot"></i> ${destinationName}`;
         });

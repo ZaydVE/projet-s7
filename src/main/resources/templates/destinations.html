@@ -322,7 +322,7 @@
           <div class="infos">
             <span th:text="${T(java.lang.Math).round(destination.price) + ' €'}" class="price">Prix</span>
             <span class="duration">
-                <span th:text="${destination.startDate}">Date de départ</span> - <span th:text="${destination.endDate}">Date de fin</span>
+                <span th:text="${#dates.format(destination.startDate, 'dd/MM/yyyy')} + ' - ' + ${#dates.format(destination.endDate, 'dd/MM/yyyy')}"></span>
             </span>
           </div>
         </div>

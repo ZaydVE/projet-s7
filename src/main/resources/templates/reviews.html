@@ -59,19 +59,17 @@
                     <div class="top-first-row">
                         <!-- Affichage de la note avec des étoiles -->
                         <span class="review-card-rating" id="rating-display">
-                <i th:each="star : ${#numbers.sequence(1, 5)}"
-                   th:classappend="${star <= review.rating} ? 'fa-solid fa-star' : 'fa-regular fa-star'"></i>
-            </span>
+                            <i th:each="star : ${#numbers.sequence(1, 5)}"
+                               th:classappend="${star <= review.rating} ? 'fa-solid fa-star' : 'fa-regular fa-star'"></i>
+                        </span>
                         <div class="user-infos">
                             <!-- Nom d'utilisateur -->
                             <span class="username">
-                    <span class="at">@</span>
-                    <span th:text="${review.user.firstname}">username</span>
-                </span>
+                                <span class="at">@</span>
+                                <span th:text="${review.user.firstname}">username</span>
+                            </span>
                             <!-- Date d'inscription -->
-                            <span class="inscription-date" th:text="'inscrit(e) le ' + ${#dates.format(review.user.createdAt, 'dd/MM/yyyy')}">
-                    inscrit(e) le ...
-                </span>
+                            <span class="inscription-date" th:text="'inscrit(e) le ' + ${#dates.format(review.user.createdAt, 'dd/MM/yyyy')}">inscrit(e) le ...</span>
                         </div>
                     </div>
                     <div class="top-last-row">
@@ -86,16 +84,17 @@
                 <div class="bottom">
                     <!-- Destination -->
                     <span class="review-card-destination" id="destination-display">
-            <i class="fa-solid fa-location-dot"></i>
-            <span th:text="${review.destination.name}"></span>
-        </span>
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span th:text="${review.destination.name}"></span>
+                    </span>
                     <!-- Date de création de la review -->
                     <span class="review-card-date">
-            <i class="fa-solid fa-calendar-days"></i>
-            <span th:text="${review.createdAt}"></span>
-        </span>
+                        <i class="fa-solid fa-calendar-days"></i>
+                        <span th:text="${#temporals.format(review.createdAt, 'dd/MM/yyyy')}"></span>
+                    </span>
                 </div>
             </div>
+        </div>
     </section>
     <div id="popup" class="popup hidden">
         <div class="popup-content">

@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -34,6 +35,12 @@ public class DestinationService {
     public Destination getDestinationById(Integer destinationId) {
         return destinationRepository.findById(destinationId)
                 .orElseThrow(() -> new IllegalArgumentException("Destination introuvable."));
+    }
+
+    // Récupère les 4 destinations avec la date de départ la plus proche
+    public List<Destination> findTop4ClosestDestinations() {
+        Date currentDate = new Date(); // Date actuelle
+        return destinationRepository.findTop4ByStartDateAfterOrderByStartDateAsc(currentDate);
     }
 
     // Créer une nouvelle destination avec les paramètres bruts
