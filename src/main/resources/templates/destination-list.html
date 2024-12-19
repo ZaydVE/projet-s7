@@ -106,7 +106,7 @@
         </tr>
         </thead>
         <tbody>
-        <!-- Boucle Thymeleaf pour afficher les utilisateurs -->
+        <!-- Boucle Thymeleaf pour afficher les destinations -->
         <tr th:each="destination : ${destinations}">
             <td th:text="${destination.name}">Nom</td>
             <td th:text="${destination.price} + '€'">Prix</td>
