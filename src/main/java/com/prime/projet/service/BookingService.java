@@ -2,52 +2,52 @@ package com.prime.projet.service;
 
 import com.prime.projet.repository.BookingRepository;
 import com.prime.projet.repository.DestinationRepository;
-import com.prime.projet.repository.UserRepository;
 import com.prime.projet.repository.entity.Booking;
 import com.prime.projet.repository.entity.Destination;
 import com.prime.projet.repository.entity.User;
-import com.prime.projet.controller.dto.BookingDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookingService {
 
-    private final BookingRepository bookingRepository;
-    private final UserRepository userRepository;
-    private final DestinationRepository destinationRepository;
+    @Autowired
+    private BookingRepository bookingRepository;
+    private DestinationRepository destinationRepository;
+    private UserService userService;
+    private com.prime.projet.service.DestinationService destinationService;
 
-    public BookingService(BookingRepository bookingRepository, UserRepository userRepository, DestinationRepository destinationRepository) {
-        this.bookingRepository = bookingRepository;
-        this.userRepository = userRepository;
-        this.destinationRepository = destinationRepository;
+
+    public List<Booking> getAllBookings() {
+        return bookingRepository.findAll();
     }
 
-    //Créer une réservation
-    public Booking createBooking(BookingDto bookingDto) {
-        User user = userRepository.findById(bookingDto.getUserId())
-                .orElseThrow(() -> new IllegalArgumentException("Utilisateur introuvable."));
-        Destination destination = destinationRepository.findById(bookingDto.getDestinationId())
-                .orElseThrow(() -> new IllegalArgumentException("Destination introuvable."));
-
-        Booking booking = buildBooking(bookingDto, destination, user);
-
-        return bookingRepository.save(booking);
-    }
-
-    private static Booking buildBooking(BookingDto bookingDto, Destination destination, User user) {
-        Booking booking = new Booking();
-        booking.setBookingDate(bookingDto.getBookingDate());
-        booking.setNbPassengers(bookingDto.getNbPassengers());
-        booking.setTotalPrice(destination.getPrice() * bookingDto.getNbPassengers());
-        booking.setUser(user);
-        booking.setDestination(destination);
-        return booking;
-    }
-
-    //Lister toutes les réservations
-    public List<Booking> getBookingsForUser(Integer userId) {
+    public List<Booking> getBookingsByUser(Integer userId) {
         return bookingRepository.findByUserUserId(userId);
+    }
+
+    public Optional<Booking> getBookingById(Integer bookingId) {
+        return bookingRepository.findById(bookingId);
+    }
+
+    public void updateBooking(Booking booking) {
+        bookingRepository.save(booking);
+    }
+
+    public void deleteBooking(Integer bookingId) {
+        Optional<Booking> booking = bookingRepository.findById(bookingId);
+
+        if (booking.isPresent()) {
+            // Rendre les places annulées disponibles à nouveau
+            Destination destination = booking.get().getDestination();
+            destination.setNbPlaces(destination.getNbPlaces() + booking.get().getNbPassengers());
+            destinationRepository.save(destination);
+
+            bookingRepository.deleteById(bookingId);
+        }
     }
 }
