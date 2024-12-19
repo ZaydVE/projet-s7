@@ -4,11 +4,9 @@ import com.prime.projet.repository.BookingRepository;
 import com.prime.projet.repository.DestinationRepository;
 import com.prime.projet.repository.entity.Booking;
 import com.prime.projet.repository.entity.Destination;
-import com.prime.projet.repository.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,10 +15,12 @@ public class BookingService {
 
     @Autowired
     private BookingRepository bookingRepository;
-    private DestinationRepository destinationRepository;
-    private UserService userService;
-    private com.prime.projet.service.DestinationService destinationService;
+    private final DestinationRepository destinationRepository;
 
+    public BookingService(BookingRepository bookingRepository, DestinationRepository destinationRepository, UserService userService, DestinationService destinationService) {
+        this.bookingRepository = bookingRepository;
+        this.destinationRepository = destinationRepository;
+    }
 
     public List<Booking> getAllBookings() {
         return bookingRepository.findAll();
