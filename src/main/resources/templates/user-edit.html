@@ -6,12 +6,13 @@
     <meta name="description" content="Modifier les informations d'un utilisateur existant.">
     <meta name="keywords" content="voyage, tourisme, modification utilisateur">
     <meta name="author" content="Younes Achouche, Zayd Ajjaji, Lucas Colussi, Mehdi El Kadaoui, Daniele Sandra Tonfack Yonta">
-    <title>Modifier un utilisateur - Evazion</title>
-    <link rel="stylesheet" href="../styles/base.css">
-    <link rel="stylesheet" href="../styles/header.css">
-    <link rel="stylesheet" href="../styles/footer.css">
-    <link rel="stylesheet" href="../styles/scroll-top-button.css">
-    <link rel="stylesheet" href="../styles/inscription.css">
+    <title>Modifier Utilisateur - Evazion</title>
+    <link rel="icon" type="image/x-icon" href="/assets/evazion-logo.png">
+    <link rel="stylesheet" href="/styles/base.css">
+    <link rel="stylesheet" href="/styles/header.css">
+    <link rel="stylesheet" href="/styles/footer.css">
+    <link rel="stylesheet" href="/styles/scroll-top-button.css">
+    <link rel="stylesheet" href="/styles/inscription.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body>
@@ -25,83 +26,55 @@
         <ul class="navigation">
             <li class="navigation-item trips-item">
                 <a th:href="@{/destinations}">Voyages</a>
-                <ul class="navigation-item trips-dropdown">
-                    <li class="dropdown-item">
-                        <a href="#">Afrique</a>
-                    </li>
-                    <li class="dropdown-item">
-                        <a href="#">Amérique du Nord</a>
-                    </li>
-                    <li class="dropdown-item">
-                        <a href="#">Amérique du Sud</a>
-                    </li>
-                    <li class="dropdown-item">
-                        <a href="#">Asie</a>
-                    </li>
-                    <li class="dropdown-item">
-                        <a href="#">Europe</a>
-                    </li>
-                </ul>
             </li>
             <li class="navigation-item">
-                <a href="#">Blog</a>
+                <a th:href="@{/reviews}">Avis</a>
             </li>
             <li class="navigation-item">
-                <a th:href="@{/reviews/liste}">Avis</a>
-            </li>
-            <li class="navigation-item">
-                <a href="#">Contact</a>
+                <a th:href="@{/contact}">Contact</a>
             </li>
             <div class="navigation-item buttons-container">
-                <form class="navigation-item search-bar">
-                    <input type="text" class="search-input" placeholder="Rechercher" size="10">
-                    <button class="search-button">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </button>
-                </form>
-                <a th:href="@{/users/profile}" class="navigation-item account">
+                <a th:href="@{/users/user-profile}" class="navigation-item account">
                     <i class="fa-solid fa-user"></i> Compte
                 </a>
             </div>
         </ul>
     </div>
+    <div class="base-line">
+        <strong class="base-line-name">Evazion</strong>
+        <span class="base-line-slogan">Laissez vos rêves devenir votre prochaine evazion.</span>
+    </div>
 </header>
 <section class="main-section">
-    <h1 class="title">Modifier un utilisateur</h1>
+    <h1 class="title">Modifier Utilisateur</h1>
     <p class="description">Mettez à jour les informations de cet utilisateur.</p>
-    <form th:action="@{'/users/user-edit/' + ${user.userId}}" method="post" class="registration-form" id="registration-form">
+    <form th:action="@{'/users/user-edit/' + ${user.userId}}" method="post" class="registration-form">
         <div class="form-block">
             <div class="form-group">
                 <h5>Nom</h5>
-                <input type="text" id="lastname" name="lastname" th:value="${user.lastname}">
-                <div class="error" id="lastnameError"></div>
+                <input type="text" id="firstname" name="firstname" th:value="${user.firstname}">
             </div>
             <div class="form-group">
                 <h5>Prénom</h5>
-                <input type="text" id="firstname" name="firstname" th:value="${user.firstname}">
-                <div class="error" id="firstnameError"></div>
+                <input type="text" id="lastname" name="lastname" th:value="${user.lastname}">
             </div>
         </div>
         <div class="form-group">
             <h5>Email</h5>
             <input type="email" id="email" name="email" th:value="${user.email}">
-            <div class="error" id="emailError"></div>
         </div>
         <div class="form-group">
             <h5>Téléphone</h5>
             <input type="text" id="phonenumber" name="phonenumber" th:value="${user.phoneNumber}">
-            <div class="error" id="phoneError"></div>
         </div>
         <div class="form-block">
             <div class="form-group">
                 <h5>Nouveau mot de passe</h5>
-                <input type="password" id="password" name="password">
-                <div class="error" id="passwordError"></div>
+                <input type="password" id="password" name="password" placeholder="Nouveau mot de passe">
             </div>
             <div class="form-group">
                 <h5>Confirmer le mot de passe</h5>
-                <input type="password" id="confirmPassword" name="confirmPassword">
-                <div class="error" id="confirmPasswordError"></div>
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirmez le mot de passe">
             </div>
         </div>
         <div class="form-group">
@@ -119,62 +92,6 @@
             <button type="submit" class="submit-button"><i class="fa-solid fa-save"></i> Enregistrer</button>
         </div>
     </form>
-    <script>
-        document.getElementById('registration-form').addEventListener('submit', function (e) {
-            e.preventDefault();
-            let isValid = true;
-            // Nom
-            const lastname = document.getElementById('lastname').value.trim();
-            if (!lastname) {
-                document.getElementById('lastnameError').textContent = "Le nom est obligatoire.";
-                isValid = false;
-            } else if (lastname.length > 45) {
-                document.getElementById('lastnameError').textContent = "Le nom est trop long.";
-                isValid = false;
-            } else {
-                document.getElementById('lastnameError').textContent = "";
-            }
-            // Prénom
-            const firstname = document.getElementById('firstname').value.trim();
-            if (!firstname) {
-                document.getElementById('firstnameError').textContent = "Le prénom est obligatoire.";
-                isValid = false;
-            } else if (firstname.length > 45) {
-                document.getElementById('firstnameError').textContent = "Le prénom est trop long.";
-                isValid = false;
-            } else {
-                document.getElementById('firstnameError').textContent = "";
-            }
-            // Email
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            const email = document.getElementById('email').value.trim();
-            document.getElementById('emailError').textContent = emailRegex.test(email) ? "" : "L'email est invalide.";
-            isValid &= emailRegex.test(email);
-            // Téléphone
-            const phoneRegex = /^\d{10}$/;
-            const phonenumber = document.getElementById('phonenumber').value.trim();
-            document.getElementById('phoneError').textContent = phoneRegex.test(phonenumber) ? "" : "Le numéro de téléphone est invalide.";
-            isValid &= phoneRegex.test(phonenumber);
-            // Mot de passe
-            const password = document.getElementById('password').value;
-            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-            document.getElementById('passwordError').textContent = passwordRegex.test(password)
-                ? ""
-                : "Le mot de passe doit contenir au moins 8 caractères, dont une majuscule, un chiffre et un caractère spécial.";
-            isValid &= passwordRegex.test(password);
-            // Confirmer le mot de passe
-            const confirmPassword = document.getElementById('confirmPassword').value;
-            document.getElementById('confirmPasswordError').textContent = (password === confirmPassword)
-                ? ""
-                : "Les mots de passe ne correspondent pas.";
-            isValid &= password === confirmPassword;
-            // Validation
-            if (isValid) {
-                alert("Formulaire soumis avec succès !");
-                this.submit();
-            }
-        });
-    </script>
 </section>
 <footer class="footer">
     <div class="footer-content">

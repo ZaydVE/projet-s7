@@ -53,8 +53,8 @@ public class UserController {
                 .orElseThrow(() -> new RuntimeException("Utilisateur non trouvé"));
             }
 
-        //Liste des utilisateurs
-        @GetMapping("/liste")
+    //Liste des utilisateurs
+        @GetMapping("/list")
         public String showAllUsers (Model model){
             List<User> users = userService.getAllUsers();
             model.addAttribute("users", users);
@@ -63,7 +63,7 @@ public class UserController {
 
         @GetMapping("/new")
         public String showRegistrationForm () {
-            return "sign-up";
+            return "inscription";
         }
 
         @PostMapping("/new")
@@ -86,7 +86,7 @@ public class UserController {
             userDto.setAdmin(true); // Assurez-vous que l'utilisateur est marqué comme administrateur
             userService.createUser(userDto);
             redirectAttributes.addFlashAttribute("successMessageRegisterUserAsAdmin", "Création d'utilisateur réussie !");
-            return "redirect:/users/liste";
+            return "redirect:/users/list";
         }
 
 
@@ -126,7 +126,6 @@ public class UserController {
         return "admin";
         }
 
-
         // -------------------- Partie Admin Modifie un User --------------------
         @GetMapping("/user-edit/{id}")
         public String editUserForm(@PathVariable Integer id, Model model) {
@@ -139,7 +138,7 @@ public class UserController {
         public String updateUser (@PathVariable Integer id, @ModelAttribute UserDto userDto, RedirectAttributes redirectAttributes) {
             userService.updateUser(id, userDto);
             redirectAttributes.addFlashAttribute("successMessageUpdateUser", "Modification d'utilisateur réussie !");
-            return "redirect:/users/liste";
+            return "redirect:/users/list";
         }
 
         //-------------------- Partie Admin Supprime un User --------------------
@@ -175,7 +174,7 @@ public class UserController {
             return "redirect:/logout"; // Si l'utilisateur s'auto-supprime, redirige vers l'accueil
         } else {
             redirectAttributes.addFlashAttribute("successMessageDeleteUser", "Suppression d'utilisateur réussie !");
-            return "redirect:/users/liste"; // Si un admin supprime un autre utilisateur, redirige vers la liste des utilisateurs
+            return "redirect:/users/list"; // Si un admin supprime un autre utilisateur, redirige vers la liste des utilisateurs
         }
     }
 
