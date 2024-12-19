@@ -53,7 +53,7 @@ public class UserController {
                 .orElseThrow(() -> new RuntimeException("Utilisateur non trouvé"));
             }
 
-    //Liste des utilisateurs
+        //Liste des utilisateurs
         @GetMapping("/liste")
         public String showAllUsers (Model model){
             List<User> users = userService.getAllUsers();
@@ -125,6 +125,7 @@ public class UserController {
         public String showAdminPage () {
         return "admin";
         }
+
 
         // -------------------- Partie Admin Modifie un User --------------------
         @GetMapping("/user-edit/{id}")
