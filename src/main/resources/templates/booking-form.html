@@ -44,22 +44,27 @@
     <section class="main-section">
         <h3>Réservation</h3>
         <div class="details">
-            <img src="../images/japon-kyoto.jpg" alt="Kyoto">
-            <form>
-                <span>Destination :</span> Lieu, Pays
+            <img th:src="@{/images/{urlImage}(urlImage=${destination.lienImage})}" alt="Image de la destination" class="trip-infos-image">
+
+            <form th:action="@{/bookings/new/{destinationId}(destinationId=${destination.destinationId})}" method="POST">
+                <span>Destination :</span> <span th:text="${destination.city} + ', ' + ${destination.country}"></span>
                 <br>
-                <span>Dates :</span> Date de début - Date de fin
+                <span>Dates :</span> <span th:text="${#dates.format(destination.startDate, 'dd MMMM yyyy')} + ' - ' + ${#dates.format(destination.endDate, 'dd MMMM yyyy')}"></span>
                 <br>
-                <span>Nombre de passagers :</span> <input type="number" id="nombrePassagers" min="1" max="47" value="1">
+                <span>Nombre de passagers :</span>
+                <input type="number" th:id="nombrePassagers" min="1" th:max="${destination.nbPlaces}" value="1" name="nbPassengers">
                 <br class="hidden">
-                <span class="hidden">Prix par personne :</span> <input type="number" id="prixParPersonne" value="2500.00" readonly class="hidden">
+                <span class="hidden">Prix par personne :</span>
+                <input type="number" th:id="prixParPersonne" th:value="${destination.price}" readonly class="hidden">
                 <br>
-                <span>Prix total :</span> <input type="text" id="prixTotal" value="2500.00 €" readonly>
+                <span>Prix total :</span>
+                <input type="text" th:id="prixTotal" th:value="${destination.price} + ' €'" readonly>
                 <br>
                 <div id="confirmation-container" class="confirmation-container">
-                    <input type="button" id="confirmation-button" value="Confirmer">
+                    <button type="submit" value="Confirmer">
                 </div>
             </form>
+
             <script>
                 const prixParPersonneInput = document.getElementById('prixParPersonne');
                 const nombrePassagersInput = document.getElementById('nombrePassagers');
