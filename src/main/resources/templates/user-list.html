@@ -12,10 +12,8 @@
   <link rel="stylesheet" href="/styles/header.css">
   <link rel="stylesheet" href="/styles/footer.css">
   <link rel="stylesheet" href="/styles/scroll-top-button.css">
-  <link rel="stylesheet" href="/styles/notification.css">
   <link rel="stylesheet" href="/styles/user-list.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
-  <script src="/script/notification.js"></script>
 </head>
 <body>
 <header class="header">
@@ -47,7 +45,6 @@
     <span class="base-line-slogan">Laissez vos rêves devenir votre prochaine evazion.</span>
   </div>
 </header>
-
 <!--/*@thymesVar id="successMessageRegisterUserAsAdmin" type="java"*/-->
 <p class="notification" th:if="${successMessageRegisterUserAsAdmin}">
   <i class="fa-solid fa-user-plus"></i>
@@ -65,7 +62,6 @@
   <i class="fa-solid fa-user-xmark"></i>
   <span th:text="${successMessageDeleteUser}"></span>
 </p>
-
 <section class="main-section">
   <h1 class="title">Liste des utilisateurs</h1>
   <p class="description">Les utilisateurs et leurs informations sont listées dans le tableau ci-dessous.</p>
@@ -91,12 +87,13 @@
       <td th:text="${user.createdAt}">Date d'inscription</td>
       <td th:text="${user.admin ? 'Oui' : 'Non'}">Admin</td>
       <td>
-        <button th:onclick="|window.location='/users/user-edit/' + ${user.userId}|">Modifier</button>
-        <button th:onclick="|window.location='/users/user-delete/' + ${user.userId}|">Supprimer</button>
+        <button th:onclick="|window.location='/users/user-edit/' + ${user.userId}|" class="edit-button"><i class="fa-solid fa-user-pen"></i> Modifier</button>
+        <button th:onclick="|window.location='/users/user-delete/' + ${user.userId}|" class="delete-button"><i class="fa-solid fa-trash"></i> Supprimer</button>
       </td>
     </tr>
     </tbody>
   </table>
+  <a class="add-user" th:href="@{/users/newadmin}"><i class="fa-solid fa-user-plus"></i> Ajouter un utilisateur</a>
 </section>
 <footer class="footer">
   <div class="footer-content">
