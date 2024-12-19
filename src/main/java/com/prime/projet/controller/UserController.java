@@ -63,7 +63,7 @@ public class UserController {
 
         @GetMapping("/new")
         public String showRegistrationForm () {
-            return "inscription";
+            return "sign-up";
         }
 
         @PostMapping("/new")
@@ -172,7 +172,7 @@ public class UserController {
         // Détermine la redirection
         if (currentLoggedInUser.getEmail().equals(userToDelete.getEmail())) {
             redirectAttributes.addFlashAttribute("successMessageDeleteUser", "Votre compte a été supprimé avec succès.");
-            return "redirect:/"; // Si l'utilisateur s'auto-supprime, redirige vers l'accueil
+            return "redirect:/logout"; // Si l'utilisateur s'auto-supprime, redirige vers l'accueil
         } else {
             redirectAttributes.addFlashAttribute("successMessageDeleteUser", "Suppression d'utilisateur réussie !");
             return "redirect:/users/liste"; // Si un admin supprime un autre utilisateur, redirige vers la liste des utilisateurs

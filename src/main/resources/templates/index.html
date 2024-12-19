@@ -1,571 +1,566 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 <head>
+    <!-- Basiques -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Découvrez nos offres de voyage autour du monde !">
-    <meta name="keywords" content="voyage, tourisme, vacances">
+    <meta name="description" content="Explorez des destinations uniques et profitez d'offres de voyage sur mesure avec Evazion. Partez à la découverte du monde en toute sérénité.">
+    <meta name="keywords" content="voyage, tourisme, vacances, destinations, escapades, aventure, Evazion, voyages sur mesure">
     <meta name="author" content="Younes Achouche, Zayd Ajjaji, Lucas Colussi, Mehdi El Kadaoui, Daniele Sandra Tonfack Yonta">
-    <title>Evazion - Explorez le monde !</title>
-    <link rel="icon" type="image/x-icon" href="/assets/evazion-logo.png">
-    <link rel="stylesheet" href="/styles/base.css">
-    <link rel="stylesheet" href="/styles/header.css">
-    <link rel="stylesheet" href="/styles/footer.css">
-    <link rel="stylesheet" href="/styles/scroll-top-button.css">
-    <link rel="stylesheet" href="/styles/notification.css">
-    <link rel="stylesheet" href="/styles/style.css">
+    <!-- Barre de titre -->
+    <title>Evazion - Explorez le monde avec nous !</title>
+    <link rel="icon" type="image/x-icon" href="../static/assets/evazion-logo.svg">
+    <!-- Styles globaux du site -->
+    <link rel="stylesheet" type="text/css" href="../static/styles/base.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/header.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/footer.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/scroll-top-button.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/notification.css">
+    <!-- Style de la page -->
+    <link rel="stylesheet" type="text/css" href="../static/styles/index.css">
+    <!-- Scripts -->
+    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <script src="/script/notification.js"></script>
 </head>
 <body>
-    <header class="header">
-        <div class="top-bar">
-            <div class="logo">
-                <a th:href="@{/}">
-                    Evazion
-                </a>
-            </div>
-            <ul class="navigation">
-                <li class="navigation-item trips-item">
-                    <a th:href="@{/destinations}">Voyages</a>
-                    <ul class="navigation-item trips-dropdown">
-                        <li class="dropdown-item">
-                            <a href="voyages.html">Afrique</a>
-                        </li>
-                        <li class="dropdown-item">
-                            <a href="voyages.html">Amérique du Nord</a>
-                        </li>
-                        <li class="dropdown-item">
-                            <a href="voyages.html">Amérique du Sud</a>
-                        </li>
-                        <li class="dropdown-item">
-                            <a href="voyages.html">Asie</a>
-                        </li>
-                        <li class="dropdown-item">
-                            <a href="voyages.html">Europe</a>
-                        </li>
-                        <li class="dropdown-item">
-                            <a href="voyages.html">Océanie</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="navigation-item">
-                    <a th:href="@{/reviews/liste}">Avis</a>
-                </li>
-                <li class="navigation-item">
-                    <a th:href="@{/contact}">Contact</a>
-                </li>
-                <div class="navigation-item buttons-container">
-                    <form class="navigation-item search-bar">
-                        <input type="text" class="search-input" placeholder="Rechercher" size="10">
-                        <button class="search-button">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </button>
-                    </form>
-                    <a th:href="@{/users/user-profile}" class="navigation-item account">
-                        <i class="fa-solid fa-user"></i> Compte
-                    </a>
-                </div>
-            </ul>
+<!-- Header -->
+<header class="header">
+    <!-- Barre de navigation -->
+    <div class="top-bar">
+        <!-- Logo et lien vers la page d'accueil -->
+        <div class="logo">
+            <a th:href="@{/}">
+                Evazion
+            </a>
         </div>
-        <div class="base-line">
-            <strong class="base-line-name">Evazion</strong>
-            <span class="base-line-slogan">Laissez vos rêves devenir votre prochaine evazion.</span>
-        </div>
-    </header>
-
-    <!--/*@thymesVar id="successMessageRegisterUser" type="java"*/-->
-    <p class="notification" th:if="${successMessageRegisterUser}">
-        <i class="fa-solid fa-user-plus"></i>
-        <span th:text="${successMessageRegisterUser}"></span>
-    </p>
-
-    <section class="section-1">
-        <h2 class="section-1-title">Les dernières offres</h2>
-        <p class="section-1-description">
-            Découvrez nos promotions exclusives pour des voyages inoubliables à prix réduits. <br> Saisissez ces opportunités avant qu'elles ne disparaissent !
-        </p>
-        <div class="card-slider-container">
-            <div class="card-slider">
-                <input type="radio" name="slide" id="card-1" checked>
-                <label for="card-1" class="card">
-                    <img src="/assets/italie-rome.jpg" class="card-image">
-                    <div class="card-content">
-                        <div class="card-header">
-                            <div class="infos">
-                                <span class="old-price">2500.00 €</span>
-                                <span class="new-price">2150.00 €</span>
-                                <span class="duration">28/04/2025 - 07/05/2025</span>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <h4 class="location">
-                                <i class="fa-solid fa-location-pin"></i> Rome, Italie
-                            </h4>
-                        </div>
-                    </div>
-                </label>
-                <input type="radio" name="slide" id="card-2">
-                <label for="card-2" class="card">
-                    <img src="/assets/suisse-zermatt.jpg" class="card-image">
-                    <div class="card-content">
-                        <div class="card-header">
-                            <div class="infos">
-                                <span class="old-price">1435.00 €</span>
-                                <span class="new-price">1200.00 €</span>
-                                <span class="duration">04/01/2025 - 12/01/2025</span>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <h4 class="location">
-                                <i class="fa-solid fa-location-pin"></i> Zermatt, Suisse
-                            </h4>
-                        </div>
-                    </div>
-                </label>
-                <input type="radio" name="slide" id="card-3">
-                <label for="card-3" class="card">
-                    <img src="/assets/grece-delphes.jpg" class="card-image">
-                    <div class="card-content">
-                        <div class="card-header">
-                            <div class="infos">
-                                <span class="old-price">4125.00 €</span>
-                                <span class="new-price">3850.00 €</span>
-                                <span class="duration">17/06/2025 - 01/07/2025</span>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <h4 class="location">
-                                <i class="fa-solid fa-location-pin"></i> Delphes, Grêce
-                            </h4>
-                        </div>
-                    </div>
-                </label>
-                <input type="radio" name="slide" id="card-4">
-                <label for="card-4" class="card">
-                    <img src="/assets/maroc-chefchaouen.jpg" class="card-image">
-                    <div class="card-content">
-                        <div class="card-header">
-                            <div class="infos">
-                                <span class="old-price">1350.00 €</span>
-                                <span class="new-price">895.00 €</span>
-                                <span class="duration">24/10/2025 - 01/11/2025</span>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <h4 class="location">
-                                <i class="fa-solid fa-location-pin"></i> Chefchaouen, Maroc
-                            </h4>
-                        </div>
-                    </div>
-                </label>
-            </div>
-        </div>
-        <a th:href="@{/destinations}" class="section-1-view-link">Voir tous nos voyages</a>
-    </section>
-    <section class="section-2">
-        <h2 class="section-2-title">Pourquoi voyager avec <span>Evazion</span> ?</h2>
-        <div class="reason-container">
-            <div class="reason">
-                <div class="reason-header">
-                    <i class="fa-solid fa-euro-sign"></i>
-                    <h4>Prix imbattables</h4>
-                </div>
-                <p>Voyagez à des tarifs jusqu'à 30% inférieurs grâce à nos partenariats exclusifs et profitez des promotions pour économiser davantage sur vos prochaines aventures.</p>
-            </div>
-            <div class="reason">
-                <div class="reason-header">
-                    <i class="fa-solid fa-shield-halved"></i>
-                    <h4>Sérénité garantie</h4>
-                </div>
-                <p>Annulez sans frais jusqu’à 48h avant le départ. Notre assistance 24/7 et nos protections uniques assurent votre tranquillité, même en cas d’intempéries ou d’imprévus.</p>
-            </div>
-            <div class="reason">
-                <div class="reason-header">
-                    <i class="fa-regular fa-star"></i>
-                    <h4>Expériences exclusives</h4>
-                </div>
-                <p>Accédez à des séjours uniques comme une nuit en igloo ou des safaris culinaires authentiques. Chaque voyage est pensé pour être original et adapté à vos envies.</p>
-            </div>
-            <div class="reason">
-                <div class="reason-header">
-                    <i class="fa-solid fa-earth-europe"></i>
-                    <h4>Voyage responsable</h4>
-                </div>
-                <p>En choisissant Evazion, vous soutenez des projets écologiques et locaux. Explorez le monde tout en contribuant à un avenir durable pour les communautés et la planète.</p>
-            </div>
-        </div>
-        <div class="section-2-view-links">
-            <p>
-                <a href="about-us.html" class="section-2-view-link-1">Qui sommes-nous ?</a> - <a href="faq.html" class="section-2-view-link-2">FAQ</a>
-            </p>
-        </div>
-    </section>
-    <section class="section-3">
-        <h2 class="section-3-title">Nos coups de cœur</h2>
-        <div class="section-3-descriptions"></div>
-        <p class="s3-description description-1" category="IT">
-            L’Italie, pays d’art et de culture, fascine par son histoire millénaire, son patrimoine architectural exceptionnel et sa gastronomie raffinée. Elle incarne un style de vie méditerranéen, mêlant traditions et modernité, et reste une source d’inspiration universelle.
-        </p>
-        <p class="s3-description description-2" category="BO">
-            La Bolivie, riche en diversité naturelle et culturelle, est un véritable trésor d’Amérique latine. Ses paysages contrastés et ses traditions profondément enracinées offrent une immersion unique dans l’histoire et l’authenticité de la région andine et amazonienne.
-        </p>
-        <p class="s3-description description-3" category="MA">
-            Le Maroc, aux influences orientales et africaines, séduit par la richesse de son artisanat, la chaleur de son accueil et la beauté de ses paysages variés. C’est une terre où se mêlent harmonieusement modernité et traditions ancestrales.
-        </p>
-        <p class="s3-description description-4" category="GR">
-            La Grèce, berceau de la civilisation occidentale, rayonne par son histoire riche et sa culture vibrante. Entre mythes intemporels, paysages marins et savoir-faire culinaire, elle offre une expérience inoubliable marquée par l’authenticité et l’hospitalité.
-        </p>
-        <p class="s3-description description-5" category="CH">
-            La Suisse, pays d’harmonie et de nature, enchante par ses paysages spectaculaires, son héritage multiculturel et sa réputation d’excellence. Elle incarne à la fois sérénité et innovation, dans un cadre empreint de raffinement et de beauté.
-        </p>
-        <nav class="list-heartthrobs">
-            <button onclick="showHeartthrobs('IT')" category="IT">Italie</button>
-            <button onclick="showHeartthrobs('BO')" category="BO">Bolivie</button>
-            <button onclick="showHeartthrobs('MA')" category="MA">Maroc</button>
-            <button onclick="showHeartthrobs('GR')" category="GR">Grêce</button>
-            <button onclick="showHeartthrobs('CH')" category="CH">Suisse</button>
-        </nav>
-        <div class="bento bento1" category="IT">
-            <div class="bento1-grid1">
-                <div class="grid-content">
-                    <h4>Rome</h4>
-                    <p>La capitale italienne, un musée à ciel ouvert avec des trésors comme le Colisée, la fontaine de Trevi, et le Vatican.</p>
-                </div>
-            </div>
-            <div class="bento1-grid2">
-                <div class="grid-content">
-                    <h4>Toscane</h4>
-                    <p>Région pittoresque, célèbre pour ses collines, ses vignobles, ses villages médiévaux et ses villes historiques comme Sienne et Pise.</p>
-                </div>
-            </div>
-            <div class="bento1-grid3">
-                <div class="grid-content">
-                    <h4>Florence</h4>
-                    <p>Berceau de la Renaissance, cette ville offre des chefs-d'œuvre comme le David de Michel-Ange, la cathédrale Santa Maria del Fiore et la Galerie des Offices.</p>
-                </div>
-            </div>
-            <div class="bento1-grid4">
-                <div class="grid-content">
-                    <h4>Cinque Terre</h4>
-                    <p>Cinq villages colorés accrochés aux falaises de la côte ligure, parfaits pour la randonnée et les panoramas sur la mer Méditerranée.</p>
-                </div>
-            </div>
-            <div class="bento1-grid5">
-                <div class="grid-content">
-                    <h4>Pompéi et le Vésuve</h4>
-                    <p>Un site archéologique figé dans le temps par l’éruption du Vésuve, offrant un voyage fascinant dans la vie romaine antique.</p>
-                </div>
-            </div>
-            <div class="bento1-grid6">
-                <div class="grid-content">
-                    <h4>Venise</h4>
-                    <p>Ville unique construite sur l’eau, célèbre pour ses gondoles, ses canaux romantiques, la place Saint-Marc et son carnaval.</p>
-                </div>
-            </div>
-            <div class="bento1-grid7">
-                <div class="grid-content">
-                    <h4>Les Dolomites</h4>
-                    <p>Chaîne montagneuse spectaculaire, idéale pour la randonnée, le ski, et les paysages alpins à couper le souffle.</p>
-                </div>
-            </div>
-            <div class="bento1-grid8">
-                <div class="grid-content">
-                    <h4>Sicile</h4>
-                    <p>Île méditerranéenne mêlant histoire, plages, volcans (l’Etna), et une gastronomie riche influencée par plusieurs civilisations.</p>
-                </div>
-            </div>
-        </div>
-        <div class="bento bento2" category="BO">
-            <div class="bento2-grid1">
-                <div class="grid-content">
-                    <h4>Salar de Uyuni</h4>
-                    <p>Le plus grand désert de sel au monde, le Salar de Uyuni offre des paysages surréalistes, un horizon infini et des reflets spectaculaires en saison humide.</p>
-                </div>
-            </div>
-            <div class="bento2-grid2">
-                <div class="grid-content">
-                    <h4>Potosí</h4>
-                    <p>Ancienne ville minière, Potosí abrite le Cerro Rico, riche en histoire coloniale et symbolisant l'exploitation de l'argent sous l'empire espagnol.</p>
-                </div>
-            </div>
-            <div class="bento2-grid3">
-                <div class="grid-content">
-                    <h4>Sucre</h4>
-                    <p>Capitale constitutionnelle de la Bolivie, Sucre est célèbre pour ses bâtiments blancs coloniaux, ses églises historiques et son ambiance culturelle chaleureuse.</p>
-                </div>
-            </div>
-            <div class="bento2-grid4">
-                <div class="grid-content">
-                    <h4>Parc National Madidi</h4>
-                    <p>Réserve naturelle spectaculaire, le Parc Madidi est un paradis pour la biodiversité, abritant des forêts tropicales luxuriantes et des espèces uniques.</p>
-                </div>
-            </div>
-            <div class="bento2-grid5">
-                <div class="grid-content">
-                    <h4>Laguna Colorada</h4>
-                    <p>Cette lagune rouge vif, nichée dans les Andes, est connue pour ses flamants roses et ses eaux colorées par des minéraux riches.</p>
-                </div>
-            </div>
-            <div class="bento2-grid6">
-                <div class="grid-content">
-                    <h4>La Paz</h4>
-                    <p>Capitale administrative à couper le souffle, La Paz est nichée dans une vallée andine, mêlant culture indigène et panoramas impressionnants.</p>
-                </div>
-            </div>
-            <div class="bento2-grid7">
-                <div class="grid-content">
-                    <h4>Copacabana et l’Isla del Sol</h4>
-                    <p>Situés au bord du lac Pipicaca, ces lieux offrent des paysages enchanteurs, des sites incas historiques et une spiritualité unique.</p>
-                </div>
-            </div>
-        </div>
-        <div class="bento bento3" category="MA">
-            <div class="bento3-grid1">
-                <div class="grid-content">
-                    <h4>Essaouira</h4>
-                    <p>Ville portuaire calme, Essaouira est réputée pour ses plages tranquilles, sa médina classée et ses bâtiments blancs, offrant une atmosphère accueillante et une riche histoire.</p>
-                </div>
-            </div>
-            <div class="bento3-grid2">
-                <div class="grid-content">
-                    <h4>Casablanca</h4>
-                    <p>Métropole vibrante, Casablanca mélange architecture moderne et sites traditionnels, comme la grande mosquée, tout en étant le cœur économique et culturel du Maroc.</p>
-                </div>
-            </div>
-            <div class="bento3-grid3">
-                <div class="grid-content">
-                    <h4>Fès</h4>
-                    <p>Connue pour sa médina médiévale, Fès conserve un patrimoine culturel unique, avec ses souks, ses palais et ses artisans, plongés dans une atmosphère intemporelle.</p>
-                </div>
-            </div>
-            <div class="bento3-grid4">
-                <div class="grid-content">
-                    <h4>Nador</h4>
-                    <p>Située sur la mer Méditerranée, Nador séduit par son climat agréable, ses plages et sa proximité avec les montagnes du Rif, offrant une riche culture locale.</p>
-                </div>
-            </div>
-            <div class="bento3-grid5">
-                <div class="grid-content">
-                    <h4>Marrakech</h4>
-                    <p>La ville impériale est un carrefour de cultures, avec ses souks animés, ses jardins exotiques et ses palais somptueux, faisant d’elle un lieu incontournable au Maroc.</p>
-                </div>
-            </div>
-            <div class="bento3-grid6">
-                <div class="grid-content">
-                    <h4>Merzouga et le Sahara</h4>
-                    <p>En plein désert, Merzouga est le point de départ pour découvrir les dunes du Sahara, offrant des expériences authentiques de vie nomade et des paysages spectaculaires.</p>
-                </div>
-            </div>
-            <div class="bento3-grid7">
-                <div class="grid-content">
-                    <h4>Chefchaouen</h4>
-                    <p>Célèbre pour ses bâtiments bleus et ses rues pittoresques, Chefchaouen attire par son ambiance calme et ses montagnes environnantes, un véritable havre de paix.</p>
-                </div>
-            </div>
-        </div>
-        <div class="bento bento4" category="GR">
-            <div class="bento4-grid1">
-                <div class="grid-content">
-                    <h4>Santorin</h4>
-                    <p>L’île, avec ses maisons blanchies à la chaux et ses vues époustouflantes sur la caldeira, offre une expérience visuelle unique, surtout au coucher du soleil.</p>
-                </div>
-            </div>
-            <div class="bento4-grid2">
-                <div class="grid-content">
-                    <h4>Corfou</h4>
-                    <p>Un mélange de nature luxuriante et de culture méditerranéenne, Corfou est une île où se mêlent influences grecques et vénitiennes, offrant une atmosphère unique.</p>
-                </div>
-            </div>
-            <div class="bento4-grid3">
-                <div class="grid-content">
-                    <h4>Meteores</h4>
-                    <p>Surplombant des formations rocheuses impressionnantes, Météores abrite des monastères perchés, créant une atmosphère mystique, propice à la contemplation et à la spiritualité.</p>
-                </div>
-            </div>
-            <div class="bento4-grid4">
-                <div class="grid-content">
-                    <h4>Mykonos</h4>
-                    <p>Île cosmopolite, Mykonos est réputée pour ses plages animées, sa vie nocturne effervescente et ses ruelles blanches qui font son charme incontournable.</p>
-                </div>
-            </div>
-            <div class="bento4-grid5">
-                <div class="grid-content">
-                    <h4>Crète</h4>
-                    <p>Île de contrastes, la Crète séduit par ses plages paradisiaques, ses montagnes majestueuses et son patrimoine historique riche, entre Minoens et influences modernes.</p>
-                </div>
-            </div>
-            <div class="bento4-grid6">
-                <div class="grid-content">
-                    <h4>Athènes</h4>
-                    <p>Berceau de la civilisation occidentale, Athènes est un mélange fascinant d’histoire ancienne, de monuments emblématiques et de vie urbaine dynamique.s</p>
-                </div>
-            </div>
-            <div class="bento4-grid7">
-                <div class="grid-content">
-                    <h4>Delphes</h4>
-                    <p>Ancien sanctuaire d’Apollon, Delphes est un lieu empreint de mystère, où les visiteurs découvrent des ruines antiques et une vue impressionnante sur la vallée environnante.</p>
-                </div>
-            </div>
-            <div class="bento4-grid8">
-                <div class="grid-content">
-                    <h4>Rhodes</h4>
-                    <p>Entre histoire médiévale et paysages côtiers, Rhodes est une île offrant des vestiges antiques, des plages splendides et une ambiance de vacances à couper le souffle.</p>
-                </div>
-            </div>
-        </div>
-        <div class="bento bento5" category="CH">
-            <div class="bento5-grid1">
-                <div class="grid-content">
-                    <h4>Lac Léman</h4>
-                    <p>Bordé de vignobles et de charmantes villes comme Montreux, le lac offre des croisières paisibles et des vues splendides sur les Alpes environnantes.</p>
-                </div>
-            </div>
-            <div class="bento5-grid2">
-                <div class="grid-content">
-                    <h4>Gruyères</h4>
-                    <p>Connue pour son fromage célèbre, Gruyères offre également une atmosphère médiévale avec son château et ses paysages verdoyants.</p>
-                </div>
-            </div>
-            <div class="bento5-grid3">
-                <div class="grid-content">
-                    <h4>Interlaken</h4>
-                    <p>Située entre deux lacs cristallins, cette ville est une destination de rêve pour les amateurs de sports d’aventure et de paysages alpins.</p>
-                </div>
-            </div>
-            <div class="bento5-grid4">
-                <div class="grid-content">
-                    <h4>Jungfraujoch</h4>
-                    <p>Accessible en train, ce site spectaculaire à plus de 3 400 mètres offre des panoramas glaciaires et des activités uniques dans la neige.</p>
-                </div>
-            </div>
-            <div class="bento5-grid5">
-                <div class="grid-content">
-                    <h4>Zurich</h4>
-                    <p>Mélange parfait de modernité et d’histoire, Zurich séduit avec ses musées, boutiques, cafés branchés, et ses ruelles pavées pleines de charme.</p>
-                </div>
-            </div>
-            <div class="bento5-grid6">
-                <div class="grid-content">
-                    <h4>Château de Chillon</h4>
-                    <p>Ce château médiéval, au bord du lac Léman, fascine par son architecture, son histoire et ses vues imprenables sur les eaux scintillantes.</p>
-                </div>
-            </div>
-            <div class="bento5-grid7">
-                <div class="grid-content">
-                    <h4>Zermatt et le Cervin</h4>
-                    <p>Ce village pittoresque est le point de départ pour admirer le majestueux Cervin, l’une des montagnes les plus emblématiques du monde.</p>
-                </div>
-            </div>
-        </div>
-        <a href="voyages.html" class="section-3-view-link" category="IT">Voir tous les voyages en Italie</a>
-        <a href="voyages.html" class="section-3-view-link" category="BO">Voir tous les voyages en Bolivie</a>
-        <a href="voyages.html" class="section-3-view-link" category="MA">Voir tous les voyages au Maroc</a>
-        <a href="voyages.html" class="section-3-view-link" category="GR">Voir tous les voyages en Grêce</a>
-        <a href="voyages.html" class="section-3-view-link" category="CH">Voir tous les voyages en Suisse</a>
-        <script type="text/javascript">
-            document.addEventListener('DOMContentLoaded', () => {
-                showHeartthrobs('IT');
-            });
-            function showHeartthrobs(category) {
-                const descriptions = document.querySelectorAll('.s3-description');
-                const bentos = document.querySelectorAll('.bento');
-                const links = document.querySelectorAll('.section-3-view-link');
-                const buttons = document.querySelectorAll('.list-heartthrobs button');
-                descriptions.forEach(description => {
-                    if (description.getAttribute('category') === category) {
-                        description.style.display = 'block';
-                    } else {
-                        description.style.display = 'none';
-                    }
-                });
-                bentos.forEach(bento => {
-                    if (bento.getAttribute('category') === category) {
-                        bento.style.display = 'grid';
-                    } else {
-                        bento.style.display = 'none';
-                    }
-                });
-                links.forEach(link => {
-                    if (link.getAttribute('category') === category) {
-                        link.style.display = 'block';
-                    } else {
-                        link.style.display = 'none';
-                    }
-                });
-                buttons.forEach(button => {
-                    if (button.getAttribute('category') === category) {
-                        button.classList.add('active');
-                    } else {
-                        button.classList.remove('active');
-                    }
-                });
-            }
-        </script>
-    </section>
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-top">
-                <h3>Evazion</h3>
-                <p>Evazion propose des voyages sur mesure pour des escapades uniques, mêlant aventure, détente et découvertes culturelles. Faites confiance à notre expertise pour transformer vos envies d’évasion en souvenirs mémorables, où que vos rêves vous mènent.</p>
-            </div>
-            <div class="footer-center">
-                <div class="footer-center-section">
-                    <h3>Accès rapide</h3>
-                    <ul class="pages">
-                        <li>
-                            <a href="about-us.html">Qui sommes-nous ?</a>
-                        </li>
-                        <li>
-                            <a href="faq.html">Foire aux questions</a>
-                        </li>
-                        <li>
-                            <a href="reviews.html">Avis</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="footer-center-section">
-                    <h3>Contactez-nous</h3>
-                    <ul class="contact">
-                        <li>
-                            <i class="fa-solid fa-phone"></i> +33 1 23 45 67 89
-                        </li>
-                        <li>
-                            <a href="mailto:contact@evazion.com" target="_blank"><i class="fa-solid fa-envelope"></i> contact@evazion.com</a>
-                        </li>
-                        <li>
-                            <a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook"></i> Evazion - Agence de voyage</a>
-                        </li>
-                        <li>
-                            <a href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i> evazionvoyages</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="footer-center-section">
-                    <h3>Partenaires</h3>
-                    <ul class="partners">
-                        <li>SkyLynx Airways</li>
-                        <li>Aurora Haven</li>
-                        <li>Pathfinders Collective</li>
-                    </ul>
-                </div>
-            </div>
-            <hr>
-            <div class="footer-bottom">
-                <ul class="documents">
-                    <li>
-                        <a href="politique-de-confidentialite.html">Politique de confidentialité</a>
+        <!-- Menu de navigation principal -->
+        <ul class="navigation">
+            <!-- Page des destinations (menu déroulant) -->
+            <li class="navigation-item trips-item">
+                <a th:href="@{/destinations}">Voyages</a>
+                <!-- Listes des continents -->
+                <ul class="navigation-item trips-dropdown">
+                    <li class="dropdown-item">
+                        <a href="#">Afrique</a>
                     </li>
-                    <li>
-                        <a href="cgv.html">Conditions générales de ventes</a>
+                    <li class="dropdown-item">
+                        <a href="#">Amérique du Nord</a>
+                    </li>
+                    <li class="dropdown-item">
+                        <a href="#">Amérique du Sud</a>
+                    </li>
+                    <li class="dropdown-item">
+                        <a href="#">Asie</a>
+                    </li>
+                    <li class="dropdown-item">
+                        <a href="#">Europe</a>
+                    </li>
+                    <li class="dropdown-item">
+                        <a href="#">Océanie</a>
                     </li>
                 </ul>
-                <p>© 2024 Evazion - Tous droits réservés.</p>
+            </li>
+            <!-- Page des avis -->
+            <li class="navigation-item">
+                <a th:href="@{/reviews/liste}">Avis</a>
+            </li>
+            <!-- Page de contact -->
+            <li class="navigation-item">
+                <a th:href="@{/contact}">Contact</a>
+            </li>
+            <!-- Zone de recherche et accès au profil utilisateur -->
+            <li class="navigation-item buttons-container">
+                <!-- Formulaire de recherche -->
+                <form class="navigation-item search-bar">
+                    <input type="text" class="search-input" placeholder="Rechercher" size="10">
+                    <button type="submit" class="search-button">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </form>
+                <!-- Profil utilisateur -->
+                <a th:href="@{/users/user-profile}" class="navigation-item account">
+                    <i class="fa-solid fa-user"></i> Compte
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- Nom et slogan d'Evazion -->
+    <div class="base-line">
+        <strong class="base-line-name">Evazion</strong>
+        <span class="base-line-slogan">Laissez vos rêves devenir votre prochaine evazion.</span>
+    </div>
+</header>
+<!-- Section 1 : Les voyages imminents -->
+<section class="section-1">
+    <!-- Titre et description de la section -->
+    <h2 class="section-1-title">Les voyages imminents</h2>
+    <p class="section-1-description">
+        Découvrez nos promotions exclusives pour des voyages inoubliables à prix réduits. <br> Saisissez ces opportunités avant qu'elles ne disparaissent !
+    </p>
+    <!-- Affichage des cartes des voyages sous forme d'un "slider" (les quatre voyages les plus imminents) -->
+    <div class="card-slider-container">
+        <div class="card-slider">
+            <input type="radio" name="slide" id="card-1" checked>
+            <label for="card-1" class="card">
+                <!-- Image de fond de la carte associée à la destination -->
+                <img src="../static/assets/italie-rome.jpg" class="card-image">
+                <div class="card-content">
+                    <div class="card-header">
+                        <div class="infos">
+                            <span class="old-price">2500.00 €</span>
+                            <span class="new-price">2150.00 €</span>
+                            <span class="duration">28/04/2025 - 07/05/2025</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <h4 class="location">
+                            <i class="fa-solid fa-location-pin"></i> Rome, Italie
+                        </h4>
+                    </div>
+                </div>
+            </label>
+            <input type="radio" name="slide" id="card-2">
+            <label for="card-2" class="card">
+                <img src="../static/assets/suisse-zermatt.jpg" class="card-image">
+                <div class="card-content">
+                    <div class="card-header">
+                        <div class="infos">
+                            <span class="old-price">1435.00 €</span>
+                            <span class="new-price">1200.00 €</span>
+                            <span class="duration">04/01/2025 - 12/01/2025</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <h4 class="location">
+                            <i class="fa-solid fa-location-pin"></i> Zermatt, Suisse
+                        </h4>
+                    </div>
+                </div>
+            </label>
+            <input type="radio" name="slide" id="card-3">
+            <label for="card-3" class="card">
+                <img src="../static/assets/grece-delphes.jpg" class="card-image">
+                <div class="card-content">
+                    <div class="card-header">
+                        <div class="infos">
+                            <span class="old-price">4125.00 €</span>
+                            <span class="new-price">3850.00 €</span>
+                            <span class="duration">17/06/2025 - 01/07/2025</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <h4 class="location">
+                            <i class="fa-solid fa-location-pin"></i> Delphes, Grêce
+                        </h4>
+                    </div>
+                </div>
+            </label>
+            <input type="radio" name="slide" id="card-4">
+            <label for="card-4" class="card">
+                <img src="../static/assets/maroc-chefchaouen.jpg" class="card-image">
+                <div class="card-content">
+                    <div class="card-header">
+                        <div class="infos">
+                            <span class="old-price">1350.00 €</span>
+                            <span class="new-price">895.00 €</span>
+                            <span class="duration">24/10/2025 - 01/11/2025</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <h4 class="location">
+                            <i class="fa-solid fa-location-pin"></i> Chefchaouen, Maroc
+                        </h4>
+                    </div>
+                </div>
+            </label>
+        </div>
+    </div>
+    <!-- Lien vers la page des destinations -->
+    <a th:href="@{/destinations}" class="section-1-view-link">Voir tous nos voyages</a>
+</section>
+<!-- Section 1 : Pourquoi voyager avec Evazion ? -->
+<section class="section-2">
+    <!-- Titre de la section -->
+    <h2 class="section-2-title">Pourquoi voyager avec <span>Evazion</span> ?</h2>
+    <!-- Liste des raisons, chacune comprenant une icône, un titre et une description -->
+    <div class="reason-container">
+        <div class="reason">
+            <div class="reason-header">
+                <i class="fa-solid fa-euro-sign"></i>
+                <h4>Prix imbattables</h4>
+            </div>
+            <p>Voyagez à des tarifs jusqu'à 30% inférieurs grâce à nos partenariats exclusifs et profitez des promotions pour économiser davantage sur vos prochaines aventures.</p>
+        </div>
+        <div class="reason">
+            <div class="reason-header">
+                <i class="fa-solid fa-shield-halved"></i>
+                <h4>Sérénité garantie</h4>
+            </div>
+            <p>Annulez sans frais jusqu’à 48h avant le départ. Notre assistance 24/7 et nos protections uniques assurent votre tranquillité, même en cas d’intempéries ou d’imprévus.</p>
+        </div>
+        <div class="reason">
+            <div class="reason-header">
+                <i class="fa-regular fa-star"></i>
+                <h4>Expériences exclusives</h4>
+            </div>
+            <p>Accédez à des séjours uniques comme une nuit en igloo ou des safaris culinaires authentiques. Chaque voyage est pensé pour être original et adapté à vos envies.</p>
+        </div>
+        <div class="reason">
+            <div class="reason-header">
+                <i class="fa-solid fa-earth-europe"></i>
+                <h4>Voyage responsable</h4>
+            </div>
+            <p>En choisissant Evazion, vous soutenez des projets écologiques et locaux. Explorez le monde tout en contribuant à un avenir durable pour les communautés et la planète.</p>
+        </div>
+    </div>
+    <!-- Liens vers la page "Qui sommes-nous ?" et "FAQ" -->
+    <div class="section-2-view-links">
+        <p>
+            <a href="#" class="section-2-view-link-1">Qui sommes-nous ?</a> - <a href="#" class="section-2-view-link-2">FAQ</a>
+        </p>
+    </div>
+</section>
+<!-- Section 3 : Nos coups de cœur -->
+<section class="section-3">
+    <!-- Titre -->
+    <h2 class="section-3-title">Nos coups de cœur</h2>
+    <!-- Liste des descriptions des pays (seule une est affichée, selon le pays choisi) -->
+    <p class="s3-description description-1" category="IT">
+        L’Italie, pays d’art et de culture, fascine par son histoire millénaire, son patrimoine architectural exceptionnel et sa gastronomie raffinée. Elle incarne un style de vie méditerranéen, mêlant traditions et modernité, et reste une source d’inspiration universelle.
+    </p>
+    <p class="s3-description description-2" category="BO">
+        La Bolivie, riche en diversité naturelle et culturelle, est un véritable trésor d’Amérique latine. Ses paysages contrastés et ses traditions profondément enracinées offrent une immersion unique dans l’histoire et l’authenticité de la région andine et amazonienne.
+    </p>
+    <p class="s3-description description-3" category="MA">
+        Le Maroc, aux influences orientales et africaines, séduit par la richesse de son artisanat, la chaleur de son accueil et la beauté de ses paysages variés. C’est une terre où se mêlent harmonieusement modernité et traditions ancestrales.
+    </p>
+    <p class="s3-description description-4" category="GR">
+        La Grèce, berceau de la civilisation occidentale, rayonne par son histoire riche et sa culture vibrante. Entre mythes intemporels, paysages marins et savoir-faire culinaire, elle offre une expérience inoubliable marquée par l’authenticité et l’hospitalité.
+    </p>
+    <p class="s3-description description-5" category="CH">
+        La Suisse, pays d’harmonie et de nature, enchante par ses paysages spectaculaires, son héritage multiculturel et sa réputation d’excellence. Elle incarne à la fois sérénité et innovation, dans un cadre empreint de raffinement et de beauté.
+    </p>
+    <!-- Liste des boutons permettant de choisir un, et afficher sa description, son bento, et son lien -->
+    <nav class="list-heartthrobs">
+        <button onclick="showHeartthrobs('IT')" category="IT">Italie</button>
+        <button onclick="showHeartthrobs('BO')" category="BO">Bolivie</button>
+        <button onclick="showHeartthrobs('MA')" category="MA">Maroc</button>
+        <button onclick="showHeartthrobs('GR')" category="GR">Grêce</button>
+        <button onclick="showHeartthrobs('CH')" category="CH">Suisse</button>
+    </nav>
+    <!-- Bento de l'Italie -->
+    <div class="bento bento1" category="IT">
+        <div class="bento1-grid1">
+            <div class="grid-content">
+                <h4>Rome</h4>
+                <p>La capitale italienne, un musée à ciel ouvert avec des trésors comme le Colisée, la fontaine de Trevi, et le Vatican.</p>
             </div>
         </div>
-    </footer>
-    <a href="#" class="scroll-top-button">
-        <i class="fa-solid fa-arrow-up"></i>
-    </a>
+        <div class="bento1-grid2">
+            <div class="grid-content">
+                <h4>Toscane</h4>
+                <p>Région pittoresque, célèbre pour ses collines, ses vignobles, ses villages médiévaux et ses villes historiques comme Sienne et Pise.</p>
+            </div>
+        </div>
+        <div class="bento1-grid3">
+            <div class="grid-content">
+                <h4>Florence</h4>
+                <p>Berceau de la Renaissance, cette ville offre des chefs-d'œuvre comme le David de Michel-Ange, la cathédrale Santa Maria del Fiore et la Galerie des Offices.</p>
+            </div>
+        </div>
+        <div class="bento1-grid4">
+            <div class="grid-content">
+                <h4>Cinque Terre</h4>
+                <p>Cinq villages colorés accrochés aux falaises de la côte ligure, parfaits pour la randonnée et les panoramas sur la mer Méditerranée.</p>
+            </div>
+        </div>
+        <div class="bento1-grid5">
+            <div class="grid-content">
+                <h4>Pompéi et le Vésuve</h4>
+                <p>Un site archéologique figé dans le temps par l’éruption du Vésuve, offrant un voyage fascinant dans la vie romaine antique.</p>
+            </div>
+        </div>
+        <div class="bento1-grid6">
+            <div class="grid-content">
+                <h4>Venise</h4>
+                <p>Ville unique construite sur l’eau, célèbre pour ses gondoles, ses canaux romantiques, la place Saint-Marc et son carnaval.</p>
+            </div>
+        </div>
+        <div class="bento1-grid7">
+            <div class="grid-content">
+                <h4>Les Dolomites</h4>
+                <p>Chaîne montagneuse spectaculaire, idéale pour la randonnée, le ski, et les paysages alpins à couper le souffle.</p>
+            </div>
+        </div>
+        <div class="bento1-grid8">
+            <div class="grid-content">
+                <h4>Sicile</h4>
+                <p>Île méditerranéenne mêlant histoire, plages, volcans (l’Etna), et une gastronomie riche influencée par plusieurs civilisations.</p>
+            </div>
+        </div>
+    </div>
+    <!-- Bento de la Bolivie -->
+    <div class="bento bento2" category="BO">
+        <div class="bento2-grid1">
+            <div class="grid-content">
+                <h4>Salar de Uyuni</h4>
+                <p>Le plus grand désert de sel au monde, le Salar de Uyuni offre des paysages surréalistes, un horizon infini et des reflets spectaculaires en saison humide.</p>
+            </div>
+        </div>
+        <div class="bento2-grid2">
+            <div class="grid-content">
+                <h4>Potosí</h4>
+                <p>Ancienne ville minière, Potosí abrite le Cerro Rico, riche en histoire coloniale et symbolisant l'exploitation de l'argent sous l'empire espagnol.</p>
+            </div>
+        </div>
+        <div class="bento2-grid3">
+            <div class="grid-content">
+                <h4>Sucre</h4>
+                <p>Capitale constitutionnelle de la Bolivie, Sucre est célèbre pour ses bâtiments blancs coloniaux, ses églises historiques et son ambiance culturelle chaleureuse.</p>
+            </div>
+        </div>
+        <div class="bento2-grid4">
+            <div class="grid-content">
+                <h4>Parc National Madidi</h4>
+                <p>Réserve naturelle spectaculaire, le Parc Madidi est un paradis pour la biodiversité, abritant des forêts tropicales luxuriantes et des espèces uniques.</p>
+            </div>
+        </div>
+        <div class="bento2-grid5">
+            <div class="grid-content">
+                <h4>Laguna Colorada</h4>
+                <p>Cette lagune rouge vif, nichée dans les Andes, est connue pour ses flamants roses et ses eaux colorées par des minéraux riches.</p>
+            </div>
+        </div>
+        <div class="bento2-grid6">
+            <div class="grid-content">
+                <h4>La Paz</h4>
+                <p>Capitale administrative à couper le souffle, La Paz est nichée dans une vallée andine, mêlant culture indigène et panoramas impressionnants.</p>
+            </div>
+        </div>
+        <div class="bento2-grid7">
+            <div class="grid-content">
+                <h4>Copacabana et l’Isla del Sol</h4>
+                <p>Situés au bord du lac Pipicaca, ces lieux offrent des paysages enchanteurs, des sites incas historiques et une spiritualité unique.</p>
+            </div>
+        </div>
+    </div>
+    <!-- Bento du Maroc -->
+    <div class="bento bento3" category="MA">
+        <div class="bento3-grid1">
+            <div class="grid-content">
+                <h4>Essaouira</h4>
+                <p>Ville portuaire calme, Essaouira est réputée pour ses plages tranquilles, sa médina classée et ses bâtiments blancs, offrant une atmosphère accueillante et une riche histoire.</p>
+            </div>
+        </div>
+        <div class="bento3-grid2">
+            <div class="grid-content">
+                <h4>Casablanca</h4>
+                <p>Métropole vibrante, Casablanca mélange architecture moderne et sites traditionnels, comme la grande mosquée, tout en étant le cœur économique et culturel du Maroc.</p>
+            </div>
+        </div>
+        <div class="bento3-grid3">
+            <div class="grid-content">
+                <h4>Fès</h4>
+                <p>Connue pour sa médina médiévale, Fès conserve un patrimoine culturel unique, avec ses souks, ses palais et ses artisans, plongés dans une atmosphère intemporelle.</p>
+            </div>
+        </div>
+        <div class="bento3-grid4">
+            <div class="grid-content">
+                <h4>Nador</h4>
+                <p>Située sur la mer Méditerranée, Nador séduit par son climat agréable, ses plages et sa proximité avec les montagnes du Rif, offrant une riche culture locale.</p>
+            </div>
+        </div>
+        <div class="bento3-grid5">
+            <div class="grid-content">
+                <h4>Marrakech</h4>
+                <p>La ville impériale est un carrefour de cultures, avec ses souks animés, ses jardins exotiques et ses palais somptueux, faisant d’elle un lieu incontournable au Maroc.</p>
+            </div>
+        </div>
+        <div class="bento3-grid6">
+            <div class="grid-content">
+                <h4>Merzouga et le Sahara</h4>
+                <p>En plein désert, Merzouga est le point de départ pour découvrir les dunes du Sahara, offrant des expériences authentiques de vie nomade et des paysages spectaculaires.</p>
+            </div>
+        </div>
+        <div class="bento3-grid7">
+            <div class="grid-content">
+                <h4>Chefchaouen</h4>
+                <p>Célèbre pour ses bâtiments bleus et ses rues pittoresques, Chefchaouen attire par son ambiance calme et ses montagnes environnantes, un véritable havre de paix.</p>
+            </div>
+        </div>
+    </div>
+    <!-- Bento de la Grêce -->
+    <div class="bento bento4" category="GR">
+        <div class="bento4-grid1">
+            <div class="grid-content">
+                <h4>Santorin</h4>
+                <p>L’île, avec ses maisons blanchies à la chaux et ses vues époustouflantes sur la caldeira, offre une expérience visuelle unique, surtout au coucher du soleil.</p>
+            </div>
+        </div>
+        <div class="bento4-grid2">
+            <div class="grid-content">
+                <h4>Corfou</h4>
+                <p>Un mélange de nature luxuriante et de culture méditerranéenne, Corfou est une île où se mêlent influences grecques et vénitiennes, offrant une atmosphère unique.</p>
+            </div>
+        </div>
+        <div class="bento4-grid3">
+            <div class="grid-content">
+                <h4>Meteores</h4>
+                <p>Surplombant des formations rocheuses impressionnantes, Météores abrite des monastères perchés, créant une atmosphère mystique, propice à la contemplation et à la spiritualité.</p>
+            </div>
+        </div>
+        <div class="bento4-grid4">
+            <div class="grid-content">
+                <h4>Mykonos</h4>
+                <p>Île cosmopolite, Mykonos est réputée pour ses plages animées, sa vie nocturne effervescente et ses ruelles blanches qui font son charme incontournable.</p>
+            </div>
+        </div>
+        <div class="bento4-grid5">
+            <div class="grid-content">
+                <h4>Crète</h4>
+                <p>Île de contrastes, la Crète séduit par ses plages paradisiaques, ses montagnes majestueuses et son patrimoine historique riche, entre Minoens et influences modernes.</p>
+            </div>
+        </div>
+        <div class="bento4-grid6">
+            <div class="grid-content">
+                <h4>Athènes</h4>
+                <p>Berceau de la civilisation occidentale, Athènes est un mélange fascinant d’histoire ancienne, de monuments emblématiques et de vie urbaine dynamique.s</p>
+            </div>
+        </div>
+        <div class="bento4-grid7">
+            <div class="grid-content">
+                <h4>Delphes</h4>
+                <p>Ancien sanctuaire d’Apollon, Delphes est un lieu empreint de mystère, où les visiteurs découvrent des ruines antiques et une vue impressionnante sur la vallée environnante.</p>
+            </div>
+        </div>
+        <div class="bento4-grid8">
+            <div class="grid-content">
+                <h4>Rhodes</h4>
+                <p>Entre histoire médiévale et paysages côtiers, Rhodes est une île offrant des vestiges antiques, des plages splendides et une ambiance de vacances à couper le souffle.</p>
+            </div>
+        </div>
+    </div>
+    <!-- Bento de la Suisse -->
+    <div class="bento bento5" category="CH">
+        <div class="bento5-grid1">
+            <div class="grid-content">
+                <h4>Lac Léman</h4>
+                <p>Bordé de vignobles et de charmantes villes comme Montreux, le lac offre des croisières paisibles et des vues splendides sur les Alpes environnantes.</p>
+            </div>
+        </div>
+        <div class="bento5-grid2">
+            <div class="grid-content">
+                <h4>Gruyères</h4>
+                <p>Connue pour son fromage célèbre, Gruyères offre également une atmosphère médiévale avec son château et ses paysages verdoyants.</p>
+            </div>
+        </div>
+        <div class="bento5-grid3">
+            <div class="grid-content">
+                <h4>Interlaken</h4>
+                <p>Située entre deux lacs cristallins, cette ville est une destination de rêve pour les amateurs de sports d’aventure et de paysages alpins.</p>
+            </div>
+        </div>
+        <div class="bento5-grid4">
+            <div class="grid-content">
+                <h4>Jungfraujoch</h4>
+                <p>Accessible en train, ce site spectaculaire à plus de 3 400 mètres offre des panoramas glaciaires et des activités uniques dans la neige.</p>
+            </div>
+        </div>
+        <div class="bento5-grid5">
+            <div class="grid-content">
+                <h4>Zurich</h4>
+                <p>Mélange parfait de modernité et d’histoire, Zurich séduit avec ses musées, boutiques, cafés branchés, et ses ruelles pavées pleines de charme.</p>
+            </div>
+        </div>
+        <div class="bento5-grid6">
+            <div class="grid-content">
+                <h4>Château de Chillon</h4>
+                <p>Ce château médiéval, au bord du lac Léman, fascine par son architecture, son histoire et ses vues imprenables sur les eaux scintillantes.</p>
+            </div>
+        </div>
+        <div class="bento5-grid7">
+            <div class="grid-content">
+                <h4>Zermatt et le Cervin</h4>
+                <p>Ce village pittoresque est le point de départ pour admirer le majestueux Cervin, l’une des montagnes les plus emblématiques du monde.</p>
+            </div>
+        </div>
+    </div>
+    <!-- Liste des liens vers la page des destinations, filtrées selon le pays choisi -->
+    <a href="voyages.html" class="section-3-view-link" category="IT">Voir tous les voyages en Italie</a>
+    <a href="voyages.html" class="section-3-view-link" category="BO">Voir tous les voyages en Bolivie</a>
+    <a href="voyages.html" class="section-3-view-link" category="MA">Voir tous les voyages au Maroc</a>
+    <a href="voyages.html" class="section-3-view-link" category="GR">Voir tous les voyages en Grêce</a>
+    <a href="voyages.html" class="section-3-view-link" category="CH">Voir tous les voyages en Suisse</a>
+    <script src="../static/scripts/heartthrobs.js"></script>
+</section>
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-content">
+        <!-- Partie haute : Description de l'agence -->
+        <div class="footer-top">
+            <h3>Evazion</h3>
+            <p>Evazion propose des voyages sur mesure pour des escapades uniques, mêlant aventure, détente et découvertes culturelles. Faites confiance à notre expertise pour transformer vos envies d’évasion en souvenirs mémorables, où que vos rêves vous mènent.</p>
+        </div>
+        <!-- Partie centrale : Liens et informations -->
+        <div class="footer-center">
+            <div class="footer-center-section">
+                <h3>Accès rapide</h3>
+                <ul class="pages">
+                    <li>
+                        <a href="#">Qui sommes-nous ?</a>
+                    </li>
+                    <li>
+                        <a href="#">Foire aux questions</a>
+                    </li>
+                    <li>
+                        <a href="#">Avis</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-center-section">
+                <h3>Contactez-nous</h3>
+                <ul class="contact">
+                    <li>
+                        <i class="fa-solid fa-phone"></i> +33 1 23 45 67 89
+                    </li>
+                    <li>
+                        <a href="mailto:contact@evazion.com" target="_blank"><i class="fa-solid fa-envelope"></i> contact@evazion.com</a>
+                    </li>
+                    <li>
+                        <a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook"></i> Evazion - Agence de voyage</a>
+                    </li>
+                    <li>
+                        <a href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i> evazionvoyages</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-center-section">
+                <h3>Partenaires</h3>
+                <ul class="partners">
+                    <li>SkyLynx Airways</li>
+                    <li>Aurora Haven</li>
+                    <li>Pathfinders Collective</li>
+                </ul>
+            </div>
+        </div>
+        <!-- Partie basse : Liens vers les pages "légales" et copyright -->
+        <hr>
+        <div class="footer-bottom">
+            <ul class="documents">
+                <li>
+                    <a href="#">Politique de confidentialité</a>
+                </li>
+                <li>
+                    <a href="#">Conditions générales de ventes</a>
+                </li>
+            </ul>
+            <p>© 2024 Evazion - Tous droits réservés.</p>
+        </div>
+    </div>
+</footer>
+<!-- Bouton de retour en haut de page -->
+<a href="#" class="scroll-top-button">
+    <i class="fa-solid fa-arrow-up"></i>
+</a>
 </body>
 </html>

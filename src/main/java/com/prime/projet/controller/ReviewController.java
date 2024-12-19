@@ -81,7 +81,7 @@ public class ReviewController {
     }
 
     //Affiche toutes les reviews
-    @GetMapping("/liste")
+    @GetMapping
     public String listAllReviews(Model model) {
         List<Review> reviews = reviewService.getAllReviews();
         model.addAttribute("reviews", reviews);

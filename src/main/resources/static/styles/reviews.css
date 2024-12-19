@@ -1,22 +1,18 @@
 :root {
-	--text-color-white: #FFFFFF;
-	--text-color-gray: #4D4D4D;
-	--accent-color-1: #06506E;
-	--accent-color-2: #C89608;
+  --text-color-white: #FFFFFF;
+  --text-color-gray: #4D4D4D;
+  --accent-color-1: #06506E;
+  --accent-color-2: #C89608;
 }
 
 .main-section {
-	padding: 115px 12.5% 0;
-	margin-bottom: 75px;
-	width: 100%;
-}
-
-.main-section .message {
-	font-style: italic;
+  padding: 115px 12.5% 0;
+  margin-bottom: 75px;
+  width: 100%;
 }
 
 .main-section h3 {
-	font-size: 2rem;
+  font-size: 2rem;
   font-weight: 700;
   letter-spacing: 6px;
   text-transform: uppercase;
@@ -34,6 +30,59 @@
   margin-bottom: 25px;
 }
 
+.main-section p a {
+  font-style: italic;
+  color: var(--accent-color-2);
+}
+
+.main-section .review form {
+  width: 100%;
+}
+
+.main-section .review form .form-main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 25px;
+}
+
+.main-section .review form .form-main .fields label {
+  display: flex;
+  flex-direction: column;
+  font-size: .675rem;
+  font-weight: normal;
+  text-transform: uppercase;
+  color: var(--accent-color-1);
+  margin: 0 0 10px 0;
+}
+
+.main-section .review form .form-main .fields label span {
+  font-size: .675rem;
+  font-weight: normal;
+  text-transform: uppercase;
+  color: var(--accent-color-1);
+  margin: 0 0 10px 0;
+}
+
+.main-section .review form .form-main .fields label select, .main-section .review form .form-main .fields label input, .main-section .review form .form-main .fields label textarea {
+  font-size: .675rem;
+  padding: 0 5px 5px 5px;
+  border: none;
+  border-bottom: solid 1px var(--accent-color-1);
+  color: var(--accent-color-1);
+  min-width: 100px;
+  max-width: 200px;
+}
+
+.main-section .review form .form-main .fields label select:focus, input:focus, textarea:focus {
+  outline: none;
+}
+
+.main-section .review form .form-main .fields .comment-field textarea {
+  font-family: 'Poppins', sans-serif;
+  resize: none;
+}
+
 .main-section .review-card-container {
   display: flex;
   flex-wrap: wrap;
@@ -41,9 +90,10 @@
   gap: 25px;
 }
 
-.main-section .review-card-container .review-card {
+.review-card {
   position: relative;
-  width: 500px;
+  width: 100%;
+  max-width: 500px;
   min-height: 350px;
   z-index: 100;
   padding: 25px;
@@ -56,34 +106,34 @@
   overflow: hidden;
 }
 
-.main-section .review-card-container .review-card .top .top-first-row {
+.review-card .top .top-first-row {
   display: flex;
   justify-content: space-between;
 }
 
-.main-section .review-card-container .review-card .top .top-first-row .review-card-rating {
+.review-card .top .top-first-row .review-card-rating {
   font-size: 1.5rem;
 }
 
-.main-section .review-card-container .review-card .top .top-first-row .review-card-rating i {
+.review-card .top .top-first-row .review-card-rating i {
   color: var(--accent-color-1);
 }
 
-.main-section .review-card-container .review-card .top .top-first-row .user-infos {
+.review-card .top .top-first-row .user-infos {
   display: flex;
   flex-direction: column;
   text-align: right;
 }
 
-.main-section .review-card-container .review-card .top .top-first-row .user-infos .username {
+.review-card .top .top-first-row .user-infos .username {
   font-weight: bold;
 }
 
-.main-section .review-card-container .review-card .top .top-first-row .user-infos .username .at {
+.review-card .top .top-first-row .user-infos .username .at {
   color: var(--accent-color-2);
 }
 
-.main-section .review-card-container .review-card .top .top-first-row .user-infos .inscription-date {
+.review-card .top .top-first-row .user-infos .inscription-date {
   line-height: .5;
   font-size: .75rem;
   font-style: italic;
@@ -91,46 +141,75 @@
   margin-top: 5px;
 }
 
-.main-section .review-card-container .review-card .top .top-last-row {
+.review-card .top .top-last-row {
   margin-top: 7%;
 }
 
-.main-section .review-card-container .review-card .top .top-last-row .review-card-title {
+.review-card .top .top-last-row .review-card-title {
   margin-top: 7%;
   font-weight: bold;
   max-width: 75%;
 }
 
-.main-section .review-card-container .review-card .body {
+.review-card .body {
   cursor: pointer;
   min-height: 150px;
 }
 
-.main-section .review-card-container .review-card .bottom {
+.review-card .bottom {
   display: flex;
   justify-content: space-between;
   margin-top: 15px;
 }
 
-.main-section .review-card-container .review-card .bottom i {
+.review-card .bottom i {
   margin-right: 5px;
   color: var(--accent-color-2);
 }
 
-.main-section .review-card-container .review-card .bottom .review-card-destination {
+.review-card .bottom .review-card-destination {
   font-weight: bold;
 }
 
-.main-section a {
+.main-section .review form .button-link {
   display: flex;
-  text-align: center;
+  justify-content: space-between;
+  margin-top: 25px;
+}
+
+.main-section .review form .button-link button {
+  font-size: .875rem;
+  background-color: var(--text-color-white);
+  color: var(--accent-color-2);
+  border: solid 1px var(--accent-color-2);
+  border-radius: 5px;
+  padding: 7px 10px;
+  text-transform: uppercase;
+  cursor: pointer;
+  align-self: center;
+  transition: all .3s ease-in-out;
+}
+
+.main-section .review form .button-link button:hover {
+  background-color: var(--accent-color-2);
+  color: var(--text-color-white);
+}
+
+.main-section .review form .button-link a {
   text-transform: uppercase;
   font-size: .675rem;
   font-weight: bold;
   line-height: 1.1;
   text-decoration: underline;
   color: var(--accent-color-2);
-  margin-top: 25px;
+}
+
+.main-section .review form .form-main .fields label .error {
+  margin-top: 5px;
+  color: var(--text-color-gray);
+  text-transform: none;
+  font-size: .5rem;
+  max-width: 200px;
 }
 
 .popup {
@@ -161,13 +240,20 @@
 
 @media (max-width: 1010px) {
 
-	.main-section {
-		padding: 0 12.5% 0;
-		margin-bottom: 75px;
-	}
+  .main-section {
+    padding: 0 12.5% 0;
+    margin-bottom: 75px;
+  }
 
-	.main-section .details {
-		margin-bottom: 0;
-	}
+  .main-section .review form .form-main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .main-section .review form .form-main .fields label select, .main-section .review form .form-main .fields label input, .main-section .review form .form-main .fields label textarea {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
 
 }

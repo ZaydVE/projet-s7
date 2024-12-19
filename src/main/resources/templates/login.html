@@ -1,31 +1,44 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 <head>
+    <!-- Basiques -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Découvrez nos offres de voyage autour du monde !">
-    <meta name="keywords" content="voyage, tourisme, vacances">
+    <meta name="description" content="Explorez des destinations uniques et profitez d'offres de voyage sur mesure avec Evazion. Partez à la découverte du monde en toute sérénité.">
+    <meta name="keywords" content="voyage, tourisme, vacances, destinations, escapades, aventure, Evazion, voyages sur mesure">
     <meta name="author" content="Younes Achouche, Zayd Ajjaji, Lucas Colussi, Mehdi El Kadaoui, Daniele Sandra Tonfack Yonta">
-    <title>Inscription - Evazion</title>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="../styles/base.css">
-    <link rel="stylesheet" href="../styles/header.css">
-    <link rel="stylesheet" href="../styles/footer.css">
-    <link rel="stylesheet" href="../styles/scroll-top-button.css">
-    <link rel="stylesheet" href="../styles/login.css">
+    <!-- Barre de titre -->
+    <title>Se connecter - Evazion</title>
+    <link rel="icon" type="image/x-icon" href="../static/assets/evazion-logo.svg">
+    <!-- Styles globaux du site -->
+    <link rel="stylesheet" type="text/css" href="../static/styles/base.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/header.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/footer.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/scroll-top-button.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/notification.css">
+    <!-- Style de la page -->
+    <link rel="stylesheet" type="text/css" href="../static/styles/registration.css">
+    <!-- Scripts -->
+    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body>
+<!-- Header -->
 <header class="header">
+    <!-- Barre de navigation -->
     <div class="top-bar">
+        <!-- Logo et lien vers la page d'accueil -->
         <div class="logo">
             <a th:href="@{/}">
                 Evazion
             </a>
         </div>
+        <!-- Menu de navigation principal -->
         <ul class="navigation">
+            <!-- Page des destinations (menu déroulant) -->
             <li class="navigation-item trips-item">
                 <a th:href="@{/destinations}">Voyages</a>
+                <!-- Listes des continents -->
                 <ul class="navigation-item trips-dropdown">
                     <li class="dropdown-item">
                         <a href="#">Afrique</a>
@@ -42,33 +55,39 @@
                     <li class="dropdown-item">
                         <a href="#">Europe</a>
                     </li>
+                    <li class="dropdown-item">
+                        <a href="#">Océanie</a>
+                    </li>
                 </ul>
             </li>
-            <li class="navigation-item">
-                <a href="#">Blog</a>
-            </li>
+            <!-- Page des avis -->
             <li class="navigation-item">
                 <a th:href="@{/reviews/liste}">Avis</a>
             </li>
+            <!-- Page de contact -->
             <li class="navigation-item">
-                <a href="#">Contact</a>
+                <a th:href="@{/contact}">Contact</a>
             </li>
-            <div class="navigation-item buttons-container">
+            <!-- Zone de recherche et accès au profil utilisateur -->
+            <li class="navigation-item buttons-container">
+                <!-- Formulaire de recherche -->
                 <form class="navigation-item search-bar">
                     <input type="text" class="search-input" placeholder="Rechercher" size="10">
-                    <button class="search-button">
+                    <button type="submit" class="search-button">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </button>
                 </form>
-                <a th:href="@{/users/profile}" class="navigation-item account">
+                <!-- Profil utilisateur -->
+                <a th:href="@{/users/user-profile}" class="navigation-item account">
                     <i class="fa-solid fa-user"></i> Compte
                 </a>
-            </div>
+            </li>
         </ul>
     </div>
 </header>
+<!-- Section principale : Corps de la page -->
 <section class="main-section">
-    <h1 class="title">Connexion</h1>
+    <h3>Connexion</h3>
     <form method="post" action="/login" class="login-form" id="login-form" novalidate>
         <div class="form-group">
             <h5>Email</h5>
@@ -84,52 +103,37 @@
             <button type="submit" class="submit-button">Se connecter</button>
         </div>
     </form>
-    <p class="message">Pas encore inscrit ? Créez un compte <a href="/users/new">ici</a>.</p>
-    <script>
-        document.getElementById('login-form').addEventListener('submit', function (e) {
-            e.preventDefault();
-            let isValid = true;
-            // Nom d'utilisateur
-            const email = document.getElementById('email').value.trim();
-            if (!email) {
-                document.getElementById('emailError').textContent = "L'email est obligatoire.";
-                isValid = false;
-            } else {
-                document.getElementById('emailError').textContent = "";
-            }
-            // Mot de passe
-            const password = document.getElementById('password').value;
-            if (!password) {
-                document.getElementById('passwordError').textContent = "Le mot de passe est obligatoire.";
-                isValid = false;
-            } else {
-                document.getElementById('passwordError').textContent = "";
-            }
-            // Validation
-            if (isValid) {
-                this.submit();
-            }
-        });
-    </script>
+    <p class="message">Pas encore inscrit ? Créez un compte en cliquant <a href="/users/new">ici</a>.</p>
+    <script src="../static/scripts/log-in-validation.js"></script>
 </section>
+<div id="popup" class="popup hidden">
+    <div class="popup-content">
+        <span id="popup-close" class="popup-close"></span>
+        <p id="popup-comment"></p>
+    </div>
+</div>
+<script src="../static/scripts/review-card-filling.js"></script>
+<!-- Footer -->
 <footer class="footer">
     <div class="footer-content">
+        <!-- Partie haute : Description de l'agence -->
         <div class="footer-top">
             <h3>Evazion</h3>
             <p>Evazion propose des voyages sur mesure pour des escapades uniques, mêlant aventure, détente et découvertes culturelles. Faites confiance à notre expertise pour transformer vos envies d’évasion en souvenirs mémorables, où que vos rêves vous mènent.</p>
         </div>
+        <!-- Partie centrale : Liens et informations -->
         <div class="footer-center">
             <div class="footer-center-section">
                 <h3>Accès rapide</h3>
                 <ul class="pages">
                     <li>
-                        <a href="#">Blog</a>
-                    </li>
-                    <li>
                         <a href="#">Qui sommes-nous ?</a>
                     </li>
                     <li>
-                        <a href="faq.html">FAQ</a>
+                        <a href="#">Foire aux questions</a>
+                    </li>
+                    <li>
+                        <a href="#">Avis</a>
                     </li>
                 </ul>
             </div>
@@ -153,12 +157,13 @@
             <div class="footer-center-section">
                 <h3>Partenaires</h3>
                 <ul class="partners">
-                    <li>Partenaire 1</li>
-                    <li>Partenaire 2</li>
-                    <li>Partenaire 3</li>
+                    <li>SkyLynx Airways</li>
+                    <li>Aurora Haven</li>
+                    <li>Pathfinders Collective</li>
                 </ul>
             </div>
         </div>
+        <!-- Partie basse : Liens vers les pages "légales" et copyright -->
         <hr>
         <div class="footer-bottom">
             <ul class="documents">
@@ -173,6 +178,7 @@
         </div>
     </div>
 </footer>
+<!-- Bouton de retour en haut de page -->
 <a href="#" class="scroll-top-button">
     <i class="fa-solid fa-arrow-up"></i>
 </a>
