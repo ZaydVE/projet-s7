@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -54,13 +55,16 @@ public class DestinationController {
             @RequestParam("startDate") String startDate,
             @RequestParam("endDate") String endDate,
             @RequestParam("nbPlaces") int nbPlaces,
-            @RequestParam("lienImage") MultipartFile lienImage) {
+            @RequestParam("lienImage") MultipartFile lienImage,
+            RedirectAttributes redirectAttributes ) {
 
         destinationService.createDestination(
                 name, description, price, continent, country, city, type, startDate, endDate, nbPlaces, lienImage
         );
 
-        return "destination-added";
+        redirectAttributes.addFlashAttribute("successMessageCreateDestination", "Ajout de la destination réussi !");
+
+        return "redirect:/destinations";
     }
 
     @GetMapping("/edit")
@@ -81,7 +85,8 @@ public class DestinationController {
             @RequestParam("startDate") String startDate,
             @RequestParam("endDate") String endDate,
             @RequestParam("nbPlaces") int nbPlaces,
-            @RequestParam(value = "lienImage", required = false) MultipartFile lienImage) {
+            @RequestParam(value = "lienImage", required = false) MultipartFile lienImage,
+            RedirectAttributes redirectAttributes ) {
 
         if (lienImage != null && !lienImage.isEmpty()) {
             destinationService.updateDestination(
@@ -93,7 +98,9 @@ public class DestinationController {
             );
         }
 
-        return "destination-edit-success";
+        redirectAttributes.addFlashAttribute("successMessageUpdateDestination", "Modification de la destination réussie !");
+
+        return "redirect:/destinations";
     }
 
     @GetMapping("/delete")
@@ -102,8 +109,9 @@ public class DestinationController {
     }
 
     @PostMapping("/delete")
-    public String deleteDestination(@RequestParam("destinationId") Integer destinationId) {
-        destinationService.deleteDestination(destinationId); //
-        return "destination-delete-success";
+    public String deleteDestination(@RequestParam("destinationId") Integer destinationId, RedirectAttributes redirectAttributes) {
+        destinationService.deleteDestination(destinationId);
+        redirectAttributes.addFlashAttribute("successMessageDeleteDestination", "Suppression de la destination réussie !");
+        return "redirect:/destinations";
     }
 }

@@ -11,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -62,7 +63,7 @@ public class ReviewController {
 
     // Poster une review
     @PostMapping("/new")
-    public String registerReview(@ModelAttribute ReviewDto reviewDto) {
+    public String registerReview(@ModelAttribute ReviewDto reviewDto, RedirectAttributes redirectAttributes) {
         // Récupérer l'utilisateur connecté
         org.springframework.security.core.userdetails.User principal =
                 (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -74,11 +75,13 @@ public class ReviewController {
         // Appelle le service en passant l'utilisateur
         reviewService.createReview(reviewDto, user);
 
-        return "redirect:/reviews/success";
+        redirectAttributes.addFlashAttribute("successMessageRegisterReview", "Ajout d'avis réussi !");
+
+        return "redirect:/reviews/liste";
     }
 
     //Affiche toutes les reviews
-    @GetMapping("/liste")
+    @GetMapping
     public String listAllReviews(Model model) {
         List<Review> reviews = reviewService.getAllReviews();
         model.addAttribute("reviews", reviews);
@@ -101,8 +104,4 @@ public class ReviewController {
         return "destination-reviews";
     }
 
-    @GetMapping("/success")
-    public String successPage() {
-        return "review-success";
-    }
 }

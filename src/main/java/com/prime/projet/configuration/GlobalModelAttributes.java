@@ -13,10 +13,4 @@ public class GlobalModelAttributes {
     public GlobalModelAttributes(DestinationService destinationService) {
         this.destinationService = destinationService;
     }
-
-    @ModelAttribute("continents")
-    public List<String> populateContinents() {
-        // Appelle une méthode du service pour récupérer les continents
-        return destinationService.getAllContinents();
-    }
 }

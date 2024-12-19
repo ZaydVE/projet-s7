@@ -1,0 +1,16 @@
+.notification {
+	position: fixed;
+	top: 0px;
+	right: 10px;
+	z-index: 1000;
+	padding: 5px 10px;
+	background-color: var(--accent-color-1);
+	color: var(--text-color-white);
+	border-radius: 32px;
+	font-size: .675rem;
+}
+
+.notification i {
+	color: var(--accent-color-2);
+	margin-right: 5px;
+}
