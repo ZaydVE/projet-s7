@@ -49,4 +49,25 @@ public class ReviewService {
     public List<Review> getAllReviews() {
         return reviewRepository.findAll();
     }
+
+    // Supprimer une review par son ID
+    public void deleteReviewById(Integer reviewId) {
+        // Vérifie si la review existe avant de la supprimer
+        if (!reviewRepository.existsById(reviewId)) {
+            throw new RuntimeException("Review non trouvée avec l'ID : " + reviewId);
+        }
+        // Supprime la review
+        reviewRepository.deleteById(reviewId);
+    }
+
+    // Récupérer une review par son ID
+    public Review getReviewById(Integer reviewId) {
+        return reviewRepository.findById(reviewId)
+                .orElseThrow(() -> new RuntimeException("Avis non trouvé avec l'ID : " + reviewId));
+    }
+    public List<Review> getReviewsByUser(Integer userId) {
+        return reviewRepository.findByUserUserId(userId);
+    }
+
 }
+
