@@ -55,10 +55,3 @@ CREATE TABLE IF NOT EXISTS review (
                                       FOREIGN KEY (user_id) REFERENCES user(user_id),
                                       FOREIGN KEY (destination_id) REFERENCES destination(destination_id)
 ) ENGINE=InnoDB;
-
-CREATE TABLE IF NOT EXISTS offer (
-                                     offer_id INT AUTO_INCREMENT PRIMARY KEY,
-                                     percentage_discount FLOAT NOT NULL,
-                                     destination_id INT NOT NULL,
-                                     FOREIGN KEY (destination_id) REFERENCES destination(destination_id)
-) ENGINE=InnoDB;
