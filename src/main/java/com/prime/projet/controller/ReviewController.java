@@ -88,6 +88,18 @@ public class ReviewController {
         return "reviews";
     }
 
+    @GetMapping("/review-list-admin")
+    public String showAllReviewsForAdmin(Model model) {
+        // Récupère toutes les reviews
+        List<Review> reviews = reviewService.getAllReviews();
+
+        // Ajoute les reviews au modèle
+        model.addAttribute("reviews", reviews);
+
+        // Retourne la vue pour la liste des reviews (admin)
+        return "review-list-admin";
+    }
+
     //Affiche toutes les review pour une destination donnée
     @GetMapping("/{destinationId}")
     public String getReviewsForDestination(@PathVariable Integer destinationId, Model model) {
@@ -104,4 +116,65 @@ public class ReviewController {
         return "destination-reviews";
     }
 
+    //----------------------------------User Supprime une Review ---------------------------------------------
+
+    @GetMapping("/delete/{id}")
+    public String showReviewToDelete(@PathVariable Integer id, Model model) {
+        // Récupère l'avis par ID
+        Review review = reviewService.getReviewById(id);
+
+        // Ajoute les informations de la review au modèle pour l'afficher dans la page
+        model.addAttribute("review", review);
+
+        return "review-delete"; // Vue HTML pour afficher les détails avant suppression
+    }
+
+    @PostMapping("/confirm-delete/{id}")
+    public String confirmDeleteReview(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
+        // Supprime l'avis via le service
+        reviewService.deleteReviewById(id);
+
+        // Ajoute un message de confirmation
+        redirectAttributes.addFlashAttribute("successMessage", "Avis supprimé avec succès !");
+
+        // Redirige vers la liste des avis
+        return "redirect:/reviews/review-list";
+    }
+
+
+    // Gère la suppression de l'avis et redirige vers user-delete.html
+    @PostMapping("/delete/{id}")
+    public String deleteReview(@PathVariable Integer id, Model model) {
+        // Supprime l'avis via le service
+        Review review = reviewService.getReviewById(id);
+        reviewService.deleteReviewById(id);
+
+        // Ajoute les informations de l'avis supprimé au modèle (si nécessaire)
+        model.addAttribute("deletedReview", review);
+
+        // Redirige vers la page user-delete.html
+        return "review-delete";
+    }
+
+// Liste des avis de l'utilisateur connecté
+    @GetMapping("/review-list")
+    public String showAllReviews(Model model) {
+        // Récupère l'utilisateur connecté
+        org.springframework.security.core.userdetails.User principal =
+                (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        com.prime.projet.repository.entity.User user = userRepository.findByEmail(principal.getUsername())
+                .orElseThrow(() -> new RuntimeException("Utilisateur non trouvé"));
+
+        // Récupère les avis de l'utilisateur
+        List<Review> reviews = reviewService.getReviewsByUser(user.getUserId());
+
+        // Ajoute les avis au modèle
+        model.addAttribute("reviews", reviews);
+
+        // Retourne la vue pour la liste des avis
+        return "review-list";
+    }
+
+
 }
+

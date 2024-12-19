@@ -2,16 +2,10 @@ package com.prime.projet.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -36,8 +30,8 @@ public class SecurityConfiguration {
         httpSecurity
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/","politique-de-confidentialite","cgv","/faq","/about-us","/contact","/reviews", "/styles/**", "/assets/**", "/public", "/favicon.ico", "/users/new","/images/**", "/login", "/destinations").permitAll() // Chemins publics
-                        .requestMatchers("/users/admin","/users/delete/**","/destinations/new", "/users/newadmin", "/users/delete-users","/users/edit-users","/users/list","/destinations/list","/destinations/new","/destinations/edit","/destinations/delete").hasRole("ADMIN") // ADMIN uniquement
-                        .requestMatchers("/users/user-edit-himself", "/users/user-edit-himself-s").hasRole("USER")
+                        .requestMatchers("/users/admin","/users/delete/**","/destinations/new", "/users/newadmin", "/users/delete-users","/users/edit-users","/users/list","/destinations/list","/destinations/new","/destinations/edit","/destinations/delete", "/reviews/review-list-admin", "reviews/delete/").hasRole("ADMIN") // ADMIN uniquement
+                        .requestMatchers("/users/user-edit-himself", "/users/user-edit-himself-s", "/reviews/review-list", "reviews/delete/").hasRole("USER")
                         .anyRequest().authenticated() // Toute autre requête doit être authentifiée
                 )
                 .csrf().disable()
@@ -52,12 +46,4 @@ public class SecurityConfiguration {
                 );
         return httpSecurity.build();
     }
-
-    /*
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        // Pour le test uniquement : mots de passe en clair
-        return NoOpPasswordEncoder.getInstance();
-    }
-    */
 }
