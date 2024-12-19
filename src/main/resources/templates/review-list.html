@@ -34,35 +34,14 @@
             <li class="navigation-item">
                 <a th:href="@{/contact}">Contact</a>
             </li>
-            <div class="navigation-item buttons-container">
+            <li class="navigation-item buttons-container">
                 <a th:href="@{/users/user-profile}" class="navigation-item account">
                     <i class="fa-solid fa-user"></i> Compte
                 </a>
-            </div>
+            </li>
         </ul>
     </div>
-    <div class="base-line">
-        <strong class="base-line-name">Evazion</strong>
-        <span class="base-line-slogan">Laissez vos rêves devenir votre prochaine evazion.</span>
-    </div>
 </header>
-<!--/*@thymesVar id="successMessageRegisterUserAsAdmin" type="java"*/-->
-<p class="notification" th:if="${successMessageRegisterUserAsAdmin}">
-    <i class="fa-solid fa-user-plus"></i>
-    <span th:text="${successMessageRegisterUserAsAdmin}"></span>
-</p>
-
-<!--/*@thymesVar id="successMessageUpdateUser" type="java"*/-->
-<p class="notification" th:if="${successMessageUpdateUser}">
-    <i class="fa-solid fa-user-check"></i>
-    <span th:text="${successMessageUpdateUser}"></span>
-</p>
-
-<!--/*@thymesVar id="successMessageDeleteUser" type="java"*/-->
-<p class="notification" th:if="${successMessageDeleteUser}">
-    <i class="fa-solid fa-user-xmark"></i>
-    <span th:text="${successMessageDeleteUser}"></span>
-</p>
 
 <section class="main-section">
     <h1 class="title">Liste de vos avis</h1>
@@ -85,7 +64,7 @@
             <td th:text="${review.rating}">Note</td>
             <td th:text="${review.title}">Titre</td>
             <td th:text="${review.comment}">Commentaire</td>
-            <td th:text="${review.createdAt}">Date d'ajout de l'avis</td>
+            <td th:text="${#temporals.format(review.createdAt, 'dd/MM/yyyy')}">Date d'ajout de l'avis</td>
             <td>
                 <form th:action="@{'/reviews/delete/' + ${review.reviewId}}" method="get" style="display:inline;">
                     <button type="submit" class="btn-delete">Supprimer</button>
@@ -106,13 +85,13 @@
                 <h3>Accès rapide</h3>
                 <ul class="pages">
                     <li>
-                        <a href="#">Blog</a>
+                        <a th:href="@{/about-us}">Qui sommes-nous ?</a>
                     </li>
                     <li>
-                        <a href="#">Qui sommes-nous ?</a>
+                        <a th:href="@{/faq}">Foire aux questions</a>
                     </li>
                     <li>
-                        <a href="faq.html">FAQ</a>
+                        <a th:href="@{/reviews}">Avis</a>
                     </li>
                 </ul>
             </div>
@@ -136,9 +115,9 @@
             <div class="footer-center-section">
                 <h3>Partenaires</h3>
                 <ul class="partners">
-                    <li>Partenaire 1</li>
-                    <li>Partenaire 2</li>
-                    <li>Partenaire 3</li>
+                    <li>SkyLynx Airways</li>
+                    <li>Aurora Haven</li>
+                    <li>Pathfinders Collective</li>
                 </ul>
             </div>
         </div>
@@ -146,10 +125,10 @@
         <div class="footer-bottom">
             <ul class="documents">
                 <li>
-                    <a href="#">Politique de confidentialité</a>
+                    <a th:href="@{/politique-de-confidentialite}">Politique de confidentialité</a>
                 </li>
                 <li>
-                    <a href="#">Conditions générales de ventes</a>
+                    <a th:href="@{/cgv}">Conditions générales de ventes</a>
                 </li>
             </ul>
             <p>© 2024 Evazion - Tous droits réservés.</p>

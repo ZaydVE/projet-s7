@@ -75,7 +75,8 @@
             </div>
             <div class="informations-item">
                 <h5>Date d'inscription</h5>
-                <p th:text="${user.createdAt}">Date d'inscription</p>
+                <p th:text="${#dates.format(user.createdAt, 'dd/MM/yyyy')}">Date d'inscription</p>
+
             </div>
             <div class="buttons">
                 <a th:href="@{/users/user-edit-himself}" class="edit-button">
