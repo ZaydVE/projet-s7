@@ -33,16 +33,12 @@
             <li class="navigation-item">
                 <a th:href="@{/contact}">Contact</a>
             </li>
-            <div class="navigation-item buttons-container">
+            <li class="navigation-item buttons-container">
                 <a th:href="@{/users/user-profile}" class="navigation-item account">
                     <i class="fa-solid fa-user"></i> Compte
                 </a>
-            </div>
+            </li>
         </ul>
-    </div>
-    <div class="base-line">
-        <strong class="base-line-name">Evazion</strong>
-        <span class="base-line-slogan">Laissez vos rêves devenir votre prochaine evazion.</span>
     </div>
 </header>
 <section class="main-section">
@@ -50,38 +46,38 @@
     <p>Bienvenue sur notre site ! Nous sommes un groupe d’étudiants en ingénierie informatique, passionnés par les nouvelles technologies et désireux de créer des projets concrets. Ce site est le fruit de notre travail collaboratif dans le cadre d’un projet académique, où nous avons combiné nos compétences pour concevoir une plateforme fonctionnelle et innovante.</p>
     <div class="member-container">
         <div class="member">
-            <img src="../images/italie-rome.jpg" class="member-image">
+            <img src="/assets/younes.jpg" class="member-image">
             <div class="member-text">
                 <h3>Younes Achouche</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat.</p>
+                <p>Younes est un aventurier dans l’âme, toujours à la recherche de nouvelles expériences et découvertes. Son enthousiasme pour les voyages se traduit par une vision créative et une capacité à penser hors des sentiers battus. Il inspire l’équipe à repousser ses limites et à intégrer des perspectives internationales au projet.</p>
             </div>
         </div>
         <div class="member">
-            <img src="../images/italie-rome.jpg" class="member-image">
+            <img src="/assets/---.jpeg" class="member-image">
             <div class="member-text">
                 <h3>Zayd Ajjaji</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat.</p>
+                <p>Zayd est le pragmatique du groupe, mais cela ne l’empêche pas d’être un grand passionné de voyages. Ses expériences à travers le monde lui permettent d’apporter une approche structurée et multiculturelle à l’équipe. Toujours organisé, il s’assure que chaque étape soit bien planifiée, tout en restant ouvert à l’imprévu, comme dans un voyage.</p>
             </div>
         </div>
         <div class="member">
-            <img src="../images/italie-rome.jpg" class="member-image">
+            <img src="/assets/lucas.jpeg" class="member-image">
             <div class="member-text">
                 <h3>Lucas Colussi</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat.</p>
+                <p>Lucas est un rêveur et un explorateur, captivé par la diversité des cultures et des paysages. Sa passion pour les voyages se retrouve dans sa capacité à concevoir des expériences uniques et immersives, que ce soit dans le projet ou dans ses interactions avec l’équipe. Il apporte une touche d’originalité qui donne vie à vos idées.</p>
             </div>
         </div>
         <div class="member">
-            <img src="../images/italie-rome.jpg" class="member-image">
+            <img src="/assets/mehdi.jpeg" class="member-image">
             <div class="member-text">
                 <h3>Mehdi El Kadaoui</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat.</p>
+                <p>Mehdi est le coordinateur et le globe-trotteur du groupe. Toujours prêt à partir à l’aventure, il sait canaliser l’énergie de l’équipe pour atteindre des objectifs communs. Sa capacité à relier les idées de chacun reflète son goût pour les rencontres et les échanges culturels qu’il a vécus lors de ses voyages.</p>
             </div>
         </div>
         <div class="member">
-            <img src="../images/italie-rome.jpg" class="member-image">
+            <img src="/assets/---.jpg" class="member-image">
             <div class="member-text">
                 <h3>Daniele Sandra Tonfack Yonta</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat.</p>
+                <p>Daniele est une passionnée de voyages et de découvertes, toujours prête à partager son énergie et ses idées pour enrichir le projet. Elle apporte une approche réfléchie et créative, combinant sa curiosité pour les cultures du monde et sa capacité technique. Sa contribution est essentielle pour donner une véritable dimension internationale au projet.</p>
             </div>
         </div>
     </div>
@@ -98,13 +94,13 @@
                 <h3>Accès rapide</h3>
                 <ul class="pages">
                     <li>
-                        <a href="#">Blog</a>
+                        <a th:href="@{/about-us}">Qui sommes-nous ?</a>
                     </li>
                     <li>
-                        <a href="#">Qui sommes-nous ?</a>
+                        <a th:href="@{/faq}">Foire aux questions</a>
                     </li>
                     <li>
-                        <a href="faq.html">FAQ</a>
+                        <a th:href="@{/reviews}">Avis</a>
                     </li>
                 </ul>
             </div>
@@ -128,9 +124,9 @@
             <div class="footer-center-section">
                 <h3>Partenaires</h3>
                 <ul class="partners">
-                    <li>Partenaire 1</li>
-                    <li>Partenaire 2</li>
-                    <li>Partenaire 3</li>
+                    <li>SkyLynx Airways</li>
+                    <li>Aurora Haven</li>
+                    <li>Pathfinders Collective</li>
                 </ul>
             </div>
         </div>
@@ -138,10 +134,10 @@
         <div class="footer-bottom">
             <ul class="documents">
                 <li>
-                    <a href="#">Politique de confidentialité</a>
+                    <a th:href="@{/politique-de-confidentialite}">Politique de confidentialité</a>
                 </li>
                 <li>
-                    <a href="#">Conditions générales de ventes</a>
+                    <a th:href="@{/cgv}">Conditions générales de ventes</a>
                 </li>
             </ul>
             <p>© 2024 Evazion - Tous droits réservés.</p>
