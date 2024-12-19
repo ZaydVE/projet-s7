@@ -18,61 +18,35 @@
     <script src="/script/notification.js"></script>
 </head>
 <body>
-    <header class="header">
-        <div class="top-bar">
-            <div class="logo">
-                <a th:href="@{/}">
-                    Evazion
+<header class="header">
+    <div class="top-bar">
+        <div class="logo">
+            <a th:href="@{/}">
+                Evazion
+            </a>
+        </div>
+        <ul class="navigation">
+            <li class="navigation-item trips-item">
+                <a th:href="@{/destinations}">Voyages</a>
+            </li>
+            <li class="navigation-item">
+                <a th:href="@{/reviews}">Avis</a>
+            </li>
+            <li class="navigation-item">
+                <a th:href="@{/contact}">Contact</a>
+            </li>
+            <div class="navigation-item buttons-container">
+                <a th:href="@{/users/user-profile}" class="navigation-item account">
+                    <i class="fa-solid fa-user"></i> Compte
                 </a>
             </div>
-            <ul class="navigation">
-                <li class="navigation-item trips-item">
-                    <a th:href="@{/destinations}">Voyages</a>
-                    <ul class="navigation-item trips-dropdown">
-                        <li class="dropdown-item">
-                            <a href="voyages.html">Afrique</a>
-                        </li>
-                        <li class="dropdown-item">
-                            <a href="voyages.html">Amérique du Nord</a>
-                        </li>
-                        <li class="dropdown-item">
-                            <a href="voyages.html">Amérique du Sud</a>
-                        </li>
-                        <li class="dropdown-item">
-                            <a href="voyages.html">Asie</a>
-                        </li>
-                        <li class="dropdown-item">
-                            <a href="voyages.html">Europe</a>
-                        </li>
-                        <li class="dropdown-item">
-                            <a href="voyages.html">Océanie</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="navigation-item">
-                    <a th:href="@{/reviews/liste}">Avis</a>
-                </li>
-                <li class="navigation-item">
-                    <a th:href="@{/contact}">Contact</a>
-                </li>
-                <div class="navigation-item buttons-container">
-                    <form class="navigation-item search-bar">
-                        <input type="text" class="search-input" placeholder="Rechercher" size="10">
-                        <button class="search-button">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </button>
-                    </form>
-                    <a th:href="@{/users/user-profile}" class="navigation-item account">
-                        <i class="fa-solid fa-user"></i> Compte
-                    </a>
-                </div>
-            </ul>
-        </div>
-        <div class="base-line">
-            <strong class="base-line-name">Evazion</strong>
-            <span class="base-line-slogan">Laissez vos rêves devenir votre prochaine evazion.</span>
-        </div>
-    </header>
+        </ul>
+    </div>
+    <div class="base-line">
+        <strong class="base-line-name">Evazion</strong>
+        <span class="base-line-slogan">Laissez vos rêves devenir votre prochaine evazion.</span>
+    </div>
+</header>
 
     <!--/*@thymesVar id="successMessageRegisterUser" type="java"*/-->
     <p class="notification" th:if="${successMessageRegisterUser}">

@@ -77,7 +77,7 @@ public class ReviewController {
 
         redirectAttributes.addFlashAttribute("successMessageRegisterReview", "Ajout d'avis réussi !");
 
-        return "redirect:/reviews/liste";
+        return "redirect:/reviews";
     }
 
     //Affiche toutes les reviews
