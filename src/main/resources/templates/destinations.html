@@ -35,16 +35,12 @@
       <li class="navigation-item">
         <a th:href="@{/contact}">Contact</a>
       </li>
-      <div class="navigation-item buttons-container">
+      <li class="navigation-item buttons-container">
         <a th:href="@{/users/user-profile}" class="navigation-item account">
           <i class="fa-solid fa-user"></i> Compte
         </a>
-      </div>
+      </li>
     </ul>
-  </div>
-  <div class="base-line">
-    <strong class="base-line-name">Evazion</strong>
-    <span class="base-line-slogan">Laissez vos rêves devenir votre prochaine evazion.</span>
   </div>
 </header>
 
@@ -324,7 +320,7 @@
       <div class="card-content">
         <div class="card-header">
           <div class="infos">
-            <span th:text="${destination.price}" class="price">Prix</span>
+            <span th:text="${T(java.lang.Math).round(destination.price) + ' €'}" class="price">Prix</span>
             <span class="duration">
                 <span th:text="${destination.startDate}">Date de départ</span> - <span th:text="${destination.endDate}">Date de fin</span>
             </span>
@@ -352,13 +348,13 @@
         <h3>Accès rapide</h3>
         <ul class="pages">
           <li>
-            <a href="#">Blog</a>
+            <a th:href="@{/about-us}">Qui sommes-nous ?</a>
           </li>
           <li>
-            <a href="#">Qui sommes-nous ?</a>
+            <a th:href="@{/faq}">Foire aux questions</a>
           </li>
           <li>
-            <a href="faq.html">FAQ</a>
+            <a th:href="@{/reviews}">Avis</a>
           </li>
         </ul>
       </div>
@@ -382,9 +378,9 @@
       <div class="footer-center-section">
         <h3>Partenaires</h3>
         <ul class="partners">
-          <li>Partenaire 1</li>
-          <li>Partenaire 2</li>
-          <li>Partenaire 3</li>
+          <li>SkyLynx Airways</li>
+          <li>Aurora Haven</li>
+          <li>Pathfinders Collective</li>
         </ul>
       </div>
     </div>
@@ -392,10 +388,10 @@
     <div class="footer-bottom">
       <ul class="documents">
         <li>
-          <a href="#">Politique de confidentialité</a>
+          <a th:href="@{/politique-de-confidentialite}">Politique de confidentialité</a>
         </li>
         <li>
-          <a href="#">Conditions générales de ventes</a>
+          <a th:href="@{/cgv}">Conditions générales de ventes</a>
         </li>
       </ul>
       <p>© 2024 Evazion - Tous droits réservés.</p>

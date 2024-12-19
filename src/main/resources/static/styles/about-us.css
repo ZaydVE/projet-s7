@@ -58,6 +58,10 @@
 	width: 600px;
 }
 
+.main-section .member:nth-child(even) .member-text {
+	text-align: right;
+}
+
 @media (max-width: 1010px) {
 
 	.main-section {

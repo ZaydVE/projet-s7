@@ -35,16 +35,12 @@
             <li class="navigation-item">
                 <a th:href="@{/contact}">Contact</a>
             </li>
-            <div class="navigation-item buttons-container">
+            <li class="navigation-item buttons-container">
                 <a th:href="@{/users/user-profile}" class="navigation-item account">
                     <i class="fa-solid fa-user"></i> Compte
                 </a>
-            </div>
+            </li>
         </ul>
-    </div>
-    <div class="base-line">
-        <strong class="base-line-name">Evazion</strong>
-        <span class="base-line-slogan">Laissez vos rêves devenir votre prochaine evazion.</span>
     </div>
 </header>
 
@@ -100,67 +96,67 @@
             </div>
         </div>
     </section>
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-top">
-                <h3>Evazion</h3>
-                <p>Evazion propose des voyages sur mesure pour des escapades uniques, mêlant aventure, détente et découvertes culturelles. Faites confiance à notre expertise pour transformer vos envies d’évasion en souvenirs mémorables, où que vos rêves vous mènent.</p>
-            </div>
-            <div class="footer-center">
-                <div class="footer-center-section">
-                    <h3>Accès rapide</h3>
-                    <ul class="pages">
-                        <li>
-                            <a href="#">Blog</a>
-                        </li>
-                        <li>
-                            <a href="#">Qui sommes-nous ?</a>
-                        </li>
-                        <li>
-                            <a href="faq.html">FAQ</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="footer-center-section">
-                    <h3>Contactez-nous</h3>
-                    <ul class="contact">
-                        <li>
-                            <i class="fa-solid fa-phone"></i> +33 1 23 45 67 89
-                        </li>
-                        <li>
-                            <a href="mailto:contact@evazion.com" target="_blank"><i class="fa-solid fa-envelope"></i> contact@evazion.com</a>
-                        </li>
-                        <li>
-                            <a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook"></i> Evazion - Agence de voyage</a>
-                        </li>
-                        <li>
-                            <a href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i> evazionvoyages</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="footer-center-section">
-                    <h3>Partenaires</h3>
-                    <ul class="partners">
-                        <li>SkyLynx Airways</li>
-                        <li>Aurora Haven</li>
-                        <li>Pathfinders Collective</li>
-                    </ul>
-                </div>
-            </div>
-            <hr>
-            <div class="footer-bottom">
-                <ul class="documents">
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-top">
+            <h3>Evazion</h3>
+            <p>Evazion propose des voyages sur mesure pour des escapades uniques, mêlant aventure, détente et découvertes culturelles. Faites confiance à notre expertise pour transformer vos envies d’évasion en souvenirs mémorables, où que vos rêves vous mènent.</p>
+        </div>
+        <div class="footer-center">
+            <div class="footer-center-section">
+                <h3>Accès rapide</h3>
+                <ul class="pages">
                     <li>
-                        <a href="politique-de-confidentialite.html">Politique de confidentialité</a>
+                        <a th:href="@{/about-us}">Qui sommes-nous ?</a>
                     </li>
                     <li>
-                        <a href="cgv.html">Conditions générales de ventes</a>
+                        <a th:href="@{/faq}">Foire aux questions</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/reviews}">Avis</a>
                     </li>
                 </ul>
-                <p>© 2024 Evazion - Tous droits réservés.</p>
+            </div>
+            <div class="footer-center-section">
+                <h3>Contactez-nous</h3>
+                <ul class="contact">
+                    <li>
+                        <i class="fa-solid fa-phone"></i> +33 1 23 45 67 89
+                    </li>
+                    <li>
+                        <a href="mailto:contact@evazion.com" target="_blank"><i class="fa-solid fa-envelope"></i> contact@evazion.com</a>
+                    </li>
+                    <li>
+                        <a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook"></i> Evazion - Agence de voyage</a>
+                    </li>
+                    <li>
+                        <a href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i> evazionvoyages</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-center-section">
+                <h3>Partenaires</h3>
+                <ul class="partners">
+                    <li>SkyLynx Airways</li>
+                    <li>Aurora Haven</li>
+                    <li>Pathfinders Collective</li>
+                </ul>
             </div>
         </div>
-    </footer>
+        <hr>
+        <div class="footer-bottom">
+            <ul class="documents">
+                <li>
+                    <a th:href="@{/politique-de-confidentialite}">Politique de confidentialité</a>
+                </li>
+                <li>
+                    <a th:href="@{/cgv}">Conditions générales de ventes</a>
+                </li>
+            </ul>
+            <p>© 2024 Evazion - Tous droits réservés.</p>
+        </div>
+    </div>
+</footer>
     <a href="#" class="scroll-top-button">
         <i class="fa-solid fa-arrow-up"></i>
     </a>
