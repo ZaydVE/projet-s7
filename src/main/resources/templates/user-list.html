@@ -80,7 +80,7 @@
       <td th:text="${user.firstname}">Prénom</td>
       <td th:text="${user.email}">Email</td>
       <td th:text="${user.phoneNumber}">Téléphone</td>
-      <td th:text="${user.createdAt}">Date d'inscription</td>
+      <td th:text="${#dates.format(user.createdAt, 'dd/MM/yyyy')}">Date d'inscription</td>
       <td th:text="${user.admin ? 'Oui' : 'Non'}">Admin</td>
       <td>
         <button th:onclick="|window.location='/users/user-edit/' + ${user.userId}|" class="edit-button"><i class="fa-solid fa-user-pen"></i> Modifier</button>
