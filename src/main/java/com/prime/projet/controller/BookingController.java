@@ -115,19 +115,23 @@ public class BookingController {
         return "booking-delete";
     }
 
-    //Enregistrement du delete
     @PostMapping("/delete/{id}")
     public String deleteBooking(@PathVariable Integer id) {
+        // Suppression de la réservation
         bookingService.deleteBooking(id);
-        return "redirect:/bookings/user-list";
-    }
 
-    @GetMapping("/edit/{id}")
-    public String showEditBookingPage(@PathVariable Integer id, Model model) {
-        Booking booking = bookingService.getBookingById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Réservation introuvable."));
-        model.addAttribute("booking", booking);
-        return "booking-edit";
+        // Récupération de l'utilisateur authentifié
+        org.springframework.security.core.userdetails.User principal =
+                (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        // Vérification du rôle de l'utilisateur
+        if (principal.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"))) {
+            // Redirection pour les administrateurs
+            return "redirect:/bookings/list";
+        } else {
+            // Redirection pour les utilisateurs
+            return "redirect:/destinations";
+        }
     }
 
     @PostMapping("/edit/{id}")
