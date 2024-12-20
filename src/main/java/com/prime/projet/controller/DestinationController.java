@@ -165,39 +165,6 @@ public class DestinationController {
         return "redirect:/destinations";
     }
 
-    /*
-    @PostMapping("/edit/{id}")
-    public String updateDestination(
-            @RequestParam("destinationId") Integer destinationId,
-            @RequestParam("name") String name,
-            @RequestParam("description") String description,
-            @RequestParam("price") float price,
-            @RequestParam("continent") String continent,
-            @RequestParam("country") String country,
-            @RequestParam("city") String city,
-            @RequestParam("type") String type,
-            @RequestParam("startDate") String startDate,
-            @RequestParam("endDate") String endDate,
-            @RequestParam("nbPlaces") int nbPlaces,
-            @RequestParam(value = "lienImage", required = false) MultipartFile lienImage,
-            RedirectAttributes redirectAttributes ) {
-
-        if (lienImage != null && !lienImage.isEmpty()) {
-            destinationService.updateDestination(
-                    destinationId, name, description, price, continent, country, city, type, startDate, endDate, nbPlaces, lienImage
-            );
-        } else {
-            destinationService.updateDestinationWithoutImage(
-                    destinationId, name, description, price, continent, country, city, type, startDate, endDate, nbPlaces
-            );
-        }
-
-        redirectAttributes.addFlashAttribute("successMessageUpdateDestination", "Modification de la destination réussie !");
-
-        return "redirect:/destinations";
-    }
-     */
-
     @GetMapping("/delete/{destinationId}")
     public String showDeleteForm(@PathVariable("destinationId") Integer destinationId, Model model) {
         Destination destination = destinationService.getDestinationById(destinationId);
