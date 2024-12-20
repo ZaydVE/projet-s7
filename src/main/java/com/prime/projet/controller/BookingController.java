@@ -156,12 +156,17 @@ public class BookingController {
     @PostMapping("/edit/{id}")
     public String editBooking(@PathVariable Integer id,
                               @RequestParam int nbPassengers,
-                              @RequestParam float totalPrice) {
+                              @RequestParam String totalPrice) {
         logger.info("Editing booking with ID: {}", id);
         Booking booking = bookingService.getBookingById(id).orElse(null);
         if (booking != null) {
             booking.setNbPassengers(nbPassengers);
-            booking.setTotalPrice(totalPrice);
+
+            // Retirer le symbole '€' et convertir en float
+            totalPrice = totalPrice.replace("€", "").trim();
+            float price = Float.parseFloat(totalPrice);
+
+            booking.setTotalPrice(price);
             bookingService.updateBooking(booking);
         }
 
@@ -169,13 +174,10 @@ public class BookingController {
         org.springframework.security.core.userdetails.User principal =
                 (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-
         // Vérification du rôle de l'utilisateur
         if (principal.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"))) {
-            // Redirection pour les administrateurs
             return "redirect:/bookings/list";
         } else {
-            // Redirection pour les utilisateurs
             return "redirect:/bookings/user-list";
         }
     }
