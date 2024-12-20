@@ -449,7 +449,7 @@
                   data.forEach(destination => {
                     const card = document.createElement('a');
                     card.classList.add('card');
-                    card.href = '#';
+                    card.href = `/destinations/${destination.destinationId}`;
                     card.innerHTML = `
               <img src="/images/${destination.lienImage}" alt="Image de la destination" class="card-image"/>
               <div class="card-content">
