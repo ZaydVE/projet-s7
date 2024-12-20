@@ -33,282 +33,84 @@
             <li class="navigation-item">
                 <a th:href="@{/contact}">Contact</a>
             </li>
-            <div class="navigation-item buttons-container">
+            <li class="navigation-item buttons-container">
                 <a th:href="@{/users/user-profile}" class="navigation-item account">
                     <i class="fa-solid fa-user"></i> Compte
                 </a>
-            </div>
+            </li>
         </ul>
-    </div>
-    <div class="base-line">
-        <strong class="base-line-name">Evazion</strong>
-        <span class="base-line-slogan">Laissez vos rêves devenir votre prochaine evazion.</span>
     </div>
 </header>
 
 <section class="main-section">
     <h1 class="title">Modifier une destination</h1>
     <p class="description">Mettez à jour les informations d'une destination.</p>
-    <form action="/destinations/edit" method="post" enctype="multipart/form-data" class="add-destination-form">
+    <form th:action="@{/destinations/edit/{id}(id=${destination.destinationId})}" method="post" enctype="multipart/form-data" class="add-destination-form">
         <div class="fields">
-            <div class="form-group">
-                <h5>ID Destination</h5>
-                <input type="number" id="destinationId" name="destinationId" placeholder="ID de la destination" required>
-            </div>
             <div class="form-block">
                 <div class="form-group">
                     <h5>Nom</h5>
-                    <input type="text" id="name" name="name" required>
+                    <input type="text" id="name" name="name" th:value="${destination.name}" required>
                 </div>
                 <div class="form-group">
                     <h5 for="type">Type</h5>
-                    <input type="text" id="type" name="type" required>
+                    <input type="text" id="type" name="type" th:value="${destination.type}" required>
                 </div>
             </div>
             <div class="form-block location">
                 <div class="form-group">
                     <h5 for="continent">Continent</h5>
                     <select id="continent" name="continent" required>
-                        <option>Afrique</option>
-                        <option>Amérique du Nord</option>
-                        <option>Amérique du Sud</option>
-                        <option>Asie</option>
-                        <option>Europe</option>
-                        <option>Océanie</option>
+                        <option th:each="continent : ${continents}"
+                                th:value="${continent}"
+                                th:text="${continent}"
+                                th:selected="${continent == destination.continent}">
+                        </option>
                     </select>
                 </div>
                 <div class="form-group">
                     <h5 for="country">Pays</h5>
                     <select id="country" name="country" required>
-                        <option>Afghanistan</option>
-                        <option>Afrique du Sud</option>
-                        <option>Albanie</option>
-                        <option>Algérie</option>
-                        <option>Allemagne</option>
-                        <option>Andorre</option>
-                        <option>Angola</option>
-                        <option>Antigua-et-Barbuda</option>
-                        <option>Arabie Saoudite</option>
-                        <option>Argentine</option>
-                        <option>Arménie</option>
-                        <option>Australie</option>
-                        <option>Autriche</option>
-                        <option>Azerbaïdjan</option>
-                        <option>Bahamas</option>
-                        <option>Bahreïn</option>
-                        <option>Bangladesh</option>
-                        <option>Barbade</option>
-                        <option>Belau / Palau / Palaos</option>
-                        <option>Belgique</option>
-                        <option>Belize</option>
-                        <option>Bénin</option>
-                        <option>Bhoutan</option>
-                        <option>Biélorussie</option>
-                        <option>Birmanie</option>
-                        <option>Bolivie</option>
-                        <option>Bosnie-Herzégovine</option>
-                        <option>Botswana</option>
-                        <option>Brésil</option>
-                        <option>Brunei</option>
-                        <option>Bulgarie</option>
-                        <option>Burkina Faso</option>
-                        <option>Burundi</option>
-                        <option>Cambodge</option>
-                        <option>Cameroun</option>
-                        <option>Canada</option>
-                        <option>Cap-Vert</option>
-                        <option>Centrafrique</option>
-                        <option>Chili</option>
-                        <option>Chine</option>
-                        <option>Chypre</option>
-                        <option>Colombie</option>
-                        <option>Comores</option>
-                        <option>Congo-Brazzaville</option>
-                        <option>Congo-Kinshasa</option>
-                        <option>Corée du Nord</option>
-                        <option>Corée du Sud</option>
-                        <option>Costa Rica</option>
-                        <option>Côte d’Ivoire</option>
-                        <option>Croatie</option>
-                        <option>Cuba</option>
-                        <option>Danemark</option>
-                        <option>Djibouti</option>
-                        <option>Dominique</option>
-                        <option>Égypte</option>
-                        <option>Émirats arabes unis</option>
-                        <option>Équateur</option>
-                        <option>Érythrée</option>
-                        <option>Espagne</option>
-                        <option>Estonie</option>
-                        <option>États-Unis</option>
-                        <option>Éthiopie</option>
-                        <option>Fidji</option>
-                        <option>Finlande</option>
-                        <option>France</option>
-                        <option>Gabon</option>
-                        <option>Gambie</option>
-                        <option>Géorgie</option>
-                        <option>Ghana</option>
-                        <option>Grèce</option>
-                        <option>Grenade</option>
-                        <option>Guatemala</option>
-                        <option>Guinée-Bissau</option>
-                        <option>Guinée-Conakry</option>
-                        <option>Guinée équatoriale</option>
-                        <option>Guyana</option>
-                        <option>Haïti</option>
-                        <option>Honduras</option>
-                        <option>Hongrie</option>
-                        <option>Inde</option>
-                        <option>Indonésie</option>
-                        <option>Irak</option>
-                        <option>Iran</option>
-                        <option>Irlande</option>
-                        <option>Islande</option>
-                        <option>Israël</option>
-                        <option>Italie</option>
-                        <option>Jamaïque</option>
-                        <option>Japon</option>
-                        <option>Jordanie</option>
-                        <option>Kazakhstan</option>
-                        <option>Kenya</option>
-                        <option>Kirghizistan</option>
-                        <option>Kiribati</option>
-                        <option>Kosovo</option>
-                        <option>Koweït</option>
-                        <option>Laos</option>
-                        <option>Lesotho</option>
-                        <option>Lettonie</option>
-                        <option>Liban</option>
-                        <option>Liberia</option>
-                        <option>Libye</option>
-                        <option>Liechtenstein</option>
-                        <option>Lituanie</option>
-                        <option>Luxembourg</option>
-                        <option>Macédoine</option>
-                        <option>Madagascar</option>
-                        <option>Malaisie</option>
-                        <option>Malawi</option>
-                        <option>Maldives</option>
-                        <option>Mali</option>
-                        <option>Malte</option>
-                        <option>Maroc</option>
-                        <option>Marshall</option>
-                        <option>Maurice</option>
-                        <option>Mauritanie</option>
-                        <option>Mexique</option>
-                        <option>Micronésie</option>
-                        <option>Moldavie</option>
-                        <option>Monaco</option>
-                        <option>Mongolie</option>
-                        <option>Monténégro</option>
-                        <option>Mozambique</option>
-                        <option>Namibie</option>
-                        <option>Nauru</option>
-                        <option>Népal</option>
-                        <option>Nicaragua</option>
-                        <option>Niger</option>
-                        <option>Nigeria</option>
-                        <option>Norvège</option>
-                        <option>Nouvelle-Zélande</option>
-                        <option>Oman</option>
-                        <option>Ouganda</option>
-                        <option>Ouzbékistan</option>
-                        <option>Pakistan</option>
-                        <option>Panama</option>
-                        <option>Papouasie-Nouvelle-Guinée</option>
-                        <option>Paraguay</option>
-                        <option>Pays-Bas</option>
-                        <option>Pérou</option>
-                        <option>Philippines</option>
-                        <option>Pologne</option>
-                        <option>Portugal</option>
-                        <option>Qatar</option>
-                        <option>République dominicaine</option>
-                        <option>République tchèque</option>
-                        <option>Roumanie</option>
-                        <option>Royaume-Uni</option>
-                        <option>Russie</option>
-                        <option>Rwanda</option>
-                        <option>Saint-Christophe-et-Niévès</option>
-                        <option>Sainte-Lucie</option>
-                        <option>Saint-Marin</option>
-                        <option>Saint-Vincent-et-les-Grenadines</option>
-                        <option>Salomon</option>
-                        <option>São-Tomé-et-Príncipe</option>
-                        <option>Salvador</option>
-                        <option>Samoa occidentales</option>
-                        <option>Sénégal</option>
-                        <option>Serbie</option>
-                        <option>Seychelles</option>
-                        <option>Sierra Leone</option>
-                        <option>Singapour</option>
-                        <option>Slovaquie</option>
-                        <option>Slovénie</option>
-                        <option>Somalie</option>
-                        <option>Soudan</option>
-                        <option>Soudan du Sud</option>
-                        <option>Sri Lanka</option>
-                        <option>Suède</option>
-                        <option>Suisse</option>
-                        <option>Surinam</option>
-                        <option>Swaziland</option>
-                        <option>Syrie</option>
-                        <option>Tadjikistan</option>
-                        <option>Tanzanie</option>
-                        <option>Tchad</option>
-                        <option>Timor oriental</option>
-                        <option>Thaïlande</option>
-                        <option>Togo</option>
-                        <option>Tonga</option>
-                        <option>Trinité-et-Tobago</option>
-                        <option>Tunisie</option>
-                        <option>Turkménistan</option>
-                        <option>Turquie</option>
-                        <option>Tuvalu</option>
-                        <option>Ukraine</option>
-                        <option>Uruguay</option>
-                        <option>Vanuatu</option>
-                        <option>Vatican</option>
-                        <option>Venezuela</option>
-                        <option>Vietnam</option>
-                        <option>Yémen</option>
-                        <option>Zambie</option>
-                        <option>Zimbabwe</option>
+                        <option th:each="country : ${countries}"
+                                th:value="${country}"
+                                th:text="${country}"
+                                th:selected="${country == destination.country}">
+                        </option>
                     </select>
                 </div>
+
                 <div class="form-group">
                     <h5 for="city">Ville</h5>
-                    <input type="text" id="city" name="city" required>
+                    <input type="text" id="city" name="city" th:value="${destination.city}" required>
                 </div>
             </div>
             <div class="form-block">
                 <div class="form-group">
                     <h5 for="startDate">Date de début</h5>
-                    <input type="date" id="startDate" name="startDate" required>
+                    <input type="date" id="startDate" name="startDate" th:value="${destination.startDate}" required>
                 </div>
                 <div class="form-group">
                     <h5 for="endDate">Date de fin</h5>
-                    <input type="date" id="endDate" name="endDate" required>
+                    <input type="date" id="endDate" name="endDate" th:value="${destination.endDate}" required>
                 </div>
             </div>
             <div class="form-block">
                 <div class="form-group">
                     <h5 for="price">Prix</h5>
-                    <input type="number" id="price" name="price" min="0" step="0.01" required>
+                    <input type="number" id="price" name="price" th:value="${destination.price}" min="0" step="0.01" required>
                 </div>
                 <div class="form-group">
                     <h5 for="nbPlaces">Places disponibles</h5>
-                    <input type="number" id="nbPlaces" name="nbPlaces" min="1" required>
+                    <input type="number" id="nbPlaces" name="nbPlaces" th:value="${destination.nbPlaces}" min="1" required>
                 </div>
             </div>
             <div class="form-group">
                 <h5 for="description">Description</h5>
-                <textarea id="description" name="description" rows="5" cols="125" required></textarea>
+                <textarea id="description" name="description" rows="5" cols="125" th:text="${destination.description}" required></textarea>
             </div>
             <div class="form-group">
                 <h5 for="lienImage">Image</h5>
-                <input type="file" id="lienImage" name="lienImage" accept=".jpg, .jpeg" required>
+                <input type="file" id="lienImage" name="lienImage" accept=".jpg, .jpeg">
             </div>
         </div>
         <button type="submit" class="submit-button"><i class="fa-solid fa-save"></i> Enregistrer</button>
@@ -326,13 +128,13 @@
                 <h3>Accès rapide</h3>
                 <ul class="pages">
                     <li>
-                        <a href="#">Blog</a>
+                        <a th:href="@{/about-us}">Qui sommes-nous ?</a>
                     </li>
                     <li>
-                        <a href="#">Qui sommes-nous ?</a>
+                        <a th:href="@{/faq}">Foire aux questions</a>
                     </li>
                     <li>
-                        <a href="faq.html">FAQ</a>
+                        <a th:href="@{/reviews}">Avis</a>
                     </li>
                 </ul>
             </div>
@@ -356,9 +158,9 @@
             <div class="footer-center-section">
                 <h3>Partenaires</h3>
                 <ul class="partners">
-                    <li>Partenaire 1</li>
-                    <li>Partenaire 2</li>
-                    <li>Partenaire 3</li>
+                    <li>SkyLynx Airways</li>
+                    <li>Aurora Haven</li>
+                    <li>Pathfinders Collective</li>
                 </ul>
             </div>
         </div>
@@ -366,10 +168,10 @@
         <div class="footer-bottom">
             <ul class="documents">
                 <li>
-                    <a href="#">Politique de confidentialité</a>
+                    <a th:href="@{/politique-de-confidentialite}">Politique de confidentialité</a>
                 </li>
                 <li>
-                    <a href="#">Conditions générales de ventes</a>
+                    <a th:href="@{/cgv}">Conditions générales de ventes</a>
                 </li>
             </ul>
             <p>© 2024 Evazion - Tous droits réservés.</p>

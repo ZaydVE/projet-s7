@@ -9,8 +9,3 @@ INSERT INTO review (rating, title, comment, user_id, destination_id)
 VALUES
     (5, 'Trop bien','Magnifique expérience, je recommande vivement cette destination !', 1, 1),
     (3, 'Mid de fou', 'L’endroit était correct, mais le service pourrait être amélioré.', 1, 2);
-
-INSERT INTO offer (percentage_discount, destination_id)
-VALUES
-    (15.5, 1),
-    (25.0, 2);

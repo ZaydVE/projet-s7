@@ -6,7 +6,7 @@
   <meta name="description" content="Découvrez nos offres de voyage autour du monde !">
   <meta name="keywords" content="voyage, tourisme, vacances">
   <meta name="author" content="Younes Achouche, Zayd Ajjaji, Lucas Colussi, Mehdi El Kadaoui, Daniele Sandra Tonfack Yonta">
-  <title>Voyages - Evazion</title>
+  <title>Inscription - Evazion</title>
   <link rel="icon" type="image/x-icon" href="/assets/evazion-logo.png">
   <link rel="stylesheet" href="/styles/base.css">
   <link rel="stylesheet" href="/styles/header.css">
@@ -33,55 +33,109 @@
       <li class="navigation-item">
         <a th:href="@{/contact}">Contact</a>
       </li>
-      <div class="navigation-item buttons-container">
+      <li class="navigation-item buttons-container">
         <a th:href="@{/users/user-profile}" class="navigation-item account">
           <i class="fa-solid fa-user"></i> Compte
         </a>
-      </div>
+      </li>
     </ul>
-  </div>
-  <div class="base-line">
-    <strong class="base-line-name">Evazion</strong>
-    <span class="base-line-slogan">Laissez vos rêves devenir votre prochaine evazion.</span>
   </div>
 </header>
 
 <section class="main-section">
   <h1 class="title">Inscription</h1>
-  <p class="description">Créez un compte pour accéder à nos offres exclusives et gérer vos réservations.<br>Vous possédez déjà un compte ? Connectez vous <a href="#">ici</a>.</p>
-  <form action="/users/new" method="post" class="registration-form">
+  <p class="description">Créez un compte pour accéder à nos offres exclusives et gérer vos réservations.</p>
+  <form action="/users/new" method="post" class="registration-form" id="registration-form" novalidate>
     <div class="form-block">
       <div class="form-group">
         <h5>Nom</h5>
-        <input type="text" id="firstname" name="firstname" placeholder="..." required>
+        <input type="text" id="lastname" name="lastname">
+        <div class="error" id="firstnameError"></div>
       </div>
       <div class="form-group">
         <h5>Prénom</h5>
-        <input type="text" id="lastname" name="lastname" placeholder="..." required>
+        <input type="text" id="firstname" name="firstname">
+        <div class="error" id="lastnameError"></div>
       </div>
     </div>
     <div class="form-group">
       <h5>Email</h5>
-      <input type="email" id="email" name="email" placeholder="..." required>
+      <input type="email" id="email" name="email">
+      <div class="error" id="emailError"></div>
     </div>
     <div class="form-group">
       <h5>Téléphone</h5>
-      <input type="text" id="phonenumber" name="phonenumber" placeholder="..." required>
+      <input type="text" id="phonenumber" name="phonenumber">
+      <div class="error" id="phoneError"></div>
     </div>
     <div class="form-block">
       <div class="form-group">
         <h5>Mot de passe</h5>
-        <input type="password" id="password" name="password" placeholder="..." required>
+        <input type="password" id="password" name="password">
+        <div class="error" id="passwordError"></div>
       </div>
       <div class="form-group">
         <h5>Confirmer le mot de passe</h5>
-        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="..." required>
+        <input type="password" id="confirmPassword" name="confirmPassword">
+        <div class="error" id="confirmPasswordError"></div>
       </div>
     </div>
     <div class="form-group">
       <button type="submit" class="submit-button">S'inscrire</button>
     </div>
   </form>
+  <p class="message">Déjà inscrit ? Connectez vous <a href="/login">ici</a>.</p>
+  <script>
+    document.getElementById('registration-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      let isValid = true;
+      // Nom
+      const lastname = document.getElementById('lastname').value.trim();
+      if (!lastname) {
+        document.getElementById('lastnameError').textContent = "Le nom est obligatoire.";
+        isValid = false;
+      } else if (lastname.length > 45) {
+        document.getElementById('lastnameError').textContent = "Le nom est trop long.";
+        isValid = false;
+      } else {
+        document.getElementById('lastnameError').textContent = "";
+      }
+      // Prénom
+      const firstname = document.getElementById('firstname').value.trim();
+      if (!lastname) {
+        document.getElementById('firstnameError').textContent = "Le prénom est obligatoire.";
+        isValid = false;
+      } else if (lastname.length > 45) {
+        document.getElementById('firstnameError').textContent = "Le prénom est trop long.";
+        isValid = false;
+      } else {
+        document.getElementById('firstnameError').textContent = "";
+      }
+      // Email
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const email = document.getElementById('email').value.trim();
+      document.getElementById('emailError').textContent = emailRegex.test(email) ? "" : "L'email est invalide.";
+      isValid &= emailRegex.test(email);
+      // Téléphone
+      const phoneRegex = /^\d{10}$/;
+      const phonenumber = document.getElementById('phonenumber').value.trim();
+      document.getElementById('phoneError').textContent = phoneRegex.test(phonenumber) ? "" : "Le numéro de téléphone est invalide.";
+      isValid &= phoneRegex.test(phonenumber);
+      // Mot de passe
+      const password = document.getElementById('password').value;
+      const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+      document.getElementById('passwordError').textContent = passwordRegex.test(password) ? "" : "Le mot de passe doit contenir au moins 8 caractères, dont une majuscule, un chiffre et un caractère spécial.";
+      isValid &= passwordRegex.test(password);
+      // Confirmer le mot de passe
+      const confirmPassword = document.getElementById('confirmPassword').value;
+      document.getElementById('confirmPasswordError').textContent = (password === confirmPassword) ? "" : "Les mots de passe ne correspondent pas.";
+      isValid &= password === confirmPassword;
+      // Validation
+      if (isValid) {
+        this.submit();
+      }
+    });
+  </script>
 </section>
 
 <footer class="footer">
@@ -95,13 +149,13 @@
         <h3>Accès rapide</h3>
         <ul class="pages">
           <li>
-            <a href="#">Blog</a>
+            <a th:href="@{/about-us}">Qui sommes-nous ?</a>
           </li>
           <li>
-            <a href="#">Qui sommes-nous ?</a>
+            <a th:href="@{/faq}">Foire aux questions</a>
           </li>
           <li>
-            <a href="faq.html">FAQ</a>
+            <a th:href="@{/reviews}">Avis</a>
           </li>
         </ul>
       </div>
@@ -125,9 +179,9 @@
       <div class="footer-center-section">
         <h3>Partenaires</h3>
         <ul class="partners">
-          <li>Partenaire 1</li>
-          <li>Partenaire 2</li>
-          <li>Partenaire 3</li>
+          <li>SkyLynx Airways</li>
+          <li>Aurora Haven</li>
+          <li>Pathfinders Collective</li>
         </ul>
       </div>
     </div>
@@ -135,10 +189,10 @@
     <div class="footer-bottom">
       <ul class="documents">
         <li>
-          <a href="#">Politique de confidentialité</a>
+          <a th:href="@{/politique-de-confidentialite}">Politique de confidentialité</a>
         </li>
         <li>
-          <a href="#">Conditions générales de ventes</a>
+          <a th:href="@{/cgv}">Conditions générales de ventes</a>
         </li>
       </ul>
       <p>© 2024 Evazion - Tous droits réservés.</p>

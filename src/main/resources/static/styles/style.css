@@ -73,7 +73,6 @@
 }
 
 .section-1 .card-slider-container .card-slider {
-	height: 400px;
 	display: flex;
 	flex-wrap: nowrap;
 	justify-content: start;
@@ -89,22 +88,24 @@
 	align-items: flex-end;
 	position: relative;
 	transition: .3s cubic-bezier(.28, -0.03, 0, .99);
+	min-height: 400px;
+	height: 400px;
 }
 
 .section-1 .card-slider-container .card-slider .card .card-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 1;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	z-index: 1;
 }
 
 .section-1 .card-slider-container .card-slider .card .card-content {
 	height: 100%;
 	width: 100%;
-	padding: 30px;
+	padding: 50px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -126,23 +127,19 @@
 
 .section-1 .card-slider-container .card-slider .card .card-content .card-header .infos {
 	display: flex;
-	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
 }
 
-.section-1 .card-slider-container .card-slider .card .card-content .card-header .infos .old-price {
-	text-decoration: line-through;
-	font-size: .675rem;
-	line-height: 1.1;
-}
-
-.section-1 .card-slider-container .card-slider .card .card-content .card-header .infos .new-price {
+.section-1 .card-slider-container .card-slider .card .card-content .card-header .infos .price {
 	font-weight: bold;
 	font-size: 2rem;
 	line-height: 1.3;
 }
 
-.section-1 .card-slider-container .card-slider .card .card-content .card-header .infos .duration {
-	font-size: .675rem;
+.section-1 .card-slider-container .card-slider .card .card-content .card-header .infos .dates {
+	font-size: 1rem;
 	text-transform: uppercase;
 	line-height: 1.1;
 }
@@ -743,6 +740,8 @@
 }
 
 .section-3 .section-3-view-link {
+	display: flex;
+	justify-self: center;
 	text-align: center;
 	text-transform: uppercase;
 	font-size: .675rem;
@@ -2003,6 +2002,12 @@
 }
 
 @media(max-width: 768px) {
+
+	.section-1 .card-slider-container .card-slider .card .card-content .card-header .infos {
+		flex-direction: column;
+		gap: 20px;
+		align-items: flex-start;
+	}
 
 	.section-3 .bento1-grid1 {
 		grid-column: 1/2;

@@ -138,6 +138,14 @@
 	background-color: var(--accent-color-2);
 }
 
+.main-section .registration-form .form-group .error {
+	margin-top: 5px;
+	color: var(--text-color-gray);
+	text-transform: none;
+	font-size: .5rem;
+	max-width: 150px;
+}
+
 .main-section .registration-form .form-group .submit-button {
 	font-size: .675rem;
 	border: none;
@@ -154,6 +162,17 @@
 
 .main-section .registration-form .form-group .submit-button i {
 	margin-right: 5px;
+}
+
+.main-section .message {
+	text-align: center;
+	margin-top: 25px;
+	font-size: .875rem;
+}
+
+.main-section .message a {
+	font-style: italic;
+	color: var(--accent-color-2);
 }
 
 @media (max-width: 1300px) {

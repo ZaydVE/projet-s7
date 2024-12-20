@@ -4,6 +4,7 @@ import com.prime.projet.repository.entity.Destination;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import java.util.Date;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -43,5 +44,8 @@ public interface DestinationRepository extends JpaRepository<Destination, Intege
                                       @Param("endDateUser") LocalDate endDateUser);  // Paramètre pour la date de fin de séjour de l'utilisateur
 
 
+
+    // Récupère les 4 destinations avec les dates de départ les plus proches
+    List<Destination> findTop4ByStartDateAfterOrderByStartDateAsc(Date currentDate);
 
 }

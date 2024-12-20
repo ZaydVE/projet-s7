@@ -31,6 +31,7 @@
   border-collapse: collapse;
   border-color: var(--accent-color-1);
   margin: 20px 0;
+  max-width: 100%;
 }
 
 .main-section table thead tr th {
@@ -42,36 +43,69 @@
   background-color: var(--accent-color-1);
 }
 
-tbody td {
+.main-section table tbody td {
   border: 1px solid var(--accent-color-1);
   padding: 10px;
   text-align: left;
+  color: var(--accent-color-1);
 }
 
-tbody tr:nth-child(even) {
+.main-section table tbody tr:nth-child(even) {
   background-color: rgba(6, 80, 110, .05);
 }
 
-tbody tr:hover {
+.main-section table tbody tr:hover {
   background-color: rgba(6, 80, 110, .1);
+}
+
+.main-section table tbody tr td button {
+	padding: 5px 10px;
+	border-radius: 32px;
+  font-size: .675rem;
+  border: none;
+  cursor: pointer;
+}
+
+.main-section table tbody tr td .edit-button {
+	background: none;
+	color: var(--accent-color-2);
+	border: 1px solid var(--accent-color-2);
+}
+
+.main-section table tbody tr td .delete-button {
+	background: var(--accent-color-2);
+	color: var(--text-color-white);
+}
+
+.main-section table tbody tr td button i {
+  margin-right: 5px;
+}
+
+.main-section table tbody tr td:last-child {
+  text-align: center;
+}
+
+.main-section .add-user {
+	background-color: var(--accent-color-2);
+	color: var(--text-color-white);
+	padding: 5px;
+	border-radius: 32px;
+	align-self: center;
+	display: block;
+  text-align: center;
+  margin: 20px auto;
+  width: 160px;
+  font-size: .675rem;
+}
+
+.main-section .add-user i {
+	margin-right: 5px;
 }
 
 @media (max-width: 1300px) {
 
-	.main-section .delete-form {
-		flex-direction: column;
-		align-items: stretch;
-		gap: 20px;
-	}
-
-	.main-section .delete-form .form-group input {
-		width: 100%;
-		max-width: 100%;
-	}
-
-	.main-section .delete-form .form-group .submit-button {
-		text-align: center;
-		margin-top: 0
+	.main-section table {
+		font-size: .675rem;
 	}
 
 }
@@ -81,6 +115,18 @@ tbody tr:hover {
 	.main-section {
 		padding: 0 12.5% 0;
 		margin-bottom: 75px;
+	}
+
+}
+
+@media (max-width: 768px) {
+
+	.main-section table {
+		font-size: .5rem;
+	}
+
+	.main-section table tbody tr td button {
+	  font-size: .5rem;
 	}
 
 }

@@ -2,6 +2,8 @@ package com.prime.projet.repository.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 import java.util.List;
 
@@ -33,10 +35,12 @@ public class Destination {
     @Column(nullable = false, length = 45)
     private String type;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
     private Date startDate;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
     private Date endDate;
@@ -54,10 +58,6 @@ public class Destination {
     @OneToMany(mappedBy = "destination", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore // Ignorer cette propriété lors de la sérialisation JSON
     private List<Review> reviews;
-
-    @OneToMany(mappedBy = "destination", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore // Ignorer cette propriété lors de la sérialisation JSON
-    private List<Offer> offers;
 
     @Transient
     private int duration; // Champ temporaire pour la durée (en jours)
@@ -182,14 +182,6 @@ public class Destination {
 
     public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
-    }
-
-    public List<Offer> getOffers() {
-        return offers;
-    }
-
-    public void setOffers(List<Offer> offers) {
-        this.offers = offers;
     }
 
     public int getDuration() {

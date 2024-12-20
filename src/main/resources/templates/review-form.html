@@ -33,23 +33,19 @@
             <li class="navigation-item">
                 <a th:href="@{/contact}">Contact</a>
             </li>
-            <div class="navigation-item buttons-container">
+            <li class="navigation-item buttons-container">
                 <a th:href="@{/users/user-profile}" class="navigation-item account">
                     <i class="fa-solid fa-user"></i> Compte
                 </a>
-            </div>
+            </li>
         </ul>
-    </div>
-    <div class="base-line">
-        <strong class="base-line-name">Evazion</strong>
-        <span class="base-line-slogan">Laissez vos rêves devenir votre prochaine evazion.</span>
     </div>
 </header>
     <section class="main-section">
         <h3>Laisser un avis</h3>
         <p>Partagez votre expérience avec Evazion ! Vos avis nous aident à améliorer nos services et à inspirer d'autres voyageurs. Merci de contribuer à notre aventure.</p>
         <div class="review">
-            <form action="/reviews/new" method="POST" th:object="${review}">
+            <form action="/reviews/new" method="POST" th:object="${review}" novalidate>
                 <div class="form-main">
                     <div class="fields">
                         <label>
@@ -59,56 +55,54 @@
                                 <option th:each="destination : ${destinations}" th:value="${destination.destinationId}" th:data-name="${destination.name}" th:text="${destination.name}">
                                 </option>
                             </select>
+                            <div class="error" id="destinationError"></div>
                         </label>
                         <br>
                         <label>
                             <span>Note :</span>
                             <input type="number" id="rating-input" min="1" max="5" th:field="*{rating}">
+                            <div class="error" id="ratingError"></div>
                         </label>
                         <br>
                         <label>
                             <span>Titre :</span>
                             <input type="text" id="title-input" maxlength="50" size="40" placeholder="..." th:field="*{title}">
+                            <div class="error" id="titleError"></div>
                         </label>
                         <br>
                         <label class="comment-field">
                             <span>Commentaire :</span>
                             <textarea id="comment-input" rows="4" cols="40" maxlength="1500" placeholder="Laisser votre commentaire..." th:field="*{comment}"></textarea>
+                            <div class="error" id="commentError"></div>
                         </label>
                         <br>
                     </div>
                     <div class="review-card">
                         <div class="top">
                             <div class="top-first-row">
-                    <span class="review-card-rating" id="rating-display">
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                    </span>
+                                <span class="review-card-rating" id="rating-display"></span>
                                 <div class="user-infos">
                                     <span class="username" th:text="${user.firstname}"><span class="at">@</span>Prénom</span>
-                                    <span class="inscription-date" th:text="'inscrit(e) le ' + ${user.createdAt}">inscrit(e) le ...</span>
+                                    <span class="inscription-date" th:text="'inscrit(e) le ' + ${#dates.format(user.createdAt, 'dd/MM/yyyy')}">inscrit(e) le ...</span>
                                 </div>
                             </div>
                             <div class="top-last-row">
-                                <span class="review-card-title" id="title-display">Titre</span>
+                                <span class="review-card-title" id="title-display"></span>
                             </div>
                         </div>
                         <div class="body" id="body">
-                            <p class="review-card-comment" id="comment-display">Laissez votre cœur parler ...</p>
+                            <p class="review-card-comment" id="comment-display"></p>
                         </div>
                         <div class="bottom">
-                            <span class="review-card-destination" id="destination-display"><i class="fa-solid fa-location-dot"></i></span>
+                            <span class="review-card-destination" id="destination-display"></span>
                             <span class="review-card-date">
-                            <i class="fa-solid fa-calendar-days"></i>
-                            <span th:text="${todayDate}"></span>
+                                <i class="fa-solid fa-calendar-days"></i>
+                                <span th:text="${#temporals.format(todayDate, 'dd/MM/yyyy')}"></span>
                             </span>
                         </div>
                     </div>
                 </div>
-                    <input type="hidden" th:field="*{createdAt}" th:value="${todayDate}" />
+                <input type="hidden" th:field="*{createdAt}" th:value="${todayDate}"/>
                 <div class="button-link">
                     <div class="form-group">
                         <button type="submit" class="btn-submit">Envoyer</button>
@@ -156,10 +150,8 @@
         destinationSelect.addEventListener('change', () => {
             // Récupère l'option sélectionnée
             const selectedOption = destinationSelect.options[destinationSelect.selectedIndex];
-
             // Récupère le nom de la destination via l'attribut data-name
             const destinationName = selectedOption.getAttribute('data-name') || '';
-
             // Met à jour l'aperçu dynamique
             destinationDisplay.innerHTML = `<i class="fa-solid fa-location-dot"></i> ${destinationName}`;
         });
@@ -183,67 +175,67 @@
             }
         });
     </script>
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-top">
-                <h3>Evazion</h3>
-                <p>Evazion propose des voyages sur mesure pour des escapades uniques, mêlant aventure, détente et découvertes culturelles. Faites confiance à notre expertise pour transformer vos envies d’évasion en souvenirs mémorables, où que vos rêves vous mènent.</p>
-            </div>
-            <div class="footer-center">
-                <div class="footer-center-section">
-                    <h3>Accès rapide</h3>
-                    <ul class="pages">
-                        <li>
-                            <a href="#">Blog</a>
-                        </li>
-                        <li>
-                            <a href="#">Qui sommes-nous ?</a>
-                        </li>
-                        <li>
-                            <a href="faq.html">FAQ</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="footer-center-section">
-                    <h3>Contactez-nous</h3>
-                    <ul class="contact">
-                        <li>
-                            <i class="fa-solid fa-phone"></i> +33 1 23 45 67 89
-                        </li>
-                        <li>
-                            <a href="mailto:contact@evazion.com" target="_blank"><i class="fa-solid fa-envelope"></i> contact@evazion.com</a>
-                        </li>
-                        <li>
-                            <a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook"></i> Evazion - Agence de voyage</a>
-                        </li>
-                        <li>
-                            <a href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i> evazionvoyages</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="footer-center-section">
-                    <h3>Partenaires</h3>
-                    <ul class="partners">
-                        <li>SkyLynx Airways</li>
-                        <li>Aurora Haven</li>
-                        <li>Pathfinders Collective</li>
-                    </ul>
-                </div>
-            </div>
-            <hr>
-            <div class="footer-bottom">
-                <ul class="documents">
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-top">
+            <h3>Evazion</h3>
+            <p>Evazion propose des voyages sur mesure pour des escapades uniques, mêlant aventure, détente et découvertes culturelles. Faites confiance à notre expertise pour transformer vos envies d’évasion en souvenirs mémorables, où que vos rêves vous mènent.</p>
+        </div>
+        <div class="footer-center">
+            <div class="footer-center-section">
+                <h3>Accès rapide</h3>
+                <ul class="pages">
                     <li>
-                        <a href="politique-de-confidentialite.html">Politique de confidentialité</a>
+                        <a th:href="@{/about-us}">Qui sommes-nous ?</a>
                     </li>
                     <li>
-                        <a href="cgv.html">Conditions générales de ventes</a>
+                        <a th:href="@{/faq}">Foire aux questions</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/reviews}">Avis</a>
                     </li>
                 </ul>
-                <p>© 2024 Evazion - Tous droits réservés.</p>
+            </div>
+            <div class="footer-center-section">
+                <h3>Contactez-nous</h3>
+                <ul class="contact">
+                    <li>
+                        <i class="fa-solid fa-phone"></i> +33 1 23 45 67 89
+                    </li>
+                    <li>
+                        <a href="mailto:contact@evazion.com" target="_blank"><i class="fa-solid fa-envelope"></i> contact@evazion.com</a>
+                    </li>
+                    <li>
+                        <a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook"></i> Evazion - Agence de voyage</a>
+                    </li>
+                    <li>
+                        <a href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i> evazionvoyages</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-center-section">
+                <h3>Partenaires</h3>
+                <ul class="partners">
+                    <li>SkyLynx Airways</li>
+                    <li>Aurora Haven</li>
+                    <li>Pathfinders Collective</li>
+                </ul>
             </div>
         </div>
-    </footer>
+        <hr>
+        <div class="footer-bottom">
+            <ul class="documents">
+                <li>
+                    <a th:href="@{/politique-de-confidentialite}">Politique de confidentialité</a>
+                </li>
+                <li>
+                    <a th:href="@{/cgv}">Conditions générales de ventes</a>
+                </li>
+            </ul>
+            <p>© 2024 Evazion - Tous droits réservés.</p>
+        </div>
+    </div>
+</footer>
     <a href="#" class="scroll-top-button">
         <i class="fa-solid fa-arrow-up"></i>
     </a>

@@ -6,13 +6,13 @@
   <meta name="description" content="Supprimer un utilisateur">
   <meta name="keywords" content="utilisateur, supprimer">
   <meta name="author" content="Evazion">
-  <title>Administration - Evazion</title>
+  <title>Supprimer un utilisateur - Evazion</title>
   <link rel="icon" type="image/x-icon" href="/assets/evazion-logo.png">
   <link rel="stylesheet" href="/styles/base.css">
   <link rel="stylesheet" href="/styles/header.css">
   <link rel="stylesheet" href="/styles/footer.css">
   <link rel="stylesheet" href="/styles/scroll-top-button.css">
-  <link rel="stylesheet" href="/styles/admin.css">
+  <link rel="stylesheet" href="/styles/user-delete.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body>
@@ -41,35 +41,48 @@
     </ul>
   </div>
 </header>
+
 <section class="main-section">
-  <h1 class="title">Administration</h1>
-  <p class="description">Accédez aux différentes pages réservées aux administrateurs, afin de gérer les utilisateurs, les destinations, et les avis.</p>
-  <div class="block-container">
-    <div class="block user-block">
-      <h3 class="block-title">Utilisateurs</h3>
-      <div class="link-container">
-        <a th:href="@{/users/liste}"><i class="fa-solid fa-arrow-right"></i> Lister les utilisateurs</a>
-        <a th:href="@{/users/newadmin}"><i class="fa-solid fa-arrow-right"></i> Créer un utilisateur / administrateur</a>
-        <a th:href="@{/users/user-edit}"><i class="fa-solid fa-arrow-right"></i> Modifier un utilisateur / administrateur</a>
-        <a th:href="@{/users/user-delete}"><i class="fa-solid fa-arrow-right"></i> Supprimer un utilisateur</a>
-      </div>
-    </div>
-    <div class="block destination-block">
-      <h3 class="block-title">Destinations</h3>
-      <div class="link-container">
-        <a th:href="@{/destinations/new}"><i class="fa-solid fa-arrow-right"></i> Créer une destination</a>
-        <a th:href="@{/destinations/???}"><i class="fa-solid fa-arrow-right"></i> Modifier une destination</a>
-        <a th:href="@{/destinations/???}"><i class="fa-solid fa-arrow-right"></i> Supprimer une destination</a>
-      </div>
-    </div>
-    <div class="block review-block">
-      <h3 class="block-title">Avis</h3>
-      <div class="link-container">
-        <a href="#"><i class="fa-solid fa-arrow-right"></i> Supprimer un avis</a>
-      </div>
+  <h1 class="title">Supprimer une réservation</h1>
+  <p class="description">Les informations de la réservation à supprimer sont affichées ci-dessous. Confirmez la suppression si nécessaire.</p>
+
+  <!-- Pop-in d'erreur -->
+  <div th:if="${error}" class="error-popup">
+    <div class="error-popup-content">
+      <p th:text="${error}"></p>
     </div>
   </div>
+
+  <form th:action="@{'/bookings/delete/' + ${booking.bookingId}}" method="post" class="delete-form" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette réservation ?');">
+    <div class="form-block">
+      <div class="form-group">
+        <h5>Nom de l'utilisateur</h5>
+        <input type="text" id="userName" name="userName" th:value="${booking.user.firstname} + ' ' + ${booking.user.lastname}" readonly>
+      </div>
+      <div class="form-group">
+        <h5>Destination</h5>
+        <input type="text" id="destination" name="destination" th:value="${booking.destination.city} + ', ' + ${booking.destination.country}" readonly>
+      </div>
+    </div>
+    <div class="form-group">
+      <h5>Date de réservation</h5>
+      <input type="text" id="bookingDate" name="bookingDate" th:value="${#dates.format(booking.bookingDate, 'dd/MM/yyyy')}" readonly>
+    </div>
+    <div class="form-group">
+      <h5>Nombre de passagers</h5>
+      <input type="number" id="nbPassengers" name="nbPassengers" th:value="${booking.nbPassengers}" readonly>
+    </div>
+    <div class="form-group">
+      <h5>Prix total</h5>
+      <input type="text" id="totalPrice" name="totalPrice" th:value="${booking.totalPrice} + ' €'" readonly>
+    </div>
+    <div class="form-group">
+      <button type="submit" class="delete-button"><i class="fa-solid fa-trash"></i> Confirmer la suppression</button>
+    </div>
+  </form>
 </section>
+
+
 <footer class="footer">
   <div class="footer-content">
     <div class="footer-top">

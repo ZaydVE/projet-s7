@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Liste des destinations">
+    <meta name="description" content="Supprimer un utilisateur">
     <meta name="keywords" content="utilisateur, supprimer">
     <meta name="author" content="Evazion">
-    <title>Liste des destinations - Evazion</title>
+    <title>Liste des utilisateurs - Evazion</title>
     <link rel="icon" type="image/x-icon" href="/assets/evazion-logo.png">
     <link rel="stylesheet" href="/styles/base.css">
     <link rel="stylesheet" href="/styles/header.css">
@@ -40,41 +40,53 @@
             </li>
         </ul>
     </div>
+    <div class="base-line">
+        <strong class="base-line-name">Evazion</strong>
+        <span class="base-line-slogan">Laissez vos rêves devenir votre prochaine evazion.</span>
+    </div>
 </header>
+<!--/*@thymesVar id="successMessageRegisterUserAsAdmin" type="java"*/-->
+<p class="notification" th:if="${successMessageRegisterUserAsAdmin}">
+    <i class="fa-solid fa-user-plus"></i>
+    <span th:text="${successMessageRegisterUserAsAdmin}"></span>
+</p>
 
+<!--/*@thymesVar id="successMessageUpdateUser" type="java"*/-->
+<p class="notification" th:if="${successMessageUpdateUser}">
+    <i class="fa-solid fa-user-check"></i>
+    <span th:text="${successMessageUpdateUser}"></span>
+</p>
+
+<!--/*@thymesVar id="successMessageDeleteUser" type="java"*/-->
+<p class="notification" th:if="${successMessageDeleteUser}">
+    <i class="fa-solid fa-user-xmark"></i>
+    <span th:text="${successMessageDeleteUser}"></span>
+</p>
 <section class="main-section">
-    <h1 class="title">Liste des destinations</h1>
-    <p class="description">Les destinations et leurs informations sont listées dans le tableau ci-dessous.</p>
+    <h1 class="title">Liste des réservations</h1>
+    <p class="description">Les réservations et leurs informations sont listées dans le tableau ci-dessous.</p>
     <table>
         <thead>
         <tr>
-            <th>Nom</th>
-            <th>Prix</th>
-            <th>Continent</th>
-            <th>Pays</th>
-            <th>Ville</th>
-            <th>Type</th>
+            <th>Destination</th>
+            <th>Nombre de passagers</th>
             <th>Date de début</th>
             <th>Date de fin</th>
-            <th>Nombre de places</th>
+            <th>Prix total</th>
             <th>Actions</th>
         </tr>
         </thead>
         <tbody>
-        <!-- Boucle Thymeleaf pour afficher les destinations -->
-        <tr th:each="destination : ${destinations}">
-            <td th:text="${destination.name}">Nom</td>
-            <td th:text="${T(java.lang.Math).round(destination.price) + ' €'}">Prix</td>
-            <td th:text="${destination.continent}">Continent</td>
-            <td th:text="${destination.country}">Pays</td>
-            <td th:text="${destination.city}">Ville</td>
-            <td th:text="${destination.type}">Type</td>
-            <td th:text="${#dates.format(destination.startDate, 'dd/MM/yyyy')}">Date de début</td>
-            <td th:text="${#dates.format(destination.endDate, 'dd/MM/yyyy')}">Date de fin</td>
-            <td th:text="${destination.nbPlaces}">Nombre de places</td>
+        <!-- Boucle Thymeleaf pour afficher les utilisateurs -->
+        <tr th:each="booking : ${bookings}">
+            <td th:text="${booking.destination.country} + ', ' + ${booking.destination.city}">Pays, Ville</td>
+            <td th:text="${booking.nbPassengers}">Nombres de passagers</td>
+            <td th:text="${booking.destination.startDate}">Début</td>
+            <td th:text="${booking.destination.endDate}">Fin</td>
+            <td th:text="${booking.totalPrice} + '€'">Prix total</td>
             <td>
-                <button th:onclick="|window.location='/destinations/edit/' + ${destination.destinationId}|">Modifier</button>
-                <button th:onclick="|window.location='/destinations/delete/' + ${destination.destinationId}|">Supprimer</button>
+                <button th:onclick="|window.location='/bookings/edit/' + ${booking.bookingId}|" class="edit-button"><i class="fa-solid fa-user-pen"></i>Modifier</button>
+                <button th:onclick="|window.location='/bookings/delete/' + ${booking.bookingId}|" class="delete-button"><i class="fa-solid fa-trash"></i>Supprimer</button>
             </td>
         </tr>
         </tbody>
@@ -91,13 +103,13 @@
                 <h3>Accès rapide</h3>
                 <ul class="pages">
                     <li>
-                        <a th:href="@{/about-us}">Qui sommes-nous ?</a>
+                        <a href="#">Blog</a>
                     </li>
                     <li>
-                        <a th:href="@{/faq}">Foire aux questions</a>
+                        <a href="#">Qui sommes-nous ?</a>
                     </li>
                     <li>
-                        <a th:href="@{/reviews}">Avis</a>
+                        <a href="faq.html">FAQ</a>
                     </li>
                 </ul>
             </div>
@@ -121,9 +133,9 @@
             <div class="footer-center-section">
                 <h3>Partenaires</h3>
                 <ul class="partners">
-                    <li>SkyLynx Airways</li>
-                    <li>Aurora Haven</li>
-                    <li>Pathfinders Collective</li>
+                    <li>Partenaire 1</li>
+                    <li>Partenaire 2</li>
+                    <li>Partenaire 3</li>
                 </ul>
             </div>
         </div>
@@ -131,10 +143,10 @@
         <div class="footer-bottom">
             <ul class="documents">
                 <li>
-                    <a th:href="@{/politique-de-confidentialite}">Politique de confidentialité</a>
+                    <a href="#">Politique de confidentialité</a>
                 </li>
                 <li>
-                    <a th:href="@{/cgv}">Conditions générales de ventes</a>
+                    <a href="#">Conditions générales de ventes</a>
                 </li>
             </ul>
             <p>© 2024 Evazion - Tous droits réservés.</p>

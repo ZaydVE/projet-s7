@@ -12,6 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Date;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -45,6 +46,12 @@ public class DestinationService {
                 duration, startDateUser, endDateUser);
     }
 
+    // Récupère les 4 destinations avec la date de départ la plus proche
+    public List<Destination> findTop4ClosestDestinations() {
+        Date currentDate = new Date(); // Date actuelle
+        return destinationRepository.findTop4ByStartDateAfterOrderByStartDateAsc(currentDate);
+    }
+
     // Créer une nouvelle destination avec les paramètres bruts
     public void createDestination(
             String name, String description, float price, String continent,
@@ -62,17 +69,25 @@ public class DestinationService {
     public void updateDestination(Integer destinationId, String name, String description, float price,
                                   String continent, String country, String city, String type,
                                   String startDate, String endDate, int nbPlaces, MultipartFile image) {
+
         // Récupérer la destination existante par ID
         Destination destination = getDestinationById(destinationId);
+
         // Créer et mapper le DTO
         DestinationDto destinationDto = createDestinationDto(name, description, price, continent, country, city, type, startDate, endDate, nbPlaces);
+
         // Mettre à jour les champs
         destination = mapDtoToDestination(destination, destinationDto);
+
         // Gérer la nouvelle image (supprimer l'ancienne et ajouter la nouvelle si fournie)
         if (image != null && !image.isEmpty()) {
-            deleteImage(destination.getLienImage()); // Supprimer l'ancienne image
+            String newImagePath = saveImage(image); // Sauvegarde de l'image
+            deleteImage(destination.getLienImage()); // Supprime l'ancienne image
+            destination.setLienImage(newImagePath); // Met à jour le chemin
         }
-        saveDestination(destination, image);
+
+        // Sauvegarder la destination mise à jour
+        destinationRepository.save(destination);
     }
 
     public void updateDestinationWithoutImage(Integer destinationId, String name, String description, float price,
@@ -150,7 +165,7 @@ public class DestinationService {
     }
 
     // Sauvegarder une image sur le système de fichiers
-    private String saveImage(MultipartFile image) {
+    public String saveImage(MultipartFile image) {
         try {
             String originalFilename = image.getOriginalFilename();
             if (originalFilename == null || originalFilename.isBlank()) {
@@ -170,7 +185,7 @@ public class DestinationService {
         if (imagePath != null) {
             try {
                 // Reconstruire le chemin complet du fichier
-                Path filePath = Paths.get(UPLOAD_DIR, imagePath.replace("/assets/", ""));
+                Path filePath = Paths.get(UPLOAD_DIR, imagePath.replace("/Evazion/images", ""));
                 Files.deleteIfExists(filePath);
             } catch (IOException e) {
                 System.err.println("Erreur lors de la suppression de l'image : " + e.getMessage());
