@@ -152,7 +152,20 @@ public class BookingController {
             booking.setTotalPrice(totalPrice);
             bookingService.updateBooking(booking);
         }
-        return "redirect:/bookings/list";
+
+        // Récupération de l'utilisateur authentifié
+        org.springframework.security.core.userdetails.User principal =
+                (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+
+        // Vérification du rôle de l'utilisateur
+        if (principal.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"))) {
+            // Redirection pour les administrateurs
+            return "redirect:/bookings/list";
+        } else {
+            // Redirection pour les utilisateurs
+            return "redirect:/bookings/user-list";
+        }
     }
 
 

@@ -106,6 +106,9 @@
             <a class="admin-link" th:href="@{/reviews/review-list-admin}" th:if="${isAdmin}">
                 <i class="fa-solid fa-eye"></i> Afficher la liste des avis et les gérer
             </a>
+            <a class="admin-link" th:href="@{/bookings/list}" th:if="${isAdmin}">
+                <i class="fa-solid fa-eye"></i> Afficher la liste des réservations et les gérer
+            </a>
         </div>
         <div class="user-links-container">
             <a class="user-link" th:href="@{/reviews/new}" th:if="${isUser}">
@@ -113,6 +116,9 @@
             </a>
             <a class="user-link" th:href="@{/reviews/review-list}" th:if="${isUser}">
                 <i class="fa-solid fa-eye"></i> Voir ses avis
+            </a>
+            <a class="user-link" th:href="@{/bookings/user-list}" th:if="${isUser}">
+            <i class="fa-solid fa-eye"></i> Voir ses réservations
             </a>
         </div>
     </section>
