@@ -1,5 +1,7 @@
 package com.prime.projet.service;
 
+import com.prime.projet.exception.UserAlreadyExistsException;
+import com.prime.projet.exception.UserNotFoundException;
 import com.prime.projet.repository.UserRepository;
 import com.prime.projet.repository.entity.User;
 import com.prime.projet.controller.dto.UserDto;
@@ -29,6 +31,9 @@ public class UserService {
 
     // Créer un utilisateur
     public void createUser(UserDto userDto) {
+        if (userRepository.findByEmail(userDto.getEmail()).isPresent()) {
+            throw new UserAlreadyExistsException("Un utilisateur avec cet email existe déjà.");
+        }
         User user = new User();
         user.setLastname(userDto.getLastname());
         user.setFirstname(userDto.getFirstname());
@@ -45,15 +50,6 @@ public class UserService {
         userRepository.deleteById(userId);
     }
 
-    /*
-    // Récupérer un utilisateur par ID
-    public UserDto getUserById(Long id) {
-        User user = userRepository.findById(id).orElse(null);
-        return createDto(user);
-    }
-
-     */
-
     // Mettre à jour un utilisateur
     public void updateUser(Integer id, UserDto userDto) {
         User user = userRepository.findById(id).orElse(null);
@@ -68,12 +64,6 @@ public class UserService {
             }
             userRepository.save(user);
         }
-    }
-
-    //Récupérer un user avec son adresse mail
-    public UserDto getUserByEmail(String email) {
-        User user = userRepository.findByEmail(email).orElse(null);
-        return createDto(user);
     }
 
     public UserDto createDto(User user){
@@ -92,7 +82,7 @@ public class UserService {
 
     public User findById(Integer id) {
         return userRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("Utilisateur avec l'ID " + id + " non trouvé."));
+                .orElseThrow(() -> new UserNotFoundException("Utilisateur avec l'ID " + id + " introuvable."));
     }
 
     public User getCurrentUser() {

@@ -140,6 +140,10 @@
 	margin-right: 5px;
 }
 
+.main-section .back-button {
+	color: var(--accent-color-1);
+}
+
 @media (max-width: 1300px) {
 
 	.main-section .informations {

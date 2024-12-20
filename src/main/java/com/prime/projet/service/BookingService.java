@@ -1,5 +1,6 @@
 package com.prime.projet.service;
 
+import com.prime.projet.exception.BookingNotFoundException;
 import com.prime.projet.repository.BookingRepository;
 import com.prime.projet.repository.DestinationRepository;
 import com.prime.projet.repository.entity.Booking;
@@ -31,7 +32,8 @@ public class BookingService {
     }
 
     public Optional<Booking> getBookingById(Integer bookingId) {
-        return bookingRepository.findById(bookingId);
+        return Optional.ofNullable(bookingRepository.findById(bookingId)
+                .orElseThrow(() -> new BookingNotFoundException("Réservation introuvable pour l'ID " + bookingId)));
     }
 
     public void updateBooking(Booking booking) {

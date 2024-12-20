@@ -1,5 +1,6 @@
 package com.prime.projet.controller;
 
+import com.prime.projet.exception.UserNotFoundException;
 import com.prime.projet.repository.UserRepository;
 import com.prime.projet.repository.entity.User;
 import com.prime.projet.service.UserService;
