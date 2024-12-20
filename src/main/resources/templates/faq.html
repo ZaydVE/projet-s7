@@ -16,31 +16,31 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body>
-<header class="header">
-    <div class="top-bar">
-        <div class="logo">
-            <a th:href="@{/}">
-                Evazion
-            </a>
-        </div>
-        <ul class="navigation">
-            <li class="navigation-item trips-item">
-                <a th:href="@{/destinations}">Voyages</a>
-            </li>
-            <li class="navigation-item">
-                <a th:href="@{/reviews}">Avis</a>
-            </li>
-            <li class="navigation-item">
-                <a th:href="@{/contact}">Contact</a>
-            </li>
-            <li class="navigation-item buttons-container">
-                <a th:href="@{/users/user-profile}" class="navigation-item account">
-                    <i class="fa-solid fa-user"></i> Compte
+    <header class="header">
+        <div class="top-bar">
+            <div class="logo">
+                <a th:href="@{/}">
+                    Evazion
                 </a>
-            </li>
-        </ul>
-    </div>
-</header>
+            </div>
+            <ul class="navigation">
+                <li class="navigation-item trips-item">
+                    <a th:href="@{/destinations}">Voyages</a>
+                </li>
+                <li class="navigation-item">
+                    <a th:href="@{/reviews}">Avis</a>
+                </li>
+                <li class="navigation-item">
+                    <a th:href="@{/contact}">Contact</a>
+                </li>
+                <li class="navigation-item buttons-container">
+                    <a th:href="@{/users/user-profile}" class="navigation-item account">
+                        <i class="fa-solid fa-user"></i> Compte
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
     <section class="questions-answers">
         <h1>Foire aux questions</h1>
         <div class="question-answer">
@@ -73,67 +73,67 @@
             <p>Oui, nos voyages sont conçus pour répondre aux besoins des familles. Que vous voyagiez avec de jeunes enfants, des adolescents ou des grands-parents, nous proposons des itinéraires adaptés, mêlant activités ludiques et moments de détente. Par exemple, nous organisons des séjours dans des hôtels avec clubs pour enfants, des excursions éducatives et des options de garde si les parents souhaitent profiter de leur temps libre. De plus, nos forfaits familiaux incluent souvent des réductions pour les enfants et des services pratiques, comme des sièges auto ou des lits pour bébé. Si vous avez des demandes spécifiques, notre équipe se fera un plaisir d’y répondre pour rendre votre séjour inoubliable.</p>
         </div>
     </section>
-<footer class="footer">
-    <div class="footer-content">
-        <div class="footer-top">
-            <h3>Evazion</h3>
-            <p>Evazion propose des voyages sur mesure pour des escapades uniques, mêlant aventure, détente et découvertes culturelles. Faites confiance à notre expertise pour transformer vos envies d’évasion en souvenirs mémorables, où que vos rêves vous mènent.</p>
-        </div>
-        <div class="footer-center">
-            <div class="footer-center-section">
-                <h3>Accès rapide</h3>
-                <ul class="pages">
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-top">
+                <h3>Evazion</h3>
+                <p>Evazion propose des voyages sur mesure pour des escapades uniques, mêlant aventure, détente et découvertes culturelles. Faites confiance à notre expertise pour transformer vos envies d’évasion en souvenirs mémorables, où que vos rêves vous mènent.</p>
+            </div>
+            <div class="footer-center">
+                <div class="footer-center-section">
+                    <h3>Accès rapide</h3>
+                    <ul class="pages">
+                        <li>
+                            <a th:href="@{/about-us}">Qui sommes-nous ?</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/faq}">Foire aux questions</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/reviews}">Avis</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-center-section">
+                    <h3>Contactez-nous</h3>
+                    <ul class="contact">
+                        <li>
+                            <i class="fa-solid fa-phone"></i> +33 1 23 45 67 89
+                        </li>
+                        <li>
+                            <a href="mailto:contact@evazion.com" target="_blank"><i class="fa-solid fa-envelope"></i> contact@evazion.com</a>
+                        </li>
+                        <li>
+                            <a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook"></i> Evazion - Agence de voyage</a>
+                        </li>
+                        <li>
+                            <a href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i> evazionvoyages</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-center-section">
+                    <h3>Partenaires</h3>
+                    <ul class="partners">
+                        <li>SkyLynx Airways</li>
+                        <li>Aurora Haven</li>
+                        <li>Pathfinders Collective</li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class="footer-bottom">
+                <ul class="documents">
                     <li>
-                        <a th:href="@{/about-us}">Qui sommes-nous ?</a>
+                        <a th:href="@{/politique-de-confidentialite}">Politique de confidentialité</a>
                     </li>
                     <li>
-                        <a th:href="@{/faq}">Foire aux questions</a>
-                    </li>
-                    <li>
-                        <a th:href="@{/reviews}">Avis</a>
+                        <a th:href="@{/cgv}">Conditions générales de ventes</a>
                     </li>
                 </ul>
-            </div>
-            <div class="footer-center-section">
-                <h3>Contactez-nous</h3>
-                <ul class="contact">
-                    <li>
-                        <i class="fa-solid fa-phone"></i> +33 1 23 45 67 89
-                    </li>
-                    <li>
-                        <a href="mailto:contact@evazion.com" target="_blank"><i class="fa-solid fa-envelope"></i> contact@evazion.com</a>
-                    </li>
-                    <li>
-                        <a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook"></i> Evazion - Agence de voyage</a>
-                    </li>
-                    <li>
-                        <a href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i> evazionvoyages</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="footer-center-section">
-                <h3>Partenaires</h3>
-                <ul class="partners">
-                    <li>SkyLynx Airways</li>
-                    <li>Aurora Haven</li>
-                    <li>Pathfinders Collective</li>
-                </ul>
+                <p>© 2024 Evazion - Tous droits réservés.</p>
             </div>
         </div>
-        <hr>
-        <div class="footer-bottom">
-            <ul class="documents">
-                <li>
-                    <a th:href="@{/politique-de-confidentialite}">Politique de confidentialité</a>
-                </li>
-                <li>
-                    <a th:href="@{/cgv}">Conditions générales de ventes</a>
-                </li>
-            </ul>
-            <p>© 2024 Evazion - Tous droits réservés.</p>
-        </div>
-    </div>
-</footer>
+    </footer>
     <a href="#" class="scroll-top-button">
         <i class="fa-solid fa-arrow-up"></i>
     </a>

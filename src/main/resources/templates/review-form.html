@@ -16,150 +16,150 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body>
-<header class="header">
-    <div class="top-bar">
-        <div class="logo">
-            <a th:href="@{/}">
-                Evazion
-            </a>
-        </div>
-        <ul class="navigation">
-            <li class="navigation-item trips-item">
-                <a th:href="@{/destinations}">Voyages</a>
-            </li>
-            <li class="navigation-item">
-                <a th:href="@{/reviews}">Avis</a>
-            </li>
-            <li class="navigation-item">
-                <a th:href="@{/contact}">Contact</a>
-            </li>
-            <li class="navigation-item buttons-container">
-                <a th:href="@{/users/user-profile}" class="navigation-item account">
-                    <i class="fa-solid fa-user"></i> Compte
+    <header class="header">
+        <div class="top-bar">
+            <div class="logo">
+                <a th:href="@{/}">
+                    Evazion
                 </a>
-            </li>
-        </ul>
-    </div>
-</header>
-<section class="main-section">
-    <h3>Laisser un avis</h3>
-    <p>Partagez votre expérience avec Evazion ! Vos avis nous aident à améliorer nos services et à inspirer d'autres voyageurs. Merci de contribuer à notre aventure.</p>
-    <div class="review">
-        <form action="/reviews/new" method="POST" th:object="${review}" id="form" novalidate>
-            <div class="form-main">
-                <div class="fields">
-                    <label>
-                        <span>Destination :</span>
-                        <select id="destination-select" th:field="*{destinationId}">
-                            <option value="" disabled selected>Sélectionner</option>
-                            <option th:each="destination : ${destinations}" th:value="${destination.destinationId}" th:data-name="${destination.name}" th:text="${destination.name}">
-                            </option>
-                        </select>
-                        <div class="error" id="destinationError"></div>
-                    </label>
-                    <br>
-                    <label>
-                        <span>Note :</span>
-                        <input type="number" id="rating-input" min="1" max="5" th:field="*{rating}">
-                        <div class="error" id="ratingError"></div>
-                    </label>
-                    <br>
-                    <label>
-                        <span>Titre :</span>
-                        <input type="text" id="title-input" maxlength="50" size="40" th:field="*{title}">
-                        <div class="error" id="titleError"></div>
-                    </label>
-                    <br>
-                    <label class="comment-field">
-                        <span>Commentaire :</span>
-                        <textarea id="comment-input" rows="4" cols="40" maxlength="999" th:field="*{comment}"></textarea>
-                        <div class="error" id="commentError"></div>
-                    </label>
-                    <br>
-                </div>
-                <div class="review-card">
-                    <div class="top">
-                        <div class="top-first-row">
-                            <span class="review-card-rating" id="rating-display"></span>
-                            <div class="user-infos">
-                                <span class="username" th:text="${user.firstname}"><span class="at">@</span>Prénom</span>
-                                <span class="inscription-date" th:text="'inscrit(e) le ' + ${#dates.format(user.createdAt, 'dd/MM/yyyy')}">inscrit(e) le ...</span>
+            </div>
+            <ul class="navigation">
+                <li class="navigation-item trips-item">
+                    <a th:href="@{/destinations}">Voyages</a>
+                </li>
+                <li class="navigation-item">
+                    <a th:href="@{/reviews}">Avis</a>
+                </li>
+                <li class="navigation-item">
+                    <a th:href="@{/contact}">Contact</a>
+                </li>
+                <li class="navigation-item buttons-container">
+                    <a th:href="@{/users/user-profile}" class="navigation-item account">
+                        <i class="fa-solid fa-user"></i> Compte
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <section class="main-section">
+        <h3>Laisser un avis</h3>
+        <p>Partagez votre expérience avec Evazion ! Vos avis nous aident à améliorer nos services et à inspirer d'autres voyageurs. Merci de contribuer à notre aventure.</p>
+        <div class="review">
+            <form action="/reviews/new" method="POST" th:object="${review}" id="form" novalidate>
+                <div class="form-main">
+                    <div class="fields">
+                        <label>
+                            <span>Destination :</span>
+                            <select id="destination-select" th:field="*{destinationId}">
+                                <option value="" disabled selected>Sélectionner</option>
+                                <option th:each="destination : ${destinations}" th:value="${destination.destinationId}" th:data-name="${destination.name}" th:text="${destination.name}">
+                                </option>
+                            </select>
+                            <div class="error" id="destinationError"></div>
+                        </label>
+                        <br>
+                        <label>
+                            <span>Note :</span>
+                            <input type="number" id="rating-input" min="1" max="5" th:field="*{rating}">
+                            <div class="error" id="ratingError"></div>
+                        </label>
+                        <br>
+                        <label>
+                            <span>Titre :</span>
+                            <input type="text" id="title-input" maxlength="50" size="40" th:field="*{title}">
+                            <div class="error" id="titleError"></div>
+                        </label>
+                        <br>
+                        <label class="comment-field">
+                            <span>Commentaire :</span>
+                            <textarea id="comment-input" rows="4" cols="40" maxlength="999" th:field="*{comment}"></textarea>
+                            <div class="error" id="commentError"></div>
+                        </label>
+                        <br>
+                    </div>
+                    <div class="review-card">
+                        <div class="top">
+                            <div class="top-first-row">
+                                <span class="review-card-rating" id="rating-display"></span>
+                                <div class="user-infos">
+                                    <span class="username" th:text="${user.firstname}"><span class="at">@</span>Prénom</span>
+                                    <span class="inscription-date" th:text="'inscrit(e) le ' + ${#dates.format(user.createdAt, 'dd/MM/yyyy')}">inscrit(e) le ...</span>
+                                </div>
+                            </div>
+                            <div class="top-last-row">
+                                <span class="review-card-title" id="title-display"></span>
                             </div>
                         </div>
-                        <div class="top-last-row">
-                            <span class="review-card-title" id="title-display"></span>
+                        <div class="body" id="body">
+                            <p class="review-card-comment" id="comment-display"></p>
+                        </div>
+                        <div class="bottom">
+                            <span class="review-card-destination" id="destination-display"></span>
+                            <span class="review-card-date">
+                                <i class="fa-solid fa-calendar-days"></i>
+                                <span th:text="${#temporals.format(todayDate, 'dd/MM/yyyy')}"></span>
+                            </span>
                         </div>
                     </div>
-                    <div class="body" id="body">
-                        <p class="review-card-comment" id="comment-display"></p>
-                    </div>
-                    <div class="bottom">
-                        <span class="review-card-destination" id="destination-display"></span>
-                        <span class="review-card-date">
-                            <i class="fa-solid fa-calendar-days"></i>
-                            <span th:text="${#temporals.format(todayDate, 'dd/MM/yyyy')}"></span>
-                        </span>
-                    </div>
                 </div>
-            </div>
-            <input type="hidden" th:field="*{createdAt}" th:value="${todayDate}"/>
-            <div class="button-link">
-                <div class="form-group">
-                    <button type="submit" class="btn-submit">Envoyer</button>
+                <input type="hidden" th:field="*{createdAt}" th:value="${todayDate}"/>
+                <div class="button-link">
+                    <div class="form-group">
+                        <button type="submit" class="btn-submit">Envoyer</button>
+                    </div>
+                    <a href="/reviews">Voir tous les avis</a>
                 </div>
-                <a href="/reviews">Voir tous les avis</a>
-            </div>
-        </form>
-    </div>
-    <script>
-        document.getElementById('form').addEventListener('submit', function (e) {
-            e.preventDefault();
-            let isValid = true;
-            // Destination
-            const destinationSelect = document.getElementById('destination-select');
-            const destinationError = document.getElementById('destinationError');
-            if (!destinationSelect.value) {
-                destinationError.textContent = "Veuillez sélectionner une destination.";
-                isValid = false;
-            } else {
-                destinationError.textContent = "";
-            }
-            // Note
-            const ratingInput = document.getElementById('rating-input');
-            const ratingError = document.getElementById('ratingError');
-            const rating = parseInt(ratingInput.value);
-            if (isNaN(rating) || rating < 1 || rating > 5) {
-                ratingError.textContent = "Veuillez entrer une note entre 1 et 5.";
-                isValid = false;
-            } else {
-                ratingError.textContent = "";
-            }
-            // Titre
-            const titleInput = document.getElementById('title-input').value.trim();
-            const titleError = document.getElementById('titleError');
-            if (!titleInput || titleInput.length > 50) {
-                titleError.textContent = "Le titre doit contenir entre 1 et 50 caractères.";
-                isValid = false;
-            } else {
-                titleError.textContent = "";
-            }
-            // Commentaire
-            const commentInput = document.getElementById('comment-input').value.trim();
-            const commentError = document.getElementById('commentError');
-            if (!commentInput || commentInput.length > 999) {
-                commentError.textContent = "Le commentaire doit contenir entre 1 et 999 caractères.";
-                isValid = false;
-            } else {
-                commentError.textContent = "";
-            }
-            // Validation
-            if (isValid) {
-                this.submit();
-            }
-        });
-    </script>
-</section>
-<div id="popup" class="popup hidden">
+            </form>
+        </div>
+        <script>
+            document.getElementById('form').addEventListener('submit', function (e) {
+                e.preventDefault();
+                let isValid = true;
+                // Destination
+                const destinationSelect = document.getElementById('destination-select');
+                const destinationError = document.getElementById('destinationError');
+                if (!destinationSelect.value) {
+                    destinationError.textContent = "Veuillez sélectionner une destination.";
+                    isValid = false;
+                } else {
+                    destinationError.textContent = "";
+                }
+                // Note
+                const ratingInput = document.getElementById('rating-input');
+                const ratingError = document.getElementById('ratingError');
+                const rating = parseInt(ratingInput.value);
+                if (isNaN(rating) || rating < 1 || rating > 5) {
+                    ratingError.textContent = "Veuillez entrer une note entre 1 et 5.";
+                    isValid = false;
+                } else {
+                    ratingError.textContent = "";
+                }
+                // Titre
+                const titleInput = document.getElementById('title-input').value.trim();
+                const titleError = document.getElementById('titleError');
+                if (!titleInput || titleInput.length > 50) {
+                    titleError.textContent = "Le titre doit contenir entre 1 et 50 caractères.";
+                    isValid = false;
+                } else {
+                    titleError.textContent = "";
+                }
+                // Commentaire
+                const commentInput = document.getElementById('comment-input').value.trim();
+                const commentError = document.getElementById('commentError');
+                if (!commentInput || commentInput.length > 999) {
+                    commentError.textContent = "Le commentaire doit contenir entre 1 et 999 caractères.";
+                    isValid = false;
+                } else {
+                    commentError.textContent = "";
+                }
+                // Validation
+                if (isValid) {
+                    this.submit();
+                }
+            });
+        </script>
+    </section>
+    <div id="popup" class="popup hidden">
         <div class="popup-content">
             <span id="popup-close" class="popup-close"></span>
             <p id="popup-comment"></p>
@@ -222,67 +222,67 @@
             }
         });
     </script>
-<footer class="footer">
-    <div class="footer-content">
-        <div class="footer-top">
-            <h3>Evazion</h3>
-            <p>Evazion propose des voyages sur mesure pour des escapades uniques, mêlant aventure, détente et découvertes culturelles. Faites confiance à notre expertise pour transformer vos envies d’évasion en souvenirs mémorables, où que vos rêves vous mènent.</p>
-        </div>
-        <div class="footer-center">
-            <div class="footer-center-section">
-                <h3>Accès rapide</h3>
-                <ul class="pages">
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-top">
+                <h3>Evazion</h3>
+                <p>Evazion propose des voyages sur mesure pour des escapades uniques, mêlant aventure, détente et découvertes culturelles. Faites confiance à notre expertise pour transformer vos envies d’évasion en souvenirs mémorables, où que vos rêves vous mènent.</p>
+            </div>
+            <div class="footer-center">
+                <div class="footer-center-section">
+                    <h3>Accès rapide</h3>
+                    <ul class="pages">
+                        <li>
+                            <a th:href="@{/about-us}">Qui sommes-nous ?</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/faq}">Foire aux questions</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/reviews}">Avis</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-center-section">
+                    <h3>Contactez-nous</h3>
+                    <ul class="contact">
+                        <li>
+                            <i class="fa-solid fa-phone"></i> +33 1 23 45 67 89
+                        </li>
+                        <li>
+                            <a href="mailto:contact@evazion.com" target="_blank"><i class="fa-solid fa-envelope"></i> contact@evazion.com</a>
+                        </li>
+                        <li>
+                            <a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook"></i> Evazion - Agence de voyage</a>
+                        </li>
+                        <li>
+                            <a href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i> evazionvoyages</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-center-section">
+                    <h3>Partenaires</h3>
+                    <ul class="partners">
+                        <li>SkyLynx Airways</li>
+                        <li>Aurora Haven</li>
+                        <li>Pathfinders Collective</li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class="footer-bottom">
+                <ul class="documents">
                     <li>
-                        <a th:href="@{/about-us}">Qui sommes-nous ?</a>
+                        <a th:href="@{/politique-de-confidentialite}">Politique de confidentialité</a>
                     </li>
                     <li>
-                        <a th:href="@{/faq}">Foire aux questions</a>
-                    </li>
-                    <li>
-                        <a th:href="@{/reviews}">Avis</a>
+                        <a th:href="@{/cgv}">Conditions générales de ventes</a>
                     </li>
                 </ul>
-            </div>
-            <div class="footer-center-section">
-                <h3>Contactez-nous</h3>
-                <ul class="contact">
-                    <li>
-                        <i class="fa-solid fa-phone"></i> +33 1 23 45 67 89
-                    </li>
-                    <li>
-                        <a href="mailto:contact@evazion.com" target="_blank"><i class="fa-solid fa-envelope"></i> contact@evazion.com</a>
-                    </li>
-                    <li>
-                        <a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook"></i> Evazion - Agence de voyage</a>
-                    </li>
-                    <li>
-                        <a href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i> evazionvoyages</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="footer-center-section">
-                <h3>Partenaires</h3>
-                <ul class="partners">
-                    <li>SkyLynx Airways</li>
-                    <li>Aurora Haven</li>
-                    <li>Pathfinders Collective</li>
-                </ul>
+                <p>© 2024 Evazion - Tous droits réservés.</p>
             </div>
         </div>
-        <hr>
-        <div class="footer-bottom">
-            <ul class="documents">
-                <li>
-                    <a th:href="@{/politique-de-confidentialite}">Politique de confidentialité</a>
-                </li>
-                <li>
-                    <a th:href="@{/cgv}">Conditions générales de ventes</a>
-                </li>
-            </ul>
-            <p>© 2024 Evazion - Tous droits réservés.</p>
-        </div>
-    </div>
-</footer>
+    </footer>
     <a href="#" class="scroll-top-button">
         <i class="fa-solid fa-arrow-up"></i>
     </a>

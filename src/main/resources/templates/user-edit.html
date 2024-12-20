@@ -16,142 +16,216 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body>
-<header class="header">
-    <div class="top-bar">
-        <div class="logo">
-            <a th:href="@{/}">
-                Evazion
-            </a>
-        </div>
-        <ul class="navigation">
-            <li class="navigation-item trips-item">
-                <a th:href="@{/destinations}">Voyages</a>
-            </li>
-            <li class="navigation-item">
-                <a th:href="@{/reviews}">Avis</a>
-            </li>
-            <li class="navigation-item">
-                <a th:href="@{/contact}">Contact</a>
-            </li>
-            <li class="navigation-item buttons-container">
-                <a th:href="@{/users/user-profile}" class="navigation-item account">
-                    <i class="fa-solid fa-user"></i> Compte
+    <header class="header">
+        <div class="top-bar">
+            <div class="logo">
+                <a th:href="@{/}">
+                    Evazion
                 </a>
-            </li>
-        </ul>
-    </div>
-</header>
-<section class="main-section">
-    <h1 class="title">Modifier Utilisateur</h1>
-    <p class="description">Mettez à jour les informations de cet utilisateur.</p>
-    <form th:action="@{'/users/user-edit/' + ${user.userId}}" method="post" class="registration-form">
-        <div class="form-block">
-            <div class="form-group">
-                <h5>Nom</h5>
-                <input type="text" id="firstname" name="firstname" th:value="${user.firstname}">
             </div>
-            <div class="form-group">
-                <h5>Prénom</h5>
-                <input type="text" id="lastname" name="lastname" th:value="${user.lastname}">
-            </div>
-        </div>
-        <div class="form-group">
-            <h5>Email</h5>
-            <input type="email" id="email" name="email" th:value="${user.email}">
-        </div>
-        <div class="form-group">
-            <h5>Téléphone</h5>
-            <input type="text" id="phonenumber" name="phonenumber" th:value="${user.phoneNumber}">
-        </div>
-        <div class="form-block">
-            <div class="form-group">
-                <h5>Nouveau mot de passe</h5>
-                <input type="password" id="password" name="password" placeholder="Nouveau mot de passe">
-            </div>
-            <div class="form-group">
-                <h5>Confirmer le mot de passe</h5>
-                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirmez le mot de passe">
-            </div>
-        </div>
-        <div class="form-group">
-            <label>Type d'utilisateur</label>
-            <div>
-                <input type="radio" id="user" name="admin" value="false" th:checked="${!user.admin}">
-                <label for="user">Utilisateur</label>
-            </div>
-            <div>
-                <input type="radio" id="admin" name="admin" value="true" th:checked="${user.admin}">
-                <label for="admin">Administrateur</label>
-            </div>
-        </div>
-        <div class="form-group">
-            <button type="submit" class="submit-button"><i class="fa-solid fa-save"></i> Enregistrer</button>
-        </div>
-    </form>
-</section>
-<footer class="footer">
-    <div class="footer-content">
-        <div class="footer-top">
-            <h3>Evazion</h3>
-            <p>Evazion propose des voyages sur mesure pour des escapades uniques, mêlant aventure, détente et découvertes culturelles. Faites confiance à notre expertise pour transformer vos envies d’évasion en souvenirs mémorables, où que vos rêves vous mènent.</p>
-        </div>
-        <div class="footer-center">
-            <div class="footer-center-section">
-                <h3>Accès rapide</h3>
-                <ul class="pages">
-                    <li>
-                        <a th:href="@{/about-us}">Qui sommes-nous ?</a>
-                    </li>
-                    <li>
-                        <a th:href="@{/faq}">Foire aux questions</a>
-                    </li>
-                    <li>
-                        <a th:href="@{/reviews}">Avis</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="footer-center-section">
-                <h3>Contactez-nous</h3>
-                <ul class="contact">
-                    <li>
-                        <i class="fa-solid fa-phone"></i> +33 1 23 45 67 89
-                    </li>
-                    <li>
-                        <a href="mailto:contact@evazion.com" target="_blank"><i class="fa-solid fa-envelope"></i> contact@evazion.com</a>
-                    </li>
-                    <li>
-                        <a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook"></i> Evazion - Agence de voyage</a>
-                    </li>
-                    <li>
-                        <a href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i> evazionvoyages</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="footer-center-section">
-                <h3>Partenaires</h3>
-                <ul class="partners">
-                    <li>SkyLynx Airways</li>
-                    <li>Aurora Haven</li>
-                    <li>Pathfinders Collective</li>
-                </ul>
-            </div>
-        </div>
-        <hr>
-        <div class="footer-bottom">
-            <ul class="documents">
-                <li>
-                    <a th:href="@{/politique-de-confidentialite}">Politique de confidentialité</a>
+            <ul class="navigation">
+                <li class="navigation-item trips-item">
+                    <a th:href="@{/destinations}">Voyages</a>
                 </li>
-                <li>
-                    <a th:href="@{/cgv}">Conditions générales de ventes</a>
+                <li class="navigation-item">
+                    <a th:href="@{/reviews}">Avis</a>
+                </li>
+                <li class="navigation-item">
+                    <a th:href="@{/contact}">Contact</a>
+                </li>
+                <li class="navigation-item buttons-container">
+                    <a th:href="@{/users/user-profile}" class="navigation-item account">
+                        <i class="fa-solid fa-user"></i> Compte
+                    </a>
                 </li>
             </ul>
-            <p>© 2024 Evazion - Tous droits réservés.</p>
         </div>
-    </div>
-</footer>
-<a href="#" class="scroll-top-button">
-    <i class="fa-solid fa-arrow-up"></i>
-</a>
+    </header>
+    <section class="main-section">
+        <h1 class="title">Modifier Utilisateur</h1>
+        <p class="description">Mettez à jour les informations de cet utilisateur.</p>
+        <form th:action="@{'/users/user-edit/' + ${user.userId}}" method="post" class="registration-form" id="editProfileForm">
+            <div class="form-block">
+                <div class="form-group">
+                    <h5>Nom</h5>
+                    <input type="text" id="firstname" name="firstname" th:value="${user.firstname}">
+                    <div class="error" id="firstnameError"></div>
+                </div>
+                <div class="form-group">
+                    <h5>Prénom</h5>
+                    <input type="text" id="lastname" name="lastname" th:value="${user.lastname}">
+                    <div class="error" id="lastnameError"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <h5>Email</h5>
+                <input type="email" id="email" name="email" th:value="${user.email}">
+                <div class="error" id="emailError"></div>
+            </div>
+            <div class="form-group">
+                <h5>Téléphone</h5>
+                <input type="text" id="phonenumber" name="phonenumber" th:value="${user.phoneNumber}">
+                <div class="error" id="phoneError"></div>
+            </div>
+            <div class="form-block">
+                <div class="form-group">
+                    <h5>Nouveau mot de passe</h5>
+                    <input type="password" id="password" name="password" placeholder="Nouveau mot de passe">
+                    <div class="error" id="passwordError"></div>
+                </div>
+                <div class="form-group">
+                    <h5>Confirmer le mot de passe</h5>
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirmez le mot de passe">
+                    <div class="error" id="confirmPasswordError"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Type d'utilisateur</label>
+                <div>
+                    <input type="radio" id="user" name="admin" value="false" th:checked="${!user.admin}">
+                    <label for="user">Utilisateur</label>
+                </div>
+                <div>
+                    <input type="radio" id="admin" name="admin" value="true" th:checked="${user.admin}">
+                    <label for="admin">Administrateur</label>
+                </div>
+                <div class="error" id="adminError"></div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="submit-button"><i class="fa-solid fa-save"></i> Enregistrer</button>
+            </div>
+        </form>
+    </section>
+    <script>
+        document.getElementById('editProfileForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            let isValid = true;
+            // Prénom
+            const firstname = document.getElementById('firstname').value.trim();
+            if (!firstname) {
+                document.getElementById('firstnameError').textContent = "Le prénom est obligatoire.";
+                isValid = false;
+            } else {
+                document.getElementById('firstnameError').textContent = "";
+            }
+            // Nom
+            const lastname = document.getElementById('lastname').value.trim();
+            if (!lastname) {
+                document.getElementById('lastnameError').textContent = "Le nom est obligatoire.";
+                isValid = false;
+            } else {
+                document.getElementById('lastnameError').textContent = "";
+            }
+            // Email
+            const email = document.getElementById('email').value.trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!email) {
+                document.getElementById('emailError').textContent = "L'email est obligatoire.";
+                isValid = false;
+            } else if (!emailRegex.test(email)) {
+                document.getElementById('emailError').textContent = "L'email n'est pas valide.";
+                isValid = false;
+            } else {
+                document.getElementById('emailError').textContent = "";
+            }
+            // Téléphone
+            const phonenumber = document.getElementById('phonenumber').value.trim();
+            const phoneRegex = /^\d{10}$/;
+            if (!phonenumber) {
+                document.getElementById('phoneError').textContent = "Le numéro de téléphone est obligatoire.";
+                isValid = false;
+            } else if (!phoneRegex.test(phonenumber)) {
+                document.getElementById('phoneError').textContent = "Le numéro de téléphone doit contenir exactement 10 chiffres.";
+                isValid = false;
+            } else {
+                document.getElementById('phoneError').textContent = "";
+            }
+            // Mot de passe
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            if (password && confirmPassword && password !== confirmPassword) {
+                document.getElementById('confirmPasswordError').textContent = "Les mots de passe ne correspondent pas.";
+                isValid = false;
+            } else {
+                document.getElementById('confirmPasswordError').textContent = "";
+            }
+            // Type d'utilisateur
+            const userType = document.querySelector('input[name="admin"]:checked');
+            if (!userType) {
+                document.getElementById('adminError').textContent = "Le type d'utilisateur est obligatoire.";
+                isValid = false;
+            } else {
+                document.getElementById('adminError').textContent = "";
+            }
+            // Validation finale
+            if (isValid) {
+                this.submit();
+            }
+        });
+    </script>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-top">
+                <h3>Evazion</h3>
+                <p>Evazion propose des voyages sur mesure pour des escapades uniques, mêlant aventure, détente et découvertes culturelles. Faites confiance à notre expertise pour transformer vos envies d’évasion en souvenirs mémorables, où que vos rêves vous mènent.</p>
+            </div>
+            <div class="footer-center">
+                <div class="footer-center-section">
+                    <h3>Accès rapide</h3>
+                    <ul class="pages">
+                        <li>
+                            <a th:href="@{/about-us}">Qui sommes-nous ?</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/faq}">Foire aux questions</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/reviews}">Avis</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-center-section">
+                    <h3>Contactez-nous</h3>
+                    <ul class="contact">
+                        <li>
+                            <i class="fa-solid fa-phone"></i> +33 1 23 45 67 89
+                        </li>
+                        <li>
+                            <a href="mailto:contact@evazion.com" target="_blank"><i class="fa-solid fa-envelope"></i> contact@evazion.com</a>
+                        </li>
+                        <li>
+                            <a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook"></i> Evazion - Agence de voyage</a>
+                        </li>
+                        <li>
+                            <a href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i> evazionvoyages</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-center-section">
+                    <h3>Partenaires</h3>
+                    <ul class="partners">
+                        <li>SkyLynx Airways</li>
+                        <li>Aurora Haven</li>
+                        <li>Pathfinders Collective</li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class="footer-bottom">
+                <ul class="documents">
+                    <li>
+                        <a th:href="@{/politique-de-confidentialite}">Politique de confidentialité</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/cgv}">Conditions générales de ventes</a>
+                    </li>
+                </ul>
+                <p>© 2024 Evazion - Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+    <a href="#" class="scroll-top-button">
+        <i class="fa-solid fa-arrow-up"></i>
+    </a>
 </body>
 </html>

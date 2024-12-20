@@ -18,73 +18,73 @@
     <script src="/script/notification.js"></script>
 </head>
 <body>
-<header class="header">
-    <div class="top-bar">
-        <div class="logo">
-            <a th:href="@{/}">
-                Evazion
-            </a>
-        </div>
-        <ul class="navigation">
-            <li class="navigation-item trips-item">
-                <a th:href="@{/destinations}">Voyages</a>
-            </li>
-            <li class="navigation-item">
-                <a th:href="@{/reviews}">Avis</a>
-            </li>
-            <li class="navigation-item">
-                <a th:href="@{/contact}">Contact</a>
-            </li>
-            <li class="navigation-item buttons-container">
-                <a th:href="@{/users/user-profile}" class="navigation-item account">
-                    <i class="fa-solid fa-user"></i> Compte
+    <header class="header">
+        <div class="top-bar">
+            <div class="logo">
+                <a th:href="@{/}">
+                    Evazion
                 </a>
-            </li>
-        </ul>
-    </div>
-    <div class="base-line">
-        <strong class="base-line-name">Evazion</strong>
-        <span class="base-line-slogan">Laissez vos rêves devenir votre prochaine evazion.</span>
-    </div>
-</header>
+            </div>
+            <ul class="navigation">
+                <li class="navigation-item trips-item">
+                    <a th:href="@{/destinations}">Voyages</a>
+                </li>
+                <li class="navigation-item">
+                    <a th:href="@{/reviews}">Avis</a>
+                </li>
+                <li class="navigation-item">
+                    <a th:href="@{/contact}">Contact</a>
+                </li>
+                <li class="navigation-item buttons-container">
+                    <a th:href="@{/users/user-profile}" class="navigation-item account">
+                        <i class="fa-solid fa-user"></i> Compte
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="base-line">
+            <strong class="base-line-name">Evazion</strong>
+            <span class="base-line-slogan">Laissez vos rêves devenir votre prochaine evazion.</span>
+        </div>
+    </header>
 
-    <!--/*@thymesVar id="successMessageRegisterUser" type="java"*/-->
-    <p class="notification" th:if="${successMessageRegisterUser}">
-        <i class="fa-solid fa-user-plus"></i>
-        <span th:text="${successMessageRegisterUser}"></span>
-    </p>
+        <!--/*@thymesVar id="successMessageRegisterUser" type="java"*/-->
+        <p class="notification" th:if="${successMessageRegisterUser}">
+            <i class="fa-solid fa-user-plus"></i>
+            <span th:text="${successMessageRegisterUser}"></span>
+        </p>
 
-<section class="section-1">
-    <h2 class="section-1-title">Les prochains départs</h2>
-    <p class="section-1-description">
-        Découvrez nos voyages les plus imminents, à petits prix. <br> Saisissez ces opportunités avant qu'elles ne disparaissent !
-    </p>
-    <div class="card-slider-container">
-        <div class="card-slider">
-            <div th:each="destination, stat : ${closestDestinations}">
-                <input type="radio" name="slide" th:id="'card-' + ${stat.index + 1}" th:checked="${stat.index == 0}">
-                <label th:for="'card-' + ${stat.index + 1}" class="card">
-                    <img th:src="@{/images/{urlImage}(urlImage=${destination.lienImage})}" alt="Image de la destination" class="card-image">
-                    <div class="card-content">
-                        <div class="card-header">
-                            <div class="infos">
-                                <span class="price" th:text="${T(java.lang.Math).round(destination.price) + ' €'}"></span>
-                                <span class="dates" th:text="${#dates.format(destination.startDate, 'dd/MM/yyyy')} + ' - ' + ${#dates.format(destination.endDate, 'dd/MM/yyyy')}"></span>
+    <section class="section-1">
+        <h2 class="section-1-title">Les prochains départs</h2>
+        <p class="section-1-description">
+            Découvrez nos voyages les plus imminents, à petits prix. <br> Saisissez ces opportunités avant qu'elles ne disparaissent !
+        </p>
+        <div class="card-slider-container">
+            <div class="card-slider">
+                <div th:each="destination, stat : ${closestDestinations}">
+                    <input type="radio" name="slide" th:id="'card-' + ${stat.index + 1}" th:checked="${stat.index == 0}">
+                    <label th:for="'card-' + ${stat.index + 1}" class="card">
+                        <img th:src="@{/images/{urlImage}(urlImage=${destination.lienImage})}" alt="Image de la destination" class="card-image">
+                        <div class="card-content">
+                            <div class="card-header">
+                                <div class="infos">
+                                    <span class="price" th:text="${T(java.lang.Math).round(destination.price) + ' €'}"></span>
+                                    <span class="dates" th:text="${#dates.format(destination.startDate, 'dd/MM/yyyy')} + ' - ' + ${#dates.format(destination.endDate, 'dd/MM/yyyy')}"></span>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <h4 class="location">
+                                    <i class="fa-solid fa-location-pin"></i> <span th:text="${destination.city} + ', ' + ${destination.country}"></span>
+                                </h4>
                             </div>
                         </div>
-                        <div class="card-footer">
-                            <h4 class="location">
-                                <i class="fa-solid fa-location-pin"></i> <span th:text="${destination.city} + ', ' + ${destination.country}"></span>
-                            </h4>
-                        </div>
-                    </div>
-                </label>
+                    </label>
+                </div>
             </div>
         </div>
-    </div>
-    <a th:href="@{/destinations}" class="section-1-view-link">Voir tous nos voyages</a>
-</section>
-<section class="section-2">
+        <a th:href="@{/destinations}" class="section-1-view-link">Voir tous nos voyages</a>
+    </section>
+    <section class="section-2">
         <h2 class="section-2-title">Pourquoi voyager avec <span>Evazion</span> ?</h2>
         <div class="reason-container">
             <div class="reason">
@@ -412,67 +412,67 @@
             }
         </script>
     </section>
-<footer class="footer">
-    <div class="footer-content">
-        <div class="footer-top">
-            <h3>Evazion</h3>
-            <p>Evazion propose des voyages sur mesure pour des escapades uniques, mêlant aventure, détente et découvertes culturelles. Faites confiance à notre expertise pour transformer vos envies d’évasion en souvenirs mémorables, où que vos rêves vous mènent.</p>
-        </div>
-        <div class="footer-center">
-            <div class="footer-center-section">
-                <h3>Accès rapide</h3>
-                <ul class="pages">
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-top">
+                <h3>Evazion</h3>
+                <p>Evazion propose des voyages sur mesure pour des escapades uniques, mêlant aventure, détente et découvertes culturelles. Faites confiance à notre expertise pour transformer vos envies d’évasion en souvenirs mémorables, où que vos rêves vous mènent.</p>
+            </div>
+            <div class="footer-center">
+                <div class="footer-center-section">
+                    <h3>Accès rapide</h3>
+                    <ul class="pages">
+                        <li>
+                            <a th:href="@{/about-us}">Qui sommes-nous ?</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/faq}">Foire aux questions</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/reviews}">Avis</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-center-section">
+                    <h3>Contactez-nous</h3>
+                    <ul class="contact">
+                        <li>
+                            <i class="fa-solid fa-phone"></i> +33 1 23 45 67 89
+                        </li>
+                        <li>
+                            <a href="mailto:contact@evazion.com" target="_blank"><i class="fa-solid fa-envelope"></i> contact@evazion.com</a>
+                        </li>
+                        <li>
+                            <a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook"></i> Evazion - Agence de voyage</a>
+                        </li>
+                        <li>
+                            <a href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i> evazionvoyages</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-center-section">
+                    <h3>Partenaires</h3>
+                    <ul class="partners">
+                        <li>SkyLynx Airways</li>
+                        <li>Aurora Haven</li>
+                        <li>Pathfinders Collective</li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class="footer-bottom">
+                <ul class="documents">
                     <li>
-                        <a th:href="@{/about-us}">Qui sommes-nous ?</a>
+                        <a th:href="@{/politique-de-confidentialite}">Politique de confidentialité</a>
                     </li>
                     <li>
-                        <a th:href="@{/faq}">Foire aux questions</a>
-                    </li>
-                    <li>
-                        <a th:href="@{/reviews}">Avis</a>
+                        <a th:href="@{/cgv}">Conditions générales de ventes</a>
                     </li>
                 </ul>
-            </div>
-            <div class="footer-center-section">
-                <h3>Contactez-nous</h3>
-                <ul class="contact">
-                    <li>
-                        <i class="fa-solid fa-phone"></i> +33 1 23 45 67 89
-                    </li>
-                    <li>
-                        <a href="mailto:contact@evazion.com" target="_blank"><i class="fa-solid fa-envelope"></i> contact@evazion.com</a>
-                    </li>
-                    <li>
-                        <a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook"></i> Evazion - Agence de voyage</a>
-                    </li>
-                    <li>
-                        <a href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i> evazionvoyages</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="footer-center-section">
-                <h3>Partenaires</h3>
-                <ul class="partners">
-                    <li>SkyLynx Airways</li>
-                    <li>Aurora Haven</li>
-                    <li>Pathfinders Collective</li>
-                </ul>
+                <p>© 2024 Evazion - Tous droits réservés.</p>
             </div>
         </div>
-        <hr>
-        <div class="footer-bottom">
-            <ul class="documents">
-                <li>
-                    <a th:href="@{/politique-de-confidentialite}">Politique de confidentialité</a>
-                </li>
-                <li>
-                    <a th:href="@{/cgv}">Conditions générales de ventes</a>
-                </li>
-            </ul>
-            <p>© 2024 Evazion - Tous droits réservés.</p>
-        </div>
-    </div>
-</footer>
+    </footer>
     <a href="#" class="scroll-top-button">
         <i class="fa-solid fa-arrow-up"></i>
     </a>

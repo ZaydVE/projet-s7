@@ -16,170 +16,268 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body>
-<header class="header">
-    <div class="top-bar">
-        <div class="logo">
-            <a th:href="@{/}">
-                Evazion
-            </a>
-        </div>
-        <ul class="navigation">
-            <li class="navigation-item trips-item">
-                <a th:href="@{/destinations}">Voyages</a>
-            </li>
-            <li class="navigation-item">
-                <a th:href="@{/reviews}">Avis</a>
-            </li>
-            <li class="navigation-item">
-                <a th:href="@{/contact}">Contact</a>
-            </li>
-            <li class="navigation-item buttons-container">
-                <a th:href="@{/users/user-profile}" class="navigation-item account">
-                    <i class="fa-solid fa-user"></i> Compte
+    <header class="header">
+        <div class="top-bar">
+            <div class="logo">
+                <a th:href="@{/}">
+                    Evazion
                 </a>
-            </li>
-        </ul>
-    </div>
-</header>
-
-<section class="main-section">
-    <h1 class="title">Modifier une destination</h1>
-    <p class="description">Mettez à jour les informations d'une destination.</p>
-    <form th:action="@{/destinations/edit/{id}(id=${destination.destinationId})}" method="post" enctype="multipart/form-data" class="add-destination-form">
-        <div class="fields">
-            <div class="form-block">
-                <div class="form-group">
-                    <h5>Nom</h5>
-                    <input type="text" id="name" name="name" th:value="${destination.name}" required>
-                </div>
-                <div class="form-group">
-                    <h5 for="type">Type</h5>
-                    <input type="text" id="type" name="type" th:value="${destination.type}" required>
-                </div>
             </div>
-            <div class="form-block location">
-                <div class="form-group">
-                    <h5 for="continent">Continent</h5>
-                    <select id="continent" name="continent" required>
-                        <option th:each="continent : ${continents}"
-                                th:value="${continent}"
-                                th:text="${continent}"
-                                th:selected="${continent == destination.continent}">
-                        </option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <h5 for="country">Pays</h5>
-                    <select id="country" name="country" required>
-                        <option th:each="country : ${countries}"
-                                th:value="${country}"
-                                th:text="${country}"
-                                th:selected="${country == destination.country}">
-                        </option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <h5 for="city">Ville</h5>
-                    <input type="text" id="city" name="city" th:value="${destination.city}" required>
-                </div>
-            </div>
-            <div class="form-block">
-                <div class="form-group">
-                    <h5 for="startDate">Date de début</h5>
-                    <input type="date" id="startDate" name="startDate" th:value="${destination.startDate}" required>
-                </div>
-                <div class="form-group">
-                    <h5 for="endDate">Date de fin</h5>
-                    <input type="date" id="endDate" name="endDate" th:value="${destination.endDate}" required>
-                </div>
-            </div>
-            <div class="form-block">
-                <div class="form-group">
-                    <h5 for="price">Prix</h5>
-                    <input type="number" id="price" name="price" th:value="${destination.price}" min="0" step="0.01" required>
-                </div>
-                <div class="form-group">
-                    <h5 for="nbPlaces">Places disponibles</h5>
-                    <input type="number" id="nbPlaces" name="nbPlaces" th:value="${destination.nbPlaces}" min="1" required>
-                </div>
-            </div>
-            <div class="form-group">
-                <h5 for="description">Description</h5>
-                <textarea id="description" name="description" rows="5" cols="125" th:text="${destination.description}" required></textarea>
-            </div>
-            <div class="form-group">
-                <h5 for="lienImage">Image</h5>
-                <input type="file" id="lienImage" name="lienImage" accept=".jpg, .jpeg">
-            </div>
-        </div>
-        <button type="submit" class="submit-button"><i class="fa-solid fa-save"></i> Enregistrer</button>
-    </form>
-</section>
-
-<footer class="footer">
-    <div class="footer-content">
-        <div class="footer-top">
-            <h3>Evazion</h3>
-            <p>Evazion propose des voyages sur mesure pour des escapades uniques, mêlant aventure, détente et découvertes culturelles. Faites confiance à notre expertise pour transformer vos envies d’évasion en souvenirs mémorables, où que vos rêves vous mènent.</p>
-        </div>
-        <div class="footer-center">
-            <div class="footer-center-section">
-                <h3>Accès rapide</h3>
-                <ul class="pages">
-                    <li>
-                        <a th:href="@{/about-us}">Qui sommes-nous ?</a>
-                    </li>
-                    <li>
-                        <a th:href="@{/faq}">Foire aux questions</a>
-                    </li>
-                    <li>
-                        <a th:href="@{/reviews}">Avis</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="footer-center-section">
-                <h3>Contactez-nous</h3>
-                <ul class="contact">
-                    <li>
-                        <i class="fa-solid fa-phone"></i> +33 1 23 45 67 89
-                    </li>
-                    <li>
-                        <a href="mailto:contact@evazion.com" target="_blank"><i class="fa-solid fa-envelope"></i> contact@evazion.com</a>
-                    </li>
-                    <li>
-                        <a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook"></i> Evazion - Agence de voyage</a>
-                    </li>
-                    <li>
-                        <a href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i> evazionvoyages</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="footer-center-section">
-                <h3>Partenaires</h3>
-                <ul class="partners">
-                    <li>SkyLynx Airways</li>
-                    <li>Aurora Haven</li>
-                    <li>Pathfinders Collective</li>
-                </ul>
-            </div>
-        </div>
-        <hr>
-        <div class="footer-bottom">
-            <ul class="documents">
-                <li>
-                    <a th:href="@{/politique-de-confidentialite}">Politique de confidentialité</a>
+            <ul class="navigation">
+                <li class="navigation-item trips-item">
+                    <a th:href="@{/destinations}">Voyages</a>
                 </li>
-                <li>
-                    <a th:href="@{/cgv}">Conditions générales de ventes</a>
+                <li class="navigation-item">
+                    <a th:href="@{/reviews}">Avis</a>
+                </li>
+                <li class="navigation-item">
+                    <a th:href="@{/contact}">Contact</a>
+                </li>
+                <li class="navigation-item buttons-container">
+                    <a th:href="@{/users/user-profile}" class="navigation-item account">
+                        <i class="fa-solid fa-user"></i> Compte
+                    </a>
                 </li>
             </ul>
-            <p>© 2024 Evazion - Tous droits réservés.</p>
         </div>
-    </div>
-</footer>
-<a href="#" class="scroll-top-button">
-    <i class="fa-solid fa-arrow-up"></i>
-</a>
+    </header>
+    <section class="main-section">
+        <h1 class="title">Modifier une destination</h1>
+        <p class="description">Mettez à jour les informations d'une destination.</p>
+        <form action="/destinations/edit/{id}" method="post" enctype="multipart/form-data" class="add-destination-form" id="edit-destination-form" novalidate>
+            <div class="fields">
+                <div class="form-block">
+                    <div class="form-group">
+                        <h5>Nom</h5>
+                        <input type="text" id="name" name="name" th:value="${destination.name}">
+                        <div id="nameError" class="error"></div> <!-- Erreur pour le nom -->
+                    </div>
+                    <div class="form-group">
+                        <h5>Type</h5>
+                        <input type="text" id="type" name="type" th:value="${destination.type}">
+                        <div id="typeError" class="error"></div> <!-- Erreur pour le type -->
+                    </div>
+                </div>
+                <div class="form-block location">
+                    <div class="form-group">
+                        <h5>Continent</h5>
+                        <select id="continent" name="continent" required>
+                            <option th:each="continent : ${continents}" th:value="${continent}" th:text="${continent}" th:selected="${continent == destination.continent}"></option>
+                        </select>
+                        <div id="continentError" class="error"></div> <!-- Erreur pour le continent -->
+                    </div>
+                    <div class="form-group">
+                        <h5>Pays</h5>
+                        <select id="country" name="country">
+                            <option th:each="country : ${countries}" th:value="${country}" th:text="${country}" th:selected="${country == destination.country}"></option>
+                        </select>
+                        <div id="countryError" class="error"></div> <!-- Erreur pour le pays -->
+                    </div>
+                    <div class="form-group">
+                        <h5>Ville</h5>
+                        <input type="text" id="city" name="city" th:value="${destination.city}">
+                        <div id="cityError" class="error"></div> <!-- Erreur pour la ville -->
+                    </div>
+                </div>
+                <div class="form-block">
+                    <div class="form-group">
+                        <h5>Date de début</h5>
+                        <input type="date" id="startDate" name="startDate" th:value="${destination.startDate}">
+                        <div id="startDateError" class="error"></div> <!-- Erreur pour la date de début -->
+                    </div>
+                    <div class="form-group">
+                        <h5>Date de fin</h5>
+                        <input type="date" id="endDate" name="endDate" th:value="${destination.endDate}">
+                        <div id="endDateError" class="error"></div> <!-- Erreur pour la date de fin -->
+                    </div>
+                </div>
+                <div class="form-block">
+                    <div class="form-group">
+                        <h5>Prix</h5>
+                        <input type="number" id="price" name="price" th:value="${destination.price}" min="0" step="0.01">
+                        <div id="priceError" class="error"></div> <!-- Erreur pour le prix -->
+                    </div>
+                    <div class="form-group">
+                        <h5>Places disponibles</h5>
+                        <input type="number" id="nbPlaces" name="nbPlaces" th:value="${destination.nbPlaces}" min="1">
+                        <div id="nbPlacesError" class="error"></div> <!-- Erreur pour le nombre de places -->
+                    </div>
+                </div>
+                <div class="form-group">
+                    <h5>Description</h5>
+                    <textarea id="description" name="description" rows="5" cols="125" th:text="${destination.description}"></textarea>
+                    <div id="descriptionError" class="error"></div> <!-- Erreur pour la description -->
+                </div>
+                <div class="form-group">
+                    <h5>Image</h5>
+                    <input type="file" id="lienImage" name="lienImage" accept=".jpg, .jpeg">
+                    <div id="imageError" class="error"></div> <!-- Erreur pour l'image -->
+                </div>
+            </div>
+            <button type="submit" class="submit-button"><i class="fa-solid fa-save"></i> Enregistrer</button>
+        </form>
+    </section>
+    <script>
+        document.getElementById('edit-destination-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            let isValid = true;
+            // Nom
+            const name = document.getElementById('name').value.trim();
+            if (!name) {
+                document.getElementById('nameError').textContent = "Le nom est obligatoire.";
+                isValid = false;
+            } else {
+                document.getElementById('nameError').textContent = "";
+            }
+            // Type
+            const type = document.getElementById('type').value.trim();
+            if (!type) {
+                document.getElementById('typeError').textContent = "Le type est obligatoire.";
+                isValid = false;
+            } else {
+                document.getElementById('typeError').textContent = "";
+            }
+            // Continent
+            const continent = document.getElementById('continent').value;
+            if (!continent) {
+                document.getElementById('continentError').textContent = "Le continent est obligatoire.";
+                isValid = false;
+            } else {
+                document.getElementById('continentError').textContent = "";
+            }
+            // Pays
+            const country = document.getElementById('country').value;
+            if (!country) {
+                document.getElementById('countryError').textContent = "Le pays est obligatoire.";
+                isValid = false;
+            } else {
+                document.getElementById('countryError').textContent = "";
+            }
+            // Ville
+            const city = document.getElementById('city').value.trim();
+            if (!city) {
+                document.getElementById('cityError').textContent = "La ville est obligatoire.";
+                isValid = false;
+            } else {
+                document.getElementById('cityError').textContent = "";
+            }
+            // Date de début
+            const startDate = document.getElementById('startDate').value;
+            if (!startDate) {
+                document.getElementById('startDateError').textContent = "La date de début est obligatoire.";
+                isValid = false;
+            } else {
+                document.getElementById('startDateError').textContent = "";
+            }
+            // Date de fin
+            const endDate = document.getElementById('endDate').value;
+            if (!endDate) {
+                document.getElementById('endDateError').textContent = "La date de fin est obligatoire.";
+                isValid = false;
+            } else {
+                document.getElementById('endDateError').textContent = "";
+            }
+            // Prix
+            const price = document.getElementById('price').value;
+            if (price <= 0) {
+                document.getElementById('priceError').textContent = "Le prix doit être positif.";
+                isValid = false;
+            } else {
+                document.getElementById('priceError').textContent = "";
+            }
+            // Places disponibles
+            const nbPlaces = document.getElementById('nbPlaces').value;
+            if (nbPlaces < 1) {
+                document.getElementById('nbPlacesError').textContent = "Le nombre de places doit être supérieur à zéro.";
+                isValid = false;
+            } else {
+                document.getElementById('nbPlacesError').textContent = "";
+            }
+            // Description
+            const description = document.getElementById('description').value.trim();
+            if (!description) {
+                document.getElementById('descriptionError').textContent = "La description est obligatoire.";
+                isValid = false;
+            } else {
+                document.getElementById('descriptionError').textContent = "";
+            }
+            // Image
+            const image = document.getElementById('lienImage').files[0];
+            if (image && !['image/jpeg', 'image/jpg'].includes(image.type)) {
+                document.getElementById('imageError').textContent = "L'image doit être au format .jpg ou .jpeg.";
+                isValid = false;
+            } else {
+                document.getElementById('imageError').textContent = "";
+            }
+            // Validation finale
+            if (isValid) {
+                this.submit();
+            }
+        });
+    </script>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-top">
+                <h3>Evazion</h3>
+                <p>Evazion propose des voyages sur mesure pour des escapades uniques, mêlant aventure, détente et découvertes culturelles. Faites confiance à notre expertise pour transformer vos envies d’évasion en souvenirs mémorables, où que vos rêves vous mènent.</p>
+            </div>
+            <div class="footer-center">
+                <div class="footer-center-section">
+                    <h3>Accès rapide</h3>
+                    <ul class="pages">
+                        <li>
+                            <a th:href="@{/about-us}">Qui sommes-nous ?</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/faq}">Foire aux questions</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/reviews}">Avis</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-center-section">
+                    <h3>Contactez-nous</h3>
+                    <ul class="contact">
+                        <li>
+                            <i class="fa-solid fa-phone"></i> +33 1 23 45 67 89
+                        </li>
+                        <li>
+                            <a href="mailto:contact@evazion.com" target="_blank"><i class="fa-solid fa-envelope"></i> contact@evazion.com</a>
+                        </li>
+                        <li>
+                            <a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook"></i> Evazion - Agence de voyage</a>
+                        </li>
+                        <li>
+                            <a href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i> evazionvoyages</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-center-section">
+                    <h3>Partenaires</h3>
+                    <ul class="partners">
+                        <li>SkyLynx Airways</li>
+                        <li>Aurora Haven</li>
+                        <li>Pathfinders Collective</li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class="footer-bottom">
+                <ul class="documents">
+                    <li>
+                        <a th:href="@{/politique-de-confidentialite}">Politique de confidentialité</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/cgv}">Conditions générales de ventes</a>
+                    </li>
+                </ul>
+                <p>© 2024 Evazion - Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+    <a href="#" class="scroll-top-button">
+        <i class="fa-solid fa-arrow-up"></i>
+    </a>
 </body>
 </html>

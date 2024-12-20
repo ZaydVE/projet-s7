@@ -16,191 +16,189 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body>
-<header class="header">
-  <div class="top-bar">
-    <div class="logo">
-      <a th:href="@{/}">
-        Evazion
-      </a>
-    </div>
-    <ul class="navigation">
-      <li class="navigation-item trips-item">
-        <a th:href="@{/destinations}">Voyages</a>
-      </li>
-      <li class="navigation-item">
-        <a th:href="@{/reviews}">Avis</a>
-      </li>
-      <li class="navigation-item">
-        <a th:href="@{/contact}">Contact</a>
-      </li>
-      <li class="navigation-item buttons-container">
-        <a th:href="@{/users/user-profile}" class="navigation-item account">
-          <i class="fa-solid fa-user"></i> Compte
+  <header class="header">
+    <div class="top-bar">
+      <div class="logo">
+        <a th:href="@{/}">
+          Evazion
         </a>
-      </li>
-    </ul>
-  </div>
-</header>
-
-<section class="main-section">
-  <h1 class="title">Inscription</h1>
-  <p class="description">Créez un compte pour accéder à nos offres exclusives et gérer vos réservations.</p>
-  <form action="/users/new" method="post" class="registration-form" id="registration-form" novalidate>
-    <div class="form-block">
-      <div class="form-group">
-        <h5>Nom</h5>
-        <input type="text" id="lastname" name="lastname">
-        <div class="error" id="firstnameError"></div>
       </div>
-      <div class="form-group">
-        <h5>Prénom</h5>
-        <input type="text" id="firstname" name="firstname">
-        <div class="error" id="lastnameError"></div>
-      </div>
-    </div>
-    <div class="form-group">
-      <h5>Email</h5>
-      <input type="email" id="email" name="email">
-      <div class="error" id="emailError"></div>
-    </div>
-    <div class="form-group">
-      <h5>Téléphone</h5>
-      <input type="text" id="phonenumber" name="phonenumber">
-      <div class="error" id="phoneError"></div>
-    </div>
-    <div class="form-block">
-      <div class="form-group">
-        <h5>Mot de passe</h5>
-        <input type="password" id="password" name="password">
-        <div class="error" id="passwordError"></div>
-      </div>
-      <div class="form-group">
-        <h5>Confirmer le mot de passe</h5>
-        <input type="password" id="confirmPassword" name="confirmPassword">
-        <div class="error" id="confirmPasswordError"></div>
-      </div>
-    </div>
-    <div class="form-group">
-      <button type="submit" class="submit-button">S'inscrire</button>
-    </div>
-  </form>
-  <p class="message">Déjà inscrit ? Connectez vous <a href="/login">ici</a>.</p>
-  <script>
-    document.getElementById('registration-form').addEventListener('submit', function (e) {
-      e.preventDefault();
-      let isValid = true;
-      // Nom
-      const lastname = document.getElementById('lastname').value.trim();
-      if (!lastname) {
-        document.getElementById('lastnameError').textContent = "Le nom est obligatoire.";
-        isValid = false;
-      } else if (lastname.length > 45) {
-        document.getElementById('lastnameError').textContent = "Le nom est trop long.";
-        isValid = false;
-      } else {
-        document.getElementById('lastnameError').textContent = "";
-      }
-      // Prénom
-      const firstname = document.getElementById('firstname').value.trim();
-      if (!lastname) {
-        document.getElementById('firstnameError').textContent = "Le prénom est obligatoire.";
-        isValid = false;
-      } else if (lastname.length > 45) {
-        document.getElementById('firstnameError').textContent = "Le prénom est trop long.";
-        isValid = false;
-      } else {
-        document.getElementById('firstnameError').textContent = "";
-      }
-      // Email
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      const email = document.getElementById('email').value.trim();
-      document.getElementById('emailError').textContent = emailRegex.test(email) ? "" : "L'email est invalide.";
-      isValid &= emailRegex.test(email);
-      // Téléphone
-      const phoneRegex = /^\d{10}$/;
-      const phonenumber = document.getElementById('phonenumber').value.trim();
-      document.getElementById('phoneError').textContent = phoneRegex.test(phonenumber) ? "" : "Le numéro de téléphone est invalide.";
-      isValid &= phoneRegex.test(phonenumber);
-      // Mot de passe
-      const password = document.getElementById('password').value;
-      const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-      document.getElementById('passwordError').textContent = passwordRegex.test(password) ? "" : "Le mot de passe doit contenir au moins 8 caractères, dont une majuscule, un chiffre et un caractère spécial.";
-      isValid &= passwordRegex.test(password);
-      // Confirmer le mot de passe
-      const confirmPassword = document.getElementById('confirmPassword').value;
-      document.getElementById('confirmPasswordError').textContent = (password === confirmPassword) ? "" : "Les mots de passe ne correspondent pas.";
-      isValid &= password === confirmPassword;
-      // Validation
-      if (isValid) {
-        this.submit();
-      }
-    });
-  </script>
-</section>
-
-<footer class="footer">
-  <div class="footer-content">
-    <div class="footer-top">
-      <h3>Evazion</h3>
-      <p>Evazion propose des voyages sur mesure pour des escapades uniques, mêlant aventure, détente et découvertes culturelles. Faites confiance à notre expertise pour transformer vos envies d’évasion en souvenirs mémorables, où que vos rêves vous mènent.</p>
-    </div>
-    <div class="footer-center">
-      <div class="footer-center-section">
-        <h3>Accès rapide</h3>
-        <ul class="pages">
-          <li>
-            <a th:href="@{/about-us}">Qui sommes-nous ?</a>
-          </li>
-          <li>
-            <a th:href="@{/faq}">Foire aux questions</a>
-          </li>
-          <li>
-            <a th:href="@{/reviews}">Avis</a>
-          </li>
-        </ul>
-      </div>
-      <div class="footer-center-section">
-        <h3>Contactez-nous</h3>
-        <ul class="contact">
-          <li>
-            <i class="fa-solid fa-phone"></i> +33 1 23 45 67 89
-          </li>
-          <li>
-            <a href="mailto:contact@evazion.com" target="_blank"><i class="fa-solid fa-envelope"></i> contact@evazion.com</a>
-          </li>
-          <li>
-            <a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook"></i> Evazion - Agence de voyage</a>
-          </li>
-          <li>
-            <a href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i> evazionvoyages</a>
-          </li>
-        </ul>
-      </div>
-      <div class="footer-center-section">
-        <h3>Partenaires</h3>
-        <ul class="partners">
-          <li>SkyLynx Airways</li>
-          <li>Aurora Haven</li>
-          <li>Pathfinders Collective</li>
-        </ul>
-      </div>
-    </div>
-    <hr>
-    <div class="footer-bottom">
-      <ul class="documents">
-        <li>
-          <a th:href="@{/politique-de-confidentialite}">Politique de confidentialité</a>
+      <ul class="navigation">
+        <li class="navigation-item trips-item">
+          <a th:href="@{/destinations}">Voyages</a>
         </li>
-        <li>
-          <a th:href="@{/cgv}">Conditions générales de ventes</a>
+        <li class="navigation-item">
+          <a th:href="@{/reviews}">Avis</a>
+        </li>
+        <li class="navigation-item">
+          <a th:href="@{/contact}">Contact</a>
+        </li>
+        <li class="navigation-item buttons-container">
+          <a th:href="@{/users/user-profile}" class="navigation-item account">
+            <i class="fa-solid fa-user"></i> Compte
+          </a>
         </li>
       </ul>
-      <p>© 2024 Evazion - Tous droits réservés.</p>
     </div>
-  </div>
-</footer>
-<a href="#" class="scroll-top-button">
-  <i class="fa-solid fa-arrow-up"></i>
-</a>
+  </header>
+  <section class="main-section">
+    <h1 class="title">Inscription</h1>
+    <p class="description">Créez un compte pour accéder à nos offres exclusives et gérer vos réservations.</p>
+    <form action="/users/new" method="post" class="registration-form" id="registration-form" novalidate>
+      <div class="form-block">
+        <div class="form-group">
+          <h5>Nom</h5>
+          <input type="text" id="lastname" name="lastname">
+          <div class="error" id="firstnameError"></div>
+        </div>
+        <div class="form-group">
+          <h5>Prénom</h5>
+          <input type="text" id="firstname" name="firstname">
+          <div class="error" id="lastnameError"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <h5>Email</h5>
+        <input type="email" id="email" name="email">
+        <div class="error" id="emailError"></div>
+      </div>
+      <div class="form-group">
+        <h5>Téléphone</h5>
+        <input type="text" id="phonenumber" name="phonenumber">
+        <div class="error" id="phoneError"></div>
+      </div>
+      <div class="form-block">
+        <div class="form-group">
+          <h5>Mot de passe</h5>
+          <input type="password" id="password" name="password">
+          <div class="error" id="passwordError"></div>
+        </div>
+        <div class="form-group">
+          <h5>Confirmer le mot de passe</h5>
+          <input type="password" id="confirmPassword" name="confirmPassword">
+          <div class="error" id="confirmPasswordError"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="submit-button">S'inscrire</button>
+      </div>
+    </form>
+    <p class="message">Déjà inscrit ? Connectez vous <a href="/login">ici</a>.</p>
+    <script>
+      document.getElementById('registration-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        let isValid = true;
+        // Nom
+        const lastname = document.getElementById('lastname').value.trim();
+        if (!lastname) {
+          document.getElementById('lastnameError').textContent = "Le nom est obligatoire.";
+          isValid = false;
+        } else if (lastname.length > 45) {
+          document.getElementById('lastnameError').textContent = "Le nom est trop long.";
+          isValid = false;
+        } else {
+          document.getElementById('lastnameError').textContent = "";
+        }
+        // Prénom
+        const firstname = document.getElementById('firstname').value.trim();
+        if (!lastname) {
+          document.getElementById('firstnameError').textContent = "Le prénom est obligatoire.";
+          isValid = false;
+        } else if (lastname.length > 45) {
+          document.getElementById('firstnameError').textContent = "Le prénom est trop long.";
+          isValid = false;
+        } else {
+          document.getElementById('firstnameError').textContent = "";
+        }
+        // Email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const email = document.getElementById('email').value.trim();
+        document.getElementById('emailError').textContent = emailRegex.test(email) ? "" : "L'email est invalide.";
+        isValid &= emailRegex.test(email);
+        // Téléphone
+        const phoneRegex = /^\d{10}$/;
+        const phonenumber = document.getElementById('phonenumber').value.trim();
+        document.getElementById('phoneError').textContent = phoneRegex.test(phonenumber) ? "" : "Le numéro de téléphone est invalide.";
+        isValid &= phoneRegex.test(phonenumber);
+        // Mot de passe
+        const password = document.getElementById('password').value;
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        document.getElementById('passwordError').textContent = passwordRegex.test(password) ? "" : "Le mot de passe doit contenir au moins 8 caractères, dont une majuscule, un chiffre et un caractère spécial.";
+        isValid &= passwordRegex.test(password);
+        // Confirmer le mot de passe
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        document.getElementById('confirmPasswordError').textContent = (password === confirmPassword) ? "" : "Les mots de passe ne correspondent pas.";
+        isValid &= password === confirmPassword;
+        // Validation
+        if (isValid) {
+          this.submit();
+        }
+      });
+    </script>
+  </section>
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-top">
+        <h3>Evazion</h3>
+        <p>Evazion propose des voyages sur mesure pour des escapades uniques, mêlant aventure, détente et découvertes culturelles. Faites confiance à notre expertise pour transformer vos envies d’évasion en souvenirs mémorables, où que vos rêves vous mènent.</p>
+      </div>
+      <div class="footer-center">
+        <div class="footer-center-section">
+          <h3>Accès rapide</h3>
+          <ul class="pages">
+            <li>
+              <a th:href="@{/about-us}">Qui sommes-nous ?</a>
+            </li>
+            <li>
+              <a th:href="@{/faq}">Foire aux questions</a>
+            </li>
+            <li>
+              <a th:href="@{/reviews}">Avis</a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-center-section">
+          <h3>Contactez-nous</h3>
+          <ul class="contact">
+            <li>
+              <i class="fa-solid fa-phone"></i> +33 1 23 45 67 89
+            </li>
+            <li>
+              <a href="mailto:contact@evazion.com" target="_blank"><i class="fa-solid fa-envelope"></i> contact@evazion.com</a>
+            </li>
+            <li>
+              <a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook"></i> Evazion - Agence de voyage</a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i> evazionvoyages</a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-center-section">
+          <h3>Partenaires</h3>
+          <ul class="partners">
+            <li>SkyLynx Airways</li>
+            <li>Aurora Haven</li>
+            <li>Pathfinders Collective</li>
+          </ul>
+        </div>
+      </div>
+      <hr>
+      <div class="footer-bottom">
+        <ul class="documents">
+          <li>
+            <a th:href="@{/politique-de-confidentialite}">Politique de confidentialité</a>
+          </li>
+          <li>
+            <a th:href="@{/cgv}">Conditions générales de ventes</a>
+          </li>
+        </ul>
+        <p>© 2024 Evazion - Tous droits réservés.</p>
+      </div>
+    </div>
+  </footer>
+  <a href="#" class="scroll-top-button">
+    <i class="fa-solid fa-arrow-up"></i>
+  </a>
 </body>
 </html>
