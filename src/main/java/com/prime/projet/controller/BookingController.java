@@ -134,6 +134,14 @@ public class BookingController {
         }
     }
 
+    @GetMapping("/edit/{id}")
+    public String showEditBookingPage(@PathVariable Integer id, Model model) {
+        Booking booking = bookingService.getBookingById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Réservation introuvable."));
+        model.addAttribute("booking", booking);
+        return "booking-edit";
+    }
+
     @PostMapping("/edit/{id}")
     public String editBooking(@PathVariable Integer id,
                               @RequestParam int nbPassengers,
