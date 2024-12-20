@@ -5,6 +5,8 @@ import com.prime.projet.exception.UserNotFoundException;
 import com.prime.projet.repository.UserRepository;
 import com.prime.projet.repository.entity.User;
 import com.prime.projet.controller.dto.UserDto;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
@@ -26,11 +29,13 @@ public class UserService {
 
     //Lister tous les users
     public List<User> getAllUsers() {
+        logger.info("Fetching all users.");
         return userRepository.findAll();
     }
 
     // Créer un utilisateur
     public void createUser(UserDto userDto) {
+        logger.info("Creating user with email: {}", userDto.getEmail());
         if (userRepository.findByEmail(userDto.getEmail()).isPresent()) {
             throw new UserAlreadyExistsException("Un utilisateur avec cet email existe déjà.");
         }
@@ -47,11 +52,13 @@ public class UserService {
 
     // Supprimer un utilisateur
     public void deleteUser(Integer userId) {
+        logger.info("Deleting user with ID: {}", userId);
         userRepository.deleteById(userId);
     }
 
     // Mettre à jour un utilisateur
     public void updateUser(Integer id, UserDto userDto) {
+        logger.info("Updating user with ID: {}", id);
         User user = userRepository.findById(id).orElse(null);
         if (user != null) {
             user.setFirstname(userDto.getFirstname());
@@ -81,11 +88,13 @@ public class UserService {
     }
 
     public User findById(Integer id) {
+        logger.info("Fetching user with ID: {}", id);
         return userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("Utilisateur avec l'ID " + id + " introuvable."));
     }
 
     public User getCurrentUser() {
+        logger.info("Fetching current logged-in user.");
         // Récupérer l'utilisateur connecté
         org.springframework.security.core.userdetails.User principal =
                 (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

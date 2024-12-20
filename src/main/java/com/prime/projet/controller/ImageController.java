@@ -1,5 +1,7 @@
 package com.prime.projet.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +19,11 @@ import java.nio.file.Paths;
 public class ImageController {
 
     private final Path uploadDir = Paths.get(System.getProperty("user.dir"),  "Evazion", "images");
+    private static final Logger logger = LoggerFactory.getLogger(ImageController.class);
 
     @GetMapping("/{filename}")
     public ResponseEntity<Resource> getImage(@PathVariable String filename) {
+        logger.info("Fetching image with filename: {}", filename);
         try {
             Path filePath = uploadDir.resolve(filename);
             Resource resource = new UrlResource(filePath.toUri());

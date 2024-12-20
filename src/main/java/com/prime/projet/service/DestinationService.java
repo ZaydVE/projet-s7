@@ -5,6 +5,8 @@ import com.prime.projet.exception.InvalidFilterException;
 import com.prime.projet.repository.DestinationRepository;
 import com.prime.projet.repository.entity.Destination;
 import com.prime.projet.controller.dto.DestinationDto;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,13 +32,17 @@ public class DestinationService {
         this.UPLOAD_DIR = UPLOAD_DIR;
     }
 
+    private static final Logger logger = LoggerFactory.getLogger(DestinationService.class);
+
     // Lister toutes les destinations
     public List<Destination> getAllDestinations() {
+        logger.info("Fetching all destinations.");
         return destinationRepository.findAll();
     }
 
     // Récupérer les détails d'une destination spécifique
     public Destination getDestinationById(Integer destinationId) {
+        logger.info("Fetching destination with ID: {}", destinationId);
         return destinationRepository.findById(destinationId)
                 .orElseThrow(() -> new DestinationNotFoundException("Destination avec l'ID " + destinationId + " introuvable."));
     }
@@ -44,6 +50,7 @@ public class DestinationService {
     public List<Destination> filterDestinations(String continent, String pays, LocalDate startDate,
                                                 LocalDate endDate, Integer personnes, String budget, String duration,
                                                 LocalDate startDateUser, LocalDate endDateUser) {
+        logger.info("Filtering destinations based on criteria.");
         if (startDate != null && endDate != null && startDate.isAfter(endDate)) {
             throw new InvalidFilterException("La date de début ne peut pas être après la date de fin.");
         }
@@ -74,6 +81,8 @@ public class DestinationService {
                                   String continent, String country, String city, String type,
                                   String startDate, String endDate, int nbPlaces, MultipartFile image) {
 
+        logger.info("Updating destination with ID: {}", destinationId);
+
         // Récupérer la destination existante par ID
         Destination destination = getDestinationById(destinationId);
 
@@ -98,6 +107,7 @@ public class DestinationService {
                                               String continent, String country, String city, String type,
                                               String startDate, String endDate, int nbPlaces) {
 
+
         // Récupérer la destination existante
         Destination destination = getDestinationById(destinationId);
 
@@ -119,6 +129,7 @@ public class DestinationService {
 
     // Supprimer une destination et l'image associée
     public void deleteDestination(Integer destinationId) {
+        logger.info("Deleting destination with ID: {}", destinationId);
         Destination destination = getDestinationById(destinationId);
 
         deleteImage(destination.getLienImage());
@@ -130,6 +141,7 @@ public class DestinationService {
     private DestinationDto createDestinationDto(String name, String description, float price, String continent,
                                                 String country, String city, String type,
                                                 String startDate, String endDate, int nbPlaces) {
+        logger.info("Creating a new destination.");
         DestinationDto dto = new DestinationDto();
         dto.setName(name);
         dto.setDescription(description);

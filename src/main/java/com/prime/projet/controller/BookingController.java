@@ -5,6 +5,8 @@ import com.prime.projet.repository.entity.Destination;
 import com.prime.projet.repository.entity.User;
 import com.prime.projet.service.BookingService;
 import com.prime.projet.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -25,6 +27,7 @@ public class BookingController {
     private final com.prime.projet.service.DestinationService destinationService;
     private final UserService userService;
     private final UserRepository userRepository;
+    private static final Logger logger = LoggerFactory.getLogger(BookingController.class);
 
     public BookingController(com.prime.projet.service.DestinationService destinationService, UserRepository userRepository, UserService userService, UserRepository userRepository1) {
         this.destinationService = destinationService;
@@ -35,6 +38,7 @@ public class BookingController {
     //Liste de toutes les réservations (admin)
     @GetMapping("/list")
     public String listAllBookings(Model model) {
+        logger.info("Listing all bookings.");
         List<Booking> bookings = bookingService.getAllBookings();
         model.addAttribute("bookings", bookings);
         return "booking-list"; // Vue pour afficher toutes les réservations
@@ -43,6 +47,7 @@ public class BookingController {
     //Liste les réservations de l'utilisateur connecté
     @GetMapping("/user-list")
     public String showUserBookings(Model model) {
+        logger.info("Listing bookings for logged-in user.");
         // Récupère l'utilisateur connecté
         org.springframework.security.core.userdetails.User principal =
                 (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -59,6 +64,7 @@ public class BookingController {
     // Initialisation du formulaire de réservation
     @GetMapping("/new/{destinationId}")
     public String initBookingForm(@PathVariable Integer destinationId, Model model) {
+        logger.info("Initializing booking form for destination ID: {}", destinationId);
         Destination destination = destinationService.getDestinationById(destinationId);
         model.addAttribute("destination", destination);
         model.addAttribute("booking", new Booking());
@@ -69,6 +75,7 @@ public class BookingController {
     @PostMapping("/new/{destinationId}")
     public String createBooking(@PathVariable Integer destinationId,
                                 @RequestParam int nbPassengers, Model model) {
+        logger.info("Creating booking for destination ID: {}", destinationId);
         Destination destination = destinationService.getDestinationById(destinationId);
         User currentUser = userService.getCurrentUser();
 
@@ -109,6 +116,7 @@ public class BookingController {
     //Init de la suppression d'une réservation
     @GetMapping("/delete/{id}")
     public String showDeleteBookingPage(@PathVariable Integer id, Model model) {
+        logger.info("Loading delete confirmation page for booking ID: {}", id);
         Booking booking = bookingService.getBookingById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Réservation introuvable."));
         model.addAttribute("booking", booking);
@@ -117,6 +125,8 @@ public class BookingController {
 
     @PostMapping("/delete/{id}")
     public String deleteBooking(@PathVariable Integer id) {
+        logger.info("Deleting booking with ID: {}", id);
+
         // Suppression de la réservation
         bookingService.deleteBooking(id);
 
@@ -136,6 +146,7 @@ public class BookingController {
 
     @GetMapping("/edit/{id}")
     public String showEditBookingPage(@PathVariable Integer id, Model model) {
+        logger.info("Loading edit page for booking ID: {}", id);
         Booking booking = bookingService.getBookingById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Réservation introuvable."));
         model.addAttribute("booking", booking);
@@ -146,6 +157,7 @@ public class BookingController {
     public String editBooking(@PathVariable Integer id,
                               @RequestParam int nbPassengers,
                               @RequestParam float totalPrice) {
+        logger.info("Editing booking with ID: {}", id);
         Booking booking = bookingService.getBookingById(id).orElse(null);
         if (booking != null) {
             booking.setNbPassengers(nbPassengers);
