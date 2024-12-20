@@ -106,11 +106,14 @@
         <a class="add-user" th:href="@{/users/list}" th:if="${isAdmin}">
             <i class="fa-solid fa-user-plus"></i> Afficher liste des utilisateurs et les gérer
         </a>
-        <a class="add-user" th:href="@{/reviews/review-list}" th:if="${isAdmin}">
+        <a class="add-user" th:href="@{/reviews/review-list-admin}" th:if="${isAdmin}">
             <i class="fa-solid fa-user-plus"></i> Afficher liste des avis et les gérer
         </a>
         <a class="add-user" th:href="@{/reviews/new}" th:if="${isUser}">
             <i class="fa-solid fa-user-plus"></i> Ajouter un avis
+        </a>
+        <a class="add-user" th:href="@{/reviews/review-list}" th:if="${isUser}">
+            <i class="fa-solid fa-user-plus"></i> Voir ses avis
         </a>
     </section>
 <footer class="footer">
