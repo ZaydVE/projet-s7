@@ -55,7 +55,7 @@
 	padding: 30px 0;
 }
 
-.main-section .trip-infos .trip-infos-text p span {
+.main-section .trip-infos .trip-infos-text p .label {
 	font-weight: bold;
 	color: var(--accent-color-1);
 }

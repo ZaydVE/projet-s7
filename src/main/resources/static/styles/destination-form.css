@@ -102,6 +102,14 @@
 	outline: none;
 }
 
+.main-section .add-destination-form .fields .form-group .error {
+	margin-top: 5px;
+	color: var(--text-color-gray);
+	text-transform: none;
+	font-size: .5rem;
+	max-width: 200px;
+}
+
 .main-section .add-destination-form .submit-button {
 	font-size: .675rem;
 	border: none;
