@@ -1,16 +1,41 @@
 .notification {
 	position: fixed;
-	top: 0px;
+	top: -50px; /* Commence hors de l'écran */
 	right: 10px;
 	z-index: 1000;
 	padding: 5px 10px;
 	background-color: var(--accent-color-1);
 	color: var(--text-color-white);
 	border-radius: 32px;
-	font-size: .675rem;
+	font-size: 0.675rem;
+	opacity: 0; /* Commence invisible */
+	transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+	animation: slide-in-out 3s ease-in-out forwards;
 }
 
 .notification i {
 	color: var(--accent-color-2);
 	margin-right: 5px;
 }
+
+/* Keyframes pour les animations */
+@keyframes slide-in-out {
+	0% {
+		top: -50px; /* Commence en haut */
+		opacity: 0;
+	}
+	15% {
+		top: 10px; /* Position finale visible */
+		opacity: 1;
+	}
+	85% {
+		top: 10px; /* Reste visible pendant un moment */
+		opacity: 1;
+	}
+	100% {
+		top: -50px; /* Repart en haut */
+		opacity: 0;
+	}
+}
+
+

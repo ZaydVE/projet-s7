@@ -52,7 +52,7 @@
 
     <section class="main-section">
         <h3>Avis</h3>
-        <p>Votre avis nous intéresse ! Laissez nous être guidés par vos avis, et laissez vous guider (ou pas) vers votre prochaine destination !</p>
+        <p class="destination">Découvrez ce que nos voyageurs pensent de leurs expériences avec Evazion ! Vous aussi, partagez votre avis en cliquant <a th:href="@{/reviews/new}">ici</a>.</p>
         <div class="review-card-container">
             <div th:each="review : ${reviews}" class="review-card">
                 <div class="top">

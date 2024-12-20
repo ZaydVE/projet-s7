@@ -49,7 +49,6 @@
         <i class="fa-solid fa-user-check"></i>
         <span th:text="${successMessageUpdateUserHimself}"></span>
     </p>
-
     <section class="main-section">
         <h3 class="title">Profil</h3>
         <p class="description">
@@ -76,7 +75,6 @@
             <div class="informations-item">
                 <h5>Date d'inscription</h5>
                 <p th:text="${#dates.format(user.createdAt, 'dd/MM/yyyy')}">Date d'inscription</p>
-
             </div>
             <div class="buttons">
                 <a th:href="@{/users/user-edit-himself}" class="edit-button">
@@ -96,6 +94,27 @@
                 </a>
             </div>
         </div>
+        <a class="add-user" th:href="@{/destinations/new}" th:if="${isAdmin}">
+            <i class="fa-solid fa-user-plus"></i> Ajouter une destination
+        </a>
+        <a class="add-user" th:href="@{/destinations/list}" th:if="${isAdmin}">
+            <i class="fa-solid fa-user-plus"></i> Afficher liste des destinations et les gérer
+        </a>
+        <a class="add-user" th:href="@{/users/newadmin}" th:if="${isAdmin}">
+            <i class="fa-solid fa-user-plus"></i> Ajouter un utilisateur/administrateur
+        </a>
+        <a class="add-user" th:href="@{/users/list}" th:if="${isAdmin}">
+            <i class="fa-solid fa-user-plus"></i> Afficher liste des utilisateurs et les gérer
+        </a>
+        <a class="add-user" th:href="@{/reviews/review-list-admin}" th:if="${isAdmin}">
+            <i class="fa-solid fa-user-plus"></i> Afficher liste des avis et les gérer
+        </a>
+        <a class="add-user" th:href="@{/reviews/new}" th:if="${isUser}">
+            <i class="fa-solid fa-user-plus"></i> Ajouter un avis
+        </a>
+        <a class="add-user" th:href="@{/reviews/review-list}" th:if="${isUser}">
+            <i class="fa-solid fa-user-plus"></i> Voir ses avis
+        </a>
     </section>
 <footer class="footer">
     <div class="footer-content">

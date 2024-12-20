@@ -31,23 +31,32 @@ public class UserController {
     }
 
     // ---------------INSCRIPTION-------------------------
-    // Partie utilisateur (inchangée)
+// Bouton pour montrer la page de profil
+    @GetMapping("/user-profile")
+    public String showUserProfile(Model model) {
+        // Récupérer l'utilisateur connecté
+        User user = getCurrentUser();
 
-    //Bouton pour montrer la page de profil
-        @GetMapping("/user-profile")
-        public String showUserProfile (Model model) {
-            // Récupérer l'utilisateur connecté
-            User user = getCurrentUser();
+        // Convertir l'utilisateur en UserDto pour pré-remplir le formulaire
+        UserDto userDto = userService.createDto(user);
 
-            // Convertir l'utilisateur en UserDto pour pré-remplir le formulaire
-            UserDto userDto = userService.createDto(user);
+        // Vérifier si l'utilisateur est administrateur
+        boolean isAdmin = SecurityContextHolder.getContext().getAuthentication().getAuthorities().stream()
+                .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ROLE_ADMIN"));
 
-            // Ajouter le UserDto au modèle
-            model.addAttribute("user", userDto);
-            return "user-profile"; // Fichier user-profile.html dans templates
-        }
+        // Vérifier si l'utilisateur est un utilisateur simple (et non un administrateur)
+        boolean isUser = !isAdmin && SecurityContextHolder.getContext().getAuthentication().getAuthorities().stream()
+                .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ROLE_USER"));
 
-        private User getCurrentUser() {
+        // Ajouter le UserDto, isAdmin et isUser au modèle
+        model.addAttribute("user", userDto);
+        model.addAttribute("isAdmin", isAdmin);
+        model.addAttribute("isUser", isUser);
+
+        return "user-profile"; // Fichier user-profile.html dans templates
+    }
+
+    private User getCurrentUser() {
             org.springframework.security.core.userdetails.User principal =
                 (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             return userRepository.findByEmail(principal.getUsername())
