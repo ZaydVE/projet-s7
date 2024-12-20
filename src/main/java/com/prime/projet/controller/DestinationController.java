@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -56,7 +58,7 @@ public class DestinationController {
             @RequestParam("endDate") String endDate,
             @RequestParam("nbPlaces") int nbPlaces,
             @RequestParam("lienImage") MultipartFile lienImage,
-            RedirectAttributes redirectAttributes ) {
+            RedirectAttributes redirectAttributes) {
 
         destinationService.createDestination(
                 name, description, price, continent, country, city, type, startDate, endDate, nbPlaces, lienImage
@@ -184,5 +186,27 @@ public class DestinationController {
         List<Destination> destinations = destinationService.getAllDestinations();
         model.addAttribute("destinations", destinations);
         return "destination-list";
+    }
+
+    @ResponseBody
+    @GetMapping("/filter")
+    public List<Destination> filterDestinations(
+            @RequestParam(required = false) String continent,
+            @RequestParam(required = false) String pays,
+            @RequestParam(required = false) String startDate,
+            @RequestParam(required = false) String endDate,
+            @RequestParam(required = false) Integer personnes,
+            @RequestParam(required = false) String budget,
+            @RequestParam(required = false) String duration,
+            @RequestParam(required = false) String startDateUser,
+            @RequestParam(required = false) String endDateUser) {  // Paramètre pour la date de fin de séjour de l'utilisateur
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate parsedStartDate = startDate != null ? LocalDate.parse(startDate, formatter) : null;
+        LocalDate parsedEndDate = endDate != null ? LocalDate.parse(endDate, formatter) : null;
+        LocalDate parsedStartDateUser = startDateUser != null ? LocalDate.parse(startDateUser, formatter) : null;  // Convertir la date de l'utilisateur
+        LocalDate parsedEndDateUser = endDateUser != null ? LocalDate.parse(endDateUser, formatter) : null;  // Convertir la date de fin de l'utilisateur
+
+        return destinationService.filterDestinations(continent, pays, parsedStartDate, parsedEndDate, personnes, budget, duration, parsedStartDateUser, parsedEndDateUser);
     }
 }

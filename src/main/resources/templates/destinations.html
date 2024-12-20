@@ -283,35 +283,29 @@
       <select name="price">
         <option selected>Tous</option>
         <option>Escapade courte (4 à 6 jours)</option>
-        <option>Séjour d'une semaine (7 à 8 jours)</option>
+        <option>Séjour de une semaine (7 à 8 jours)</option>
         <option>Voyage prolongé (9 à 11 jours)</option>
         <option>Long séjour (12 à 15 jours)</option>
       </select>
     </div>
     <div class="menu-item">
-      <h5 class="menu-item-title">Nombre de personnes</h5>
-      <select name="people-number">
-        <option selected>Tous</option>
-        <option>Voyage seul (1 personne)</option>
-        <option>En duo (2 personnes)</option>
-        <option>En petit comité (3 à 4 personnes)</option>
-        <option>En groupe (5 à 8 personnes)</option>
-        <option>En grande compagnie (9 à 10 personnes)</option>
-      </select>
+      <h5 class="menu-item-title">Date de départ</h5>
+      <input type="date" name="startDateUser" class="date-picker" />
+    </div>
+    <div class="menu-item">
+      <h5 class="menu-item-title">Date de fin</h5>
+      <input type="date" name="endDateUser" class="date-picker" />
     </div>
     <div class="menu-item">
       <h5 class="menu-item-title">Budget par personne</h5>
-      <select name="price">
+      <select name="budget">
         <option selected>Tous</option>
-        <option>Moins de 1 000 €</option>
-        <option>De 1 000 € à 3 000 €</option>
-        <option>De 3 000 € à 5 000 €</option>
-        <option>De 5 000 € à 7 000 €</option>
-        <option>Plus de 7 000 €</option>
+        <option>Moins de 1000 €</option>
+        <option>De 1000 € à 3000 €</option>
+        <option>De 3000 € à 5000 €</option>
+        <option>De 5000 € à 7000 €</option>
+        <option>Plus de 7000 €</option>
       </select>
-    </div>
-    <div class="menu-button">
-      <button onclick="">Filtrer <i class="fa-solid fa-filter"></i></button>
     </div>
   </div>
   <div class="list">
@@ -401,5 +395,96 @@
 <a href="#" class="scroll-top-button">
   <i class="fa-solid fa-arrow-up"></i>
 </a>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const filters = document.querySelectorAll('.menu-item select, .menu-item input');
+    const destinationList = document.querySelector('.list');
+
+    if (!destinationList) {
+      console.error('Element destinationList non trouvé.');
+      return;
+    }
+
+    const fetchDestinations = () => {
+      const params = new URLSearchParams();
+
+      filters.forEach(f => {
+        if (f.value !== 'Tous' && f.value !== '') {
+          // Si c'est la date de départ, ajoute un paramètre startDateUser
+          if (f.name === "startDateUser") {
+            params.append("startDateUser", f.value);  // Ajoute le paramètre startDateUser
+          }
+          // Si c'est la date de fin, ajoute un paramètre endDateUser
+          else if (f.name === "endDateUser") {
+            params.append("endDateUser", f.value);  // Ajoute le paramètre endDateUser
+          }
+          // Si c'est la durée, utilise un nom spécifique pour ce paramètre
+          else if (f.name === "price") {
+            params.append("duration", f.value);  // Ajoute le paramètre duration
+          } else {
+            params.append(f.name, f.value);  // Ajoute les autres paramètres
+          }
+        }
+      });
+
+      console.log("Params being sent:", params.toString());  // Affiche les paramètres envoyés dans l'URL
+
+      const url = `/destinations/filter?${params.toString()}`;
+      console.log("Fetching data from:", url);  // Affiche l'URL complète de la requête
+
+      fetch(url)
+              .then(response => {
+                if (!response.ok) {
+                  console.error('Erreur dans la réponse:', response.statusText);
+                  throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json(); // Convertir la réponse en JSON
+              })
+              .then(data => {
+                console.log('Destinations:', data);
+
+                destinationList.innerHTML = '';
+
+                if (data.length > 0) {
+                  data.forEach(destination => {
+                    const card = document.createElement('a');
+                    card.classList.add('card');
+                    card.href = '#';
+                    card.innerHTML = `
+              <img src="/images/${destination.lienImage}" alt="Image de la destination" class="card-image"/>
+              <div class="card-content">
+                <div class="card-header">
+                  <div class="infos">
+                    <span class="price">${destination.price}€</span>
+                    <span class="duration">${destination.startDate} - ${destination.endDate}</span>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <h4 class="location">
+                    <i class="fa-solid fa-map-pin"></i>
+                    ${destination.city}, ${destination.country}
+                  </h4>
+                </div>
+              </div>
+            `;
+                    destinationList.appendChild(card);
+                  });
+                } else {
+                  destinationList.innerHTML = '<p>Aucune destination trouvée.</p>';
+                }
+              })
+              .catch(error => {
+                console.error('Erreur lors du chargement des destinations :', error);
+                destinationList.innerHTML = '<p>Une erreur est survenue lors du chargement des destinations. Veuillez réessayer plus tard.</p>';
+              });
+    };
+
+    filters.forEach(filter => {
+      filter.addEventListener('change', () => {
+        fetchDestinations();
+      });
+    });
+  });
+</script>
 </body>
 </html>
