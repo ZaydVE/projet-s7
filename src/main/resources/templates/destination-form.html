@@ -16,490 +16,438 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body>
-<header class="header">
-  <div class="top-bar">
-    <div class="logo">
-      <a th:href="@{/}">
-        Evazion
-      </a>
-    </div>
-    <ul class="navigation">
-      <li class="navigation-item trips-item">
-        <a th:href="@{/destinations}">Voyages</a>
-      </li>
-      <li class="navigation-item">
-        <a th:href="@{/reviews}">Avis</a>
-      </li>
-      <li class="navigation-item">
-        <a th:href="@{/contact}">Contact</a>
-      </li>
-      <li class="navigation-item buttons-container">
-        <a th:href="@{/users/user-profile}" class="navigation-item account">
-          <i class="fa-solid fa-user"></i> Compte
+  <header class="header">
+    <div class="top-bar">
+      <div class="logo">
+        <a th:href="@{/}">
+          Evazion
         </a>
-      </li>
-    </ul>
-  </div>
-</header>
-<section class="main-section">
-  <h1 class="title">Ajouter une Destination</h1>
-  <p class="description">Ajoutez un nouveau voyage au catalogue via le formulaire ci-dessous.</p>
-  <form action="/destinations/new" method="post" enctype="multipart/form-data" class="add-destination-form" id="add-destination-form" novalidate>
-    <div class="fields">
-      <div class="form-block">
-        <div class="form-group">
-          <h5>Nom</h5>
-          <input type="text" id="name" name="name" required>
-          <div class="error" id="nameError"></div>
-        </div>
-        <div class="form-group">
-          <h5 for="type">Type</h5>
-          <input type="text" id="type" name="type" required>
-          <div class="error" id="typeError"></div>
-        </div>
       </div>
-      <div class="form-block location">
-        <div class="form-group">
-          <h5 for="continent">Continent</h5>
-          <select id="continent" name="continent" required>
-            <option>Afrique</option>
-            <option>Amérique du Nord</option>
-            <option>Amérique du Sud</option>
-            <option>Asie</option>
-            <option>Europe</option>
-            <option>Océanie</option>
-          </select>
-          <div class="error" id="continentError"></div>
-        </div>
-        <div class="form-group">
-          <h5 for="country">Pays</h5>
-          <select id="country" name="country">
-            <option>Afghanistan</option>
-            <option>Afrique du Sud</option>
-            <option>Albanie</option>
-            <option>Algérie</option>
-            <option>Allemagne</option>
-            <option>Andorre</option>
-            <option>Angola</option>
-            <option>Antigua-et-Barbuda</option>
-            <option>Arabie Saoudite</option>
-            <option>Argentine</option>
-            <option>Arménie</option>
-            <option>Australie</option>
-            <option>Autriche</option>
-            <option>Azerbaïdjan</option>
-            <option>Bahamas</option>
-            <option>Bahreïn</option>
-            <option>Bangladesh</option>
-            <option>Barbade</option>
-            <option>Belau / Palau / Palaos</option>
-            <option>Belgique</option>
-            <option>Belize</option>
-            <option>Bénin</option>
-            <option>Bhoutan</option>
-            <option>Biélorussie</option>
-            <option>Birmanie</option>
-            <option>Bolivie</option>
-            <option>Bosnie-Herzégovine</option>
-            <option>Botswana</option>
-            <option>Brésil</option>
-            <option>Brunei</option>
-            <option>Bulgarie</option>
-            <option>Burkina Faso</option>
-            <option>Burundi</option>
-            <option>Cambodge</option>
-            <option>Cameroun</option>
-            <option>Canada</option>
-            <option>Cap-Vert</option>
-            <option>Centrafrique</option>
-            <option>Chili</option>
-            <option>Chine</option>
-            <option>Chypre</option>
-            <option>Colombie</option>
-            <option>Comores</option>
-            <option>Congo-Brazzaville</option>
-            <option>Congo-Kinshasa</option>
-            <option>Corée du Nord</option>
-            <option>Corée du Sud</option>
-            <option>Costa Rica</option>
-            <option>Côte d’Ivoire</option>
-            <option>Croatie</option>
-            <option>Cuba</option>
-            <option>Danemark</option>
-            <option>Djibouti</option>
-            <option>Dominique</option>
-            <option>Égypte</option>
-            <option>Émirats arabes unis</option>
-            <option>Équateur</option>
-            <option>Érythrée</option>
-            <option>Espagne</option>
-            <option>Estonie</option>
-            <option>États-Unis</option>
-            <option>Éthiopie</option>
-            <option>Fidji</option>
-            <option>Finlande</option>
-            <option>France</option>
-            <option>Gabon</option>
-            <option>Gambie</option>
-            <option>Géorgie</option>
-            <option>Ghana</option>
-            <option>Grèce</option>
-            <option>Grenade</option>
-            <option>Guatemala</option>
-            <option>Guinée-Bissau</option>
-            <option>Guinée-Conakry</option>
-            <option>Guinée équatoriale</option>
-            <option>Guyana</option>
-            <option>Haïti</option>
-            <option>Honduras</option>
-            <option>Hongrie</option>
-            <option>Inde</option>
-            <option>Indonésie</option>
-            <option>Irak</option>
-            <option>Iran</option>
-            <option>Irlande</option>
-            <option>Islande</option>
-            <option>Israël</option>
-            <option>Italie</option>
-            <option>Jamaïque</option>
-            <option>Japon</option>
-            <option>Jordanie</option>
-            <option>Kazakhstan</option>
-            <option>Kenya</option>
-            <option>Kirghizistan</option>
-            <option>Kiribati</option>
-            <option>Kosovo</option>
-            <option>Koweït</option>
-            <option>Laos</option>
-            <option>Lesotho</option>
-            <option>Lettonie</option>
-            <option>Liban</option>
-            <option>Liberia</option>
-            <option>Libye</option>
-            <option>Liechtenstein</option>
-            <option>Lituanie</option>
-            <option>Luxembourg</option>
-            <option>Macédoine</option>
-            <option>Madagascar</option>
-            <option>Malaisie</option>
-            <option>Malawi</option>
-            <option>Maldives</option>
-            <option>Mali</option>
-            <option>Malte</option>
-            <option>Maroc</option>
-            <option>Marshall</option>
-            <option>Maurice</option>
-            <option>Mauritanie</option>
-            <option>Mexique</option>
-            <option>Micronésie</option>
-            <option>Moldavie</option>
-            <option>Monaco</option>
-            <option>Mongolie</option>
-            <option>Monténégro</option>
-            <option>Mozambique</option>
-            <option>Namibie</option>
-            <option>Nauru</option>
-            <option>Népal</option>
-            <option>Nicaragua</option>
-            <option>Niger</option>
-            <option>Nigeria</option>
-            <option>Norvège</option>
-            <option>Nouvelle-Zélande</option>
-            <option>Oman</option>
-            <option>Ouganda</option>
-            <option>Ouzbékistan</option>
-            <option>Pakistan</option>
-            <option>Panama</option>
-            <option>Papouasie-Nouvelle-Guinée</option>
-            <option>Paraguay</option>
-            <option>Pays-Bas</option>
-            <option>Pérou</option>
-            <option>Philippines</option>
-            <option>Pologne</option>
-            <option>Portugal</option>
-            <option>Qatar</option>
-            <option>République dominicaine</option>
-            <option>République tchèque</option>
-            <option>Roumanie</option>
-            <option>Royaume-Uni</option>
-            <option>Russie</option>
-            <option>Rwanda</option>
-            <option>Saint-Christophe-et-Niévès</option>
-            <option>Sainte-Lucie</option>
-            <option>Saint-Marin</option>
-            <option>Saint-Vincent-et-les-Grenadines</option>
-            <option>Salomon</option>
-            <option>São-Tomé-et-Príncipe</option>
-            <option>Salvador</option>
-            <option>Samoa occidentales</option>
-            <option>Sénégal</option>
-            <option>Serbie</option>
-            <option>Seychelles</option>
-            <option>Sierra Leone</option>
-            <option>Singapour</option>
-            <option>Slovaquie</option>
-            <option>Slovénie</option>
-            <option>Somalie</option>
-            <option>Soudan</option>
-            <option>Soudan du Sud</option>
-            <option>Sri Lanka</option>
-            <option>Suède</option>
-            <option>Suisse</option>
-            <option>Surinam</option>
-            <option>Swaziland</option>
-            <option>Syrie</option>
-            <option>Tadjikistan</option>
-            <option>Tanzanie</option>
-            <option>Tchad</option>
-            <option>Timor oriental</option>
-            <option>Thaïlande</option>
-            <option>Togo</option>
-            <option>Tonga</option>
-            <option>Trinité-et-Tobago</option>
-            <option>Tunisie</option>
-            <option>Turkménistan</option>
-            <option>Turquie</option>
-            <option>Tuvalu</option>
-            <option>Ukraine</option>
-            <option>Uruguay</option>
-            <option>Vanuatu</option>
-            <option>Vatican</option>
-            <option>Venezuela</option>
-            <option>Vietnam</option>
-            <option>Yémen</option>
-            <option>Zambie</option>
-            <option>Zimbabwe</option>
-          </select>
-          <div class="error" id="countryError"></div>
-        </div>
-        <div class="form-group">
-          <h5 for="city">Ville</h5>
-          <input type="text" id="city" name="city">
-          <div class="error" id="cityError"></div>
-        </div>
-      </div>
-      <div class="form-block">
-        <div class="form-group">
-          <h5 for="startDate">Date de début</h5>
-          <input type="date" id="startDate" name="startDate">
-          <div class="error" id="startDateError"></div>
-        </div>
-        <div class="form-group">
-          <h5 for="endDate">Date de fin</h5>
-          <input type="date" id="endDate" name="endDate">
-          <div class="error" id="endDateError"></div>
-        </div>
-      </div>
-      <div class="form-block">
-        <div class="form-group">
-          <h5 for="price">Prix</h5>
-          <input type="number" id="price" name="price" min="0" step="0.01">
-          <div class="error" id="priceError"></div>
-        </div>
-        <div class="form-group">
-          <h5 for="nbPlaces">Places disponibles</h5>
-          <input type="number" id="nbPlaces" name="nbPlaces" min="1">
-          <div class="error" id="nbPlacesError"></div>
-        </div>
-      </div>
-      <div class="form-group">
-        <h5 for="description">Description</h5>
-        <textarea id="description" name="description" rows="5" cols="125"></textarea>
-        <div class="error" id="descriptionError"></div>
-      </div>
-      <div class="form-group">
-        <h5 for="lienImage">Image</h5>
-        <input type="file" id="lienImage" name="lienImage" accept=".jpg, .jpeg">
-        <div class="error" id="imageError"></div>
-      </div>
-    </div>
-    <button type="submit" class="submit-button"><i class="fa-solid fa-plus"></i> Ajouter</button>
-  </form>
-</section>
-<script>
-  document.getElementById('add-destination-form').addEventListener('submit', function (e) {
-    e.preventDefault();
-    let isValid = true;
-
-    // Nom
-    const name = document.getElementById('name').value.trim();
-    if (!name) {
-      document.getElementById('nameError').textContent = "Le nom est obligatoire.";
-      isValid = false;
-    } else {
-      document.getElementById('nameError').textContent = "";
-    }
-
-    // Type
-    const type = document.getElementById('type').value.trim();
-    if (!type) {
-      document.getElementById('typeError').textContent = "Le type est obligatoire.";
-      isValid = false;
-    } else {
-      document.getElementById('typeError').textContent = "";
-    }
-
-    // Continent
-    const continent = document.getElementById('continent').value;
-    if (!continent) {
-      document.getElementById('continentError').textContent = "Veuillez sélectionner un continent.";
-      isValid = false;
-    } else {
-      document.getElementById('continentError').textContent = "";
-    }
-
-    // Pays
-    const country = document.getElementById('country').value;
-    if (!country) {
-      document.getElementById('countryError').textContent = "Veuillez sélectionner un pays.";
-      isValid = false;
-    } else {
-      document.getElementById('countryError').textContent = "";
-    }
-
-    // Ville
-    const city = document.getElementById('city').value.trim();
-    if (!city) {
-      document.getElementById('cityError').textContent = "Veuillez sélectionner une ville.";
-      isValid = false;
-    } else {
-      document.getElementById('cityError').textContent = "";
-    }
-
-    // Dates
-    const startDate = document.getElementById('startDate').value;
-    const endDate = document.getElementById('endDate').value;
-    if (!startDate) {
-      document.getElementById('startDateError').textContent = "La date de début est obligatoire.";
-      isValid = false;
-    } else {
-      document.getElementById('startDateError').textContent = "";
-    }
-    if (!endDate) {
-      document.getElementById('endDateError').textContent = "La date de fin est obligatoire.";
-      isValid = false;
-    } else {
-      document.getElementById('endDateError').textContent = "";
-    }
-    if (startDate && endDate && new Date(startDate) > new Date(endDate)) {
-      document.getElementById('startDateError').textContent = "La date de début doit être antérieure ou égale à la date de fin.";
-      isValid = false;
-    }
-
-    // Prix
-    const price = document.getElementById('price').value;
-    if (price === "" || price < 0) {
-      document.getElementById('priceError').textContent = "Le prix doit être un nombre positif.";
-      isValid = false;
-    } else {
-      document.getElementById('priceError').textContent = "";
-    }
-
-    // Places disponibles
-    const nbPlaces = document.getElementById('nbPlaces').value;
-    if (nbPlaces === "" || nbPlaces < 1) {
-      document.getElementById('nbPlacesError').textContent = "Le nombre de places disponibles doit être d'au moins 1.";
-      isValid = false;
-    } else {
-      document.getElementById('nbPlacesError').textContent = "";
-    }
-
-    // Description
-    const description = document.getElementById('description').value.trim();
-    if (!description) {
-      document.getElementById('descriptionError').textContent = "La description est obligatoire.";
-      isValid = false;
-    } else {
-      document.getElementById('descriptionError').textContent = "";
-    }
-
-    // Image
-    const imageInput = document.getElementById('lienImage');
-    if (imageInput.files.length === 0) {
-      document.getElementById('imageError').textContent = "Veuillez sélectionner une image.";
-      isValid = false;
-    } else {
-      const allowedExtensions = ['jpg', 'jpeg'];
-      const fileName = imageInput.files[0].name;
-      const fileExtension = fileName.split('.').pop().toLowerCase();
-      if (!allowedExtensions.includes(fileExtension)) {
-        document.getElementById('imageError').textContent = "Le fichier doit être au format JPG ou JPEG.";
-        isValid = false;
-      } else {
-        document.getElementById('imageError').textContent = "";
-      }
-    }
-
-    // Validation finale
-    if (isValid) {
-      alert("Destination ajoutée avec succès !");
-      this.submit();
-    }
-  });
-</script>
-<footer class="footer">
-  <div class="footer-content">
-    <div class="footer-top">
-      <h3>Evazion</h3>
-      <p>Evazion propose des voyages sur mesure pour des escapades uniques, mêlant aventure, détente et découvertes culturelles. Faites confiance à notre expertise pour transformer vos envies d’évasion en souvenirs mémorables, où que vos rêves vous mènent.</p>
-    </div>
-    <div class="footer-center">
-      <div class="footer-center-section">
-        <h3>Accès rapide</h3>
-        <ul class="pages">
-          <li>
-            <a th:href="@{/about-us}">Qui sommes-nous ?</a>
-          </li>
-          <li>
-            <a th:href="@{/faq}">Foire aux questions</a>
-          </li>
-          <li>
-            <a th:href="@{/reviews}">Avis</a>
-          </li>
-        </ul>
-      </div>
-      <div class="footer-center-section">
-        <h3>Contactez-nous</h3>
-        <ul class="contact">
-          <li>
-            <i class="fa-solid fa-phone"></i> +33 1 23 45 67 89
-          </li>
-          <li>
-            <a href="mailto:contact@evazion.com" target="_blank"><i class="fa-solid fa-envelope"></i> contact@evazion.com</a>
-          </li>
-          <li>
-            <a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook"></i> Evazion - Agence de voyage</a>
-          </li>
-          <li>
-            <a href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i> evazionvoyages</a>
-          </li>
-        </ul>
-      </div>
-      <div class="footer-center-section">
-        <h3>Partenaires</h3>
-        <ul class="partners">
-          <li>SkyLynx Airways</li>
-          <li>Aurora Haven</li>
-          <li>Pathfinders Collective</li>
-        </ul>
-      </div>
-    </div>
-    <hr>
-    <div class="footer-bottom">
-      <ul class="documents">
-        <li>
-          <a th:href="@{/politique-de-confidentialite}">Politique de confidentialité</a>
+      <ul class="navigation">
+        <li class="navigation-item trips-item">
+          <a th:href="@{/destinations}">Voyages</a>
         </li>
-        <li>
-          <a th:href="@{/cgv}">Conditions générales de ventes</a>
+        <li class="navigation-item">
+          <a th:href="@{/reviews}">Avis</a>
+        </li>
+        <li class="navigation-item">
+          <a th:href="@{/contact}">Contact</a>
+        </li>
+        <li class="navigation-item buttons-container">
+          <a th:href="@{/users/user-profile}" class="navigation-item account">
+            <i class="fa-solid fa-user"></i> Compte
+          </a>
         </li>
       </ul>
-      <p>© 2024 Evazion - Tous droits réservés.</p>
     </div>
-  </div>
-</footer>
-<a href="#" class="scroll-top-button">
-  <i class="fa-solid fa-arrow-up"></i>
-</a>
+  </header>
+  <section class="main-section">
+    <h1 class="title">Ajouter une Destination</h1>
+    <p class="description">Ajoutez un nouveau voyage au catalogue via le formulaire ci-dessous.</p>
+    <form action="/destinations/new" method="post" enctype="multipart/form-data" class="add-destination-form" id="add-destination-form" novalidate>
+      <div class="fields">
+        <div class="form-block">
+          <div class="form-group">
+            <h5>Nom</h5>
+            <input type="text" id="name" name="name" required>
+            <div class="error" id="nameError"></div>
+          </div>
+          <div class="form-group">
+            <h5 for="type">Type</h5>
+            <input type="text" id="type" name="type" required>
+            <div class="error" id="typeError"></div>
+          </div>
+        </div>
+        <div class="form-block location">
+          <div class="form-group">
+            <h5 for="continent">Continent</h5>
+            <select id="continent" name="continent" required>
+              <option>Afrique</option>
+              <option>Amérique du Nord</option>
+              <option>Amérique du Sud</option>
+              <option>Asie</option>
+              <option>Europe</option>
+              <option>Océanie</option>
+            </select>
+            <div class="error" id="continentError"></div>
+          </div>
+          <div class="form-group">
+            <h5 for="country">Pays</h5>
+            <select id="country" name="country">
+              <option>Afghanistan</option>
+              <option>Afrique du Sud</option>
+              <option>Albanie</option>
+              <option>Algérie</option>
+              <option>Allemagne</option>
+              <option>Andorre</option>
+              <option>Angola</option>
+              <option>Antigua-et-Barbuda</option>
+              <option>Arabie Saoudite</option>
+              <option>Argentine</option>
+              <option>Arménie</option>
+              <option>Australie</option>
+              <option>Autriche</option>
+              <option>Azerbaïdjan</option>
+              <option>Bahamas</option>
+              <option>Bahreïn</option>
+              <option>Bangladesh</option>
+              <option>Barbade</option>
+              <option>Belau / Palau / Palaos</option>
+              <option>Belgique</option>
+              <option>Belize</option>
+              <option>Bénin</option>
+              <option>Bhoutan</option>
+              <option>Biélorussie</option>
+              <option>Birmanie</option>
+              <option>Bolivie</option>
+              <option>Bosnie-Herzégovine</option>
+              <option>Botswana</option>
+              <option>Brésil</option>
+              <option>Brunei</option>
+              <option>Bulgarie</option>
+              <option>Burkina Faso</option>
+              <option>Burundi</option>
+              <option>Cambodge</option>
+              <option>Cameroun</option>
+              <option>Canada</option>
+              <option>Cap-Vert</option>
+              <option>Centrafrique</option>
+              <option>Chili</option>
+              <option>Chine</option>
+              <option>Chypre</option>
+              <option>Colombie</option>
+              <option>Comores</option>
+              <option>Congo-Brazzaville</option>
+              <option>Congo-Kinshasa</option>
+              <option>Corée du Nord</option>
+              <option>Corée du Sud</option>
+              <option>Costa Rica</option>
+              <option>Côte d’Ivoire</option>
+              <option>Croatie</option>
+              <option>Cuba</option>
+              <option>Danemark</option>
+              <option>Djibouti</option>
+              <option>Dominique</option>
+              <option>Égypte</option>
+              <option>Émirats arabes unis</option>
+              <option>Équateur</option>
+              <option>Érythrée</option>
+              <option>Espagne</option>
+              <option>Estonie</option>
+              <option>États-Unis</option>
+              <option>Éthiopie</option>
+              <option>Fidji</option>
+              <option>Finlande</option>
+              <option>France</option>
+              <option>Gabon</option>
+              <option>Gambie</option>
+              <option>Géorgie</option>
+              <option>Ghana</option>
+              <option>Grèce</option>
+              <option>Grenade</option>
+              <option>Guatemala</option>
+              <option>Guinée-Bissau</option>
+              <option>Guinée-Conakry</option>
+              <option>Guinée équatoriale</option>
+              <option>Guyana</option>
+              <option>Haïti</option>
+              <option>Honduras</option>
+              <option>Hongrie</option>
+              <option>Inde</option>
+              <option>Indonésie</option>
+              <option>Irak</option>
+              <option>Iran</option>
+              <option>Irlande</option>
+              <option>Islande</option>
+              <option>Israël</option>
+              <option>Italie</option>
+              <option>Jamaïque</option>
+              <option>Japon</option>
+              <option>Jordanie</option>
+              <option>Kazakhstan</option>
+              <option>Kenya</option>
+              <option>Kirghizistan</option>
+              <option>Kiribati</option>
+              <option>Kosovo</option>
+              <option>Koweït</option>
+              <option>Laos</option>
+              <option>Lesotho</option>
+              <option>Lettonie</option>
+              <option>Liban</option>
+              <option>Liberia</option>
+              <option>Libye</option>
+              <option>Liechtenstein</option>
+              <option>Lituanie</option>
+              <option>Luxembourg</option>
+              <option>Macédoine</option>
+              <option>Madagascar</option>
+              <option>Malaisie</option>
+              <option>Malawi</option>
+              <option>Maldives</option>
+              <option>Mali</option>
+              <option>Malte</option>
+              <option>Maroc</option>
+              <option>Marshall</option>
+              <option>Maurice</option>
+              <option>Mauritanie</option>
+              <option>Mexique</option>
+              <option>Micronésie</option>
+              <option>Moldavie</option>
+              <option>Monaco</option>
+              <option>Mongolie</option>
+              <option>Monténégro</option>
+              <option>Mozambique</option>
+              <option>Namibie</option>
+              <option>Nauru</option>
+              <option>Népal</option>
+              <option>Nicaragua</option>
+              <option>Niger</option>
+              <option>Nigeria</option>
+              <option>Norvège</option>
+              <option>Nouvelle-Zélande</option>
+              <option>Oman</option>
+              <option>Ouganda</option>
+              <option>Ouzbékistan</option>
+              <option>Pakistan</option>
+              <option>Panama</option>
+              <option>Papouasie-Nouvelle-Guinée</option>
+              <option>Paraguay</option>
+              <option>Pays-Bas</option>
+              <option>Pérou</option>
+              <option>Philippines</option>
+              <option>Pologne</option>
+              <option>Portugal</option>
+              <option>Qatar</option>
+              <option>République dominicaine</option>
+              <option>République tchèque</option>
+              <option>Roumanie</option>
+              <option>Royaume-Uni</option>
+              <option>Russie</option>
+              <option>Rwanda</option>
+              <option>Saint-Christophe-et-Niévès</option>
+              <option>Sainte-Lucie</option>
+              <option>Saint-Marin</option>
+              <option>Saint-Vincent-et-les-Grenadines</option>
+              <option>Salomon</option>
+              <option>São-Tomé-et-Príncipe</option>
+              <option>Salvador</option>
+              <option>Samoa occidentales</option>
+              <option>Sénégal</option>
+              <option>Serbie</option>
+              <option>Seychelles</option>
+              <option>Sierra Leone</option>
+              <option>Singapour</option>
+              <option>Slovaquie</option>
+              <option>Slovénie</option>
+              <option>Somalie</option>
+              <option>Soudan</option>
+              <option>Soudan du Sud</option>
+              <option>Sri Lanka</option>
+              <option>Suède</option>
+              <option>Suisse</option>
+              <option>Surinam</option>
+              <option>Swaziland</option>
+              <option>Syrie</option>
+              <option>Tadjikistan</option>
+              <option>Tanzanie</option>
+              <option>Tchad</option>
+              <option>Timor oriental</option>
+              <option>Thaïlande</option>
+              <option>Togo</option>
+              <option>Tonga</option>
+              <option>Trinité-et-Tobago</option>
+              <option>Tunisie</option>
+              <option>Turkménistan</option>
+              <option>Turquie</option>
+              <option>Tuvalu</option>
+              <option>Ukraine</option>
+              <option>Uruguay</option>
+              <option>Vanuatu</option>
+              <option>Vatican</option>
+              <option>Venezuela</option>
+              <option>Vietnam</option>
+              <option>Yémen</option>
+              <option>Zambie</option>
+              <option>Zimbabwe</option>
+            </select>
+            <div class="error" id="countryError"></div>
+          </div>
+          <div class="form-group">
+            <h5 for="city">Ville</h5>
+            <input type="text" id="city" name="city">
+            <div class="error" id="cityError"></div>
+          </div>
+        </div>
+        <div class="form-block">
+          <div class="form-group">
+            <h5 for="startDate">Date de début</h5>
+            <input type="date" id="startDate" name="startDate">
+            <div class="error" id="startDateError"></div>
+          </div>
+          <div class="form-group">
+            <h5 for="endDate">Date de fin</h5>
+            <input type="date" id="endDate" name="endDate">
+            <div class="error" id="endDateError"></div>
+          </div>
+        </div>
+        <div class="form-block">
+          <div class="form-group">
+            <h5 for="price">Prix</h5>
+            <input type="number" id="price" name="price" min="0" step="0.01">
+            <div class="error" id="priceError"></div>
+          </div>
+          <div class="form-group">
+            <h5 for="nbPlaces">Places disponibles</h5>
+            <input type="number" id="nbPlaces" name="nbPlaces" min="1">
+            <div class="error" id="nbPlacesError"></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <h5 for="description">Description</h5>
+          <textarea id="description" name="description" rows="5" cols="125"></textarea>
+          <div class="error" id="descriptionError"></div>
+        </div>
+        <div class="form-group">
+          <h5 for="lienImage">Image</h5>
+          <input type="file" id="lienImage" name="lienImage" accept=".jpg, .jpeg">
+          <div class="error" id="imageError"></div>
+        </div>
+      </div>
+      <button type="submit" class="submit-button"><i class="fa-solid fa-plus"></i> Ajouter</button>
+    </form>
+  </section>
+  <script>
+    document.getElementById('editProfileForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      let isValid = true;
+
+      // Prénom
+      const firstname = document.getElementById('firstname').value.trim();
+      if (!firstname) {
+        document.getElementById('firstname-error').textContent = "Le prénom est obligatoire.";
+        isValid = false;
+      } else {
+        document.getElementById('firstname-error').textContent = "";
+      }
+
+      // Nom
+      const lastname = document.getElementById('lastname').value.trim();
+      if (!lastname) {
+        document.getElementById('lastname-error').textContent = "Le nom est obligatoire.";
+        isValid = false;
+      } else {
+        document.getElementById('lastname-error').textContent = "";
+      }
+
+      // Email
+      const email = document.getElementById('email').value.trim();
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email) {
+        document.getElementById('email-error').textContent = "L'email est obligatoire.";
+        isValid = false;
+      } else if (!emailRegex.test(email)) {
+        document.getElementById('email-error').textContent = "L'email n'est pas valide.";
+        isValid = false;
+      } else {
+        document.getElementById('email-error').textContent = "";
+      }
+
+      // Téléphone
+      const phonenumber = document.getElementById('phonenumber').value.trim();
+      const phoneRegex = /^\d{10}$/;
+      if (phonenumber && !phoneRegex.test(phonenumber)) {
+        document.getElementById('phonenumber-error').textContent = "Le numéro de téléphone doit contenir 10 chiffres.";
+        isValid = false;
+      } else {
+        document.getElementById('phonenumber-error').textContent = "";
+      }
+
+      // Mot de passe
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+      if (password && password.length < 8) {
+        document.getElementById('password-error').textContent = "Le mot de passe doit contenir au moins 8 caractères.";
+        isValid = false;
+      } else {
+        document.getElementById('password-error').textContent = "";
+      }
+      if (password && confirmPassword && password !== confirmPassword) {
+        document.getElementById('confirmPassword-error').textContent = "Les mots de passe ne correspondent pas.";
+        isValid = false;
+      } else {
+        document.getElementById('confirmPassword-error').textContent = "";
+      }
+
+      // Validation finale
+      if (isValid) {
+        alert("Profil modifié avec succès !");
+        this.submit();
+      }
+    });
+  </script>
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-top">
+        <h3>Evazion</h3>
+        <p>Evazion propose des voyages sur mesure pour des escapades uniques, mêlant aventure, détente et découvertes culturelles. Faites confiance à notre expertise pour transformer vos envies d’évasion en souvenirs mémorables, où que vos rêves vous mènent.</p>
+      </div>
+      <div class="footer-center">
+        <div class="footer-center-section">
+          <h3>Accès rapide</h3>
+          <ul class="pages">
+            <li>
+              <a th:href="@{/about-us}">Qui sommes-nous ?</a>
+            </li>
+            <li>
+              <a th:href="@{/faq}">Foire aux questions</a>
+            </li>
+            <li>
+              <a th:href="@{/reviews}">Avis</a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-center-section">
+          <h3>Contactez-nous</h3>
+          <ul class="contact">
+            <li>
+              <i class="fa-solid fa-phone"></i> +33 1 23 45 67 89
+            </li>
+            <li>
+              <a href="mailto:contact@evazion.com" target="_blank"><i class="fa-solid fa-envelope"></i> contact@evazion.com</a>
+            </li>
+            <li>
+              <a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook"></i> Evazion - Agence de voyage</a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i> evazionvoyages</a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-center-section">
+          <h3>Partenaires</h3>
+          <ul class="partners">
+            <li>SkyLynx Airways</li>
+            <li>Aurora Haven</li>
+            <li>Pathfinders Collective</li>
+          </ul>
+        </div>
+      </div>
+      <hr>
+      <div class="footer-bottom">
+        <ul class="documents">
+          <li>
+            <a th:href="@{/politique-de-confidentialite}">Politique de confidentialité</a>
+          </li>
+          <li>
+            <a th:href="@{/cgv}">Conditions générales de ventes</a>
+          </li>
+        </ul>
+        <p>© 2024 Evazion - Tous droits réservés.</p>
+      </div>
+    </div>
+  </footer>
+  <a href="#" class="scroll-top-button">
+    <i class="fa-solid fa-arrow-up"></i>
+  </a>
 </body>
 </html>

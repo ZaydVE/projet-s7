@@ -16,159 +16,170 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body>
-<header class="header">
-  <div class="top-bar">
-    <div class="logo">
-      <a th:href="@{/}">
-        Evazion
-      </a>
-    </div>
-    <ul class="navigation">
-      <li class="navigation-item trips-item">
-        <a th:href="@{/destinations}">Voyages</a>
-      </li>
-      <li class="navigation-item">
-        <a th:href="@{/reviews}">Avis</a>
-      </li>
-      <li class="navigation-item">
-        <a th:href="@{/contact}">Contact</a>
-      </li>
-      <li class="navigation-item buttons-container">
-        <a th:href="@{/users/user-profile}" class="navigation-item account">
-          <i class="fa-solid fa-user"></i> Compte
+  <header class="header">
+    <div class="top-bar">
+      <div class="logo">
+        <a th:href="@{/}">
+          Evazion
         </a>
-      </li>
-    </ul>
-  </div>
-</header>
-<section class="main-section">
-  <h1 class="title">Modifier une réservation</h1>
-  <p class="description">Mettez à jour les informations de cette réservation.</p>
-  <form th:action="@{'/bookings/edit/' + ${booking.bookingId}}" method="post" class="registration-form">
-    <div class="form-block">
-      <div class="form-group">
-        <h5>Destination</h5>
-        <input type="text" id="destination" name="destination" th:value="${booking.destination.city} + ', ' + ${booking.destination.country}" readonly>
       </div>
-      <div class="form-group">
-        <h5>Date de début</h5>
-        <input type="text" id="startDate" name="startDate" th:value="${#dates.format(booking.destination.startDate, 'dd/MM/yyyy')}" readonly>
-      </div>
-      <div class="form-group">
-        <h5>Date de fin</h5>
-        <input type="text" id="endDate" name="endDate" th:value="${#dates.format(booking.destination.endDate, 'dd/MM/yyyy')}" readonly>
-      </div>
-    </div>
-    <div class="form-group">
-      <h5>Nombre de passagers</h5>
-      <input type="number" id="nbPassengers" name="nbPassengers" th:value="${booking.nbPassengers}" min="1">
-    </div>
-    <div class="form-group">
-      <h5>Prix par personne</h5>
-      <input type="number" id="prixParPersonne" th:value="${booking.destination.price}" readonly>
-    </div>
-    <div class="form-group">
-      <h5>Prix total</h5>
-      <input type="text" id="totalPrice" name="totalPrice" th:value="${booking.totalPrice} + ' €'" readonly>
-    </div>
-    <div class="form-group">
-      <button type="submit" class="submit-button"><i class="fa-solid fa-save"></i> Enregistrer</button>
-    </div>
-  </form>
-</section>
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const nombrePassagersInput = document.getElementById('nbPassengers');
-    const prixTotalInput = document.getElementById('totalPrice');
-    const prixParPersonneInput = document.getElementById('prixParPersonne');
-
-    /*
-    // Récupère le prix par personne depuis l'attribut data-price
-    const pricePerPassenger = parseFloat(nbPassengersInput.dataset.price);
-
-    // Ajoute un écouteur pour recalculer le prix total à chaque modification du nombre de passagers
-    nbPassengersInput.addEventListener('input', () => {
-      const nbPassengers = parseInt(nbPassengersInput.value) || 0;
-      const totalPrice = nbPassengers * pricePerPassenger;
-      totalPriceInput.value = `${totalPrice.toFixed(2)} €`;
-    });
-     */
-
-    function calculerPrixTotal() {
-      const prixParPersonne = parseFloat(prixParPersonneInput.value);
-      const nombrePassagers = parseInt(nombrePassagersInput.value, 10);
-      if (!isNaN(prixParPersonne) && !isNaN(nombrePassagers)) {
-        const prixTotal = prixParPersonne * nombrePassagers;
-        prixTotalInput.value = `${prixTotal.toFixed(2)} €`;
-      }
-    }
-    nombrePassagersInput.addEventListener('input', calculerPrixTotal);
-  });
-
-</script>
-<footer class="footer">
-  <div class="footer-content">
-    <div class="footer-top">
-      <h3>Evazion</h3>
-      <p>Evazion propose des voyages sur mesure pour des escapades uniques, mêlant aventure, détente et découvertes culturelles. Faites confiance à notre expertise pour transformer vos envies d’évasion en souvenirs mémorables, où que vos rêves vous mènent.</p>
-    </div>
-    <div class="footer-center">
-      <div class="footer-center-section">
-        <h3>Accès rapide</h3>
-        <ul class="pages">
-          <li>
-            <a th:href="@{/about-us}">Qui sommes-nous ?</a>
-          </li>
-          <li>
-            <a th:href="@{/faq}">Foire aux questions</a>
-          </li>
-          <li>
-            <a th:href="@{/reviews}">Avis</a>
-          </li>
-        </ul>
-      </div>
-      <div class="footer-center-section">
-        <h3>Contactez-nous</h3>
-        <ul class="contact">
-          <li>
-            <i class="fa-solid fa-phone"></i> +33 1 23 45 67 89
-          </li>
-          <li>
-            <a href="mailto:contact@evazion.com" target="_blank"><i class="fa-solid fa-envelope"></i> contact@evazion.com</a>
-          </li>
-          <li>
-            <a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook"></i> Evazion - Agence de voyage</a>
-          </li>
-          <li>
-            <a href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i> evazionvoyages</a>
-          </li>
-        </ul>
-      </div>
-      <div class="footer-center-section">
-        <h3>Partenaires</h3>
-        <ul class="partners">
-          <li>SkyLynx Airways</li>
-          <li>Aurora Haven</li>
-          <li>Pathfinders Collective</li>
-        </ul>
-      </div>
-    </div>
-    <hr>
-    <div class="footer-bottom">
-      <ul class="documents">
-        <li>
-          <a th:href="@{/politique-de-confidentialite}">Politique de confidentialité</a>
+      <ul class="navigation">
+        <li class="navigation-item trips-item">
+          <a th:href="@{/destinations}">Voyages</a>
         </li>
-        <li>
-          <a th:href="@{/cgv}">Conditions générales de ventes</a>
+        <li class="navigation-item">
+          <a th:href="@{/reviews}">Avis</a>
+        </li>
+        <li class="navigation-item">
+          <a th:href="@{/contact}">Contact</a>
+        </li>
+        <li class="navigation-item buttons-container">
+          <a th:href="@{/users/user-profile}" class="navigation-item account">
+            <i class="fa-solid fa-user"></i> Compte
+          </a>
         </li>
       </ul>
-      <p>© 2024 Evazion - Tous droits réservés.</p>
     </div>
-  </div>
-</footer>
-<a href="#" class="scroll-top-button">
-  <i class="fa-solid fa-arrow-up"></i>
-</a>
-</body>
+  </header>
+  <section class="main-section">
+    <h1 class="title">Modifier une réservation</h1>
+    <p class="description">Mettez à jour les informations de cette réservation.</p>
+    <form th:action="@{'/bookings/edit/' + ${booking.bookingId}}" method="post" class="registration-form">
+      <div class="form-block">
+        <div class="form-group">
+          <h5>Destination</h5>
+          <input type="text" id="destination" name="destination" th:value="${booking.destination.city} + ', ' + ${booking.destination.country}" readonly>
+        </div>
+        <div class="form-group">
+          <h5>Date de début</h5>
+          <input type="text" id="startDate" name="startDate" th:value="${#dates.format(booking.destination.startDate, 'dd/MM/yyyy')}" readonly>
+        </div>
+        <div class="form-group">
+          <h5>Date de fin</h5>
+          <input type="text" id="endDate" name="endDate" th:value="${#dates.format(booking.destination.endDate, 'dd/MM/yyyy')}" readonly>
+        </div>
+      </div>
+      <div class="form-group">
+        <h5>Nombre de passagers</h5>
+        <input type="number" id="nbPassengers" name="nbPassengers" th:value="${booking.nbPassengers}" min="1">
+        <div id="nbPassengersError" class="error"></div>
+      </div>
+      <div class="form-group">
+        <h5>Prix par personne</h5>
+        <input type="number" id="prixParPersonne" th:value="${booking.destination.price}" readonly>
+      </div>
+      <div class="form-group">
+        <h5>Prix total</h5>
+        <input type="text" id="totalPrice" name="totalPrice" th:value="${booking.totalPrice} + ' €'" readonly>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="submit-button"><i class="fa-solid fa-save"></i> Enregistrer</button>
+      </div>
+    </form>
+  </section>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const nombrePassagersInput = document.getElementById('nbPassengers');
+      const prixTotalInput = document.getElementById('totalPrice');
+      const prixParPersonneInput = document.getElementById('prixParPersonne');
+
+      // Fonction pour calculer le prix total
+      function calculerPrixTotal() {
+        const prixParPersonne = parseFloat(prixParPersonneInput.value);
+        const nombrePassagers = parseInt(nombrePassagersInput.value, 10);
+        if (!isNaN(prixParPersonne) && !isNaN(nombrePassagers)) {
+          const prixTotal = prixParPersonne * nombrePassagers;
+          prixTotalInput.value = `${prixTotal.toFixed(2)} €`;
+        }
+      }
+
+      // Ajout de l'événement sur le champ nombre de passagers
+      nombrePassagersInput.addEventListener('input', calculerPrixTotal);
+
+      // Validation du formulaire
+      const form = document.querySelector('form');
+      form.addEventListener('submit', function(e) {
+        let isValid = true;
+
+        // Validation du nombre de passagers
+        const nombrePassagers = nombrePassagersInput.value;
+        if (nombrePassagers <= 0) {
+          document.getElementById('nbPassengersError').textContent = "Le nombre de passagers doit être supérieur à zéro.";
+          isValid = false;
+        } else {
+          document.getElementById('nbPassengersError').textContent = "";
+        }
+
+        // Empêche l'envoi du formulaire si une erreur est détectée
+        if (!isValid) {
+          e.preventDefault();
+        }
+      });
+    });
+  </script>
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-top">
+        <h3>Evazion</h3>
+        <p>Evazion propose des voyages sur mesure pour des escapades uniques, mêlant aventure, détente et découvertes culturelles. Faites confiance à notre expertise pour transformer vos envies d’évasion en souvenirs mémorables, où que vos rêves vous mènent.</p>
+      </div>
+      <div class="footer-center">
+        <div class="footer-center-section">
+          <h3>Accès rapide</h3>
+          <ul class="pages">
+            <li>
+              <a th:href="@{/about-us}">Qui sommes-nous ?</a>
+            </li>
+            <li>
+              <a th:href="@{/faq}">Foire aux questions</a>
+            </li>
+            <li>
+              <a th:href="@{/reviews}">Avis</a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-center-section">
+          <h3>Contactez-nous</h3>
+          <ul class="contact">
+            <li>
+              <i class="fa-solid fa-phone"></i> +33 1 23 45 67 89
+            </li>
+            <li>
+              <a href="mailto:contact@evazion.com" target="_blank"><i class="fa-solid fa-envelope"></i> contact@evazion.com</a>
+            </li>
+            <li>
+              <a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook"></i> Evazion - Agence de voyage</a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram"></i> evazionvoyages</a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-center-section">
+          <h3>Partenaires</h3>
+          <ul class="partners">
+            <li>SkyLynx Airways</li>
+            <li>Aurora Haven</li>
+            <li>Pathfinders Collective</li>
+          </ul>
+        </div>
+      </div>
+      <hr>
+      <div class="footer-bottom">
+        <ul class="documents">
+          <li>
+            <a th:href="@{/politique-de-confidentialite}">Politique de confidentialité</a>
+          </li>
+          <li>
+            <a th:href="@{/cgv}">Conditions générales de ventes</a>
+          </li>
+        </ul>
+        <p>© 2024 Evazion - Tous droits réservés.</p>
+      </div>
+    </div>
+  </footer>
+  <a href="#" class="scroll-top-button">
+    <i class="fa-solid fa-arrow-up"></i>
+  </a>
+  </body>
 </html>
