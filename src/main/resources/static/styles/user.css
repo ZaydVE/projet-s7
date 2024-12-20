@@ -82,6 +82,8 @@
 	text-transform: uppercase;
 	cursor: pointer;
 	text-align: center;
+	width: 100%;
+	height: auto;
 }
 
 .main-section .informations .buttons .edit-button {
@@ -91,6 +93,7 @@
 
 .main-section .informations .buttons .delete-button {
 	background-color: var(--accent-color-1);
+	padding: 12px 10px 11px;
 }
 
 .main-section .informations .buttons .log-out-button, .confirm-button {
@@ -98,6 +101,42 @@
 }
 
 .main-section .informations .buttons a i, .main-section .informations .buttons button i {
+	margin-right: 5px;
+}
+
+.main-section .admin-links-container {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 25px;
+}
+
+.main-section .user-links-container {
+	display: flex;
+	justify-content: center;
+	gap: 25px;
+	margin-top: 25px;
+}
+
+.main-section .admin-links-container .admin-link, .main-section .user-links-container .user-link {
+	font-size: .5rem;
+	outline: none;
+	border-radius: 5px;
+	padding: 8px 10px 7px;
+	margin-left: 0;
+	text-transform: uppercase;
+	cursor: pointer;
+	text-align: center;
+	color: var(--accent-color-1);
+	border: solid 1px var(--accent-color-1);
+	transition: all .3s ease-in-out;
+}
+
+.main-section .admin-links-container .admin-link:hover, .main-section .user-links-container .user-link:hover {
+	color: var(--text-color-white);
+	background-color: var(--accent-color-1);
+}
+
+.main-section .admin-links-container .admin-link i, .main-section .user-links-container .user-link i {
 	margin-right: 5px;
 }
 
@@ -116,6 +155,17 @@
 
 	.main-section .buttons {
 		text-align: center;
+	}
+
+	.main-section .admin-links-container, .main-section .user-links-container {
+		flex-direction: column;
+		align-items: stretch;
+		gap: 20px;
+	}
+
+	.main-section .admin-links-container .admin-link, .main-section .user-links-container .user-link {
+		width: 100%;
+		max-width: 100%;
 	}
 
 }

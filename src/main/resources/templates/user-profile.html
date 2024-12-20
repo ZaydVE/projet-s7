@@ -80,41 +80,41 @@
                 <a th:href="@{/users/user-edit-himself}" class="edit-button">
                     <i class="fa-solid fa-user-pen"></i> Modifier
                 </a>
-                <a>
-                    <form th:action="@{'/users/user-delete/' + ${user.userId}}" method="post" style="display: inline;">
+                <form th:action="@{'/users/user-delete/' + ${user.userId}}" method="post" style="display: inline;">
                     <button type="submit" class="delete-button">
-                            <i class="fa-solid fa-trash"></i> Supprimer
-                        </button>
-                    </form>
-                </a>
+                        <i class="fa-solid fa-trash"></i> Supprimer
+                    </button>
+                </form>
                 <a th:href="@{/logout}" class="log-out-button">
-                    <form th:action="@{/logout}" method="post" style="display: inline;">
-                        <i class="fa-solid fa-arrow-right-from-bracket"></i> Se déconnecter
-                    </form>
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Se déconnecter
                 </a>
             </div>
         </div>
-        <a class="add-user" th:href="@{/destinations/new}" th:if="${isAdmin}">
-            <i class="fa-solid fa-user-plus"></i> Ajouter une destination
-        </a>
-        <a class="add-user" th:href="@{/destinations/list}" th:if="${isAdmin}">
-            <i class="fa-solid fa-user-plus"></i> Afficher liste des destinations et les gérer
-        </a>
-        <a class="add-user" th:href="@{/users/newadmin}" th:if="${isAdmin}">
-            <i class="fa-solid fa-user-plus"></i> Ajouter un utilisateur/administrateur
-        </a>
-        <a class="add-user" th:href="@{/users/list}" th:if="${isAdmin}">
-            <i class="fa-solid fa-user-plus"></i> Afficher liste des utilisateurs et les gérer
-        </a>
-        <a class="add-user" th:href="@{/reviews/review-list-admin}" th:if="${isAdmin}">
-            <i class="fa-solid fa-user-plus"></i> Afficher liste des avis et les gérer
-        </a>
-        <a class="add-user" th:href="@{/reviews/new}" th:if="${isUser}">
-            <i class="fa-solid fa-user-plus"></i> Ajouter un avis
-        </a>
-        <a class="add-user" th:href="@{/reviews/review-list}" th:if="${isUser}">
-            <i class="fa-solid fa-user-plus"></i> Voir ses avis
-        </a>
+        <div class="admin-links-container">
+            <a class="admin-link" th:href="@{/destinations/new}" th:if="${isAdmin}">
+                <i class="fa-solid fa-plus"></i> Ajouter une destination
+            </a>
+            <a class="admin-link" th:href="@{/destinations/list}" th:if="${isAdmin}">
+                <i class="fa-solid fa-eye"></i> Afficher la liste des destinations et les gérer
+            </a>
+            <a class="admin-link" th:href="@{/users/newadmin}" th:if="${isAdmin}">
+                <i class="fa-solid fa-user-plus"></i> Ajouter un utilisateur/administrateur
+            </a>
+            <a class="admin-link" th:href="@{/users/list}" th:if="${isAdmin}">
+                <i class="fa-solid fa-eye"></i> Afficher la liste des utilisateurs et les gérer
+            </a>
+            <a class="admin-link" th:href="@{/reviews/review-list-admin}" th:if="${isAdmin}">
+                <i class="fa-solid fa-eye"></i> Afficher la liste des avis et les gérer
+            </a>
+        </div>
+        <div class="user-links-container">
+            <a class="user-link" th:href="@{/reviews/new}" th:if="${isUser}">
+                <i class="fa-solid fa-plus"></i> Ajouter un avis
+            </a>
+            <a class="user-link" th:href="@{/reviews/review-list}" th:if="${isUser}">
+                <i class="fa-solid fa-eye"></i> Voir ses avis
+            </a>
+        </div>
     </section>
 <footer class="footer">
     <div class="footer-content">
