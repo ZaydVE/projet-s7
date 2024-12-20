@@ -1,5 +1,6 @@
 package com.prime.projet.service;
 
+import com.prime.projet.exception.ReviewNotFoundException;
 import com.prime.projet.repository.DestinationRepository;
 import com.prime.projet.repository.ReviewRepository;
 import com.prime.projet.repository.entity.Destination;
@@ -63,8 +64,9 @@ public class ReviewService {
     // Récupérer une review par son ID
     public Review getReviewById(Integer reviewId) {
         return reviewRepository.findById(reviewId)
-                .orElseThrow(() -> new RuntimeException("Avis non trouvé avec l'ID : " + reviewId));
+                .orElseThrow(() -> new ReviewNotFoundException("Avis avec l'ID " + reviewId + " introuvable."));
     }
+
     public List<Review> getReviewsByUser(Integer userId) {
         return reviewRepository.findByUserUserId(userId);
     }

@@ -1,5 +1,7 @@
 package com.prime.projet.service;
 
+import com.prime.projet.exception.DestinationNotFoundException;
+import com.prime.projet.exception.InvalidFilterException;
 import com.prime.projet.repository.DestinationRepository;
 import com.prime.projet.repository.entity.Destination;
 import com.prime.projet.controller.dto.DestinationDto;
@@ -36,14 +38,16 @@ public class DestinationService {
     // Récupérer les détails d'une destination spécifique
     public Destination getDestinationById(Integer destinationId) {
         return destinationRepository.findById(destinationId)
-                .orElseThrow(() -> new IllegalArgumentException("Destination introuvable."));
+                .orElseThrow(() -> new DestinationNotFoundException("Destination avec l'ID " + destinationId + " introuvable."));
     }
 
     public List<Destination> filterDestinations(String continent, String pays, LocalDate startDate,
                                                 LocalDate endDate, Integer personnes, String budget, String duration,
                                                 LocalDate startDateUser, LocalDate endDateUser) {
-        return destinationRepository.findWithFilters(continent, pays, startDate, endDate, personnes, budget,
-                duration, startDateUser, endDateUser);
+        if (startDate != null && endDate != null && startDate.isAfter(endDate)) {
+            throw new InvalidFilterException("La date de début ne peut pas être après la date de fin.");
+        }
+        return destinationRepository.findWithFilters(continent, pays, startDate, endDate, personnes, budget, duration, startDateUser, endDateUser);
     }
 
     // Récupère les 4 destinations avec la date de départ la plus proche

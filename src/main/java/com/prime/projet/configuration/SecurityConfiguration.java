@@ -37,6 +37,7 @@ public class SecurityConfiguration {
                 .csrf().disable()
                 .formLogin((form) -> form
                         .loginPage("/login") // Page de login personnalisée
+                        .failureUrl("/login?error=true") // Redirige vers /login avec un paramètre "error" en cas d'échec
                         .permitAll() // Autorise tout le monde à accéder à la page de connexion
                 )
                 .logout((logout) -> logout

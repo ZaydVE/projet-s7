@@ -58,6 +58,12 @@
             <button type="submit" class="submit-button">Se connecter</button>
         </div>
     </form>
+
+    <!-- Afficher le message d'erreur en cas d'échec de connexion -->
+    <div th:if="${param.error}">
+        <p style="color: red;">Nom d'utilisateur ou mot de passe incorrect.</p>
+    </div>
+
     <p class="message">Pas encore inscrit ? Créez un compte <a href="/users/new">ici</a>.</p>
     <script>
         document.getElementById('login-form').addEventListener('submit', function (e) {
