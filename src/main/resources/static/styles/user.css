@@ -108,6 +108,7 @@
 	display: flex;
 	justify-content: space-between;
 	margin-top: 25px;
+	flex-wrap: wrap;
 }
 
 .main-section .user-links-container {
@@ -115,6 +116,10 @@
 	justify-content: center;
 	gap: 25px;
 	margin-top: 25px;
+}
+
+.main-section .admin-links-container .admin-link:last-child {
+	margin-top: 15px;
 }
 
 .main-section .admin-links-container .admin-link, .main-section .user-links-container .user-link {
@@ -170,6 +175,10 @@
 	.main-section .admin-links-container .admin-link, .main-section .user-links-container .user-link {
 		width: 100%;
 		max-width: 100%;
+	}
+
+	.main-section .admin-links-container .admin-link:last-child {
+		margin-top: 0;
 	}
 
 }

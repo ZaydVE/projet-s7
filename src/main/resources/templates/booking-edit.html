@@ -78,9 +78,11 @@
 </section>
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const nbPassengersInput = document.getElementById('nbPassengers');
-    const totalPriceInput = document.getElementById('totalPrice');
+    const nombrePassagersInput = document.getElementById('nbPassengers');
+    const prixTotalInput = document.getElementById('totalPrice');
+    const prixParPersonneInput = document.getElementById('prixParPersonne');
 
+    /*
     // Récupère le prix par personne depuis l'attribut data-price
     const pricePerPassenger = parseFloat(nbPassengersInput.dataset.price);
 
@@ -90,6 +92,17 @@
       const totalPrice = nbPassengers * pricePerPassenger;
       totalPriceInput.value = `${totalPrice.toFixed(2)} €`;
     });
+     */
+
+    function calculerPrixTotal() {
+      const prixParPersonne = parseFloat(prixParPersonneInput.value);
+      const nombrePassagers = parseInt(nombrePassagersInput.value, 10);
+      if (!isNaN(prixParPersonne) && !isNaN(nombrePassagers)) {
+        const prixTotal = prixParPersonne * nombrePassagers;
+        prixTotalInput.value = `${prixTotal.toFixed(2)} €`;
+      }
+    }
+    nombrePassagersInput.addEventListener('input', calculerPrixTotal);
   });
 
 </script>
