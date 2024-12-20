@@ -29,10 +29,9 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/","politique-de-confidentialite","cgv","/faq","/about-us","/contact","/reviews", "/styles/**", "/assets/**", "/public", "/favicon.ico", "/users/new","/images/**", "/login", "/destinations","/destinations/{id}", "/destinations/**").permitAll() // Chemins publics
-                        .requestMatchers("/users/user-edit-himself", "/users/user-edit-himself-s", "/reviews/review-list", "reviews/delete/","/bookings/edit/**","/bookings/delete/**","/bookings/new/**","/bookings/user-list").hasRole("USER")
-                        .requestMatchers("/users/admin","/users/delete/**", "/users/newadmin", "/users/delete-users","/users/edit-users","/users/list","/destinations/list","/destinations/new","/destinations/edit","/destinations/delete", "/reviews/review-list-admin", "reviews/delete/","/bookings/edit/**","/bookings/delete/**","/bookings/list").hasRole("ADMIN") // ADMIN uniquement
-                        .anyRequest().authenticated() // Toute autre requête doit être authentifiée
+                        .requestMatchers( "/styles/**", "/assets/**","/favicon.ico","/images/**","/public","/","/login","/about-us", "/cgv", "/contact", "/destinations", "/destinations/{id}", "/error", "/faq", "/politique-de-confidentialite", "/users/new","/reviews" ).permitAll()
+                        .requestMatchers("/bookings/delete/**", "/bookings/edit/**", "/bookings/new/**", "/bookings/user-list", "/reviews/delete/{id}", "/reviews/new", "/reviews/review-list", "/users/user-delete/{id}", "/users/user-edit-himself", "/users/user-profile/{id}").hasRole("USER")
+                        .requestMatchers("/bookings/delete/**", "/bookings/edit/**", "/bookings/new/**", "/bookings/list", "/destinations/delete/**","/destinations/edit/**", "/destinations/new", "/destinations/list", "/reviews/delete/**", "/reviews/review-list-admin", "/users/user-delete/**", "/users/user-edit/", "/users/newadmin", "/users/list", "/users/user-profile/{id}").hasRole("ADMIN")
                 )
                 .csrf().disable()
                 .formLogin((form) -> form

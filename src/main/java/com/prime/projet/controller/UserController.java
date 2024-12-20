@@ -140,14 +140,6 @@ public class UserController {
             return "redirect:/users/user-profile";
         }
 
-        // -------------------- Partie Admin ouvre le centre de contrôle admin ----------------------------
-        //Ouvrir la page admin
-        @GetMapping("/admin")
-        public String showAdminPage () {
-            logger.info("Displaying admin control panel.");
-            return "admin";
-        }
-
         // -------------------- Partie Admin Modifie un User --------------------
         @GetMapping("/user-edit/{id}")
         public String editUserForm(@PathVariable Integer id, Model model) {

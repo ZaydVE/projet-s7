@@ -107,23 +107,6 @@ public class ReviewController {
         return "review-list-admin";
     }
 
-    //Affiche toutes les review pour une destination donnée
-    @GetMapping("/{destinationId}")
-    public String getReviewsForDestination(@PathVariable Integer destinationId, Model model) {
-        logger.info("Fetching reviews for destination ID: {}", destinationId);
-        // Récupérer les reviews pour la destination
-        List<Review> reviews = reviewService.getReviewsForDestination(destinationId);
-
-        // Ajouter les reviews au modèle
-        model.addAttribute("reviews", reviews);
-
-        // Récupérer le nom de la destination
-        Destination destination = destinationService.getDestinationById(destinationId);
-        model.addAttribute("destinationName", destination.getName());
-
-        return "destination-reviews";
-    }
-
     //----------------------------------User Supprime une Review ---------------------------------------------
 
     @GetMapping("/delete/{id}")
