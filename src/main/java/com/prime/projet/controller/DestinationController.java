@@ -2,6 +2,8 @@ package com.prime.projet.controller;
 
 import com.prime.projet.repository.entity.Destination;
 import com.prime.projet.service.DestinationService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +19,7 @@ import java.util.List;
 public class DestinationController {
 
     private final DestinationService destinationService;
+    private static final Logger logger = LoggerFactory.getLogger(DestinationController.class);
 
 
     public DestinationController(DestinationService destinationService) {
@@ -26,6 +29,7 @@ public class DestinationController {
     //Affiche toutes les destinations
     @GetMapping
     public String showAllDestinations(Model model) {
+        logger.info("Displaying all destinations.");
         List<Destination> destinations = destinationService.getAllDestinations();
         model.addAttribute("destinations", destinations);
         return "destinations";
@@ -34,6 +38,7 @@ public class DestinationController {
     //Affiche les détails d'une destination
     @GetMapping("/{id}")
     public String getDestinationDetails(@PathVariable Integer id, Model model) {
+        logger.info("Fetching details for destination ID: {}", id);
         Destination destination = destinationService.getDestinationById(id);
         model.addAttribute("destination", destination);
         return "destination-details";
@@ -42,6 +47,7 @@ public class DestinationController {
     //Affiche une page pour créer une nouvelle destination
     @GetMapping("/new")
     public String showCreateDestinationForm() {
+        logger.info("Displaying create destination form.");
         return "destination-form";
     }
 
@@ -60,6 +66,8 @@ public class DestinationController {
             @RequestParam("lienImage") MultipartFile lienImage,
             RedirectAttributes redirectAttributes) {
 
+        logger.info("Creating a new destination.");
+
         destinationService.createDestination(
                 name, description, price, continent, country, city, type, startDate, endDate, nbPlaces, lienImage
         );
@@ -71,6 +79,7 @@ public class DestinationController {
 
     @GetMapping("/edit/{id}")
     public String editDestinationForm(@PathVariable Integer id, Model model) {
+        logger.info("Loading edit form for destination ID: {}", id);
         Destination destination = destinationService.getDestinationById(id);
 
         // Liste des continents en dur
@@ -144,6 +153,7 @@ public class DestinationController {
             @RequestParam int nbPlaces,
             @RequestParam(value = "lienImage", required = false) MultipartFile lienImage,
             RedirectAttributes redirectAttributes) {
+        logger.info("Updating destination with ID: {}", id);
 
         // Vérifier si une image a été uploadée
         if (lienImage != null && !lienImage.isEmpty()) {
@@ -176,6 +186,7 @@ public class DestinationController {
 
     @PostMapping("/delete/{destinationId}")
     public String deleteDestination(@PathVariable("destinationId") Integer destinationId, RedirectAttributes redirectAttributes) {
+        logger.info("Deleting destination with ID: {}", destinationId);
         destinationService.deleteDestination(destinationId);
         redirectAttributes.addFlashAttribute("successMessageDeleteDestination", "Suppression de la destination réussie !");
         return "redirect:/destinations";
@@ -183,6 +194,7 @@ public class DestinationController {
 
     @GetMapping("/list")
     public String listAllDestinations(Model model) {
+        logger.info("Listing all destinations.");
         List<Destination> destinations = destinationService.getAllDestinations();
         model.addAttribute("destinations", destinations);
         return "destination-list";

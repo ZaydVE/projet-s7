@@ -7,6 +7,8 @@ import com.prime.projet.repository.UserRepository;
 import com.prime.projet.service.ReviewService;
 import com.prime.projet.controller.dto.ReviewDto;
 import com.prime.projet.service.DestinationService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +25,7 @@ public class ReviewController {
     private final ReviewService reviewService;
     private final DestinationService destinationService;
     private final UserRepository userRepository;
+    private static final Logger logger = LoggerFactory.getLogger(ReviewController.class);
 
     public ReviewController(ReviewService reviewService, DestinationService destinationService, UserRepository userRepository, ReviewRepository reviewRepository) {
         this.reviewService = reviewService;
@@ -33,6 +36,7 @@ public class ReviewController {
     //Ouvre une page pour créer une nouvelle review
     @GetMapping("/new")
     public String showReviewForm(Model model) {
+        logger.info("Displaying review form.");
         addTodayTo(model);
         addDestinationTo(model);
         //Ajoute un ReviewDto vide dans le modèle
@@ -64,6 +68,7 @@ public class ReviewController {
     // Poster une review
     @PostMapping("/new")
     public String registerReview(@ModelAttribute ReviewDto reviewDto, RedirectAttributes redirectAttributes) {
+        logger.info("Submitting a new review for destination ID: {}", reviewDto.getDestinationId());
         // Récupérer l'utilisateur connecté
         org.springframework.security.core.userdetails.User principal =
                 (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -83,6 +88,7 @@ public class ReviewController {
     //Affiche toutes les reviews
     @GetMapping
     public String listAllReviews(Model model) {
+        logger.info("Fetching all reviews.");
         List<Review> reviews = reviewService.getAllReviews();
         model.addAttribute("reviews", reviews);
         return "reviews";
@@ -90,6 +96,7 @@ public class ReviewController {
 
     @GetMapping("/review-list-admin")
     public String showAllReviewsForAdmin(Model model) {
+        logger.info("Displaying all reviews for admin.");
         // Récupère toutes les reviews
         List<Review> reviews = reviewService.getAllReviews();
 
@@ -103,6 +110,7 @@ public class ReviewController {
     //Affiche toutes les review pour une destination donnée
     @GetMapping("/{destinationId}")
     public String getReviewsForDestination(@PathVariable Integer destinationId, Model model) {
+        logger.info("Fetching reviews for destination ID: {}", destinationId);
         // Récupérer les reviews pour la destination
         List<Review> reviews = reviewService.getReviewsForDestination(destinationId);
 
@@ -120,6 +128,7 @@ public class ReviewController {
 
     @GetMapping("/delete/{id}")
     public String showReviewToDelete(@PathVariable Integer id, Model model) {
+        logger.info("Displaying delete confirmation for review with ID: {}", id);
         // Récupère l'avis par ID
         Review review = reviewService.getReviewById(id);
 
@@ -131,6 +140,7 @@ public class ReviewController {
 
     @PostMapping("/confirm-delete/{id}")
     public String confirmDeleteReview(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
+        logger.info("Confirming deletion for review with ID: {}", id);
         // Supprime l'avis via le service
         reviewService.deleteReviewById(id);
 
@@ -145,6 +155,7 @@ public class ReviewController {
     // Gère la suppression de l'avis et redirige vers user-delete.html
     @PostMapping("/delete/{id}")
     public String deleteReview(@PathVariable Integer id, Model model) {
+        logger.info("Deleting review with ID: {}", id);
         // Supprime l'avis via le service
         Review review = reviewService.getReviewById(id);
         reviewService.deleteReviewById(id);
@@ -159,6 +170,7 @@ public class ReviewController {
 // Liste des avis de l'utilisateur connecté
     @GetMapping("/review-list")
     public String showAllReviews(Model model) {
+        logger.info("Displaying all reviews for the logged-in user.");
         // Récupère l'utilisateur connecté
         org.springframework.security.core.userdetails.User principal =
                 (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

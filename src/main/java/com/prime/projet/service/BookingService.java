@@ -1,10 +1,13 @@
 package com.prime.projet.service;
 
+import com.prime.projet.controller.UserController;
 import com.prime.projet.exception.BookingNotFoundException;
 import com.prime.projet.repository.BookingRepository;
 import com.prime.projet.repository.DestinationRepository;
 import com.prime.projet.repository.entity.Booking;
 import com.prime.projet.repository.entity.Destination;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,11 +26,16 @@ public class BookingService {
         this.destinationRepository = destinationRepository;
     }
 
+    private static final Logger logger = LoggerFactory.getLogger(BookingService.class);
+
+
     public List<Booking> getAllBookings() {
+        logger.info("Fetching all bookings.");
         return bookingRepository.findAll();
     }
 
     public List<Booking> getBookingsByUser(Integer userId) {
+        logger.info("Fetching bookings for user with ID: {}", userId);
         return bookingRepository.findByUserUserId(userId);
     }
 
@@ -37,10 +45,12 @@ public class BookingService {
     }
 
     public void updateBooking(Booking booking) {
+        logger.info("Updating booking with ID: {}", booking.getBookingId());
         bookingRepository.save(booking);
     }
 
     public void deleteBooking(Integer bookingId) {
+        logger.info("Deleting booking with ID: {}", bookingId);
         Optional<Booking> booking = bookingRepository.findById(bookingId);
 
         if (booking.isPresent()) {
