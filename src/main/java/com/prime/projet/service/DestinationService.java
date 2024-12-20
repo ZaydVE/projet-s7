@@ -176,7 +176,7 @@ public class DestinationService {
         if (imagePath != null) {
             try {
                 // Reconstruire le chemin complet du fichier
-                Path filePath = Paths.get(UPLOAD_DIR, imagePath.replace("/assets/", ""));
+                Path filePath = Paths.get(UPLOAD_DIR, imagePath.replace("/Evazion/images", ""));
                 Files.deleteIfExists(filePath);
             } catch (IOException e) {
                 System.err.println("Erreur lors de la suppression de l'image : " + e.getMessage());
