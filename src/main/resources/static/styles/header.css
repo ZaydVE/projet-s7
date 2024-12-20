@@ -68,71 +68,6 @@
 	color: var(--accent-color-2);
 }
 
-.header .top-bar .navigation .trips-item .trips-dropdown {
-	display: none;
-    position: absolute;
-    top: 100%;
-    left: -100%;
-    background-color: white;
-    list-style: none;
-    margin: 0;
-    padding: 15px 0;
-    z-index: 1000;
-    width: 300%;
-}
-
-.header .top-bar .navigation .trips-item:hover .trips-dropdown {
-	display: block;
-}
-
-.header .top-bar .navigation .trips-item .trips-dropdown .dropdown-item {
-	display: block;
-	padding: 5px 0;
-}
-
-.header .top-bar .navigation .buttons-container {
-	display: flex;
-	margin: 0;
-}
-
-.header .top-bar .navigation .buttons-container .search-bar {
-	border: solid 1px var(--accent-color-1);
-	border-radius: 5px;
-	margin-top: 5px;
-	margin-right: 15px;
-	padding: 7px 10px;
-	display: flex;
-	justify-content: space-between;
-	margin: 0 10px;
-}
-
-.header .top-bar .navigation .buttons-container .search-bar .search-input {
-	background: none;
-	border: none;
-	outline: none;
-	color: var(--accent-color-1);
-}
-
-.header .top-bar .navigation .buttons-container .search-bar .search-input::placeholder {
-	color: var(--accent-color-1);
-	text-transform: uppercase;
-}
-
-.header .top-bar .navigation .buttons-container .search-bar .search-input:focus::placeholder {
-	opacity: 0;
-}
-
-.header .top-bar .navigation .buttons-container .search-bar .search-button {
-	background: none;
-	border: none;
-	color: var(--accent-color-1);
-	cursor: pointer;
-}
-
-.header .top-bar .navigation .buttons-container .search-bar .search-button i {
-	font-size: .75rem;
-}
-
 .header .top-bar .navigation .buttons-container .account {
 	color: var(--accent-color-2);
 	border: solid 1px var(--accent-color-2);
@@ -156,7 +91,7 @@
 
 	.header .top-bar {
 		flex-direction: column;
-		align-items: flex-start;
+		align-items: center;
 		padding: 15px;
 		position: inherit;
 	}
@@ -164,6 +99,7 @@
 	.header .top-bar .logo {
 		margin: 15px 0;
 		align-self: center;
+		width: 100%;
 	}
 
 	.header .top-bar .navigation {
@@ -171,35 +107,19 @@
 		flex-wrap: wrap;
 		justify-content: center;
 		width: 100%;
-		gap: 10px;
+		margin: 0 40px 0 0;
 	}
 
 	.header .top-bar .navigation .navigation-item {
 		margin: 0 10px;
 	}
 
-	.header .top-bar .navigation .trips-item {
-		margin: 0 10px 0 0;
-	}
-
-	.header .top-bar .navigation .trips-dropdown {
-		width: 100%;
-		left: 0;
-		top: auto;
-		color: var(--accent-color-1);
-	}
-
 	.header .top-bar .navigation .buttons-container {
 		display: flex;
 		justify-content: center;
 		width: 100%;
-		margin: 15px 20px 0 0;
 		padding: 0;
-	}
-
-	.header .top-bar .navigation .search-bar {
-		height: 40px;
-		align-items: center;
+		margin: 15px 0;
 	}
 
 	.header .top-bar .navigation .account {
