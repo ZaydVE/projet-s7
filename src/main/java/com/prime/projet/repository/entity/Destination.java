@@ -1,5 +1,6 @@
 package com.prime.projet.repository.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -47,13 +48,28 @@ public class Destination {
     private int nbPlaces;
 
     @OneToMany(mappedBy = "destination", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore // Ignorer cette propriété lors de la sérialisation JSON
     private List<Booking> bookings;
 
     @OneToMany(mappedBy = "destination", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore // Ignorer cette propriété lors de la sérialisation JSON
     private List<Review> reviews;
 
     @OneToMany(mappedBy = "destination", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore // Ignorer cette propriété lors de la sérialisation JSON
     private List<Offer> offers;
+
+    @Transient
+    private int duration; // Champ temporaire pour la durée (en jours)
+
+    // Méthode pour calculer la durée du séjour
+    @PostLoad
+    public void calculateDuration() {
+        if (startDate != null && endDate != null) {
+            long diff = endDate.getTime() - startDate.getTime();
+            duration = (int) (diff / (1000 * 60 * 60 * 24)); // Conversion du temps en jours
+        }
+    }
 
     // Getters et setters
     public Integer getDestinationId() {
@@ -174,5 +190,13 @@ public class Destination {
 
     public void setOffers(List<Offer> offers) {
         this.offers = offers;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 }

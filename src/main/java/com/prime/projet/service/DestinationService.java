@@ -10,7 +10,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -25,15 +27,22 @@ public class DestinationService {
         this.UPLOAD_DIR = UPLOAD_DIR;
     }
 
-    //Lister toutes les destinations
+    // Lister toutes les destinations
     public List<Destination> getAllDestinations() {
         return destinationRepository.findAll();
     }
 
-    //Récupérer les détails d'une destination spécifique
+    // Récupérer les détails d'une destination spécifique
     public Destination getDestinationById(Integer destinationId) {
         return destinationRepository.findById(destinationId)
                 .orElseThrow(() -> new IllegalArgumentException("Destination introuvable."));
+    }
+
+    public List<Destination> filterDestinations(String continent, String pays, LocalDate startDate,
+                                                LocalDate endDate, Integer personnes, String budget, String duration,
+                                                LocalDate startDateUser, LocalDate endDateUser) {
+        return destinationRepository.findWithFilters(continent, pays, startDate, endDate, personnes, budget,
+                duration, startDateUser, endDateUser);
     }
 
     // Créer une nouvelle destination avec les paramètres bruts
@@ -102,7 +111,6 @@ public class DestinationService {
     private DestinationDto createDestinationDto(String name, String description, float price, String continent,
                                                 String country, String city, String type,
                                                 String startDate, String endDate, int nbPlaces) {
-
         DestinationDto dto = new DestinationDto();
         dto.setName(name);
         dto.setDescription(description);
@@ -132,6 +140,7 @@ public class DestinationService {
         return destination;
     }
 
+    // Sauvegarder une destination et gérer l'image
     private void saveDestination(Destination destination, MultipartFile image) {
         if (image != null && !image.isEmpty()) {
             String imagePath = saveImage(image); // Sauvegarder la nouvelle image
