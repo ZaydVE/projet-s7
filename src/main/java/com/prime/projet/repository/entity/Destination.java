@@ -1,6 +1,8 @@
 package com.prime.projet.repository.entity;
 
 import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 import java.util.List;
 
@@ -32,10 +34,12 @@ public class Destination {
     @Column(nullable = false, length = 45)
     private String type;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
     private Date startDate;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
     private Date endDate;

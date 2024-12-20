@@ -60,17 +60,25 @@ public class DestinationService {
     public void updateDestination(Integer destinationId, String name, String description, float price,
                                   String continent, String country, String city, String type,
                                   String startDate, String endDate, int nbPlaces, MultipartFile image) {
+
         // Récupérer la destination existante par ID
         Destination destination = getDestinationById(destinationId);
+
         // Créer et mapper le DTO
         DestinationDto destinationDto = createDestinationDto(name, description, price, continent, country, city, type, startDate, endDate, nbPlaces);
+
         // Mettre à jour les champs
         destination = mapDtoToDestination(destination, destinationDto);
+
         // Gérer la nouvelle image (supprimer l'ancienne et ajouter la nouvelle si fournie)
         if (image != null && !image.isEmpty()) {
-            deleteImage(destination.getLienImage()); // Supprimer l'ancienne image
+            String newImagePath = saveImage(image); // Sauvegarde de l'image
+            deleteImage(destination.getLienImage()); // Supprime l'ancienne image
+            destination.setLienImage(newImagePath); // Met à jour le chemin
         }
-        saveDestination(destination, image);
+
+        // Sauvegarder la destination mise à jour
+        destinationRepository.save(destination);
     }
 
     public void updateDestinationWithoutImage(Integer destinationId, String name, String description, float price,
@@ -148,7 +156,7 @@ public class DestinationService {
     }
 
     // Sauvegarder une image sur le système de fichiers
-    private String saveImage(MultipartFile image) {
+    public String saveImage(MultipartFile image) {
         try {
             String originalFilename = image.getOriginalFilename();
             if (originalFilename == null || originalFilename.isBlank()) {
