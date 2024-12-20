@@ -97,11 +97,17 @@
         <a class="add-user" th:href="@{/destinations/new}" th:if="${isAdmin}">
             <i class="fa-solid fa-user-plus"></i> Ajouter une destination
         </a>
-        <a class="add-user" th:href="@{/users/new}" th:if="${isAdmin}">
-            <i class="fa-solid fa-user-plus"></i> Ajouter un utilisateur
+        <a class="add-user" th:href="@{/destinations/list}" th:if="${isAdmin}">
+            <i class="fa-solid fa-user-plus"></i> Afficher liste des destinations et les gérer
         </a>
         <a class="add-user" th:href="@{/users/newadmin}" th:if="${isAdmin}">
-            <i class="fa-solid fa-user-plus"></i> Ajouter un administrateur
+            <i class="fa-solid fa-user-plus"></i> Ajouter un utilisateur/administrateur
+        </a>
+        <a class="add-user" th:href="@{/users/list}" th:if="${isAdmin}">
+            <i class="fa-solid fa-user-plus"></i> Afficher liste des utilisateurs et les gérer
+        </a>
+        <a class="add-user" th:href="@{/reviews/review-list}" th:if="${isAdmin}">
+            <i class="fa-solid fa-user-plus"></i> Afficher liste des avis et les gérer
         </a>
         <a class="add-user" th:href="@{/reviews/new}" th:if="${isUser}">
             <i class="fa-solid fa-user-plus"></i> Ajouter un avis
