@@ -42,27 +42,29 @@ public class GlobalExceptionHandler {
         return "error";
     }
 
-    // Exceptions spécifiques avec réponse JSON
+    // Exceptions spécifiques avec retour HTML sous forme de modèle
+
     @ExceptionHandler(UserAlreadyExistsException.class)
-    public ResponseEntity<String> handleUserAlreadyExists(UserAlreadyExistsException ex) {
+    public String handleUserAlreadyExists(UserAlreadyExistsException ex, Model model) {
         logger.warn("UserAlreadyExistsException: {}", ex.getMessage());
-        String errorMessage = "Un utilisateur avec cet email existe déjà. Veuillez utiliser un email différent.";
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorMessage);
+        model.addAttribute("errorMessage", "Un utilisateur avec cet email existe déjà. Veuillez utiliser un email différent.");
+        return "error";  // Retourne la vue 'error.html' avec le message d'erreur
     }
 
     @ExceptionHandler(InvalidFilterException.class)
-    public ResponseEntity<String> handleInvalidFilter(InvalidFilterException ex) {
+    public String handleInvalidFilter(InvalidFilterException ex, Model model) {
         logger.warn("InvalidFilterException: {}", ex.getMessage());
-        String errorMessage = "Les filtres fournis sont invalides. Veuillez vérifier votre saisie.";
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMessage);
+        model.addAttribute("errorMessage", "Les filtres fournis sont invalides. Veuillez vérifier votre saisie.");
+        return "error";  // Retourne la vue 'error.html' avec le message d'erreur
     }
 
     @ExceptionHandler(NoDestinationAvailableException.class)
-    public ResponseEntity<String> handleNoDestinationAvailable(NoDestinationAvailableException ex) {
+    public String handleNoDestinationAvailable(NoDestinationAvailableException ex, Model model) {
         logger.info("NoDestinationAvailableException: {}", ex.getMessage());
-        String errorMessage = "Aucune destination disponible selon vos critères. Veuillez élargir votre recherche.";
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
+        model.addAttribute("errorMessage", "Aucune destination disponible selon vos critères. Veuillez élargir votre recherche.");
+        return "error";  // Retourne la vue 'error.html' avec le message d'erreur
     }
+
 
     // Gestion des erreurs inattendues (génériques)
     @ExceptionHandler(Exception.class)
