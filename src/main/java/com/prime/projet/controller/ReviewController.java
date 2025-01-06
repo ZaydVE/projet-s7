@@ -131,7 +131,7 @@ public class ReviewController {
         redirectAttributes.addFlashAttribute("successMessage", "Avis supprimé avec succès !");
 
         // Redirige vers la liste des avis
-        return "redirect:/reviews/review-list";
+        return "redirect:/reviews";
     }
 
 

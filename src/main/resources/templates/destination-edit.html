@@ -44,7 +44,7 @@
     <section class="main-section">
         <h1 class="title">Modifier une destination</h1>
         <p class="description">Mettez à jour les informations d'une destination.</p>
-        <form action="/destinations/edit/{id}" method="post" enctype="multipart/form-data" class="add-destination-form" id="edit-destination-form" novalidate>
+        <form th:action="@{'/destinations/edit/' + ${destination.destinationId}}" method="post" enctype="multipart/form-data" class="add-destination-form" id="edit-destination-form" novalidate>
             <div class="fields">
                 <div class="form-block">
                     <div class="form-group">
